@@ -1,0 +1,140 @@
+.banner{
+  img{
+    width:100%;
+  }
+}
+
+/*nav-list-nav*/
+.index-nav-list{
+  width:100%;
+  overflow: hidden;
+  >ul{
+    overflow: hidden;
+    padding:20px 0;
+    border-bottom:1px solid #ccc;
+    :first-child{
+      border:none;
+    }
+    li{
+      width:33%;
+      float: left;
+      border-left:1px solid #ccc;
+      >a{
+        display: block;
+        width:90px;
+        margin:0 auto;
+        overflow: hidden;
+        >img{
+          float: left;
+        }
+        >div{
+          margin-left:10px;
+          float: left;
+          >.p1{
+            color:#333;
+          }
+          >.p2{
+            font-size:12px;
+            color:#e3aa00;
+          }
+        }
+      }
+    }
+  }
+}
+
+/*index-ll-wrapper*/
+.index-ll-wrapper{
+  padding-bottom:30px;
+  .swiper-container{
+    border-bottom:none;
+  }
+  .index-ll-content{
+    .index-ll-info{
+      >div{
+        width:50%;
+        float: left;
+        font-size:14px;
+        box-sizing: border-box;
+        color:#333;
+      }
+      >.d1{
+        text-align:right;
+        padding-right:10px;
+        >span{
+          margin-left:10px;
+          color:#e3aa00;
+        }
+      }
+      >.d2{
+        text-align:left;
+        padding-left:10px;
+        >span{
+          margin-left:10px;
+          color:#e3aa00;
+        }
+      }
+    }
+    .index-ll-bg{
+      width:150px;
+      height:170px;
+      background:url("/static/img/index-ll-bg.png") 0 10px no-repeat;
+      background-size: 100%;
+      margin:20px auto 0 auto;
+      position: relative;
+      text-align:center;
+      >h2{
+        font-size:12px;
+        font-weight:normal;
+        color:#333;
+      }
+      >.p1{
+        margin-top:10px;
+        font-size:36px;
+        color:#fff;
+        >span{
+          font-size:24px;
+        }
+      }
+      >.p2{
+        color:#fff;
+        font-size:14px;
+      }
+      >.p3{
+        color:#fff;
+        margin-top:25px;
+      }
+    }
+  }
+}
+
+/*index-date-line*/
+.index-date-line{
+  border-top:1px solid #d6d7dc;
+  width:100%;
+  >ul{
+    padding:10px 0;
+    li{
+      font-size:14px;
+      float: left;
+      width:33.3%;
+      text-align:center;
+      background-color:#fff;
+      padding-bottom:10px;
+      >i{
+        display: block;
+        width:10px;
+        height: 10px;
+        border-radius:50%;
+        background:#ccc;
+        margin:-15px auto 10px auto;
+      }
+    }
+    li.active{
+      color:#e3aa00;
+      >i{
+        background-color:#e3aa00;
+      }
+    }
+  }
+}
