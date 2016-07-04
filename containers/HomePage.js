@@ -19,7 +19,6 @@ class HomePage extends Component {
   componentWillMount() {
     //loadData(this.props)
     this.props.loadIndex()
-
   }
   componentDidMount(){
 
@@ -148,7 +147,6 @@ class HomePage extends Component {
     )
   }
 }
-
 
 function mapStateToProps(state, ownProps) {
   return {

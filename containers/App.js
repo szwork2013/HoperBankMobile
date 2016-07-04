@@ -32,7 +32,7 @@ class App extends Component {
   }
 
   render() {
-    const { children, inputValue } = this.props
+    const { children } = this.props
     return (
         <div>
             {children}

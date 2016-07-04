@@ -29,8 +29,18 @@
     top:0;
     left:0;
     background-color:#000;
-    opacity:0.5;
+    opacity:0.2;
     z-index:998;
+}
+.root-loading-con{
+    width:100px;
+    height:100px;
+    background:url('../img/loading-1.gif') center no-repeat #000;
+    opacity:0.7;
+    border-radius:20px;
+    position: fixed;
+    left:100px;
+    top:100px;
 }
 .loading-fade-out{
 

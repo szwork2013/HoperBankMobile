@@ -6,6 +6,12 @@
     <!--<link href="/static/css/mobile.css"  rel="stylesheet" type="text/css">-->
     <link href="/static/css/v2.css"  rel="stylesheet" type="text/css">
     <script src="/static/lib/zepto.min.js"></script>
+    <style>
+      .root-loading-enter { opacity: 0; transition: opacity .3s ease-in; }
+      .root-loading-enter.root-loading-enter-active { opacity: 1; transition: opacity .3s ease-in; }
+      .root-loading-leave { opacity: 1; transition: opacity .3s ease-in; }
+      .root-loading-leave.root-loading-leave-active { opacity: 0; transition: opacity .3s ease-in; }
+    </style>
   </head>
   <body class="gray-bg">
     <div id="root" class="wrap">

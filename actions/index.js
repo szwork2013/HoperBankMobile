@@ -23,7 +23,7 @@ export function loadIndex(){
     });
   }
 }
-export function fetchAccount(id){
+export function fetchAccount(id,callback){
   return (dispatch, getState) => {
     return $.ajax({
       type: 'GET',
@@ -35,6 +35,7 @@ export function fetchAccount(id){
       dataType:"jsonp",
       jsonpCallback:'jsonp',
       success: function(data){
+        callback && callback(data);
         dispatch({
           type:FETCH_ACCOUNT,
           response:data
