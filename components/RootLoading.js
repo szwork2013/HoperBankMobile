@@ -8,7 +8,7 @@ var RootLoading = React.createClass({
         return(
             <div className={'root-loading'}>
                 <div className="root-loading-bg"></div>
-                <div style={{left:(document.body.clientWidth-100)/2,top:(screen.height -100)/2}} className="root-loading-con"></div>
+                <div style={{left:(document.body.clientWidth-100)/2,top:($(window).height() -100)/2}} className="root-loading-con"></div>
             </div>
         )
     },
