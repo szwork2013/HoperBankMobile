@@ -14,13 +14,47 @@ function index(state=null,action){
   }
   return state
 }
-function account(state=null,action){
+
+var accountState = {
+  "account":{
+    "balance":cookie.get('balance'),
+    "bankCard":cookie.get('bankCard'),
+    "freezeMoney":cookie.get('freezeMoney'),
+    "idCard":cookie.get('idCard'),
+    "invest":cookie.get('invest'),
+    "mobile":cookie.get('mobile'),
+    "name":cookie.get('name'),
+    "principalMoney":cookie.get('principalMoney'),
+    "totalIncome":cookie.get('totalIncome'),
+    "userId":cookie.get('userId')
+  }
+};
+var emptyState = {
+  "account":{
+    "balance":"",
+    "bankCard":"",
+    "freezeMoney":"",
+    "idCard":"",
+    "invest":"",
+    "mobile":"",
+    "name":"",
+    "principalMoney":"",
+    "totalIncome":"",
+    "userId":""
+  }
+}
+
+function account(state=accountState,action){
   const { type } = action;
-  if (type === ActionTypes.FETCH_ACCOUNT) {
+  if (type === ActionTypes.FETCH_ACCOUNT || type === ActionTypes.DO_LOGIN) {
     if (action.response) {
       console.log(action.response)
       return action.response
     }
+
+  }
+  if(type === ActionTypes.DO_LOGOUT){
+    return emptyState
   }
 
   return state

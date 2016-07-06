@@ -8,7 +8,7 @@ export default class IconInput extends Component {
   }
   handleChange(arr,e){
     var reg = new RegExp(arr[0],'g');
-    arr[1] && arr[1](reg.test(e.target.value));
+    arr[1] && arr[1](reg.test(e.target.value),e.target.value);
   }
   render() {
     const props = this.props;

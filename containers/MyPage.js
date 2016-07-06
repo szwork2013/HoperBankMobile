@@ -1,17 +1,26 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
-import { fetchAccount } from '../actions'
+import { fetchAccount,doLogout } from '../actions'
 import IconButton from '../components/IconButton'
 import RootLoading from '../components/RootLoading'
+var ReactCSSTransitionGroup = require('react-addons-css-transition-group');
 class MyPage extends Component {
   constructor(props) {
     super(props)
     this.state={
       loaded:false
     }
+    this.logout = this.logout.bind(this);
+    this.jumpTo = this.jumpTo.bind(this);
   }
   componentWillMount() {
-    this.props.fetchAccount('15718',()=>{
+
+    if(!this.props.account.userId){
+      /*this.props.history.push('/login')*/
+      this.context.router.push('/login')
+      return false;
+    }
+    this.props.fetchAccount(this.props.account.userId,()=>{
       this.setState({
         loaded:true
       })
@@ -24,12 +33,26 @@ class MyPage extends Component {
   componentWillReceiveProps(nextProps) {
 
   }
+  logout(){
+    var r = confirm("确定要退出吗？")
+    if(r){
+      this.props.doLogout();
+      this.context.router.push('/login')
+    }
+  }
+  jumpTo(link){
+    this.context.router.push(link)
+  }
   render() {
     const account = this.props.account;
-    console.log(account)
     return (
           <section style={{paddingBottom:'70px'}} className="gray-bg">
             <RootLoading display={!this.state.loaded}/>
+            <ReactCSSTransitionGroup component="div"
+                                     transitionName="slide-right"
+                                     transitionEnterTimeout={300} transitionLeaveTimeout={300}>
+              {this.props.children}
+            </ReactCSSTransitionGroup>
 
             <section className="my-wrap">
               <div className="my-info-top">
@@ -65,13 +88,10 @@ class MyPage extends Component {
                 </div>
               </div>
             </section>
-            <section className={account && account.name ? 'm-item-wrap tip-section hide':'m-item-wrap tip-section show'} id="authentication">
+            <section className={account && account.name ? 'm-item-wrap tip-section hide':'m-item-wrap tip-section show'}>
               <div className="m-item">
                 <a className="m-item-a"  href="bindbank.html">
                   随时随地投资，请先<span style={{color:"#004fa3"}}>实名认证</span>
-                  <div className="arrow-wrap">
-                    <i className="icon icon-arrow-right"></i>
-                  </div>
                 </a>
               </div>
             </section>
@@ -79,13 +99,13 @@ class MyPage extends Component {
               <IconButton text="交易记录" icon="icon-record" />
               <IconButton text="我的投资" icon="icon-lcproduct" />
               <IconButton text="我的回款" icon="icon-authentication" />
-              <IconButton text="个人资料" icon="icon-personal" />
+              <IconButton text="个人资料" icon="icon-personal" onClick={()=>{this.jumpTo('/my/personal')}} />
               <IconButton text="我的推荐码" icon="icon-dimension-code" />
               <IconButton text="我的礼券" icon="icon-gift" />
               <IconButton text="客服热线" icon="icon-user3" hasBorder={false} href="tel:4008-758-338" hasArrow={false} arrowText="4008-758-338"/>
             </section>
             <section className="my-exit-wrap">
-              <input className="my-exit-btn" type="button" id="exit" value="安全退出"/>
+              <input className="my-exit-btn" type="button" id="exit" onClick={this.logout} value="安全退出"/>
             </section>
 
           </section>
@@ -94,7 +114,9 @@ class MyPage extends Component {
   }
 }
 
-
+MyPage.contextTypes = {
+  router: React.PropTypes.object.isRequired
+};
 function mapStateToProps(state, ownProps) {
   return {
     account:state.account ? state.account.account : null
@@ -102,5 +124,6 @@ function mapStateToProps(state, ownProps) {
 }
 
 export default connect(mapStateToProps, {
-  fetchAccount
+  fetchAccount,
+  doLogout
 })(MyPage)

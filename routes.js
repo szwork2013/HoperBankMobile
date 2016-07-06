@@ -17,7 +17,7 @@ export default (
 
         </Route>
     <Route path="/my" component={MyPage}>
-        <Route path="/my/personal"></Route>
+        <Route path="/my/personal" component={PersonalPage}></Route>
     </Route>
       <Route path="/login" component={LoginPage}>
 
