@@ -1,51 +1,69 @@
 import React, { Component, PropTypes } from 'react'
 import { browserHistory,Link } from 'react-router'
 import { connect } from 'react-redux'
-export default class TabBar extends Component {
+class TabBar extends Component {
+
+  constructor(props) {
+    super(props)
+    this.state={
+      currentIndex:0
+    }
+  }
+  getTitleItemCssClasses(index){
+    return index === this.state.currentIndex ? "tab-title-item active" : "tab-title-item";
+  }
+
+  getContentItemCssClasses(index){
+    return index === this.state.currentIndex ? "tab-content-item active" : "tab-content-item";
+  }
+
+  render() {
+    let that = this;
+    const length = this.props.children.length
+    return (
+        <div className="tab-wrap">
+          <nav className="tab-title-items">
+            {React.Children.map(this.props.children, (element, index) => {
+              return (
+                  <div
+                      onClick={() => {this.setState({currentIndex: index})}}
+                      className={that.getTitleItemCssClasses(index)} style={{width:(100/length)+'%'}}>
+                    {element.props.name}
+                  </div>
+              )
+            })}
+          </nav>
+          <div className="tab-content-items"  style={{height:$(window).height()-98 +'px'}}>
+            {React.Children.map(this.props.children, (element, index) => {
+              return (
+                  <div className={that.getContentItemCssClasses(index)}>
+                    {element}
+                  </div>
+              )
+            })}
+          </div>
+        </div>
+    )
+  }
+}
+export class TabBarItem extends Component {
 
   constructor(props) {
     super(props)
   }
-  jumpTo(route){
-    //browserHistory.push('/'+route)
-  }
   render() {
-    const selected = this.props.selected
+    const props = this.props;
     return (
-        <section className="main-foot-nav">
-          <ul>
-            <li className={selected =='/home' ? 'active':''}>
-              <Link to="/home">
-                <i className="i1"></i>
-                <p>首页</p>
-              </Link>
-            </li>
-            <li className={selected =='/financial' ? 'active':''}>
-              <a href="#">
-                <i className="i2"></i>
-                <p>理财</p>
-              </a>
-            </li>
-            <li className={selected =='/borrow' ? 'active':''}>
-              <Link to="/borrow">
-                <i className="i3"></i>
-                <p>借款</p>
-              </Link>
-            </li>
-            <li className={selected =='/my' ? 'active':''}>
-              <Link to="/my" >
-                <i className="i4"></i>
-                <p>我的</p>
-              </Link>
-            </li>
-          </ul>
-        </section>
+        <div className="" name={props.name}>
+          {props.children}
+        </div>
     )
   }
 }
+
 function mapStateToProps(state, ownProps) {
   return {
-    selected: state.routing.locationBeforeTransitions.pathname
+    selected: ''
   }
 }
 

@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { browserHistory } from 'react-router'
 import Explore from '../components/Explore'
-import TabBar from '../components/TabBar'
+import TabNavigator from '../components/TabNavigator'
 
 class App extends Component {
   constructor(props) {
@@ -36,7 +36,7 @@ class App extends Component {
     return (
         <div>
             {children}
-            <TabBar></TabBar>
+            <TabNavigator></TabNavigator>
         </div>
 
     )

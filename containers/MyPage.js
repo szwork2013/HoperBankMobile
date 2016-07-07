@@ -88,13 +88,16 @@ class MyPage extends Component {
                 </div>
               </div>
             </section>
-            <section className={account && account.name ? 'm-item-wrap tip-section hide':'m-item-wrap tip-section show'}>
-              <div className="m-item">
-                <a className="m-item-a"  href="bindbank.html">
-                  随时随地投资，请先<span style={{color:"#004fa3"}}>实名认证</span>
-                </a>
-              </div>
-            </section>
+            {
+              account && !account.name && <section className={'m-item-wrap tip-section'}>
+                <div className="m-item">
+                  <a className="m-item-a"  href="bindbank.html">
+                    随时随地投资，请先<span style={{color:"#004fa3"}}>实名认证</span>
+                  </a>
+                </div>
+              </section>
+            }
+
             <section className="my-btn-wrap">
               <IconButton text="交易记录" icon="icon-record" />
               <IconButton text="我的投资" icon="icon-lcproduct" />
