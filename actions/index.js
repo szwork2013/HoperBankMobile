@@ -2,15 +2,22 @@ import 'isomorphic-fetch'
 import API from '../api'
 export const FETCH_INDEX =  'FETCH_INDEX'
 export const FETCH_ACCOUNT =  'FETCH_ACCOUNT'
+export const FETCH_LCLIST = 'FETCH_LCLIST'
+export const FETCH_FWLIST = 'FETCH_FWLIST'
 export const DO_LOGIN =  'DO_LOGIN'
 export const DO_LOGOUT =  'DO_LOGOUT'
+
+function asyncData(url,data,callback){
+
+}
+
 export function loadIndex(){
   return (dispatch, getState) => {
     return $.ajax({
       type: 'GET',
       url: API.index,
       data: {},
-      timeout:15000,
+      timeout:10000,
       dataType:"jsonp",
       jsonpCallback:'jsonp',
       success: function(data){
@@ -21,6 +28,7 @@ export function loadIndex(){
       },
       error: function(xhr, type){
         console.log(xhr)
+        alert('error')
       }
     });
   }
@@ -103,4 +111,61 @@ function setCookie(data){
     "totalIncome":data.totalIncome,
     "userId":data.userId
   })
+}
+
+
+/*理财*/
+export function fetchLCList(callback){
+  return (dispatch, getState) => {
+    return $.ajax({
+      type: 'GET',
+      url: API.product.list,
+      data: {
+      },
+      timeout:15000,
+      dataType:"jsonp",
+      jsonpCallback:'jsonp',
+      success: function(data){
+        if(data.r==1){
+          dispatch({
+            type:FETCH_LCLIST,
+            response:data.list || null
+          })
+          callback && callback(data);
+        }
+
+      },
+      error: function(xhr, type){
+        console.log(xhr)
+      }
+    });
+  }
+}
+
+export function fetchFWList(curpage,callback){
+  return (dispatch, getState) => {
+    return $.ajax({
+      type: 'GET',
+      url: API.product.financial.list,
+      data: {
+        curPage:curpage
+      },
+      timeout:15000,
+      dataType:"jsonp",
+      jsonpCallback:'jsonp',
+      success: function(data){
+        if(data.r==1){
+          dispatch({
+            type:FETCH_FWLIST,
+            response:data.list || null
+          })
+          callback && callback(data);
+        }
+
+      },
+      error: function(xhr, type){
+        console.log(xhr)
+      }
+    });
+  }
 }

@@ -33,11 +33,11 @@ class TabBar extends Component {
               )
             })}
           </nav>
-          <div className="tab-content-items"  style={{height:$(window).height()-98 +'px'}}>
+          <div className="tab-content-items"  style={{height:$(window).height()-100 +'px'}}>
             {React.Children.map(this.props.children, (element, index) => {
               return (
                   <div className={that.getContentItemCssClasses(index)}>
-                    {element}
+                    {index == this.state.currentIndex ? element : ''}
                   </div>
               )
             })}

@@ -1,10 +1,10 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
-import { fetchLCList } from '../actions'
+import { fetchFWList } from '../actions'
 import ReactIScroll from 'react-iscroll'
 import iScroll from 'iscroll';
 import RootLoading from '../components/RootLoading'
-class FinancialList extends Component {
+class FinancialServicesList extends Component {
     constructor(props) {
         super(props)
         this.state={
@@ -15,7 +15,7 @@ class FinancialList extends Component {
 
     componentWillMount() {
         //loadData(this.props)
-        this.props.fetchLCList(()=>{
+        this.props.fetchFWList(1,()=>{
             this.setState({
                 loaded:true
             })
@@ -31,11 +31,15 @@ class FinancialList extends Component {
     onScrollStart() {
         console.log("iScroll starts scrolling")
     }
+    onScrollEnd(){
+
+    }
     render() {
 
         return(
             <ReactIScroll iScroll={iScroll}
                           options={this.props.options}
+                          onScrollEnd={(a)=>{console.log(a)}}
                           onScrollStart={this.onScrollStart}>
 
                 <ul className="financial-ul">
@@ -49,12 +53,12 @@ class FinancialList extends Component {
         )
     }
     renderItem(){
-        const data = this.props.product.type1
+        const data = this.props.product.type2
         var arr = [];
         data.map((item,index)=>{
             arr.push(
                 <li key={index}>
-                    <h2>{item.name}</h2>
+                    <h2>{item.title}</h2>
                     <div>
                         <div className="part-1">
                             <p className="p1">{item.rate}<span style={{fontSize:'18px'}}>%</span></p>
@@ -87,5 +91,5 @@ function mapStateToProps(state, ownProps) {
 }
 
 export default connect(mapStateToProps, {
-    fetchLCList
-})(FinancialList)
+    fetchFWList
+})(FinancialServicesList)

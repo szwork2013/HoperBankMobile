@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { loadUser, loadStarred } from '../actions'
 import TabBar,{TabBarItem} from '../components/TabBar'
 import FinancialList from './FinancialList'
+import FinancialServicesList from './FinancialServicesList'
 class FinancialPage extends Component {
   constructor(props) {
     super(props)
@@ -26,10 +27,9 @@ class FinancialPage extends Component {
             <TabBar>
               <TabBarItem name="理财服务">
                 <FinancialList />
-
               </TabBarItem>
               <TabBarItem name="优选服务">
-                <span>1</span>
+                  <FinancialServicesList />
               </TabBarItem>
             </TabBar>
     )

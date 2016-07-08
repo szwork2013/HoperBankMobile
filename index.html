@@ -8,6 +8,7 @@
     <script src="/static/lib/zepto.min.js"></script>
     <script src="/static/lib/cookie.min.js"></script>
     <script src="/static/lib/md5.js"></script>
+    <script src="/static/lib/fastclick.min.js"></script>
     <style>
       .root-loading-enter { opacity: 0; transition: opacity .3s ease-in; }
       .root-loading-enter.root-loading-enter-active { opacity: 1; transition: opacity .3s ease-in; }
@@ -24,6 +25,11 @@
     <div id="root" class="wrap">
 
     </div>
+    <script>
+      $(function(){
+        FastClick.attach(document.body);
+      })
+    </script>
     <script src="/static/bundle.js"></script>
   </body>
 </html>

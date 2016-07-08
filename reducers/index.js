@@ -60,11 +60,30 @@ function account(state=accountState,action){
   return state
 }
 
+function product(state={type1:[],type2:[],type3:[]},action){
+  const { type } = action;
+  if (type === ActionTypes.FETCH_LCLIST) {
+    if (action.response) {
+      state.type1 = action.response;
+      return state
+    }
+  }
+  if (type === ActionTypes.FETCH_FWLIST) {
+    if (action.response) {
+      state.type2 = action.response;
+      return state
+    }
+  }
+
+  return state
+}
+
 
 const rootReducer = combineReducers({
   routing,
   index,
-  account
+  account,
+  product
 })
 
 export default rootReducer

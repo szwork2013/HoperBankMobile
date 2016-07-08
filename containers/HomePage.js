@@ -52,7 +52,7 @@ class HomePage extends Component {
       startSlide:1
     }
     return (
-        <section style={{width:'375px',height:'667px',backgroundColor:'#fff'}}>
+        <section style={{width:'375px',height:$(window).height()-110,backgroundColor:'#fff'}}>
           <ReactSwipe className="carousel" swipeOptions={{continuous: true,auto: 2000}}>
             {
                 banner.map((item,index)=>{
