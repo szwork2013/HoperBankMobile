@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { fetchFWList } from '../actions'
 import ReactIScroll from 'react-iscroll'
-import iScroll from 'iscroll';
+import iScroll from 'iscroll/build/iscroll-probe';
 import RootLoading from '../components/RootLoading'
 class FinancialServicesList extends Component {
     constructor(props) {
@@ -34,12 +34,20 @@ class FinancialServicesList extends Component {
     onScrollEnd(){
 
     }
+    onScroll(){
+        console.log('scrolling^')
+    }
+    onRefresh(){
+        console.log('refresh')
+    }
     render() {
 
         return(
             <ReactIScroll iScroll={iScroll}
                           options={this.props.options}
-                          onScrollEnd={(a)=>{console.log(a)}}
+                          onScrollEnd={this.onScrollEnd}
+                          onRefresh={this.onRefresh}
+                          onScroll={this.onScroll}
                           onScrollStart={this.onScrollStart}>
 
                 <ul className="financial-ul">

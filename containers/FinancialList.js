@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { fetchLCList } from '../actions'
 import ReactIScroll from 'react-iscroll'
-import iScroll from 'iscroll';
+import iScroll from 'iscroll/build/iscroll-probe';
 import RootLoading from '../components/RootLoading'
 class FinancialList extends Component {
     constructor(props) {

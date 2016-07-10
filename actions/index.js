@@ -28,7 +28,7 @@ export function loadIndex(){
       },
       error: function(xhr, type){
         console.log(xhr)
-        alert('error')
+        alert('网络状况不佳')
       }
     });
   }

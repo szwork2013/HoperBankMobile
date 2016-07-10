@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { loadIndex } from '../actions'
 import ReactSwipe from 'react-swipe';
-import Loading from '../components/RootLoading'
+import RootLoading from '../components/RootLoading'
 
 class HomePage extends Component {
   constructor(props) {
@@ -12,13 +12,12 @@ class HomePage extends Component {
     }
     this.prev = this.prev.bind(this);
     this.next = this.next.bind(this);
-    this.renderLoading = this.renderLoading.bind(this);
     this.renderMain = this.renderMain.bind(this);
   }
 
   componentWillMount() {
     //loadData(this.props)
-    this.props.loadIndex()
+    !this.props.index && this.props.loadIndex()
   }
   componentDidMount(){
 
@@ -26,11 +25,6 @@ class HomePage extends Component {
 
   componentWillReceiveProps(nextProps) {
 
-  }
-  renderLoading(){
-    return(
-        <Loading className={this.props.index && 'loading-fade-out'}></Loading>
-    )
   }
   next() {
     this.refs.reactSwipe.next();
@@ -53,7 +47,7 @@ class HomePage extends Component {
     }
     return (
         <section style={{width:'375px',height:$(window).height()-110,backgroundColor:'#fff'}}>
-          <ReactSwipe className="carousel" swipeOptions={{continuous: true,auto: 2000}}>
+          <ReactSwipe className="carousel" swipeOptions={{continuous: true,auto: 3000}}>
             {
                 banner.map((item,index)=>{
                   return(
@@ -142,6 +136,7 @@ class HomePage extends Component {
   render() {
     return (
         <section className="home-page">
+          <RootLoading display={!this.props.index}/>
           {this.props.index && this.renderMain()}
         </section>
     )
