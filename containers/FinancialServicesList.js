@@ -1,20 +1,27 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
-import { fetchFWList } from '../actions'
+import { fetchFWList,clearProduct } from '../actions'
 import ReactIScroll from 'react-iscroll'
 import iScroll from 'iscroll/build/iscroll-probe';
 import RootLoading from '../components/RootLoading'
+import RefreshView from '../components/RefreshView';
 class FinancialServicesList extends Component {
     constructor(props) {
         super(props)
         this.state={
-            loaded:false
+            loaded:false,
+            scrollToBottom:false,
+            currentPage:1,
+            loaderText:'上拉加载更多',
         }
         this.renderItem = this.renderItem.bind(this);
+        this.onScrollEnd =  this.onScrollEnd.bind(this);
+        this.onScroll =  this.onScroll.bind(this);
     }
 
     componentWillMount() {
-        //loadData(this.props)
+        //先清除产品2数据
+        this.props.clearProduct(2);
         this.props.fetchFWList(1,()=>{
             this.setState({
                 loaded:true
@@ -22,42 +29,65 @@ class FinancialServicesList extends Component {
         })
     }
     componentDidMount(){
-
     }
 
     componentWillReceiveProps(nextProps) {
-
     }
     onScrollStart() {
-        console.log("iScroll starts scrolling")
     }
     onScrollEnd(){
-
+        this.setState({
+            scrollToBottom:false
+        })
     }
-    onScroll(){
-        console.log('scrolling^')
+    onScroll(ins){
+        var curY = ins.y,
+            maxY = ins.maxScrollY
+        if(this.props.fetching) return false
+        if(curY<(maxY-20)){
+            this.setState({
+                loaderText:'上拉加载更多',
+                scrollToBottom:true
+            })
+
+        }
+        if(curY<(maxY-60)){
+            this.setState({
+                loaderText:'loading……',
+                currentPage:this.state.currentPage+1
+            })
+           this.props.fetchFWList(this.state.currentPage,()=>{
+                this.setState({
+                    scrollToBottom:false
+                })
+            })
+        }
     }
     onRefresh(){
-        console.log('refresh')
+
+    }
+    onBeforeScrollStart(){
     }
     render() {
-
         return(
-            <ReactIScroll iScroll={iScroll}
-                          options={this.props.options}
-                          onScrollEnd={this.onScrollEnd}
-                          onRefresh={this.onRefresh}
-                          onScroll={this.onScroll}
-                          onScrollStart={this.onScrollStart}>
+            <div className="financial-box">
+                <ReactIScroll iScroll={iScroll}
+                              options={this.props.options}
+                              onScrollEnd={this.onScrollEnd}
+                              onRefresh={this.onRefresh}
+                              onScroll={this.onScroll}
+                              onScrollStart={this.onScrollStart}>
 
-                <ul className="financial-ul">
-                    {
-                        this.state.loaded && this.renderItem()
-                    }
-                </ul>
+                    <ul className="financial-ul">
+                        {
+                            this.state.loaded && this.renderItem()
+                        }
+                    </ul>
+
+                </ReactIScroll>
+                <RefreshView text={this.state.loaderText} display={this.state.scrollToBottom} />
                 <RootLoading display={!this.state.loaded}/>
-            </ReactIScroll>
-
+            </div>
         )
     }
     renderItem(){
@@ -91,13 +121,16 @@ class FinancialServicesList extends Component {
 function mapStateToProps(state, ownProps) {
     return {
         product:state.product,
+        fetching:state.fetching,
         options: {
-            mouseWheel: true,
-            scrollbars: false
+            mouseWheel: false,
+            scrollbars: false,
+            probeType: 1
         }
     }
 }
 
 export default connect(mapStateToProps, {
-    fetchFWList
+    fetchFWList,
+    clearProduct
 })(FinancialServicesList)

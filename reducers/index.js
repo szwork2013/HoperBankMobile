@@ -59,6 +59,9 @@ function account(state=accountState,action){
 
   return state
 }
+function fetching(state=false){
+  return state;
+}
 
 function product(state={type1:[],type2:[],type3:[]},action){
   const { type } = action;
@@ -74,6 +77,10 @@ function product(state={type1:[],type2:[],type3:[]},action){
       return state
     }
   }
+  if (type === ActionTypes.CLEAR_PRODUCT) {
+    state['type'+action.response] = [];
+    return state
+  }
 
   return state
 }
@@ -83,7 +90,8 @@ const rootReducer = combineReducers({
   routing,
   index,
   account,
-  product
+  product,
+  fetching
 })
 
 export default rootReducer

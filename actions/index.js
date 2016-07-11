@@ -6,6 +6,7 @@ export const FETCH_LCLIST = 'FETCH_LCLIST'
 export const FETCH_FWLIST = 'FETCH_FWLIST'
 export const DO_LOGIN =  'DO_LOGIN'
 export const DO_LOGOUT =  'DO_LOGOUT'
+export const CLEAR_PRODUCT =  'CLEAR_PRODUCT'
 
 function asyncData(url,data,callback){
 
@@ -142,8 +143,20 @@ export function fetchLCList(callback){
   }
 }
 
+export function clearProduct(type){
+  return (dispatch, getState) => {
+    dispatch({
+      type:CLEAR_PRODUCT,
+      response:type
+    })
+  }
+}
 export function fetchFWList(curpage,callback){
   return (dispatch, getState) => {
+    dispatch({
+      type:'fetching',
+      response:true
+    })
     return $.ajax({
       type: 'GET',
       url: API.product.financial.list,
@@ -154,16 +167,24 @@ export function fetchFWList(curpage,callback){
       dataType:"jsonp",
       jsonpCallback:'jsonp',
       success: function(data){
+        dispatch({
+          type:'fetching',
+          response:false
+        })
         if(data.r==1){
           dispatch({
             type:FETCH_FWLIST,
-            response:data.list || null
+            response:getState().product.type2.concat(data.list)
           })
           callback && callback(data);
         }
 
       },
       error: function(xhr, type){
+        dispatch({
+          type:'fetching',
+          response:false
+        })
         console.log(xhr)
       }
     });

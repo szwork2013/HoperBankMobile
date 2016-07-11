@@ -1,0 +1,38 @@
+/*root loading*/
+.root-loading{
+  position: fixed;
+  width:100%;
+  height:100%;
+  top:0;
+  left:0;
+  z-index:999;
+  .root-loading-bg{
+    position: fixed;
+    width:100%;
+    height:100%;
+    top:0;
+    left:0;
+    background-color:#000;
+    opacity:0.2;
+    z-index:998;
+  }
+  .root-loading-con{
+    width:100px;
+    height:100px;
+    background:url('/static/img/loading-1.gif') center no-repeat #000;
+    opacity:0.7;
+    border-radius:20px;
+    position: fixed;
+    left:100px;
+    top:100px;
+  }
+}
+
+.refresh-loading-wrap{
+  position: absolute;
+  bottom:0;
+  width:100%;
+  >.refresh-loading{
+    text-align:center;
+  }
+}
