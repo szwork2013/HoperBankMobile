@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { loadUser, loadStarred } from '../actions'
 import TabBar,{TabBarItem} from '../components/TabBar'
 import FinancialList from './FinancialList'
-import FinancialServicesList from './FinancialServicesList'
+import FinancialServicesList from './FinancialServicesList2'
 class FinancialPage extends Component {
   constructor(props) {
     super(props)

@@ -8,7 +8,6 @@ function index(state=null,action){
   const { type } = action;
   if (type === ActionTypes.FETCH_INDEX) {
     if (action.response) {
-      console.log(action.response)
       return action.response
     }
   }

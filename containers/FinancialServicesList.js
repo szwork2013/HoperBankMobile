@@ -30,9 +30,6 @@ class FinancialServicesList extends Component {
     }
     componentDidMount(){
     }
-
-    componentWillReceiveProps(nextProps) {
-    }
     onScrollStart() {
     }
     onScrollEnd(){
@@ -56,7 +53,7 @@ class FinancialServicesList extends Component {
                 loaderText:'loading……',
                 currentPage:this.state.currentPage+1
             })
-           this.props.fetchFWList(this.state.currentPage,()=>{
+           this.props.fetchFWList(this.state.currentPage,(data)=>{
                 this.setState({
                     scrollToBottom:false
                 })
@@ -69,6 +66,7 @@ class FinancialServicesList extends Component {
     onBeforeScrollStart(){
     }
     render() {
+        console.log('render')
         return(
             <div className="financial-box">
                 <ReactIScroll iScroll={iScroll}
@@ -90,8 +88,12 @@ class FinancialServicesList extends Component {
             </div>
         )
     }
+    componentWillReceiveProps(nextProps) {
+        console.log('数组改变了')
+    }
     renderItem(){
         const data = this.props.product.type2
+        //console.log(data)
         var arr = [];
         data.map((item,index)=>{
             arr.push(

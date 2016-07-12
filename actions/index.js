@@ -153,10 +153,6 @@ export function clearProduct(type){
 }
 export function fetchFWList(curpage,callback){
   return (dispatch, getState) => {
-    dispatch({
-      type:'fetching',
-      response:true
-    })
     return $.ajax({
       type: 'GET',
       url: API.product.financial.list,
@@ -167,10 +163,6 @@ export function fetchFWList(curpage,callback){
       dataType:"jsonp",
       jsonpCallback:'jsonp',
       success: function(data){
-        dispatch({
-          type:'fetching',
-          response:false
-        })
         if(data.r==1){
           dispatch({
             type:FETCH_FWLIST,
@@ -181,10 +173,6 @@ export function fetchFWList(curpage,callback){
 
       },
       error: function(xhr, type){
-        dispatch({
-          type:'fetching',
-          response:false
-        })
         console.log(xhr)
       }
     });
