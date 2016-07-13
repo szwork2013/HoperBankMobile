@@ -23,7 +23,7 @@ export default class ListView extends Component {
     onScroll(ins){
         var curY = ins.y,
             maxY = ins.maxScrollY
-        if(this.props.fetching) return false
+        if(this.props.isFetching) return false
         if(curY<(maxY-20)){
             this.setState({
                 loaderText:'上拉加载更多',
@@ -47,7 +47,7 @@ export default class ListView extends Component {
 
     }
     componentWillReceiveProps(nextProps) {
-        //console.log('getNewＰｒｏｐ')
+
     }
 
     onBeforeScrollStart(){

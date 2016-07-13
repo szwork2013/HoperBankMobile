@@ -7,10 +7,8 @@ export const FETCH_FWLIST = 'FETCH_FWLIST'
 export const DO_LOGIN =  'DO_LOGIN'
 export const DO_LOGOUT =  'DO_LOGOUT'
 export const CLEAR_PRODUCT =  'CLEAR_PRODUCT'
+export const SET_FETCHING = 'SET_FETCHING'
 
-function asyncData(url,data,callback){
-
-}
 
 export function loadIndex(){
   return (dispatch, getState) => {
@@ -118,7 +116,7 @@ function setCookie(data){
 /*理财*/
 export function fetchLCList(callback){
   return (dispatch, getState) => {
-    return $.ajax({
+    $.ajax({
       type: 'GET',
       url: API.product.list,
       data: {
@@ -142,7 +140,15 @@ export function fetchLCList(callback){
     });
   }
 }
+export function setFetching(b){
+  return (dispatch, getState) => {
+    dispatch({
+      type:SET_FETCHING,
+      response:b
+    })
 
+  }
+}
 export function clearProduct(type){
   return (dispatch, getState) => {
     dispatch({
@@ -163,10 +169,11 @@ export function fetchFWList(curpage,callback){
       dataType:"jsonp",
       jsonpCallback:'jsonp',
       success: function(data){
+        var oldArr = getState().product.type2;
         if(data.r==1){
           dispatch({
             type:FETCH_FWLIST,
-            response:getState().product.type2.concat(data.list)
+            response:oldArr.concat(data.list)
           })
           callback && callback(data);
         }

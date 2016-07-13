@@ -58,30 +58,33 @@ function account(state=accountState,action){
 
   return state
 }
-function fetching(state=false){
+function isFetching(state=false,action){
+  const { type } = action;
+  if (type === ActionTypes.SET_FETCHING) {
+    state=action.response;
+  }
   return state;
 }
 
 function product(state={type1:[],type2:[],type3:[]},action){
   const { type } = action;
-  if (type === ActionTypes.FETCH_LCLIST) {
-    if (action.response) {
-      state.type1 = action.response;
-      return state
-    }
+  switch (type){
+    case ActionTypes.FETCH_LCLIST:
+      state = {
+        type1:action.response
+      }
+          break;
+    case ActionTypes.FETCH_FWLIST:
+      state = {
+        type2:action.response
+      }
+          break;
+    case ActionTypes.CLEAR_PRODUCT:
+      state['type'+action.response] = [];
+          break;
+    //no default
   }
-  if (type === ActionTypes.FETCH_FWLIST) {
-    if (action.response) {
-      state.type2 = action.response;
-      return state
-    }
-  }
-  if (type === ActionTypes.CLEAR_PRODUCT) {
-    state['type'+action.response] = [];
-    return state
-  }
-
-  return state
+  return state;
 }
 
 
@@ -90,7 +93,7 @@ const rootReducer = combineReducers({
   index,
   account,
   product,
-  fetching
+  isFetching
 })
 
 export default rootReducer
