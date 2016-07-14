@@ -210,13 +210,35 @@
 .financial-nav{
   width:90%;
   overflow: hidden;
-  margin:0 auto;
+  margin:10px auto 0 auto;
+  padding:10px;
   background-color:#fff;
   >li{
     float: left;
     width:25%;
+    height:25px;
+    line-height:25px;
+    overflow: hidden;
     &.active{
       color:#e3be4f;
+      &.up i{
+        background-position:0 -25px;
+      }
+      &.down i{
+        background-position:0 -50px;
+      }
+    }
+    >span{
+      float: left;
+    }
+    i{
+      display: inline-block;
+      width:12px;
+      height:25px;
+      background:url("/static/img/arrow-icon.png") no-repeat;
+      background-size:100%;
+      margin-left:10px;
+
     }
   }
 }

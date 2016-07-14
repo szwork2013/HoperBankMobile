@@ -157,13 +157,14 @@ export function clearProduct(type){
     })
   }
 }
-export function fetchFWList(curpage,callback){
+export function fetchFWList(opt,callback){
   return (dispatch, getState) => {
     return $.ajax({
       type: 'GET',
       url: API.product.financial.list,
       data: {
-        curPage:curpage
+        curPage:opt.curPage || 1,
+        orderby:opt.orderBy || 1
       },
       timeout:15000,
       dataType:"jsonp",
@@ -175,7 +176,7 @@ export function fetchFWList(curpage,callback){
             type:FETCH_FWLIST,
             response:oldArr.concat(data.list)
           })
-          callback && callback(data);
+          opt.callback && opt.callback(data);
         }
 
       },

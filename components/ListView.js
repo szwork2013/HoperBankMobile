@@ -36,10 +36,16 @@ export default class ListView extends Component {
                 loaderText:'loading……',
                 currentPage:this.state.currentPage+1
             })
-            this.props.fetchFunc(this.state.currentPage,()=>{
-                this.setState({
-                    scrollToBottom:false
-                })
+            console.log(this.props.params)
+            this.props.fetchFunc({
+                curPage:this.state.currentPage,
+                params:this.props.params,
+                callback:()=>{
+
+                    this.setState({
+                        scrollToBottom:false
+                    })
+                }
             })
         }
     }
@@ -47,7 +53,11 @@ export default class ListView extends Component {
 
     }
     componentWillReceiveProps(nextProps) {
-
+        if(nextProps.dataSource.length == 0){
+            this.setState({
+                currentPage:1
+            })
+        }
     }
 
     onBeforeScrollStart(){
