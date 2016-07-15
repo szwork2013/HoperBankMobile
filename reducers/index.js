@@ -15,7 +15,6 @@ function index(state=null,action){
 }
 
 var accountState = {
-  "account":{
     "balance":cookie.get('balance'),
     "bankCard":cookie.get('bankCard'),
     "freezeMoney":cookie.get('freezeMoney'),
@@ -26,10 +25,8 @@ var accountState = {
     "principalMoney":cookie.get('principalMoney'),
     "totalIncome":cookie.get('totalIncome'),
     "userId":cookie.get('userId')
-  }
 };
 var emptyState = {
-  "account":{
     "balance":"",
     "bankCard":"",
     "freezeMoney":"",
@@ -40,7 +37,6 @@ var emptyState = {
     "principalMoney":"",
     "totalIncome":"",
     "userId":""
-  }
 }
 
 function account(state=accountState,action){
@@ -87,13 +83,29 @@ function product(state={type1:[],type2:[],type3:[]},action){
   return state;
 }
 
+var initTeamState={
+  income:'',
+      prevIncome:'',
+      sumIncome:'',
+      userId:''
+}
+function team(state=initTeamState,action){
+  const { type } = action;
+  switch (type){
+    case ActionTypes.FETCH_TEAM:
+      return action.response
+      break;
+  }
+  return state;
+}
 
 const rootReducer = combineReducers({
   routing,
   index,
   account,
   product,
-  isFetching
+  isFetching,
+  team
 })
 
 export default rootReducer

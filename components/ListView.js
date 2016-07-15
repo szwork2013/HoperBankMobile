@@ -65,7 +65,7 @@ export default class ListView extends Component {
     render() {
         const props = this.props;
         return (
-            <div className="list-view-wrap">
+            <div className="list-view-wrap" style={props.style || null}>
                 <ReactIScroll iScroll={iScroll}
                               options={props.options}
                               onScrollEnd={this.onScrollEnd}
@@ -99,6 +99,6 @@ ListView.defaultProps = {
     options: {
         mouseWheel: true,
         scrollbars: false,
-        probeType: 1
+        probeType: 1,
     }
 }

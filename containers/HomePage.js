@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { loadIndex } from '../actions'
 import ReactSwipe from 'react-swipe';
 import RootLoading from '../components/RootLoading'
+import { browserHistory,Link } from 'react-router'
 
 class HomePage extends Component {
   constructor(props) {
@@ -80,12 +81,13 @@ class HomePage extends Component {
                 </a>
               </li>
               <li>
-                <a id="myteamLink">
+                <Link to={'/myteam/'+ (this.props.account ? this.props.account.userId : '')}>
+
                   <img src="/static/img/index-icon3.png" width="30" height="30" />
                   <div>
                     <p className="p1">团队</p>
                   </div>
-                </a>
+                </Link>
               </li>
             </ul>
           </section>
@@ -142,9 +144,12 @@ class HomePage extends Component {
     )
   }
 }
-
+HomePage.contextTypes = {
+  router: React.PropTypes.object.isRequired
+};
 function mapStateToProps(state, ownProps) {
   return {
+    account:state.account,
     index:state.index
   }
 }

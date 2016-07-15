@@ -59,7 +59,7 @@ TextLineItem.defaultProps = {
 
 function mapStateToProps(state, ownProps) {
   return {
-    account:state.account ? state.account.account : null
+    account:state.account
   }
 }
 

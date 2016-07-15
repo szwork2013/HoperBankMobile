@@ -64,7 +64,9 @@ class FinancialServicesList extends Component {
                     fetchFunc={this.fetchFunc}
                     wrapperClass='financial-ul'
                     params={this.state.params}
-                    isFetching={props.isFetching}>
+                    isFetching={props.isFetching}
+                    style={{height:$(window).height() - $('.main-foot-nav').height() - $('.tab-title-items').height() - $('.financial-nav').height() - 20}}
+                >
                 </ListView>
                 <RootLoading display={!this.state.loaded}/>
             </div>
@@ -72,11 +74,13 @@ class FinancialServicesList extends Component {
     }
     renderItem(item,index){
         var options = {
-            strokeWidth: 10
+            strokeWidth: 6,
+            color: '#e3be4f',
+            trailColor: '#D1D3D7',
         };
         var containerStyle = {
-            width: '80px',
-            height: '80px'
+            width: '70px',
+            height: '70px'
         };
         var Circle = ProgressBar.Circle;
         return(
@@ -93,12 +97,12 @@ class FinancialServicesList extends Component {
                         </div>
                         <div className="part-3">
                             <Circle
-                                progress={item.progress}
+                                progress={item.progress/100}
                                 text={item.progress+'%'}
                                 options={options}
                                 initialAnimate={true}
                                 containerStyle={containerStyle}
-                                containerClassName={'.progressbar'} />
+                                containerClassName={'progressbar'} />
                         </div>
                     </div>
                 </div>

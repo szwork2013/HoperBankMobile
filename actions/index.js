@@ -8,6 +8,7 @@ export const DO_LOGIN =  'DO_LOGIN'
 export const DO_LOGOUT =  'DO_LOGOUT'
 export const CLEAR_PRODUCT =  'CLEAR_PRODUCT'
 export const SET_FETCHING = 'SET_FETCHING'
+export const FETCH_TEAM = 'FETCH_TEAM'
 
 
 export function loadIndex(){
@@ -49,7 +50,7 @@ export function fetchAccount(id,callback){
           setCookie(data.account)
           dispatch({
             type:FETCH_ACCOUNT,
-            response:data
+            response:data.account
           })
         }
         callback && callback(data);
@@ -78,7 +79,7 @@ export function doLogin(username,password,callback){
           setCookie(data.account);
           dispatch({
             type:DO_LOGIN,
-            response:data
+            response:data.account
           })
         }
         callback && callback(data);
@@ -177,6 +178,35 @@ export function fetchFWList(opt,callback){
             response:oldArr.concat(data.list)
           })
           opt.callback && opt.callback(data);
+        }
+
+      },
+      error: function(xhr, type){
+        console.log(xhr)
+      }
+    });
+  }
+}
+
+/*获取团队数据*/
+export function fetchTeam(userId,callback){
+  return (dispatch, getState) => {
+    return $.ajax({
+      type: 'GET',
+      url:API.myteam.preview,
+      data: {
+        userId: userId
+      },
+      timeout:15000,
+      dataType:"jsonp",
+      jsonpCallback:'jsonp',
+      success: function(data){
+        if(data.r==1){
+          dispatch({
+            type:FETCH_TEAM,
+            response:data.info
+          })
+          callback && callback(data);
         }
 
       },
