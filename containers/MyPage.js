@@ -99,12 +99,12 @@ class MyPage extends Component {
             }
 
             <section className="my-btn-wrap">
-              <IconButton text="交易记录" icon="icon-record" />
-              <IconButton text="我的投资" icon="icon-lcproduct" />
-              <IconButton text="我的回款" icon="icon-authentication" />
+              <IconButton text="交易记录" icon="icon-record" onClick={()=>{this.jumpTo('/my/dealrecord')}} />
+              <IconButton text="我的投资" icon="icon-lcproduct" onClick={()=>{this.jumpTo('/my/investmentrecord')}} />
+              <IconButton text="我的回款" icon="icon-authentication" onClick={()=>{this.jumpTo('/my/returnPlanRecordPage')}} />
               <IconButton text="个人资料" icon="icon-personal" onClick={()=>{this.jumpTo('/my/personal')}} />
-              <IconButton text="我的推荐码" icon="icon-dimension-code" />
-              <IconButton text="我的礼券" icon="icon-gift" />
+              <IconButton text="我的推荐码" icon="icon-dimension-code" onClick={()=>{this.jumpTo('/my/invitation')}}  />
+              <IconButton text="我的礼券" icon="icon-gift" onClick={()=>{this.jumpTo('/my/myGift')}} />
               <IconButton text="客服热线" icon="icon-user3" hasBorder={false} href="tel:4008-758-338" hasArrow={false} arrowText="4008-758-338"/>
             </section>
             <section className="my-exit-wrap">

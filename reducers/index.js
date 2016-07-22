@@ -22,6 +22,7 @@ var accountState = {
     "invest":cookie.get('invest'),
     "mobile":cookie.get('mobile'),
     "name":cookie.get('name'),
+    "fullMobile":cookie.get('fullMobile'),
     "principalMoney":cookie.get('principalMoney'),
     "totalIncome":cookie.get('totalIncome'),
     "userId":cookie.get('userId')
@@ -33,6 +34,7 @@ var emptyState = {
     "idCard":"",
     "invest":"",
     "mobile":"",
+    "fullMobile":'',
     "name":"",
     "principalMoney":"",
     "totalIncome":"",
@@ -98,14 +100,83 @@ function team(state=initTeamState,action){
   }
   return state;
 }
+function teamList(state=[],action){
+    const { type } = action;
+    switch (type){
+        case ActionTypes.FETCH_TEAMLIST:
+            return action.response
+            break;
+        case ActionTypes.CLEAR_TEAMLIST:
+            return []
+            break;
+    }
+    return state;
+}
+function royaltyList(state=[],action){
+    const { type } = action;
+    switch (type){
+        case ActionTypes.FETCH_ROYALTYLIST:
+            return action.response
+            break;
+    }
+    return state;
+}
+function dealRecord(state=[],action){
+    const { type } = action;
+    switch (type){
+        case ActionTypes.FETCH_DEALRECORD:
+            return action.response
+            break;
+        case ActionTypes.CLEAR_DEALRECORD:
+            return []
+            break;
+    }
+    return state;
+}
 
+/*投资记录*/
+function investRecord(state=[],action){
+    const { type } = action;
+    switch (type){
+        case ActionTypes.FETCH_INVESTRECORD:
+            return action.response
+            break;
+        case ActionTypes.CLEAR_INVESTRECORD:
+            return []
+            break;
+    }
+    return state;
+}
+
+/*回款记录*/
+function returnPlanRecord(state=[],action){
+    const { type } = action;
+    switch (type){
+        case ActionTypes.FETCH_RETURNPLANRECORD:
+            return action.response
+            break;
+        case ActionTypes.CLEAR_RETURNPLANRECORD:
+            return []
+            break;
+    }
+    return state;
+}
 const rootReducer = combineReducers({
   routing,
   index,
   account,
   product,
   isFetching,
-  team
+  team:combineReducers({
+      preview:team,
+      teamList,
+      royaltyList
+  }),
+    user:combineReducers({
+        dealRecord,
+        investRecord,
+        returnPlanRecord
+    })
 })
 
 export default rootReducer

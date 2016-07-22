@@ -174,6 +174,10 @@
     border-bottom:1px solid #d6d7dc;
     margin-bottom:-1px;
     overflow: hidden;
+    >.m-item-a{
+      display: block;
+      overflow: hidden;
+    }
     span{
       display:block;
       line-height: 30px;
@@ -182,6 +186,386 @@
         float: right;
 
       }
+    }
+  }
+}
+.my-team-tit,.my-team-list-item{
+  width:90%;
+  margin:10px auto;
+  overflow: hidden;
+  padding:5px 0;
+  span{
+    display: block;
+    float: left;
+    width:25%;
+    text-align: center;
+    font-size:14px;
+  }
+}
+.my-team-list-item{
+  width:100%;
+  padding:20px 0;
+  background-color:#fff;
+  border-bottom:1px solid #dcdcdc;
+  border-top:1px solid #dcdcdc;
+  margin-top:-1px;
+  margin-bottom:0;
+}
+
+
+/*提成清单*/
+.select-wrap{
+  background-color:#fff2cc;
+  position: relative;
+  width:100%;
+  height:50px;
+  .select-value{
+    background-color:#fff2cc;
+    display: block;
+    position: absolute;
+    width:100%;
+    height:50px;
+    line-height: 50px;
+    text-align: center;
+    left:0;
+    top:0;
+    z-index:1;
+    >span{
+      position: relative;
+      i{
+        display: block;
+        width:13px;
+        height:8px;
+        background-size: 100%;
+        position: absolute;
+        right:-20px;
+        top:7px;
+      }
+    }
+  }
+  >select{
+    border:none;
+    width:100%;
+    height:50px;
+    position: absolute;
+    left:0;
+    top:0;
+    z-index:2;
+    opacity:0;
+  }
+}
+.royalty-item{
+  color:#969696;
+  width:90%;
+  box-sizing: border-box;
+  margin:10px auto 0 auto;
+  height:60px;
+  overflow: hidden;
+  border:none;
+  padding:10px;
+  background-color:#fff;
+  &.active{
+    height:auto;
+    overflow: visible;
+    .icon{
+      transform:rotate(-90deg)
+    }
+  }
+  p{
+    overflow: hidden;
+  }
+  .icon{
+    float: right;
+    margin-top:5px;
+  }
+  span{
+    float: left;
+    line-height:30px;
+  }
+  .month{
+    display: block;
+    width:40px;
+    height:40px;
+    line-height: 40px;
+    text-align: center;
+    background-color:#e3be4f;
+    color:#fff;
+    border-radius:50%;
+    margin-right:5px;
+  }
+  .s1{
+    width:40px;
+    margin-top:5px;
+  }
+  .s3{
+    width:33%;
+    text-align:center;
+    margin-top:5px;
+  }
+}
+
+/*deal record*/
+.my-deal-record-item,.invest-record-item,.return-plan-record-item{
+  border-top:1px solid #dcdcdc;
+  border-bottom:1px solid #dcdcdc;
+  margin-top:-1px;
+  background-color:#fff;
+  >.my-deal-record-info{
+    padding:10px;
+    p{
+      overflow: hidden;
+      line-height:30px;
+    }
+    .my-deal-record-money{
+      color:#ff4343;
+      float: left;
+    }
+    .my-deal-record-status{
+      float: right;
+
+    }
+    .my-deal-record-order-id{
+      display: inline-block;
+
+    }
+  }
+}
+
+/*investmentRecord*/
+.invest-record-item{
+  height:75px;
+  padding:10px 0;
+  overflow: hidden;
+  >.invest-record-info{
+    padding:0 10px;
+    em{
+      font-style: normal;
+      float: left;
+    }
+    .item-record-detail{
+      .em1{
+        display: block;
+        width:80px;
+      }
+    }
+    .invest-record-title{
+      width:70%;
+      height:21px;
+      white-space:nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    p{
+      overflow: hidden;
+      margin-bottom:5px;
+    }
+    .invest-record-money{
+      color:#e3aa00
+    }
+  }
+  &.active{
+    height:auto;
+    overflow: visible;
+    .icon-arrow-down-1{
+      transform:rotate(-90deg);
+    }
+  }
+}
+
+/*我的回款*/
+.return-plan-record-item{
+  >.return-plan-record-info{
+    padding:10px;
+    .return-plan-h2{
+      font-size:18px;
+      font-weight:normal;
+    }
+    p{
+      overflow: hidden;
+      font-size:14px;
+      margin-top:10px;
+      span{
+        display: block;
+        width:33%;
+        float:left;
+        text-align: center;
+        &:first-child{
+          text-align: left;
+        }
+      }
+    }
+  }
+}
+
+
+/*二维码*/
+.invitation-wrap{
+  width:90%;
+  background-color:#fff;
+  padding-bottom:20px;
+  margin:20px auto 0 auto;
+  .part-1{
+    background-color:#e3aa00;
+    color:#fff;
+    padding:20px;
+    font-size:18px;
+    p.p1{
+      word-spacing:8px; letter-spacing:13px;
+    }
+    p.p2{
+      word-spacing:8px; letter-spacing:13px;
+    }
+  }
+  .part-2{
+    text-align: center;
+    padding:20px 0;
+    p.p1{
+      color:#e3aa00
+    }
+    p.p2{
+      font-size:14px;
+    }
+    p.p3{
+      font-size:12px;
+      color:#666;
+      text-align:center;
+      width:90%;
+      margin:0 auto;
+    }
+    .code{
+      width:150px;
+      height:150px;
+      margin:10px auto;
+    }
+    input{
+      text-overflow: ellipsis;
+      color:#e3aa00;
+    }
+  }
+}
+
+
+/*我的礼券*/
+.gift-list-item{
+  display: block;
+  width:90%;
+  border:none;
+  border-radius:5px;
+  background-color:#fff;
+  margin:20px auto;
+  height:100px;
+  >div{
+    float: left;
+    &.part-left{
+      width:30%;
+      background-color:#ff7676;
+      position: relative;
+      border-top-left-radius: 5px;
+      border-bottom-left-radius: 5px;
+      height:100px;
+      >.abs{
+        background:url("/static/img/gift_bg1.png") center 10px no-repeat ;
+        background-size:50%;
+        position: absolute;
+        left:0;
+        top:0;
+        width:100%;
+        height:100%;
+        &.ab2{
+          background:none;
+          width:80px;
+          height:80px;
+          line-height:80px;
+          border:5px solid #fff;
+          font-size:50px;
+          border-radius:50%;
+          color:#fff;
+          opacity:0.2;
+          text-align: center;
+          left:-15px;
+          top:-15px;
+        }
+      }
+      >p{
+        position: absolute;
+        width:100%;
+        text-align: center;
+        color:#fff;
+        bottom:10px;
+        left:0;
+      }
+    }
+    &.part-right{
+      width:70%;
+      padding-top:10px;
+      position: relative;
+
+      .abs{
+        width:15px;
+        height:15px;
+        position: absolute;
+        top:40px;
+        right:-7px;
+        border-radius:50%;
+        background-color:#efeff4;
+      }
+      p{
+        margin-top:10px;
+        overflow: hidden;
+      }
+      span{
+        display: block;
+        float: left;
+        width:33%;
+        text-align: center;
+      }
+    }
+  }
+}
+.gift-list-item-2{
+  width:90%;
+  height:100px;
+  max-width: 337.5px;
+  background:url("/static/img/gift_bg2.png") center no-repeat;
+  background-size:100%;
+  margin:20px auto;
+  position: relative;
+  >.abs{
+    width:60px;
+    text-align: center;
+    position: absolute;
+    right:25px;
+    top:30px;
+    font-size:30px;
+    color:#333;
+  }
+  >.part-left{
+    color:#fff;
+    padding-left:25px;
+    font-size:12px;
+    h3{
+      font-size:18px;
+      padding-top:7px;
+    }
+    p{
+      margin-top:2px;
+    }
+  }
+  &.type2{
+    background:url("/static/img/gift_bg3.png") center no-repeat;
+    background-size:100%;
+    >.abs{
+      opacity:0.5
+    }
+  }
+  &.type3{
+    background:url("/static/img/gift_bg4.png") center no-repeat;
+    background-size:100%;
+    >.part-left{
+      color:#999;
+    }
+    >.abs{
+      color:#fff;
     }
   }
 }

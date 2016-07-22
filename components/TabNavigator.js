@@ -2,15 +2,15 @@ import React, { Component, PropTypes } from 'react'
 import { browserHistory,Link } from 'react-router'
 import { connect } from 'react-redux'
 export default class TabNavigator extends Component {
-
   constructor(props) {
     super(props)
   }
-  jumpTo(route){
-    //browserHistory.push('/'+route)
-  }
   render() {
     const selected = this.props.selected
+    function test(str){
+      return new RegExp(selected).test(str)
+    }
+
     return (
         <section className="main-foot-nav">
           <ul>
@@ -50,20 +50,3 @@ function mapStateToProps(state, ownProps) {
 }
 
 export default connect(mapStateToProps)(TabNavigator)
-
-/*
-List.propTypes = {
-  loadingLabel: PropTypes.string.isRequired,
-  pageCount: PropTypes.number,
-  renderItem: PropTypes.func.isRequired,
-  items: PropTypes.array.isRequired,
-  isFetching: PropTypes.bool.isRequired,
-  onLoadMoreClick: PropTypes.func.isRequired,
-  nextPageUrl: PropTypes.string
-}
-
-List.defaultProps = {
-  isFetching: true,
-  loadingLabel: 'Loading...'
-}
-*/

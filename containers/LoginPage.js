@@ -68,7 +68,7 @@ class LoginPage extends Component {
                     type="password"
                     callback={(b,val)=>{this.setState({password:val,passWordPassed:b})}}>
                 </IconInput>
-                <section style={{width:'90%',textAlign:'right',margin:'10px auto'}}>
+                <section style={{width:'90%',textAlign:'right',margin:'10px auto',overflow:'hidden'}}>
                     <a href="findoutPwd.html" className="fr" style={{color:'#004fa3'}}>忘记密码?</a>
                 </section>
                 <BaseButton text="登 录" className="mt20" onClick={this.login}/>

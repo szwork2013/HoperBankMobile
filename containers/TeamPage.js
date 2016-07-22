@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 var ReactCSSTransitionGroup = require('react-addons-css-transition-group');
 import { connect } from 'react-redux'
+import { browserHistory,Link } from 'react-router'
 import { fetchTeam } from '../actions'
 import RootLoading from '../components/RootLoading'
 class TeamPage extends Component {
@@ -29,33 +30,38 @@ class TeamPage extends Component {
     return (
         <section>
           <RootLoading display={!this.state.loaded} />
+          <ReactCSSTransitionGroup component="div"
+                                   transitionName="slide-right"
+                                   transitionEnterTimeout={300} transitionLeaveTimeout={300}>
+            {this.props.children}
+          </ReactCSSTransitionGroup>
           <section className="my-team-wrap">
             <div className="my-team-item">
               <span className="s1">本期收入</span>
-              <span className="s2" id="income">{team.income}</span>
+              <span className="s2" id="income">{team.income}元</span>
             </div>
             <div className="my-team-item">
               <span className="s1">上期收入</span>
-              <span className="s2" id="prevIncome">{team.prevIncome}</span>
+              <span className="s2" id="prevIncome">{team.prevIncome}元</span>
             </div>
             <div className="my-team-item">
               <span className="s1">累计收入</span>
-              <span className="s2" id="sumIncome">{team.sumIncome}</span>
+              <span className="s2" id="sumIncome">{team.sumIncome}元</span>
             </div>
           </section>
 
           <section className="my-team-wrap">
             <div className="my-team-item">
-              <a className="m-item-a" href="teamlist.html" id="teamListA">
+              <Link className="m-item-a" to={`/myteam/${this.props.routeParams.userId}/teamlist`}>
                 <span className="s1">团队清单</span>
                 <span className="s2"><i className="icon icon-arrow-right"></i></span>
-              </a>
+              </Link>
             </div>
             <div className="my-team-item">
-              <a className="m-item-a" href="royaltylist.html" id="royaltyListA">
+              <Link className="m-item-a" to={`/myteam/${this.props.routeParams.userId}/royaltylist`}>
                 <span className="s1">提成清单</span>
                 <span className="s2"><i className="icon icon-arrow-right"></i></span>
-              </a>
+              </Link>
             </div>
           </section>
 
@@ -68,7 +74,7 @@ TeamPage.contextTypes = {
 };
 function mapStateToProps(state, ownProps) {
   return {
-    team:state.team,
+    team:state.team.preview,
     account:state.account
   }
 }

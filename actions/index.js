@@ -9,8 +9,15 @@ export const DO_LOGOUT =  'DO_LOGOUT'
 export const CLEAR_PRODUCT =  'CLEAR_PRODUCT'
 export const SET_FETCHING = 'SET_FETCHING'
 export const FETCH_TEAM = 'FETCH_TEAM'
-
-
+export const FETCH_TEAMLIST = 'FETCH_TEAMLIST'
+export const CLEAR_TEAMLIST = 'CLEAR_TEAMLIST'
+export const FETCH_ROYALTYLIST ='FETCH_ROYALTYLIST'
+export const FETCH_DEALRECORD = 'FETCH_DEALRECORD'
+export const CLEAR_DEALRECORD = 'CLEAR_DEALRECORD'
+export const CLEAR_INVESTRECORD = 'CLEAR_INVESTRECORD';
+export const FETCH_INVESTRECORD = 'FETCH_INVESTRECORD';
+export const FETCH_RETURNPLANRECORD = 'FETCH_RETURNPLANRECORD'
+export const CLEAR_RETURNPLANRECORD = 'CLEAR_RETURNPLANRECORD';
 export function loadIndex(){
   return (dispatch, getState) => {
     return $.ajax({
@@ -47,6 +54,7 @@ export function fetchAccount(id,callback){
       success: function(data){
 
         if(data.r==1){
+          data.account.fullMobile=cookie.get('fullMobile');
           setCookie(data.account)
           dispatch({
             type:FETCH_ACCOUNT,
@@ -76,6 +84,7 @@ export function doLogin(username,password,callback){
       success: function(data){
 
         if(data.r==1){
+          data.account.fullMobile=username;
           setCookie(data.account);
           dispatch({
             type:DO_LOGIN,
@@ -106,6 +115,7 @@ function setCookie(data){
     "idCard":data.idCard,
     "invest":data.invest,
     "mobile":data.mobile,
+    'fullMobile':data.fullMobile || cookie.get('fullMobile'),
     "name":data.name,
     "principalMoney":data.principalMoney,
     "totalIncome":data.totalIncome,
@@ -207,6 +217,224 @@ export function fetchTeam(userId,callback){
             response:data.info
           })
           callback && callback(data);
+        }
+
+      },
+      error: function(xhr, type){
+        console.log(xhr)
+      }
+    });
+  }
+}
+export function fetchTeamList(opt){
+  return (dispatch, getState) => {
+    return $.ajax({
+      type: 'GET',
+      url:API.myteam.teamList,
+      data:{
+        userId:opt.userId,
+        type:opt.type,
+        curPage:opt.curPage
+      },
+      timeout:15000,
+      dataType:"jsonp",
+      jsonpCallback:'jsonp',
+      success: function(data){
+        if(data.r==1){
+          dispatch({
+            type:FETCH_TEAMLIST,
+            response:getState().team.teamList.concat(data.info.list)
+          })
+          opt.callback && opt.callback(data);
+        }
+
+      },
+      error: function(xhr, type){
+        console.log(xhr)
+      }
+    });
+  }
+}
+export function clearTeamList(){
+  return (dispatch, getState) => {
+    dispatch({
+      type:CLEAR_TEAMLIST
+    })
+  }
+}
+
+/* 提成列表获取 */
+export function fetchRoyaltyList(userId,year,callback){
+  return (dispatch, getState) => {
+    return $.ajax({
+      type: 'GET',
+      url:API.myteam.royaltyList,
+      data:{
+        userId:userId,
+        year:year
+      },
+      timeout:15000,
+      dataType:"jsonp",
+      jsonpCallback:'jsonp',
+      success: function(data){
+        if(data.r==1){
+          dispatch({
+            type:FETCH_ROYALTYLIST,
+            response:data.list
+          })
+          callback && callback(data);
+        }
+
+      },
+      error: function(xhr, type){
+        console.log(xhr)
+      }
+    });
+  }
+}
+
+
+/* 交易记录 */
+/*清除*/
+export function clearDealRecord(){
+  return (dispatch, getState) => {
+    dispatch({
+      type:CLEAR_DEALRECORD
+    })
+  }
+}
+/*获取*/
+export function fetchDealRecord(opt){
+  return (dispatch, getState) => {
+    return $.ajax({
+      type: 'GET',
+      url:API.user.dealrecord,
+      data:{
+        userId:opt.userId,
+        type:opt.type,
+        curPage:opt.curPage
+      },
+      timeout:15000,
+      dataType:"jsonp",
+      jsonpCallback:'jsonp',
+      success: function(data){
+        if(data.r==1){
+          dispatch({
+            type:FETCH_DEALRECORD,
+            response:getState().user.dealRecord.concat(data.list)
+          })
+          opt.callback && opt.callback(data);
+        }
+
+      },
+      error: function(xhr, type){
+        console.log(xhr)
+      }
+    });
+  }
+}
+
+
+/* 投资记录 */
+/*清除*/
+export function clearInvestRecord(){
+  return (dispatch, getState) => {
+    dispatch({
+      type:CLEAR_INVESTRECORD
+    })
+  }
+}
+/*获取*/
+export function fetchInvestRecord(opt){
+  return (dispatch, getState) => {
+    return $.ajax({
+      type: 'GET',
+      url:API.user.investmentrecord,
+      data:{
+        userId:opt.userId,
+        status:opt.type,
+        curPage:opt.curPage
+      },
+      timeout:15000,
+      dataType:"jsonp",
+      jsonpCallback:'jsonp',
+      success: function(data){
+        if(data.r==1){
+          dispatch({
+            type:FETCH_INVESTRECORD,
+            response:getState().user.investRecord.concat(data.list)
+          })
+          opt.callback && opt.callback(data);
+        }
+
+      },
+      error: function(xhr, type){
+        console.log(xhr)
+      }
+    });
+  }
+}
+
+
+/* 回款记录 */
+/*清除*/
+export function clearReturnPlanRecord(){
+  return (dispatch, getState) => {
+    dispatch({
+      type:CLEAR_RETURNPLANRECORD
+    })
+  }
+}
+/*获取*/
+export function fetchReturnPlanRecord(opt){
+  return (dispatch, getState) => {
+    return $.ajax({
+      type: 'GET',
+      url:API.user.returnedPlan,
+      data:{
+        userId:opt.userId,
+        status:opt.type,
+        curPage:opt.curPage
+      },
+      timeout:15000,
+      dataType:"jsonp",
+      jsonpCallback:'jsonp',
+      success: function(data){
+        if(data.r==1){
+          dispatch({
+            type:FETCH_RETURNPLANRECORD,
+            response:getState().user.returnPlanRecord.concat(data.list)
+          })
+          opt.callback && opt.callback(data);
+        }
+
+      },
+      error: function(xhr, type){
+        console.log(xhr)
+      }
+    });
+  }
+}
+
+/* 我的礼券-一级 */
+export function fetchGift(opt){
+  return (dispatch, getState) => {
+    return $.ajax({
+      type: 'GET',
+      url:API.coupon.preview,
+      data:{
+        userId:opt.userId,
+      },
+      timeout:15000,
+      dataType:"jsonp",
+      jsonpCallback:'jsonp',
+      success: function(data){
+        if(data.r==1){
+          dispatch({
+            type:FETCH_GIFT,
+            response:data.list
+          })
+          opt.callback && opt.callback(data);
         }
 
       },

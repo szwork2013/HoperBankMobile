@@ -76,8 +76,12 @@ export default class ListView extends Component {
                     <div className={"list-view-scroller " + props.wrapperClass }>
                         {
                             props.dataSource.map((item,index)=>{
+
                                 return props.renderRow(item,index)
                             })
+                        }
+                        {
+                            props.dataSource.length===0 && <p className="no-record">没有记录</p>
                         }
                     </div>
 
