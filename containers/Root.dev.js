@@ -17,12 +17,9 @@ export default class Root extends Component {
     )*/
     return (
         <Provider store={store}>
-          <div>
-              <div style={{position:'relative'}}>
+              <div style={{position:'relative',height:'100%'}}>
                   <Router history={history} routes={routes} />
               </div>
-          </div>
-
         </Provider>
     )
   }

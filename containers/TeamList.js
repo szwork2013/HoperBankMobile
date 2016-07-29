@@ -41,16 +41,7 @@ class TeamList extends Component {
     }
     render(){
         const props = this.props;
-        /*<ListView
-            dataSource={props.product.type2}
-            renderRow={this.renderItem}
-            fetchFunc={this.fetchFunc}
-            wrapperClass='financial-ul'
-            params={this.state.params}
-            isFetching={props.isFetching}
-            style={{height:$(window).height() - $('.main-foot-nav').height() - $('.tab-title-items').height() - $('.financial-nav').height() - 20}}
-        >
-        </ListView>*/
+        var canUseHeight = $(window).height() - 52 -44-50
         return(
             <div className="" >
                 <div className="my-team-tit">
@@ -68,7 +59,7 @@ class TeamList extends Component {
                     wrapperClass=''
                     params={this.state.params}
                     isFetching={props.isFetching}
-                    style={{height:$(window).height() - $('.main-foot-nav').height() - $('.tab-title-items').height() - $('.financial-nav').height() - 50}}
+                    style={{height:canUseHeight}}
                 >
                 </ListView>
                 <RootLoading display={!this.state.loaded}/>

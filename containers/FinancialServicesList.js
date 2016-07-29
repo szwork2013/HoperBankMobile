@@ -1,10 +1,12 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { fetchFWList,clearProduct,setFetching } from '../actions'
+import {Link} from 'react-router'
 import RootLoading from '../components/RootLoading'
 import ListView from '../components/ListView'
 import FinancialSelector from './FinancialSelector'
 import ProgressBar from '../static/lib/react-progressbar'
+import config from './componentConfig'
 
 class FinancialServicesList extends Component {
     constructor(props) {
@@ -43,6 +45,7 @@ class FinancialServicesList extends Component {
     }
     render(){
         const props = this.props;
+        const iScrollHeight = config.windowHeight - config.navHeight - config.tabBarHeight - config.financialNavHeight - 20
         return(
             <div className="financial-box" >
                 <FinancialSelector callback={(orderBy)=>{
@@ -65,7 +68,7 @@ class FinancialServicesList extends Component {
                     wrapperClass='financial-ul'
                     params={this.state.params}
                     isFetching={props.isFetching}
-                    style={{height:$(window).height() - $('.main-foot-nav').height() - $('.tab-title-items').height() - $('.financial-nav').height() - 20}}
+                    style={{height:iScrollHeight}}
                 >
                 </ListView>
                 <RootLoading display={!this.state.loaded}/>
@@ -84,7 +87,7 @@ class FinancialServicesList extends Component {
         };
         var Circle = ProgressBar.Circle;
         return(
-                <div key={index} className='financial-li'>
+                <Link to="/" key={index} className='financial-li'>
                     <h2>{item.title}</h2>
                     <div>
                         <div className="part-1">
@@ -105,7 +108,7 @@ class FinancialServicesList extends Component {
                                 containerClassName={'progressbar'} />
                         </div>
                     </div>
-                </div>
+                </Link>
             )
     }
 }

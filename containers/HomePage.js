@@ -4,7 +4,7 @@ import { loadIndex } from '../actions'
 import ReactSwipe from 'react-swipe';
 import RootLoading from '../components/RootLoading'
 import { browserHistory,Link } from 'react-router'
-
+var ReactCSSTransitionGroup = require('react-addons-css-transition-group');
 class HomePage extends Component {
   constructor(props) {
     super(props)
@@ -47,7 +47,7 @@ class HomePage extends Component {
       startSlide:1
     }
     return (
-        <section style={{width:'375px',height:$(window).height()-110,backgroundColor:'#fff'}}>
+        <section style={{backgroundColor:'#fff'}}>
           <ReactSwipe className="carousel" swipeOptions={{continuous: true,auto: 3000}}>
             {
                 banner.map((item,index)=>{
@@ -98,12 +98,12 @@ class HomePage extends Component {
                   recommend.map((item,index)=>{
                     return(
                         <section className="index-ll-content" key={index}>
-                          <a style={{display:'block'}} href="product.html?productId=10001" className="index-ll-bg">
+                          <Link style={{display:'block'}} to={`/financial/product1/${item.productId}`} className="index-ll-bg">
                             <h2 className="tit">{item.name}</h2>
                             <p className="p1">{item.rate}<span>%</span></p>
                             <p className="p2">预期年化收益率</p>
                             <p className="p3">立即抢购</p>
-                          </a>
+                          </Link>
                           <div className="index-ll-info">
                             <div className="d1" style={{width:'100%',textAlign:'center'}}>起购金额<span>{item.lowestBuy}元</span></div>
                           </div>
@@ -138,6 +138,11 @@ class HomePage extends Component {
   render() {
     return (
         <section className="home-page">
+          <ReactCSSTransitionGroup component="div"
+                                   transitionName="slide-right"
+                                   transitionEnterTimeout={300} transitionLeaveTimeout={300}>
+            {this.props.children}
+          </ReactCSSTransitionGroup>
           <RootLoading display={!this.props.index}/>
           {this.props.index && this.renderMain()}
         </section>

@@ -10,35 +10,13 @@ class App extends Component {
 
   }
 
-
-
-  renderErrorMessage() {
-    const { errorMessage } = this.props
-    if (!errorMessage) {
-      return null
-    }
-
-    return (
-      <p style={{ backgroundColor: '#e99', padding: 10 }}>
-        <b>{errorMessage}</b>
-        {' '}
-        (<a href="#"
-            onClick={this.handleDismissClick}>
-          Dismiss
-        </a>)
-        <a href="/Home">home</a>
-      </p>
-    )
-  }
-
   render() {
     const { children } = this.props
     return (
-        <div>
+        <div style={{height:'100%'}}>
             {children}
             <TabNavigator></TabNavigator>
         </div>
-
     )
   }
 }
