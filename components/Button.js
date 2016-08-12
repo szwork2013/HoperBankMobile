@@ -30,10 +30,10 @@ export class TextButton extends Component{
     render(){
         const props = this.props;
         return(
-            <div className={"base-text-button-wrap " + props.className } onClick={props.onClick}>
+            <div className={"base-text-button-wrap " + props.className } style={props.style || {}} onClick={props.onClick}>
                 <div className={"base-text-button-info " + (!props.hasBorder && 'no-border')}>
                     <span>{props.text}</span>
-                    <i className="icon icon-arrow-right"></i>
+                    {props.hasIcon && <i className="icon icon-arrow-right"></i>}
                 </div>
 
             </div>
@@ -44,11 +44,13 @@ TextButton.propTypes = {
     text: PropTypes.string,
     onClick: PropTypes.func,
     className:PropTypes.string,
-    hasBorder:PropTypes.bool
+    hasBorder:PropTypes.bool,
+    hasIcon:PropTypes.bool
 }
 TextButton.defaultProps = {
     onClick: ()=>{},
     text: 'button',
     hasBorder:true,
-    className:''
+    className:'',
+    hasIcon:true
 }

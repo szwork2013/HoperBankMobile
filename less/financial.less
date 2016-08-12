@@ -7,6 +7,7 @@
   /*invest-wrap*/
     li,.financial-li{
       width:90%;
+      display: block;
       padding:10px;
       margin:10px auto 0 auto;
       background-color:#fff;
@@ -59,7 +60,7 @@
         display: block;
         width:50px;
         height: 50px;
-        background:url("/img/invest-item-bg.png") no-repeat;
+        background:url("/static/img/invest-item-bg.png") no-repeat;
         background-size: 100%;
         position: absolute;
         right:0;
@@ -75,11 +76,11 @@
         }
         &.i-2{
           top:0;
-          background-image: url('/img/invest-item-bg-2.png');
+          background-image: url('/static/img/invest-item-bg-2.png');
         }
         &.i-3{
           top:0;
-          background-image: url('/img/invest-item-bg-3.png');
+          background-image: url('/static/img/invest-item-bg-3.png');
         }
       }
       >div,>a>div{
@@ -133,7 +134,7 @@
                 display: block;
                 width:36px;
                 height:36px;
-                background:url("/img/product-icon-1.png") no-repeat;
+                background:url("/static/img/product-icon-1.png") no-repeat;
                 background-size:100%;
                 margin:10px auto 5px auto;
                 &.i2{
@@ -189,7 +190,7 @@
             display: inline-block;
             width:12px;
             height:25px;
-            background:url("/img/arrow-icon.png") no-repeat;
+            background:url("/static/img/arrow-icon.png") no-repeat;
             background-size:100%;
             &.up{
               background-position:0 -25px;
@@ -402,13 +403,23 @@
   background-color:#fff;
   margin-bottom:-1px;
   overflow: hidden;
+  &.no-bg{
+    background:none;
+    border:none;
+    margin-top:0!important;
+  }
   >span{
     display: block;
     float: left;
     &.s2{
-      width:240px;
+      width:65%;
       margin-left:15px;
       color:#666;
+      &.text-right{
+        text-align: right;
+        float: right;
+        margin-left:0;
+      }
     }
     &.s3{
       width:auto;
@@ -448,5 +459,163 @@
         text-align:right;
       }
     }
+  }
+}
+
+/*优选服务*/
+.project-invest-wrap{
+  padding:30px 0 10px 0;
+  background-color:#fff;
+  >.sq{
+    position: absolute;
+    width:100%;
+    height:251px;
+    background:url("/static/img/sq.png") no-repeat center;
+    background-size: 50%;
+    z-index:15;
+    top:0;
+    display: none;
+  }
+  .project-invest-info{
+    overflow: hidden;
+
+    >div{
+      box-sizing: border-box;
+      float:left;
+      width:50%;
+      &.part-left{
+        padding-left:20px;
+        >.p1{
+          color:#646464;
+          font-size:14px;
+        }
+        >.p2{
+          color:#ff4343;
+          font-size:36px;
+          >span.f14{
+            font-size:14px;
+          }
+        }
+      }
+      &.part-right{
+        padding-right:20px;
+        >.p1{
+          text-align: right;
+          >span{
+            font-size:12px;
+            padding:2px 15px;
+            color:@color6;
+            border:1px solid @color6;
+            border-radius:3px;
+          }
+        }
+        >.p2{
+          text-align: right;
+          font-size:14px;
+          margin-top:10px;
+          >span{
+            color:@color6;
+          }
+        }
+      }
+    }
+  }
+  .project-invest-progress{
+    box-sizing: border-box;
+    padding:0 20px;
+    margin-top:10px;
+    >.project-invest-progress-max{
+      width:100%;
+      height:10px;
+      background-color:#f0f0f0;
+      border-radius:5px;
+      position: relative;
+      >.project-invest-progress-current{
+        position: absolute;
+        height:100%;
+        width:0;
+        left:0;
+        top:0;
+        border-radius:5px;
+        background-color:@color6;
+        transition: all .5s;
+        >span{
+          display: block;
+          position: absolute;
+          right:-10px;
+          top:-2px;
+          height:15px;
+          width:25px;
+          border:1px solid @color6;
+          border-radius:10px;
+          font-size:10px;
+          background-color:#fff;
+          color:@color6;
+        }
+      }
+    }
+  }
+  .project-money-info{
+    padding:20px;
+    border-bottom:1px solid #d6d7dc;
+    overflow: hidden;
+    >div{
+      float: left;
+      width:50%;
+      font-size:12px;
+      color:#646464;
+      &.d1{
+        >span{
+          color:#333;
+        }
+      }
+      &.d2{
+        text-align: right;
+        >span{
+          color:#ff4343;
+        }
+      }
+    }
+  }
+  .project-money-info-2{
+    padding:10px 20px 0 20px;
+    font-size:14px;
+
+    >p{
+      margin-bottom:10px;
+      color:#333;
+      >.s1{
+        color:#ff4343;
+        margin:0 5px;
+      }
+      >.s2{
+        color:#646464
+      }
+    }
+  }
+}
+
+/* 交易结果 */
+.deal-success-wrap{
+  width:90%;
+  margin:35px auto 20px auto;
+  border:1px solid #d6d7dc;
+  overflow: hidden;
+  border-radius:5px;
+  background-color:#fff;
+  >.deal-success-item{
+    overflow: hidden;
+    padding:10px;
+    border-bottom:1px solid #d6d7dc;
+    &:last-child{
+      border:none;
+    }
+
+  }
+}
+.deal-result-container{
+  >.deal-result-top{
+    text-align:center;
+    margin-top:50px;
   }
 }

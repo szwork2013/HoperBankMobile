@@ -66,22 +66,22 @@ class HomePage extends Component {
             <ul>
               <li>
                 <a href="activityCenter.html">
-                  <img src="/static/img/index-icon1.png" width="30" height="30" />
+                  <img src="/static/img/index-icon2.png" width="30" height="30" />
                   <div>
-                    <p className="p1">活动</p>
+                    <p className="p1">活动中心</p>
                   </div>
                 </a>
               </li>
               <li>
                 <a>
-                  <img src="/static/img/index-icon2.png" width="30" height="30" />
+                  <img src="/static/img/index-icon1.png" width="30" height="30" />
                   <div>
-                    <p className="p1">收益</p>
+                    <p className="p1">安全保障</p>
                   </div>
                 </a>
               </li>
               <li>
-                <Link to={'/myteam/'+ (this.props.account ? this.props.account.userId : '')}>
+                <Link to={'/myteam'}>
 
                   <img src="/static/img/index-icon3.png" width="30" height="30" />
                   <div>
@@ -98,15 +98,15 @@ class HomePage extends Component {
                   recommend.map((item,index)=>{
                     return(
                         <section className="index-ll-content" key={index}>
-                          <Link style={{display:'block'}} to={`/financial/product1/${item.productId}`} className="index-ll-bg">
+                          <div className="index-ll-bg">
                             <h2 className="tit">{item.name}</h2>
-                            <p className="p1">{item.rate}<span>%</span></p>
+                            <p className="p1"><span className="rate">{item.rate}</span><span>%</span></p>
                             <p className="p2">预期年化收益率</p>
-                            <p className="p3">立即抢购</p>
-                          </Link>
-                          <div className="index-ll-info">
-                            <div className="d1" style={{width:'100%',textAlign:'center'}}>起购金额<span>{item.lowestBuy}元</span></div>
+                            <p className="p3">{item.lowestBuy+'元起投'}</p>
                           </div>
+                          <Link to={`/financial/product/1/${item.productId}`} style={{display:'block'}} className="index-ll-info">
+                            <div className="d1">立即抢购</div>
+                          </Link>
                         </section>
                     )
                   })

@@ -22,6 +22,9 @@ export const FETCH_GIFT = 'FETCH_GIFT';
 export const FETCH_GIFT_LIST = 'FETCH_GIFT_LIST';
 export const FETCH_FINANCIAL_INVEST_RECORD = 'FETCH_FINANCIAL_INVEST_RECORD'
 export const CLEAR_FINANCIAL_INVEST_RECORD = 'CLEAR_FINANCIAL_INVEST_RECORD'
+export const FETCH_FINANCIAL_SERVICES = 'FETCH_FINANCIAL_SERVICES'
+export const FETCH_FINANCIAL_RETURN_PLAN = 'FETCH_FINANCIAL_RETURN_PLAN'
+export const CLEAR_FINANCIAL_RETURN_PLAN = 'CLEAR_FINANCIAL_RETURN_PLAN'
 export function loadIndex(){
     return (dispatch, getState) => {
         return $.ajax({
@@ -56,9 +59,7 @@ export function fetchAccount(id,callback){
             dataType:"jsonp",
             jsonpCallback:'fetchAccountJsonp',
             success: function(data){
-
                 if(data.r==1){
-                    console.log(data)
                     data.account.fullMobile=cookie.get('fullMobile');
                     setCookie(data.account)
                     dispatch({
@@ -174,10 +175,20 @@ export function clearProduct(type){
     }
 }
 export function fetchFWList(opt){
+    var url = '';
+    switch(parseInt(opt.type)){
+        case 9:
+            url = API.product.financial.list;
+            break;
+        case 5:
+            url = API.product.transfer.list
+            break;
+        //no default
+    }
     return (dispatch, getState) => {
         return $.ajax({
             type: 'GET',
-            url: API.product.financial.list,
+            url:url,
             data: {
                 curPage:opt.curPage || 1,
                 orderby:opt.orderBy || 1
@@ -243,7 +254,7 @@ export function fetchTeamList(opt){
             },
             timeout:15000,
             dataType:"jsonp",
-            jsonpCallback:'jsonp',
+            jsonpCallback:'fetchTeamListJsonp',
             success: function(data){
                 if(data.r==1){
                     dispatch({
@@ -481,10 +492,26 @@ export function fetchGiftList(opt){
 
 /* 产品详情投资记录获取 */
 export function fetchFinancialInvestRecord(opt){
+    var url='';
+    switch (parseInt(opt.type)){
+        case 1:
+            url=API.product.record;
+            break;
+        case 9:
+            url=API.product.financial.record;
+            break;
+        case 5:
+            url=API.product.transfer.record;
+            break;
+        default:
+            url=API.product.record;
+            break;
+        // no default
+    }
     return (dispatch, getState) => {
         return $.ajax({
             type: 'GET',
-            url:API.product.record,
+            url:url,
             data:{
                 curPage:opt.curPage,
                 projectId:opt.projectId
@@ -519,16 +546,20 @@ export function clearFinancialInvestRecord(){
 /*购买产品action，无需通知store*/
 export function payForProduct(opt){
     var url='';
-    switch (opt.type){
+    switch (parseInt(opt.type)){
         case 1:
             url=API.product.buy;
             break;
-        case 2:
+        case 9:
             url=API.product.financial.buy;
+            break;
+        case 5:
+            url=API.product.transfer.buy;
             break;
         // no default
     }
     return (dispatch, getState) => {
+        console.log(url)
         return $.ajax({
             type: 'GET',
             url:url,
@@ -559,4 +590,148 @@ export function payForProduct(opt){
         });
     }
 
+}
+
+/* 优选服务 投资页面资料获取 */
+export function fetchFinancialServices(opt){
+    var url='';
+    switch (parseInt(opt.type)){
+        case 9:
+            url=API.product.financial.detail;
+            break;
+        case 5:
+            url=API.product.transfer.detail;
+            break;
+        default:
+            url=API.product.financial.detail;
+            break;
+
+    }
+    return (dispatch, getState) => {
+        return $.ajax({
+            type: 'GET',
+            url:url,
+            data:{
+                projectId:opt.projectId
+            },
+            timeout:15000,
+            dataType:"jsonp",
+            jsonpCallback:'fetchFinancialServices',
+            success: function(data){
+                if(data.r==1){
+                    dispatch({
+                        type:FETCH_FINANCIAL_SERVICES,
+                        response:data.productInfo
+                    })
+                    opt.callback && opt.callback(data);
+                }
+            },
+            error: function(xhr, type){
+                console.log(xhr)
+            }
+        });
+    }
+}
+
+/* 产品详情还款计划获取 */
+export function fetchFinancialReturnPlan(opt){
+    var url='';
+    switch (parseInt(opt.type)){
+        case 9:
+            url=API.product.financial.findRepaymentPlan;
+            break;
+        case 5:
+            url=API.product.transfer.findRepaymentPlan;
+            break;
+        default:
+            url=API.product.financial.findRepaymentPlan;
+            break;
+
+    }
+    return (dispatch, getState) => {
+        return $.ajax({
+            type: 'GET',
+            url:url,
+            data:{
+                curPage:opt.curPage,
+                projectId:opt.projectId
+            },
+            timeout:15000,
+            dataType:"jsonp",
+            jsonpCallback:'fetchFinancialReturnPlanJsonp',
+            success: function(data){
+                if(data.r==1){
+                    dispatch({
+                        type:FETCH_FINANCIAL_RETURN_PLAN,
+                        response:getState().product.returnPlan.concat(data.list)
+                    })
+                    opt.callback && opt.callback(data);
+                }
+            },
+            error: function(xhr, type){
+                console.log(xhr)
+            }
+        });
+    }
+}
+/* 产品详情投资记录删除 */
+export function clearFinancialReturnPlan(){
+    return (dispatch, getState) => {
+        dispatch({
+            type:CLEAR_FINANCIAL_RETURN_PLAN
+        })
+    }
+}
+
+
+/*充值操作，不用通知store*/
+export function charge(opt){
+    var url=API.charge.step1;
+    return (dispatch, getState) => {
+        return $.ajax({
+            type: 'GET',
+            url:url,
+            data:{
+                amt:opt.amt,
+                userId:getState().account.userId
+            },
+            timeout:15000,
+            dataType:"jsonp",
+            jsonpCallback:'chargeJsonp',
+            success: function(data){
+                if(data.r==1){
+                    opt.callback && opt.callback(data);
+                }
+            },
+            error: function(xhr, type){
+                console.log(xhr)
+            }
+        });
+    }
+}
+
+/*提现操作，不用通知store*/
+export function withDraw(opt){
+    var url=API.withdraw;
+    return (dispatch, getState) => {
+        return $.ajax({
+            type: 'GET',
+            url:url,
+            data:{
+                amt:opt.amt,
+                userId:getState().account.userId
+            },
+            timeout:15000,
+            dataType:"jsonp",
+            jsonpCallback:'chargeJsonp',
+            success: function(data){
+                if(data.r==1){
+                    opt.callback && opt.callback(data);
+                }
+            },
+            error: function(xhr, type){
+                console.log(xhr)
+            }
+        });
+    }
 }

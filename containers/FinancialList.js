@@ -58,7 +58,7 @@ class FinancialList extends Component {
                             <p className="p2">期限</p>
                         </div>
                         <div className="part-3">
-                            <Link to={`/financial/product1/${item.productId}`}>立投</Link>
+                            <Link to={`/financial/product/1/${item.productId}`}>立投</Link>
                         </div>
                     </div>
                 </li>

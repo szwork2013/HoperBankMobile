@@ -46,14 +46,19 @@ class LoginPage extends Component {
                     alert(result.msg)
                 },300)
             }else{
-                this.context.router.push('/my')
+                if(this.props.location.query.backUrl){
+                    this.context.router.push(this.props.location.query.backUrl)
+                }else{
+                    this.context.router.push('/my')
+                }
             }
         })
     }
     render() {
         return (
-            <section className="form-wrap" style={{marginTop:'30px'}}>
+            <section className="form-wrap">
                 <RootLoading display={this.state.loading} />
+                <img src="/static/img/login_banner.jpg" width="100%" style={{marginBottom:'10px'}} />
                 <IconInput
                     placeholder="请输入手机号"
                     icon="icon-phone"
@@ -72,7 +77,7 @@ class LoginPage extends Component {
                     <a href="findoutPwd.html" className="fr" style={{color:'#004fa3'}}>忘记密码?</a>
                 </section>
                 <BaseButton text="登 录" className="mt20" onClick={this.login}/>
-                <BaseButton text="注 册" className="mt20 register" />
+                <BaseButton text="注 册" className="mt20 register" onClick={()=>{this.context.router.push('/register')}} />
             </section>
 
         )

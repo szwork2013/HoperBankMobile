@@ -20,7 +20,7 @@ class RoyaltyList extends Component {
         this.setState({
             loaded:false
         })
-        props.fetchRoyaltyList(this.props.routeParams.userId,year,(data)=>{
+        props.fetchRoyaltyList(this.props.account.userId,year,(data)=>{
             this.setState({
                 loaded:true
             })
@@ -90,7 +90,8 @@ class RoyaltyList extends Component {
 
 function mapStateToProps(state, ownProps) {
     return {
-        royaltyList:state.team.royaltyList
+        royaltyList:state.team.royaltyList,
+        account:state.account
     }
 }
 

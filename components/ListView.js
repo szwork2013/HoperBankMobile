@@ -36,7 +36,6 @@ export default class ListView extends Component {
                 loaderText:'loading……',
                 currentPage:this.state.currentPage+1
             })
-            console.log(this.props.params)
             this.props.fetchFunc({
                 curPage:this.state.currentPage,
                 params:this.props.params,
@@ -101,7 +100,7 @@ ListView.defaultProps = {
     renderRow:()=>{},
     wrapperClass:'',
     options: {
-        mouseWheel: true,
+        mouseWheel: false,
         scrollbars: false,
         probeType: 1,
     }

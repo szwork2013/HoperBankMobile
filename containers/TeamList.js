@@ -18,7 +18,7 @@ class TeamList extends Component {
 
         props.clearTeamList();
         props.fetchTeamList({
-            userId:props.id,
+            userId:props.account.userId,
             curPage:1,
             type:props.type,
             callback:()=>{
@@ -34,14 +34,14 @@ class TeamList extends Component {
     fetchFunc(opt){
             this.props.fetchTeamList({
                 curPage:opt.curPage,
-                userId:this.props.id,
+                userId:this.props.account.userId,
                 type:this.props.type,
                 callback:opt.callback
             })
     }
     render(){
         const props = this.props;
-        var canUseHeight = $(window).height() - 52 -44-50
+        var canUseHeight = $(window).height() - 52 -44
         return(
             <div className="" >
                 <div className="my-team-tit">
@@ -84,7 +84,8 @@ class TeamList extends Component {
 function mapStateToProps(state, ownProps) {
     return {
         teamList:state.team.teamList,
-        isFetching:state.isFetching
+        isFetching:state.isFetching,
+        account:state.account
     }
 }
 

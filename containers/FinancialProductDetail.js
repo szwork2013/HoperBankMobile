@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react'
-export default class FinancialProductDetail extends Component {
+import { connect } from 'react-redux'
+class FinancialProductDetail extends Component {
     constructor(props) {
         super(props)
     }
@@ -9,9 +10,10 @@ export default class FinancialProductDetail extends Component {
 
     }
     renderContent(type){
+        const data = this.props.productInfo;
         //理财服务项目详情 0
         switch (type){
-            case 0:
+            case 1:
                 return(
                     <div className="product-s1-detail">
                         <div className="product-text-item">
@@ -48,16 +50,122 @@ export default class FinancialProductDetail extends Component {
                         </div>
                     </div>
                 )
-            break;
+                break;
 
+            //由于优选项目和债权转让使用同样的详情页，那么在类型5和9的时候都是使用InvestInfoPage，所以5的时候不写break,穿透到9
+            case 5:
+            case 9:
+                return <InvestInfoPage data={data} />
+                break;
         }
 
     }
     render() {
         return (
             <section className="level-2-wrap">
-                {this.renderContent(this.props.type)}
+                {this.renderContent.bind(this)(parseInt(this.props.params.productType))}
             </section>
         )
     }
 }
+const InvestInfoPage = (props)=>{
+    var productType= '';
+    const data = props.data;
+    switch (data.xdProductType){
+        case 1:
+            productType = '消费薪金贷'
+            break;
+        case 2:
+            productType = '消费精英贷'
+            break;
+        case 3:
+            productType = '悦楼薪金贷'
+            break;
+        case 4:
+            productType = '悦楼生意贷'
+            break;
+        case 5:
+            productType = '生意贷'
+            break;
+        case 6:
+            productType = '社保贷'
+            break;
+        case 7:
+            productType = '保单贷'
+            break;
+        case 8:
+            productType = '车主贷'
+            break;
+    }
+    return(
+        <div className="product-s1-detail">
+            <div className="product-text-item no-bg">
+                <span className="s1">借款信息</span>
+            </div>
+            <div className="product-text-item">
+                <span className="s1">借款类型</span>
+                <span className="s2 text-right">{productType}</span>
+            </div>
+            <div className="product-text-item">
+                <span className="s1">借款期限</span>
+                <span className="s2 text-right">{data.productCycle}</span>
+            </div>
+            <div className="product-text-item">
+                <span className="s1">借款用途</span>
+                <span className="s2 text-right">{data.loanApplication}</span>
+            </div>
+            <div className="product-text-item no-bg">
+                <span className="s1">用户信息</span>
+            </div>
+            <div className="product-text-item">
+                <span className="s1">用户名</span>
+                <span className="s2 text-right">{data.realName}</span>
+            </div>
+            <div className="product-text-item">
+                <span className="s1">性别</span>
+                <span className="s2 text-right">{data.sex == 1?'男':'女'}</span>
+            </div>
+            <div className="product-text-item">
+                <span className="s1">学历</span>
+                <span className="s2 text-right">{data.degree}</span>
+            </div>
+            <div className="product-text-item">
+                <span className="s1">现住址</span>
+                <span className="s2 text-right">{data.nowProvince + data.nowCity + data.nowArea}</span>
+            </div>
+            <div className="product-text-item">
+                <span className="s1">户籍地:</span>
+                <span className="s2 text-right">{data.houseProvince+ data.houseCity + data.houseArea}</span>
+            </div>
+            <div className="product-text-item no-bg">
+                <span className="s1">工作信息</span>
+            </div>
+            <div className="product-text-item">
+                <span className="s1">工作单位</span>
+                <span className="s2 text-right">{data.companyName}</span>
+            </div>
+            <div className="product-text-item">
+                <span className="s1">职位级别</span>
+                <span className="s2 text-right">{data.position}</span>
+            </div>
+            <div className="product-text-item">
+                <span className="s1">任职部门</span>
+                <span className="s2 text-right">{data.dept}</span>
+            </div>
+            <div className="product-text-item">
+                <span className="s1">收入范围</span>
+                <span className="s2 text-right">{data.wages}</span>
+            </div>
+        </div>
+    )
+
+
+}
+function mapStateToProps(state, ownProps) {
+    return {
+        productInfo:state.product.productDetail
+    }
+}
+
+export default connect(mapStateToProps, {
+})(FinancialProductDetail)

@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { fetchAccount,doLogout } from '../actions'
 import IconButton from '../components/IconButton'
 import RootLoading from '../components/RootLoading'
+import { browserHistory,Link } from 'react-router'
 var ReactCSSTransitionGroup = require('react-addons-css-transition-group');
 class MyPage extends Component {
   constructor(props) {
@@ -83,8 +84,8 @@ class MyPage extends Component {
                   <p className="p2">可用余额(元)</p>
                 </div>
                 <div className="part-2">
-                  <a href="charge.html" className="btn-2" id="charge_btn">充值</a>
-                  <a href="withdraw.html" className="btn-1" id="tx_btn">提现</a>
+                  <Link to="/my/charge" className="btn-2" >充值</Link>
+                  <Link to="/my/withdraw" className="btn-1">提现</Link>
                 </div>
               </div>
             </section>

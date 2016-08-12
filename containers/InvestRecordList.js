@@ -81,7 +81,7 @@ class InvestRecordList extends Component {
                             <span className="fr">{item.payTime}</span>
                         </p>
                         <p>
-                            <span className="fl invest-record-money">{item.matchMoney}元</span>
+                            <span className="fl invest-record-money">{item.actualMoney}元</span>
                             <span className="fr">
                                 {productType}
                             </span>

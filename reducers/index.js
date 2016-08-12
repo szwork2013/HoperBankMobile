@@ -2,6 +2,7 @@ import * as ActionTypes from '../actions'
 import merge from 'lodash/merge'
 import { routerReducer as routing } from 'react-router-redux'
 import { combineReducers } from 'redux'
+import API from '../api'
 
 function index(state=null,action){
   const { type } = action;
@@ -14,17 +15,17 @@ function index(state=null,action){
 }
 
 var accountState = {
-    "balance":cookie.get('balance'),
-    "bankCard":cookie.get('bankCard'),
-    "freezeMoney":cookie.get('freezeMoney'),
-    "idCard":cookie.get('idCard'),
-    "invest":cookie.get('invest'),
-    "mobile":cookie.get('mobile'),
-    "name":cookie.get('name'),
-    "fullMobile":cookie.get('fullMobile'),
-    "principalMoney":cookie.get('principalMoney'),
-    "totalIncome":cookie.get('totalIncome'),
-    "userId":cookie.get('userId')
+    "balance":cookie.get('balance') || 0,
+    "bankCard":cookie.get('bankCard') || '',
+    "freezeMoney":cookie.get('freezeMoney') || '',
+    "idCard":cookie.get('idCard') || '',
+    "invest":cookie.get('invest') || '',
+    "mobile":cookie.get('mobile') || '',
+    "name":cookie.get('name') || '',
+    "fullMobile":cookie.get('fullMobile') || '',
+    "principalMoney":cookie.get('principalMoney') || '',
+    "totalIncome":cookie.get('totalIncome') || '',
+    "userId":cookie.get('userId') || ''
 };
 var emptyState = {
     "balance":"",
@@ -51,7 +52,6 @@ function account(state=accountState,action){
   if(type === ActionTypes.DO_LOGOUT){
     return emptyState
   }
-
   return state
 }
 function isFetching(state=false,action){
@@ -195,15 +195,48 @@ function financialInvestRecord(state=[],action){
     return state;
 }
 
+/* 优选服务-单个详情获取 */
+function fetchFinancialServices(state=[],action){
+    const { type } = action;
+    switch (type){
+        case ActionTypes.FETCH_FINANCIAL_SERVICES:
+            return action.response
+            break;
+    }
+    return state;
+}
+
+/*项目详情--回款计划记录*/
+function financialReturnPlan(state=[],action){
+    const {type} = action;
+    switch (type){
+        case ActionTypes.FETCH_FINANCIAL_RETURN_PLAN:
+            return action.response
+            break;
+        case ActionTypes.CLEAR_FINANCIAL_RETURN_PLAN:
+            return []
+            break;
+    }
+    return state;
+}
+
+
+/*富友充值提现接口*/
+function fuiouURI(state=API.fuiouURI){
+    return state;
+}
 
 const rootReducer = combineReducers({
   routing,
   index,
   account,
+    fuiouURI,
   product:combineReducers({
       type1:productType1,
       type2:productType2,
-      investRecord:financialInvestRecord
+      investRecord:financialInvestRecord,
+      productDetail:fetchFinancialServices,
+      returnPlan:financialReturnPlan
   }),
   isFetching,
   team:combineReducers({

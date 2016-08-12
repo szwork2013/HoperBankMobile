@@ -18,6 +18,7 @@ class FinancialProductRecord extends Component {
         const props = this.props;
         props.clearFinancialInvestRecord()
         props.fetchFinancialInvestRecord({
+            type:props.params.productType,
             curPage:1,
             projectId:props.params.id,
             callback:()=>{
@@ -30,6 +31,7 @@ class FinancialProductRecord extends Component {
     fetchFunc(opt){
         const props = this.props;
         props.fetchFinancialInvestRecord({
+            type:props.params.productType,
             curPage:opt.curPage,
             projectId:props.params.id,
             callback:opt.callback

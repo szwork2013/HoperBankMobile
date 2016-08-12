@@ -15,10 +15,15 @@ class TeamPage extends Component {
 
     const props = this.props;
     if(!props.account.userId){
-      this.context.router.push('/login')
+      this.context.router.push({
+        pathname: '/login',
+        query: { backUrl: location.pathname }
+      })
       return false;
     }
-    props.fetchTeam(props.routeParams.userId,()=>{
+
+    /*url中有userId的话使用url的，没有的话使用store的userId，是为了给app端调用这页面用的*/
+    props.fetchTeam(props.routeParams.userId || props.account.userId,()=>{
       this.setState({loaded:true})
     })
   }
@@ -52,13 +57,13 @@ class TeamPage extends Component {
 
           <section className="my-team-wrap">
             <div className="my-team-item">
-              <Link className="m-item-a" to={`/myteam/${this.props.routeParams.userId}/teamlist`}>
+              <Link className="m-item-a" to={`/myteam/teamlist`}>
                 <span className="s1">团队清单</span>
                 <span className="s2"><i className="icon icon-arrow-right"></i></span>
               </Link>
             </div>
             <div className="my-team-item">
-              <Link className="m-item-a" to={`/myteam/${this.props.routeParams.userId}/royaltylist`}>
+              <Link className="m-item-a" to={`/myteam/royaltylist`}>
                 <span className="s1">提成清单</span>
                 <span className="s2"><i className="icon icon-arrow-right"></i></span>
               </Link>

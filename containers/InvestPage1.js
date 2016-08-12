@@ -30,15 +30,19 @@ class InvestPage1 extends Component{
         },200)
 
 
-        //如果store中没有理财产品信息就去执行ajax更新
+        //这里的判断是为了从列表页面点进来的，列表点进来的时候如果产品列表不为空则隐藏遮罩层
+        //由于控制遮罩层的因素较多，所以没有直接使用遮罩的隐藏与否直接用 （props.product.length!==0）
         const props = this.props;
-        if(props.product.length===0){
-            props.fetchLCList(()=>{
-                this.setState({
-                    loaded:true
-                })
+        if(props.product.length!==0){
+            this.setState({
+                loaded:true
             })
-        }else{
+        }
+    }
+    componentWillReceiveProps(nextProps){
+        //直接刷新当前页面的时候，由于不是列表页点进来的，那么store里会没有product信息
+        //进到这页之后父级页也就是列表页会获取列表，这个时候这个遮罩的判断隐藏与否没有重新判断，所以在这里接收到新的props后重新判断一次
+        if(nextProps.product.length!==0){
             this.setState({
                 loaded:true
             })
@@ -208,10 +212,10 @@ class InvestPage1 extends Component{
                 </section>
                 <section className="product-button-wrap">
                     <TextButton text="产品详情" onClick={()=>{
-                        this.context.router.push(`/financial/product1/${this.props.params.id}/detail`)
+                        this.context.router.push(`/financial/product/1/${this.props.params.id}/detail`)
                     }} />
                     <TextButton text="投标记录" onClick={()=>{
-                        this.context.router.push(`/financial/product1/${this.props.params.id}/record`)
+                        this.context.router.push(`/financial/product/1/${this.props.params.id}/record`)
                     }}  hasBorder={false} />
                 </section>
                 <Overlay display={this.state.overlayShouldShow} onClick={()=>{
@@ -239,13 +243,13 @@ class InvestPage1 extends Component{
                     </div>
                     <BaseButton text="确认" className={this.state.canSubmit ? '' : 'disabled'}
                                 disabled={!this.state.canSubmit}
-                                style={{width:'100%',marginTop:'10px'}} onClick={this.doPay.bind(this)} />
+                                style={{width:'100%',marginTop:'10px'}} onClick={this.doPay.bind(this,{productName:data.name,rate:data.rate,limit:data.limit})} />
 
                 </div>
             </section>
         )
     }
-    doPay(){
+    doPay(obj){
         const props = this.props;
         if(!props.account.userId){
             let r = confirm("请先登录");
@@ -264,9 +268,17 @@ class InvestPage1 extends Component{
                 productId:props.params.id,
                 amt:this.state.amtMoney,
                 success:(result)=>{
-                    alert('投资成功了')
                     this.setState({
-                        loaded:true
+                        loaded:true,
+                        overlayShouldShow:false
+                    })
+                    this.context.router.push({
+                        pathname:`/financial/product/1/${props.params.id}/dealResult`,
+                        query:{
+                            amt:this.state.amtMoney,
+                            sy:this.calculate(this.state.amtMoney,obj.rate,obj.limit),
+                            product:obj.productName
+                        }
                     })
                 },
                 fail:(result)=>{

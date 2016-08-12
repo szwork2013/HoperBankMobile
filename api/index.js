@@ -1,17 +1,31 @@
-var domain;
-//内测
-//domain='http://120.25.97.109:5080/hpmobile/v1/';
-
-//本地
-//domain='http://192.168.1.46:8080/hpmobile/v1/';
-
-//生产
-domain='http://api.hoperbank.com/hpmobile/v1/';
-
-//domain = 'http://192.168.1.46:8080/hpmobile/v1/';
+var domain,
+    fuiouCharge='',
+    fuiouWithDraw = '';
+/*
+* @EVN
+* 1为生产
+* 2为公测
+* */
+const ENV = 2;
+switch (ENV){
+    case 1:
+        domain='http://api.hoperbank.com/hpmobile/v1/';
+        fuiouCharge = 'https://jzh.fuiou.com/app/500002.action';
+        fuiouWithDraw='https://jzh.fuiou.com/app/500003.action';
+        break;
+    case 2:
+        domain='http://120.25.97.109:5080/hpmobile/v1/';
+        fuiouCharge='http://www-1.fuiou.com:9057/jzh/app/500002.action';
+        fuiouWithDraw='http://www-1.fuiou.com:9057/jzh/app/500003.action';
+        break;
+    //no default
+}
 var API = {
     ossBannerDomain:'http://oss-cn-shenzhen.aliyuncs.com/hopertest/',
-    fuiouURI:'https://jzh.fuiou.com/500002.action',
+    fuiouURI:{
+        charge:fuiouCharge,
+        withdraw:fuiouWithDraw
+    },
     index:domain+'index',
     product:{
         list:domain+'product/list',
@@ -22,8 +36,15 @@ var API = {
             list:domain+'product/financial/list',
             detail:domain+'product/financial/detail',
             buy:domain+'financial/buy',
-            dealrecord:domain+'product/financial/detail/record',
+            record:domain+'product/financial/detail/record',
             findRepaymentPlan:domain+'product/financial/detail/findRepaymentPlan'
+        },
+        transfer:{
+            list:domain+'product/transfer/list',
+            detail:domain+'product/transfer/detail',
+            buy:domain+'transfer/buy',
+            record:domain+'product/transfer/detail/record',
+            findRepaymentPlan:domain+'product/transfer/detail/findRepaymentPlan'
         }
     },
     activity:{

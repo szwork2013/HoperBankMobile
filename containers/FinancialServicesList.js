@@ -1,3 +1,7 @@
+/*
+* 优选服务与债权转让列表
+* @param   为1时调用的是优选服务，2时调用债权转让
+* */
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { fetchFWList,clearProduct,setFetching } from '../actions'
@@ -19,11 +23,13 @@ class FinancialServicesList extends Component {
             }
         }
         this.fetchFunc = this.fetchFunc.bind(this);
+        this.renderItem = this.renderItem.bind(this);
     }
     componentWillMount() {
         //先清除产品2数据
         this.props.clearProduct(2);
         this.props.fetchFWList({
+            type:this.props.type,
             curPage:1,
             orderBy:1,
             callback:()=>{
@@ -38,6 +44,7 @@ class FinancialServicesList extends Component {
     }
     fetchFunc(opt){
             this.props.fetchFWList({
+                type:this.props.type,
                 curPage:opt.curPage,
                 orderBy:opt.params.orderBy,
                 callback:opt.callback
@@ -57,6 +64,7 @@ class FinancialServicesList extends Component {
                         }
                     });
                     props.fetchFWList({
+                        type:props.type,
                         curPage:1,
                         orderBy:orderBy
                     })
@@ -87,7 +95,7 @@ class FinancialServicesList extends Component {
         };
         var Circle = ProgressBar.Circle;
         return(
-                <Link to="/" key={index} className='financial-li'>
+                <Link to={`/financial/product/${this.props.type}/${item.projectId}`} key={index} className='financial-li'>
                     <h2>{item.title}</h2>
                     <div>
                         <div className="part-1">
