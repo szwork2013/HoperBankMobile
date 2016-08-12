@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { fetchLCList } from '../actions'
+import {Link} from 'react-router'
 import ReactIScroll from 'react-iscroll'
 import iScroll from 'iscroll/build/iscroll-probe';
 import RootLoading from '../components/RootLoading'
@@ -14,7 +15,6 @@ class FinancialList extends Component {
     }
 
     componentWillMount() {
-        //loadData(this.props)
         this.props.fetchLCList(()=>{
             this.setState({
                 loaded:true
@@ -23,13 +23,6 @@ class FinancialList extends Component {
     }
     componentDidMount(){
 
-    }
-
-    componentWillReceiveProps(nextProps) {
-
-    }
-    onScrollStart() {
-        console.log("iScroll starts scrolling")
     }
     render() {
 
@@ -65,7 +58,7 @@ class FinancialList extends Component {
                             <p className="p2">期限</p>
                         </div>
                         <div className="part-3">
-                            <a href="product.html?productId=10005">立投</a>
+                            <Link to={`/financial/product/1/${item.productId}`}>立投</Link>
                         </div>
                     </div>
                 </li>

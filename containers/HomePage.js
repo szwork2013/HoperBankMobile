@@ -4,7 +4,7 @@ import { loadIndex } from '../actions'
 import ReactSwipe from 'react-swipe';
 import RootLoading from '../components/RootLoading'
 import { browserHistory,Link } from 'react-router'
-
+var ReactCSSTransitionGroup = require('react-addons-css-transition-group');
 class HomePage extends Component {
   constructor(props) {
     super(props)
@@ -47,7 +47,7 @@ class HomePage extends Component {
       startSlide:1
     }
     return (
-        <section style={{width:'375px',height:$(window).height()-110,backgroundColor:'#fff'}}>
+        <section style={{backgroundColor:'#fff'}}>
           <ReactSwipe className="carousel" swipeOptions={{continuous: true,auto: 3000}}>
             {
                 banner.map((item,index)=>{
@@ -66,22 +66,22 @@ class HomePage extends Component {
             <ul>
               <li>
                 <a href="activityCenter.html">
-                  <img src="/static/img/index-icon1.png" width="30" height="30" />
+                  <img src="/static/img/index-icon2.png" width="30" height="30" />
                   <div>
-                    <p className="p1">活动</p>
+                    <p className="p1">活动中心</p>
                   </div>
                 </a>
               </li>
               <li>
                 <a>
-                  <img src="/static/img/index-icon2.png" width="30" height="30" />
+                  <img src="/static/img/index-icon1.png" width="30" height="30" />
                   <div>
-                    <p className="p1">收益</p>
+                    <p className="p1">安全保障</p>
                   </div>
                 </a>
               </li>
               <li>
-                <Link to={'/myteam/'+ (this.props.account ? this.props.account.userId : '')}>
+                <Link to={'/myteam'}>
 
                   <img src="/static/img/index-icon3.png" width="30" height="30" />
                   <div>
@@ -98,15 +98,15 @@ class HomePage extends Component {
                   recommend.map((item,index)=>{
                     return(
                         <section className="index-ll-content" key={index}>
-                          <a style={{display:'block'}} href="product.html?productId=10001" className="index-ll-bg">
+                          <div className="index-ll-bg">
                             <h2 className="tit">{item.name}</h2>
-                            <p className="p1">{item.rate}<span>%</span></p>
+                            <p className="p1"><span className="rate">{item.rate}</span><span>%</span></p>
                             <p className="p2">预期年化收益率</p>
-                            <p className="p3">立即抢购</p>
-                          </a>
-                          <div className="index-ll-info">
-                            <div className="d1" style={{width:'100%',textAlign:'center'}}>起购金额<span>{item.lowestBuy}元</span></div>
+                            <p className="p3">{item.lowestBuy+'元起投'}</p>
                           </div>
+                          <Link to={`/financial/product/1/${item.productId}`} style={{display:'block'}} className="index-ll-info">
+                            <div className="d1">立即抢购</div>
+                          </Link>
                         </section>
                     )
                   })
@@ -138,6 +138,11 @@ class HomePage extends Component {
   render() {
     return (
         <section className="home-page">
+          <ReactCSSTransitionGroup component="div"
+                                   transitionName="slide-right"
+                                   transitionEnterTimeout={300} transitionLeaveTimeout={300}>
+            {this.props.children}
+          </ReactCSSTransitionGroup>
           <RootLoading display={!this.props.index}/>
           {this.props.index && this.renderMain()}
         </section>

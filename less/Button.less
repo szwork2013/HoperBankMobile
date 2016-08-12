@@ -1,15 +1,56 @@
 .base-button{
+  display: block;
   width:90%;
   text-align:center;
   line-height:40px;
   background-color:#e3aa00;
   border-radius:5px;
+  border:none;
   color:#fff;
   margin:0 auto;
+  font-size:16px;
+  font-family:'Microsoft Yahei';
+  &.fixed{
+    position: fixed;
+    bottom:0;
+    width:100%;
+    line-height:50px;
+    border-radius:0;
+  }
+  &.disabled{
+    background-color:#ccc;
+  }
 }
 
 .register{
   border:1px solid #004fa3;
   background:none;
   color:#004fa3;
+}
+
+.base-text-button-wrap{
+  width:100%;
+  background-color:#fff;
+  line-height:45px;
+  height:45px;
+  margin-top:0;
+  >.base-text-button-info{
+    height:100%;
+    box-sizing: border-box;
+    margin-left:15px;
+    overflow: hidden;
+    border-bottom:1px solid #dcdcdc;
+    >span{
+      float: left;
+      color:#333;
+    }
+    >i{
+      float: right;
+      margin-top:7px;
+    }
+    &.no-border{
+      border-bottom:none
+    }
+  }
+
 }

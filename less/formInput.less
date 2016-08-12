@@ -1,0 +1,46 @@
+.input-item{
+  width:100%;
+  font-size:14px;
+  overflow: hidden;
+  >span[class^='input-item']{
+    display: block;
+    padding:0 15px;
+    box-sizing: border-box;
+    line-height:45px;
+  }
+  >.input-item-left{
+    width:30%;
+    float: left;
+  }
+  >.input-item-right{
+    width:70%;
+    min-height:45px;
+    float: right;
+    text-align: right;
+    position: relative;
+    >span{
+      display: block;
+      float: right;
+    }
+    >input[type='text']{
+      position: absolute;
+      width:100%;
+      height:100%;
+      right:15px;
+      padding:0;
+      text-align:right;
+      background:none;
+    }
+  }
+  &.white{
+    background-color:#fff;
+  }
+}
+
+/*register*/
+div[class^='register-step'].hide{
+  display: none;
+}
+.register-step-third{
+  text-align:center
+}

@@ -18,7 +18,7 @@ class TeamList extends Component {
 
         props.clearTeamList();
         props.fetchTeamList({
-            userId:props.id,
+            userId:props.account.userId,
             curPage:1,
             type:props.type,
             callback:()=>{
@@ -34,23 +34,14 @@ class TeamList extends Component {
     fetchFunc(opt){
             this.props.fetchTeamList({
                 curPage:opt.curPage,
-                userId:this.props.id,
+                userId:this.props.account.userId,
                 type:this.props.type,
                 callback:opt.callback
             })
     }
     render(){
         const props = this.props;
-        /*<ListView
-            dataSource={props.product.type2}
-            renderRow={this.renderItem}
-            fetchFunc={this.fetchFunc}
-            wrapperClass='financial-ul'
-            params={this.state.params}
-            isFetching={props.isFetching}
-            style={{height:$(window).height() - $('.main-foot-nav').height() - $('.tab-title-items').height() - $('.financial-nav').height() - 20}}
-        >
-        </ListView>*/
+        var canUseHeight = $(window).height() - 52 -44
         return(
             <div className="" >
                 <div className="my-team-tit">
@@ -68,7 +59,7 @@ class TeamList extends Component {
                     wrapperClass=''
                     params={this.state.params}
                     isFetching={props.isFetching}
-                    style={{height:$(window).height() - $('.main-foot-nav').height() - $('.tab-title-items').height() - $('.financial-nav').height() - 50}}
+                    style={{height:canUseHeight}}
                 >
                 </ListView>
                 <RootLoading display={!this.state.loaded}/>
@@ -93,7 +84,8 @@ class TeamList extends Component {
 function mapStateToProps(state, ownProps) {
     return {
         teamList:state.team.teamList,
-        isFetching:state.isFetching
+        isFetching:state.isFetching,
+        account:state.account
     }
 }
 
