@@ -14,6 +14,7 @@ export default class IconInput extends Component {
     const props = this.props;
     return (
         <div className={"icon-input-wrap"} onClick={props.onClick}>
+          {props.children}
           <div className={props.hasBorder ? 'icon-input-con' : 'icon-input-con icon-input-no-border'}>
             <i className={'icon '+props.icon}></i>
             <input type={props.type} placeholder={props.placeholder} onChange={this.handleChange.bind(this,[props.rule,props.callback])} />

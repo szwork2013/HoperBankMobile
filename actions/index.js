@@ -735,3 +735,50 @@ export function withDraw(opt){
         });
     }
 }
+
+/*注册-步骤一 -> 手机是否被注册 */
+/*不需要存入store*/
+export function registerFirstStep(phoneNumber,callback){
+    var url = API.regedit.step1
+    return (dispatch, getState) => {
+        return $.ajax({
+            type: 'GET',
+            url:url,
+            data:{
+                mobile:phoneNumber
+            },
+            timeout:15000,
+            dataType:"jsonp",
+            jsonpCallback:'registerFirstStepJsonp',
+            success: function(data){
+                callback && callback(data);
+            },
+            error: function(xhr, type){
+                console.log(xhr)
+            }
+        });
+    }
+}
+/*注册-步骤二 -> 获取验证码 */
+/*不需要存入store*/
+export function registerSecondStep(phoneNumber,callback){
+    var url = API.regedit.step2
+    return (dispatch, getState) => {
+        return $.ajax({
+            type: 'GET',
+            url:url,
+            data:{
+                mobile:phoneNumber
+            },
+            timeout:15000,
+            dataType:"jsonp",
+            jsonpCallback:'registerFirstStepJsonp',
+            success: function(data){
+                callback && callback(data);
+            },
+            error: function(xhr, type){
+                console.log(xhr)
+            }
+        });
+    }
+}
