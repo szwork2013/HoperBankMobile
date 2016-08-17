@@ -103,5 +103,6 @@ ListView.defaultProps = {
         mouseWheel: false,
         scrollbars: false,
         probeType: 1,
+        click:true,
     }
 }

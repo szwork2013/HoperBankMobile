@@ -1,11 +1,12 @@
 import React, { Component, PropTypes } from 'react'
 var ReactCSSTransitionGroup = require('react-addons-css-transition-group');
 import { connect } from 'react-redux'
-import { doLogin,registerFirstStep,registerSecondStep } from '../actions'
+import { doLogin,registerFirstStep,registerSecondStep,registerThirdStep } from '../actions'
 import IconButton from '../components/IconButton'
 import IconInput from '../components/IconInput'
 import {BaseButton} from '../components/Button'
 import RootLoading from '../components/RootLoading'
+import { Link } from 'react-router'
 class ReigsterPage extends Component {
     constructor(props) {
         super(props)
@@ -25,8 +26,8 @@ class ReigsterPage extends Component {
             loading:false,
             step:{
                 first:true,
-                second:true,
-                third:true
+                second:false,
+                third:false
             }
         }
         this.doStepFirst = this.doStepFirst.bind(this);
@@ -60,11 +61,6 @@ class ReigsterPage extends Component {
                 loading:true
             })
             props.registerFirstStep(this.state.username,(result)=>{
-                setTimeout(()=>{
-                    this.setState({
-                        loading:false
-                    })
-                },300)
                 if(result.r==1){
                     this.setState({
                         step:{
@@ -73,12 +69,18 @@ class ReigsterPage extends Component {
                             third:false
                         }
                     })
+                    this.handleGetCode()
                 }else{
-                    alert(result.msg)
+                    setTimeout(()=>{
+                        alert(result.msg)
+                    },300)
+
                 }
+                this.setState({
+                    loading:false
+                })
             })
         }
-
     }
     doStepSecond(){
 
@@ -88,11 +90,95 @@ class ReigsterPage extends Component {
         console.log(`both:${this.state.bothPasswordPassed}`)
         console.log(`yCodePassed:${this.state.yCodePassed}`)
         console.log(`referrerNamePassed:${this.state.referrerNamePassed}`)
-    }
-    doStepThird(){
+
+        this.setErrorTip([
+            {
+                condition:this.state.userNamePassed,
+                errorMsg:'请输入正确的用户名'
+            },
+            {
+                condition:this.state.passWordPassed,
+                errorMsg:'请输入6-20位密码'
+            },
+            {
+                condition:this.state.rePasswordPassed,
+                errorMsg:'请再次输入6-20位密码'
+            },
+            {
+                condition:this.state.bothPasswordPassed,
+                errorMsg:'两次密码不一致'
+            },
+            {
+                condition:this.state.yCodePassed,
+                errorMsg:'请输入6位数字验证码'
+            },
+            {
+                condition:this.state.referrerNamePassed,
+                errorMsg:'请输入正确的推荐人'
+            }
+        ])
+        if(this.state.userNamePassed && this.state.passWordPassed && this.state.rePasswordPassed && this.state.bothPasswordPassed && this.state.yCodePassed  && this.state.referrerNamePassed){
+            this.setState({
+                loading:true
+            })
+            if(this.state.referrerName.toLowerCase()=='hoperbank'){
+                //填的不是手机号的时候
+                this.doRegister();
+            }else{
+                //推荐人填写的是手机号的时候
+                this.props.registerFirstStep(this.state.referrerName,(result)=>{
+                    if(result.r==1002){
+                        this.doRegister();
+                    }else{
+                        alert('没有该推荐人')
+                    }
+                })
+            }
+        }
 
     }
+    setErrorTip(obj){
+        for(var item of obj){
+            if(!item.condition){
+                alert(item.errorMsg);
+                return false;
+            }
+        }
+    }
+    doRegister(){
+        this.props.registerThirdStep({
+            mobile:this.state.username,
+            password:hex_md5(this.state.password),
+            code:this.state.yCode,
+            referrerName:this.state.referrerName,
+            callback:(result)=>{
+                this.setState({
+                    loading:false
+                })
+                if(result.r==1){
+                    this.setState({
+                        step:{
+                            first:false,
+                            second:false,
+                            third:true
+                        }
+                    })
+                }else{
+                    alert(result.msg)
+                }
+            }
+
+        })
+    }
+    doStepThird(){
+        this.props.doLogin(this.state.username,hex_md5(this.state.password),()=>{
+            this.context.router.push('/my')
+        })
+    }
     handleGetCode(){
+        if(!this.state.userNamePassed){
+            return false;
+        }
         this.setState({
             yCodeSendAble:false
         })
@@ -137,7 +223,7 @@ class ReigsterPage extends Component {
                     </section>
                     <BaseButton text="下一步" onClick={this.doStepFirst} className={`mt20 ${this.state.userNamePassed? '':'disabled'}`} disabled={!this.state.userNamePassed} />
                     <section className="tip-section-2">
-                        <a>已有帐号返回登录</a>
+                        <Link to="/login">已有帐号返回登录</Link>
                     </section>
                 </section>
                 <section className={`register-step-second ${this.state.step.second ? '':'hide'}`}>
@@ -184,7 +270,7 @@ class ReigsterPage extends Component {
                     <section className="tip-section-2">
                         注册成功！
                     </section>
-                    <BaseButton text="完成注册" className="mt20" />
+                    <BaseButton text="完成注册" className="mt20" onClick={this.doStepThird} />
                 </section>
             </section>
 
@@ -204,5 +290,6 @@ function mapStateToProps(state, ownProps) {
 export default connect(mapStateToProps, {
     doLogin,
     registerFirstStep,
-    registerSecondStep
+    registerSecondStep,
+    registerThirdStep
 })(ReigsterPage)

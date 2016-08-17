@@ -25,11 +25,14 @@ import ProductDetail from './containers/FinancialProductDetail'
 import FinancialProductRecord from './containers/FinancialProductRecord'
 import FinancialReturnPlan from './containers/FinancialReturnPlan'
 import DealResultPage from './containers/DealResultPage'
+import ActivityCenterPage from './containers/ActivityCenter'
 export default (
     <Route path="/" component={App}>
         <IndexRoute component={HomePage}  />
         <Route path="/home" component={HomePage} >
+            <Route path="/activity" component={ActivityCenterPage} >
 
+            </Route>
         </Route>
 
         /*层数越多，页面上加载的dom元素就越多，安卓比较卡，如果有必要将所有的二级全部放到外面性能最好，但是会大幅度降低用户体验*/

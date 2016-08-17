@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { fetchLCList } from '../actions'
-import {Link} from 'react-router'
+import {Link,browserHistory} from 'react-router'
 import ReactIScroll from 'react-iscroll'
 import iScroll from 'iscroll/build/iscroll-probe';
 import RootLoading from '../components/RootLoading'
@@ -58,7 +58,7 @@ class FinancialList extends Component {
                             <p className="p2">期限</p>
                         </div>
                         <div className="part-3">
-                            <Link to={`/financial/product/1/${item.productId}`}>立投</Link>
+                            <Link to={`/financial/product/1/${item.productId}`} >立投</Link>
                         </div>
                     </div>
                 </li>
@@ -74,7 +74,8 @@ function mapStateToProps(state, ownProps) {
         product:state.product,
         options: {
             mouseWheel: true,
-            scrollbars: false
+            scrollbars: false,
+            click:true,
         }
     }
 }

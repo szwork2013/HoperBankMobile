@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { fetchInvestRecord,clearInvestRecord } from '../actions'
 import RootLoading from '../components/RootLoading'
 import ListView from '../components/ListView'
-
+import config from './componentConfig'
 class InvestRecordList extends Component {
     constructor(props) {
         super(props)
@@ -41,6 +41,7 @@ class InvestRecordList extends Component {
     }
     render(){
         const props = this.props;
+        const iScrollHeight = config.windowHeight - config.tabBarHeight
         return(
             <div className="" >
                 <ListView
@@ -50,7 +51,7 @@ class InvestRecordList extends Component {
                     wrapperClass=''
                     params={this.state.params}
                     isFetching={props.isFetching}
-                    style={{height:$(window).height() - $('.main-foot-nav').height() - $('.tab-title-items').height()}}
+                    style={{height:iScrollHeight}}
                 >
                 </ListView>
                 <RootLoading display={!this.state.loaded}/>
