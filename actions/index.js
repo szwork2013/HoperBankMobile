@@ -837,3 +837,32 @@ export function fetchActivityList(callback){
         });
     }
 }
+
+/* 借款产品列表 */
+/*
+export function fetchActivityList(callback){
+    var url=API.activity.list;
+    return (dispatch, getState) => {
+        return $.ajax({
+            type: 'GET',
+            url:url,
+            data:{
+            },
+            timeout:15000,
+            dataType:"jsonp",
+            jsonpCallback:'fetchActivityListJsonp',
+            success: function(data){
+                if(data.r==1){
+                    dispatch({
+                        type:FETCH_ACTIVITY_LIST,
+                        response:data.list
+                    })
+                }
+                callback && callback(data);
+            },
+            error: function(xhr, type){
+                console.log(xhr)
+            }
+        });
+    }
+}*/

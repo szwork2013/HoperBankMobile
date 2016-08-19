@@ -46,6 +46,7 @@ export default (
             </Route>
         </Route>
         <Route path="/borrow" component={BorrowNavPage}>
+
         </Route>
         <Route path="/my" component={MyPage}>
             <Route path="/my/personal" component={PersonalPage} />

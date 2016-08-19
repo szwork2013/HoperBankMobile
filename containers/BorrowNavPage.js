@@ -1,7 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { loadUser, loadStarred } from '../actions'
-import ReactSwipe from 'react-swipe';
 
 class BorrowNavPage extends Component {
   constructor(props) {
