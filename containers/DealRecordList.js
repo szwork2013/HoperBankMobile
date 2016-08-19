@@ -41,7 +41,7 @@ class DealRecordList extends Component {
     }
     render(){
         const props = this.props;
-        const iScrollHeight = config.windowHeight - config.navHeight - config.tabBarHeight
+        const iScrollHeight = config.windowHeight - config.tabBarHeight
         return(
             <div className="" >
                 <ListView

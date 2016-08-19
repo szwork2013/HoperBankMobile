@@ -65,12 +65,12 @@ class HomePage extends Component {
           <section className="index-nav-list">
             <ul>
               <li>
-                <a href="activityCenter.html">
+                <Link to="/activity">
                   <img src="/static/img/index-icon2.png" width="30" height="30" />
                   <div>
                     <p className="p1">活动中心</p>
                   </div>
-                </a>
+                </Link>
               </li>
               <li>
                 <a>

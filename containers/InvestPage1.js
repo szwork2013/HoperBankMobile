@@ -24,12 +24,6 @@ class InvestPage1 extends Component{
         this.amtMoneyChange = this.amtMoneyChange.bind(this);
     }
     componentWillMount() {
-        //隐藏navigator
-        setTimeout(()=>{
-            $('.main-foot-nav').fadeOut();
-        },200)
-
-
         //这里的判断是为了从列表页面点进来的，列表点进来的时候如果产品列表不为空则隐藏遮罩层
         //由于控制遮罩层的因素较多，所以没有直接使用遮罩的隐藏与否直接用 （props.product.length!==0）
         const props = this.props;
@@ -47,9 +41,6 @@ class InvestPage1 extends Component{
                 loaded:true
             })
         }
-    }
-    componentWillUnmount(){
-        $('.main-foot-nav').fadeIn(200);
     }
     onScroll(ins){
 
@@ -254,7 +245,10 @@ class InvestPage1 extends Component{
         if(!props.account.userId){
             let r = confirm("请先登录");
             if(r){
-                this.context.router.push(`/login`)
+                this.context.router.push({
+                    pathname: '/login',
+                    query: { backUrl: location.pathname }
+                })
             }
             return false;
         }

@@ -6,7 +6,7 @@ import ReactIScroll from 'react-iscroll'
 import iScroll from 'iscroll/build/iscroll-probe';
 import RootLoading from '../components/RootLoading'
 import config from './componentConfig'
-class FinancialList extends Component {
+class BorrowListPage extends Component {
     constructor(props) {
         super(props)
         this.state={
@@ -72,7 +72,7 @@ class FinancialList extends Component {
 
 function mapStateToProps(state, ownProps) {
     return {
-        product:state.product,
+        borrowList:state.product.borrowList,
         options: {
             scrollbars: false,
             click:config.isScrollClick
@@ -82,4 +82,4 @@ function mapStateToProps(state, ownProps) {
 
 export default connect(mapStateToProps, {
     fetchLCList
-})(FinancialList)
+})(BorrowListPage)

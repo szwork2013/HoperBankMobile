@@ -25,6 +25,7 @@ export const CLEAR_FINANCIAL_INVEST_RECORD = 'CLEAR_FINANCIAL_INVEST_RECORD'
 export const FETCH_FINANCIAL_SERVICES = 'FETCH_FINANCIAL_SERVICES'
 export const FETCH_FINANCIAL_RETURN_PLAN = 'FETCH_FINANCIAL_RETURN_PLAN'
 export const CLEAR_FINANCIAL_RETURN_PLAN = 'CLEAR_FINANCIAL_RETURN_PLAN'
+export const FETCH_ACTIVITY_LIST = 'FETCH_ACTIVITY_LIST';
 export function loadIndex(){
     return (dispatch, getState) => {
         return $.ajax({
@@ -735,3 +736,133 @@ export function withDraw(opt){
         });
     }
 }
+
+/*注册-步骤一 -> 手机是否被注册 */
+/*不需要存入store*/
+export function registerFirstStep(phoneNumber,callback){
+    var url = API.regedit.step1
+    return (dispatch, getState) => {
+        return $.ajax({
+            type: 'GET',
+            url:url,
+            data:{
+                mobile:phoneNumber
+            },
+            timeout:15000,
+            dataType:"jsonp",
+            jsonpCallback:'registerFirstStepJsonp',
+            success: function(data){
+                callback && callback(data);
+            },
+            error: function(xhr, type){
+                console.log(xhr)
+            }
+        });
+    }
+}
+/*注册-步骤二 -> 获取验证码 */
+/*不需要存入store*/
+export function registerSecondStep(phoneNumber,callback){
+    var url = API.regedit.step2
+    return (dispatch, getState) => {
+        return $.ajax({
+            type: 'GET',
+            url:url,
+            data:{
+                mobile:phoneNumber
+            },
+            timeout:15000,
+            dataType:"jsonp",
+            jsonpCallback:'registerSecondStepJsonp',
+            success: function(data){
+                callback && callback(data);
+            },
+            error: function(xhr, type){
+                console.log(xhr)
+            }
+        });
+    }
+}
+/*注册-步骤三 -> 发送表单 */
+/*不需要存入store*/
+export function registerThirdStep(opt){
+    var url = API.regedit.step3
+    return (dispatch, getState) => {
+        return $.ajax({
+            type: 'GET',
+            url:url,
+            data:{
+                mobile:opt.mobile,
+                passwd:opt.password,
+                code:opt.code,
+                referrerName:opt.referrerName
+            },
+            timeout:15000,
+            dataType:"jsonp",
+            jsonpCallback:'registerThirdStepJsonp',
+            success: function(data){
+                opt.callback && opt.callback(data);
+            },
+            error: function(xhr, type){
+                console.log(xhr)
+            }
+        });
+    }
+}
+
+/* 活动列表 */
+export function fetchActivityList(callback){
+    var url=API.activity.list;
+        return (dispatch, getState) => {
+        return $.ajax({
+            type: 'GET',
+            url:url,
+            data:{
+            },
+            timeout:15000,
+            dataType:"jsonp",
+            jsonpCallback:'fetchActivityListJsonp',
+            success: function(data){
+                if(data.r==1){
+                    dispatch({
+                        type:FETCH_ACTIVITY_LIST,
+                        response:data.list
+                    })
+                }
+                callback && callback(data);
+            },
+            error: function(xhr, type){
+                console.log(xhr)
+            }
+        });
+    }
+}
+
+/* 借款产品列表 */
+/*
+export function fetchActivityList(callback){
+    var url=API.activity.list;
+    return (dispatch, getState) => {
+        return $.ajax({
+            type: 'GET',
+            url:url,
+            data:{
+            },
+            timeout:15000,
+            dataType:"jsonp",
+            jsonpCallback:'fetchActivityListJsonp',
+            success: function(data){
+                if(data.r==1){
+                    dispatch({
+                        type:FETCH_ACTIVITY_LIST,
+                        response:data.list
+                    })
+                }
+                callback && callback(data);
+            },
+            error: function(xhr, type){
+                console.log(xhr)
+            }
+        });
+    }
+}*/

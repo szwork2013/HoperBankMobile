@@ -14,6 +14,7 @@ class WithDrawPage extends Component{
             canSubmit:true
         }
         this.amtMoneyChange = this.amtMoneyChange.bind(this);
+        this.checkInput = this.checkInput.bind(this)
     }
     componentWillMount() {
         if(!this.props.account.userId){
@@ -101,6 +102,9 @@ class WithDrawPage extends Component{
         const amtMoney = this.state.amtMoney;
         if(amtMoney < 2){
             alert('2元起提现')
+            return false;
+        }else if(amtMoney>this.props.account.balance){
+            alert('余额不足')
             return false;
         }
         return true;

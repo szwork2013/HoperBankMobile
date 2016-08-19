@@ -226,11 +226,22 @@ function fuiouURI(state=API.fuiouURI){
     return state;
 }
 
+/*活动列表*/
+function activity(state=[],action){
+    const {type} = action;
+    if(type==ActionTypes.FETCH_ACTIVITY_LIST){
+        return action.response
+    }
+    return state;
+}
+
+
 const rootReducer = combineReducers({
   routing,
   index,
   account,
     fuiouURI,
+    activity,
   product:combineReducers({
       type1:productType1,
       type2:productType2,
