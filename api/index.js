@@ -5,6 +5,7 @@ var domain,
 * @EVN
 * 1为生产
 * 2为公测
+* 3为后端测试
 * */
 const ENV = 2;
 switch (ENV){
@@ -15,6 +16,11 @@ switch (ENV){
         break;
     case 2:
         domain='http://120.25.97.109:5080/hpmobile/v1/';
+        fuiouCharge='http://www-1.fuiou.com:9057/jzh/app/500002.action';
+        fuiouWithDraw='http://www-1.fuiou.com:9057/jzh/app/500003.action';
+        break;
+    case 3:
+        domain = 'http://192.168.1.46:8080/hpmobile/v1/';
         fuiouCharge='http://www-1.fuiou.com:9057/jzh/app/500002.action';
         fuiouWithDraw='http://www-1.fuiou.com:9057/jzh/app/500003.action';
         break;
@@ -32,6 +38,8 @@ var API = {
         detail:domain+'productDetail.json',
         record:domain+'product/detail/record',
         buy:domain+'product/buy',
+        cancel:domain+ 'product/cancel',
+        reBuy:domain+'product/rebuy',
         financial:{
             list:domain+'product/financial/list',
             detail:domain+'product/financial/detail',

@@ -2,51 +2,36 @@ import React, { Component, PropTypes } from 'react'
 import { browserHistory,Link } from 'react-router'
 import { connect } from 'react-redux'
 export default class TabNavigator extends Component {
-  constructor(props) {
-    super(props)
-  }
-  render() {
-    const selected = this.props.selected
-    function test(str){
-      return new RegExp(selected).test(str)
+    constructor(props) {
+        super(props);
     }
+    componentWillMount(){
 
-    return (
-        <section className="main-foot-nav">
-          <ul>
-            <li className={selected =='/home' ? 'active':''}>
-              <Link to="/home">
-                <i className="i1"></i>
-                <p>首页</p>
-              </Link>
-            </li>
-            <li className={selected =='/financial' ? 'active':''}>
-              <Link to="/financial">
-                <i className="i2"></i>
-                <p>理财</p>
-              </Link>
-            </li>
-            <li className={selected =='/borrow' ? 'active':''}>
-              <Link to="/borrow">
-                <i className="i3"></i>
-                <p>借款</p>
-              </Link>
-            </li>
-            <li className={selected =='/my' ? 'active':''}>
-              <Link to="/my" >
-                <i className="i4"></i>
-                <p>我的</p>
-              </Link>
-            </li>
-          </ul>
-        </section>
-    )
-  }
+    }
+    render() {
+        const props = this.props;
+        return (
+            <section className="main-foot-nav">
+                <Link to={{pathname:'/home'}} activeClassName="active" >
+                    <i className="i1"></i>
+                    <p>首页</p>
+                </Link>
+                <Link to="/financial" activeClassName="active">
+                    <i className="i2"></i>
+                    <p>理财</p>
+                </Link>
+                <Link to={{pathname:'/borrow',state:{borrowProductList:props.rootState.product.borrowProductList}}} activeClassName="active">
+                    <i className="i3"></i>
+                    <p>借款</p>
+                </Link>
+                <Link to="/my" activeClassName="active">
+                    <i className="i4"></i>
+                    <p>我的</p>
+                </Link>
+            </section>
+        )
+    }
 }
-function mapStateToProps(state, ownProps) {
-  return {
-    selected: state.routing.locationBeforeTransitions.pathname
-  }
-}
-
-export default connect(mapStateToProps)(TabNavigator)
+TabNavigator.contextTypes = {
+    router: React.PropTypes.object.isRequired
+};

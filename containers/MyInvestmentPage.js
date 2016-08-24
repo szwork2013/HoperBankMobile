@@ -3,6 +3,7 @@ import ListView from '../components/ListView'
 import { connect } from 'react-redux'
 import TabBar,{TabBarItem} from '../components/TabBar'
 import InvestRecordList from './InvestRecordList'
+var ReactCSSTransitionGroup = require('react-addons-css-transition-group');
 class MyInvestmentPage extends Component {
   constructor(props) {
     super(props)
@@ -12,10 +13,18 @@ class MyInvestmentPage extends Component {
   componentDidMount(){
 
   }
+  newdata(){
+
+  }
   render() {
     const props = this.props;
     return (
         <section className="level-2-wrap">
+          <ReactCSSTransitionGroup component="div"
+                                   transitionName="slide-right"
+                                   transitionEnterTimeout={300} transitionLeaveTimeout={300}>
+            {this.props.children}
+          </ReactCSSTransitionGroup>
           <TabBar>
             <TabBarItem name="待匹配">
               <InvestRecordList type="1" id={props.account.userId}/>
