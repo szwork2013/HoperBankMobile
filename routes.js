@@ -4,6 +4,7 @@ import App from './containers/App'
 import HomePage from './containers/HomePage'
 import BorrowNavPage from './containers/BorrowNavPage'
 import BorrowListPage from './containers/BorrowListPage'
+import BorrowApplyPage from './containers/BorrowApplyPage'
 import MyPage from './containers/MyPage'
 import ChargePage from './containers/ChargePage'
 import WithDrawPage from './containers/WithDrawPage'
@@ -53,6 +54,9 @@ export default (
         </Route>
         <Route path="/borrow" component={BorrowNavPage}>
             <Route path="/borrow/list" component={BorrowListPage}>
+
+            </Route>
+            <Route path="/borrow/apply" component={BorrowApplyPage}>
 
             </Route>
         </Route>
