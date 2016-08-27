@@ -6,10 +6,12 @@
   background-color:#fafafa;
   bottom:0;
   z-index: 1;
-  >ul{
-    li{
-      font-size:14px;
-      >a{
+  >a{
+      display: block;
+        font-size:14px;
+        float: left;
+        width:25%;
+        text-align: center;
         >i{
           display: block;
           width:32px;
@@ -31,29 +33,20 @@
         >i.i4{
           background-position:0 -192px;
         }
+    &.active{
+      >i.i1{
+        background-position:0 -32px;
       }
-
-      float: left;
-      width:25%;
-      text-align: center;
-    }
-    li.active{
-      >a{
-        >i.i1{
-          background-position:0 -32px;
-        }
-        >i.i2{
-          background-position:0 -96px;
-        }
-        >i.i3{
-          background-position:0 -160px;
-        }
-        >i.i4{
-          background-position:0 -224px;
-        }
-        color:#e3aa00;
+      >i.i2{
+        background-position:0 -96px;
       }
-
+      >i.i3{
+        background-position:0 -160px;
+      }
+      >i.i4{
+        background-position:0 -224px;
+      }
+      color:#e3aa00;
     }
   }
 }

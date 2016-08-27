@@ -1,8 +1,10 @@
 import React from 'react'
-import { Route,IndexRoute } from 'react-router'
+import { Route,Redirect,IndexRedirect  } from 'react-router'
 import App from './containers/App'
 import HomePage from './containers/HomePage'
 import BorrowNavPage from './containers/BorrowNavPage'
+import BorrowListPage from './containers/BorrowListPage'
+import BorrowApplyPage from './containers/BorrowApplyPage'
 import MyPage from './containers/MyPage'
 import ChargePage from './containers/ChargePage'
 import WithDrawPage from './containers/WithDrawPage'
@@ -16,6 +18,7 @@ import RoyaltyList from './containers/RoyaltyList'
 import NoMatch from './containers/NoMatch'
 import DealRecordPage from './containers/DealRecordPage'
 import MyInvestmentPage from './containers/MyInvestmentPage'
+import ChoseRebuyPage from './containers/ChoseRebuyPage'
 import ReturnPlanRecordPage from './containers/ReturnedPlanRecordPage'
 import InvitationPage from './containers/InvitationPage'
 import MyGiftPage from './containers/MyGiftPage'
@@ -28,7 +31,8 @@ import DealResultPage from './containers/DealResultPage'
 import ActivityCenterPage from './containers/ActivityCenter'
 export default (
     <Route path="/" component={App}>
-        <IndexRoute component={HomePage}  />
+        <IndexRedirect to="/home" />
+        <Redirect from="/" to="/home" />
         <Route path="/home" component={HomePage} >
             <Route path="/activity" component={ActivityCenterPage} >
 
@@ -37,7 +41,10 @@ export default (
 
         /*层数越多，页面上加载的dom元素就越多，安卓比较卡，如果有必要将所有的二级全部放到外面性能最好，但是会大幅度降低用户体验*/
 
-        <Route path="/financial" component={FinancialPage}>
+        <Route path="/financial"  getComponent={(nextState, cb)=>{
+            //console.log(nextState)
+            cb(null,FinancialPage)
+        }}>
             <Route path="/financial/product/:productType/:id" component={InvestMainPage}>
                 <Route path="/financial/product/:productType/:id/detail" component={ProductDetail} />
                 <Route path="/financial/product/:productType/:id/record" component={FinancialProductRecord} />
@@ -46,12 +53,21 @@ export default (
             </Route>
         </Route>
         <Route path="/borrow" component={BorrowNavPage}>
+            <Route path="/borrow/list" component={BorrowListPage}>
 
+            </Route>
+            <Route path="/borrow/apply" component={BorrowApplyPage}>
+
+            </Route>
         </Route>
         <Route path="/my" component={MyPage}>
             <Route path="/my/personal" component={PersonalPage} />
             <Route path="/my/dealrecord" component={DealRecordPage} />
-            <Route path="/my/investmentrecord" component={MyInvestmentPage} />
+            <Route path="/my/investmentrecord" component={MyInvestmentPage}>
+                <Route path="/my/investmentrecord/select" component={ChoseRebuyPage}>
+
+                </Route>
+            </Route>
             <Route path="/my/returnPlanRecordPage" component={ReturnPlanRecordPage} />
             <Route path="/my/invitation" component={InvitationPage} />
             <Route path="/my/myGift" component={MyGiftPage}>

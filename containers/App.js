@@ -6,7 +6,6 @@ import TabNavigator from '../components/TabNavigator'
 class App extends Component {
   constructor(props) {
     super(props)
-
   }
 
   render() {
@@ -14,7 +13,9 @@ class App extends Component {
     return (
         <div style={{height:'100%'}}>
             {children}
-            <TabNavigator></TabNavigator>
+            <TabNavigator rootState={this.props.state}>
+
+            </TabNavigator>
         </div>
     )
   }
@@ -23,6 +24,7 @@ class App extends Component {
 
 function mapStateToProps(state, ownProps) {
   return {
+      state
   }
 }
 

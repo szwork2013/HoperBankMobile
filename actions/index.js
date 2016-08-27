@@ -26,6 +26,7 @@ export const FETCH_FINANCIAL_SERVICES = 'FETCH_FINANCIAL_SERVICES'
 export const FETCH_FINANCIAL_RETURN_PLAN = 'FETCH_FINANCIAL_RETURN_PLAN'
 export const CLEAR_FINANCIAL_RETURN_PLAN = 'CLEAR_FINANCIAL_RETURN_PLAN'
 export const FETCH_ACTIVITY_LIST = 'FETCH_ACTIVITY_LIST';
+export const SET_INVEST_RECORD_SHOULD_UPDATE = 'SET_INVEST_RECORD_SHOULD_UPDATE'
 export function loadIndex(){
     return (dispatch, getState) => {
         return $.ajax({
@@ -840,7 +841,7 @@ export function fetchActivityList(callback){
 
 /* 借款产品列表 */
 /*
-export function fetchActivityList(callback){
+export function fetchBorrowProductList(callback){
     var url=API.activity.list;
     return (dispatch, getState) => {
         return $.ajax({
@@ -866,3 +867,65 @@ export function fetchActivityList(callback){
         });
     }
 }*/
+
+/*取消投资，不用通知store*/
+export function cancelInvest(opt){
+    var url=API.product.cancel;
+    return (dispatch, getState) => {
+        return $.ajax({
+            type: 'GET',
+            url:url,
+            data:{
+                userId:opt.userId,
+                productId:opt.productId,
+                investId:opt.investId
+            },
+            timeout:15000,
+            dataType:"jsonp",
+            jsonpCallback:'cancelInvestJsonp',
+            success: function(data){
+                opt.callback && opt.callback(data);
+            },
+            error: function(xhr, type){
+                console.log(xhr)
+            }
+        });
+    }
+}
+
+/* 这个是设置续投成功与否的方法，是为了让列表页面点进续投页面后选择了续投项目后通知列表页面续投成功了没，成功了就
+ * 告诉修改列表页使用的store中的一个是InvestRecordShouldUpdate值变为true，然后列表页接收到新props后判断这个值为true的话就更新当前数据并将
+  * 该值再设置回false*/
+export function setInvestRecordShouldUpdate(b){
+    return (dispatch, getState) => {
+        dispatch({
+            type:SET_INVEST_RECORD_SHOULD_UPDATE,
+            response:b
+        })
+    }
+}
+/*续投与取消续投，不用通知store*/
+export function reBuyOperation(opt){
+    var url=API.product.reBuy;
+    return (dispatch, getState) => {
+        return $.ajax({
+            type: 'GET',
+            url:url,
+            data:{
+                userId:opt.userId,
+                productId:opt.productId,
+                investId:opt.investId,
+                operation:opt.operation
+            },
+            timeout:15000,
+            dataType:"jsonp",
+            jsonpCallback:'cancelInvestJsonp',
+            success: function(data){
+                opt.callback && opt.callback(data);
+            },
+            error: function(xhr, type){
+                console.log(xhr)
+            }
+        });
+    }
+}

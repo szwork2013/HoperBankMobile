@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import { browserHistory,Link } from 'react-router'
 import { connect } from 'react-redux'
+import config from '../containers/componentConfig'
 class TabBar extends Component {
 
   constructor(props) {
@@ -33,7 +34,7 @@ class TabBar extends Component {
               )
             })}
           </nav>
-          <div className="tab-content-items"  style={{height:$(window).height()-100 +'px'}}>
+          <div className="tab-content-items"  style={{height:config.windowHeight-config.tabBarHeight +'px'}}>
             {React.Children.map(this.props.children, (element, index) => {
               return (
                   <div className={that.getContentItemCssClasses(index)}>

@@ -2,6 +2,7 @@ import * as ActionTypes from '../actions'
 import merge from 'lodash/merge'
 import { routerReducer as routing } from 'react-router-redux'
 import { combineReducers } from 'redux'
+import {reducer as formReducer} from 'redux-form';
 import API from '../api'
 
 function index(state=null,action){
@@ -235,6 +236,78 @@ function activity(state=[],action){
     return state;
 }
 
+//我的投资-》续投成功后返回来页面是否需要刷新用到的reducer
+function setInvestRecordShouldUpdate(state=false,action){
+    const {type} = action;
+    if(type==ActionTypes.SET_INVEST_RECORD_SHOULD_UPDATE){
+        return action.response
+    }
+    return state;
+}
+
+//借款产品列表
+const borrowProductListData=[
+    {
+        name:'保单贷',
+        amt:'1-50万元',
+        expires:'12-36个月',
+        rate:'2.38%',
+        type:1
+    },
+    {
+        name:'车主贷',
+        amt:'1-30万元',
+        expires:'12-36个月',
+        rate:'2.58%',
+        type:2
+    },
+    {
+        name:'悦楼工薪贷',
+        amt:'1-15万元',
+        expires:'12-36个月',
+        rate:'2.58%-2.78%',
+        type:7
+    },
+    {
+        name:'悦楼生意贷',
+        amt:'1-15万元',
+        expires:'12-36个月',
+        rate:'2.58%-2.78%',
+        type:8
+    },
+    {
+        name:'消费精英贷',
+        amt:'1-50万元',
+        expires:'12-36个月',
+        rate:'1.98%-2.58%',
+        type:4
+    },
+    {
+        name:'消费薪金贷',
+        amt:'1-50万元',
+        expires:'12-36个月',
+        rate:'1.98%-2.58%',
+        type:1
+    },
+    {
+        name:'生意贷',
+        amt:'1-50万元',
+        expires:'12-36个月',
+        rate:'2.78%',
+        type:6
+    },
+    {
+        name:'社保贷',
+        amt:'1-50万元',
+        expires:'12-36个月',
+        rate:'2.58%',
+        type:5
+    }
+];
+function borrowProductList(state=borrowProductListData,action){
+    const {type} = action;
+    return state;
+}
 
 const rootReducer = combineReducers({
   routing,
@@ -247,7 +320,8 @@ const rootReducer = combineReducers({
       type2:productType2,
       investRecord:financialInvestRecord,
       productDetail:fetchFinancialServices,
-      returnPlan:financialReturnPlan
+      returnPlan:financialReturnPlan,
+      borrowProductList
   }),
   isFetching,
   team:combineReducers({
@@ -258,12 +332,14 @@ const rootReducer = combineReducers({
     user:combineReducers({
         dealRecord,
         investRecord,
+        investRecordShouldUpdate:setInvestRecordShouldUpdate,
         returnPlanRecord,
         gift:combineReducers({
             preview:myGift,
             list:myGiftList
         })
-    })
+    }),
+    form:formReducer
 })
 
 export default rootReducer

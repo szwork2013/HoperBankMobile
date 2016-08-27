@@ -344,12 +344,54 @@
 }
 
 /*investmentRecord*/
+.invest-record-wrap{
+  padding-bottom:20px;
+}
 .invest-record-item{
-  height:75px;
   padding:10px 0;
-  overflow: hidden;
+  position: relative;
+  width:95%;
+  margin:10px auto 0 auto;
+  box-sizing: border-box;
+  border:1px solid #dcdcdc;
+  >div[class^='invest-type-icon']{
+    width:35px;
+    height:35px;
+    position: absolute;
+    left:-2px;
+    top:-2px;
+  }
+  >div.invest-type-icon-0{
+    background:url("/static/img/invest-item-bg.png");
+    background-size:100%;
+  }
+  >div.invest-type-icon-1{
+    background:url("/static/img/invest-item-bg-2.png");
+    background-size:100%;
+
+  }
+  >div.invest-type-icon-2{
+    background:url("/static/img/invest-item-bg-3.png");
+    background-size:100%;
+
+  }
   >.invest-record-info{
-    padding:0 10px;
+    width:95%;
+    margin:0 auto;
+    background-color:#fff;
+    >p{
+      overflow: hidden;
+      &.p1{
+        padding-bottom:10px;
+        border-bottom:1px solid #dcdcdc;
+      }
+      &.p2{
+        font-size:14px;
+        margin-top:10px;
+        color:#969696;
+        overflow: hidden;
+      }
+    }
     em{
       font-style: normal;
       float: left;
@@ -359,20 +401,36 @@
         display: block;
         width:80px;
       }
+      overflow: hidden;
+      text-align:center;
+      >div{
+        float: left;
+        width:33.3%;
+        p{
+          margin:10px 0 0 0;
+        }
+      }
     }
     .invest-record-title{
       width:70%;
-      height:21px;
+      height:23px;
       white-space:nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
+      margin-left:15px;
+      >.invest-record-title-tip{
+        padding:2px 5px;
+        color:#4995e5;
+        border:1px solid #4995e5;
+        font-size:12px;
+        margin-left:10px;
+      }
     }
-    p{
-      overflow: hidden;
-      margin-bottom:5px;
+    .operation{
+      color:#e3aa00
     }
     .invest-record-money{
-      color:#e3aa00
+      color:#ff4343
     }
   }
   &.active{
@@ -580,4 +638,41 @@
       color:#fff;
     }
   }
+}
+
+/*w我的投资*/
+#select-product-wrap{
+  width:100%;
+  color:#969696;
+  padding:20px;
+  box-sizing: border-box;
+  background-color:#efeff4;
+  .rebuy-direction-btn{
+    text-align: right;
+    margin-top:10px;
+  }
+}
+.select-product-item{
+  border:1px solid #dcdcdc;
+  background-color:#fff;
+  padding:10px;
+  overflow: hidden;
+  border-radius:5px;
+  margin-top:15px;
+}
+.select-product-item>span{
+  display: block;
+  width:33.3%;
+  float: left;
+}
+.select-product-item>span.s2{
+  text-align: center;
+}
+.select-product-item>span.s3{
+  text-align:right;
+  color:#ff4343;
+}
+.select-product-item.selected{
+  border-color:#e3aa00;
+  background:url("/static/img/invest_selected.png") bottom right #fff no-repeat;
 }
