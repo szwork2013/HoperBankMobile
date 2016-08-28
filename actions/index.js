@@ -929,3 +929,34 @@ export function reBuyOperation(opt){
         });
     }
 }
+
+/*申请借款表单发送，不用通知store*/
+export function borrowApply(opt){
+    var url=API.borrow.apply;
+    return (dispatch, getState) => {
+        return $.ajax({
+            type: 'GET',
+            url:url,
+            data:{
+                referrerName:opt.referrerName,
+                sex:opt.sex,
+                phone:opt.phone,
+                province:opt.province,
+                city:opt.city,
+                company:opt.company,
+                money:opt.money,
+                cycle:opt.cycle
+            },
+            timeout:15000,
+            dataType:"jsonp",
+            jsonpCallback:'borrowApplyJsonp',
+            success: function(data){
+                opt.callback && opt.callback(data);
+            },
+            error: function(xhr, type){
+                console.log(xhr)
+            }
+        });
+    }
+}
+

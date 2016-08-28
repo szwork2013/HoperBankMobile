@@ -1,12 +1,11 @@
 import React, { Component, PropTypes } from 'react'
-import {charge} from '../actions'
+import {borrowApply} from '../actions'
 import {Field,reduxForm} from 'redux-form';
 import {BaseButton,TextButton} from '../components/Button'
 import RootLoading from '../components/RootLoading'
 import showCity from '../static/lib/city'
 const validate = values => {
     const errors = {}
-    console.log(values.city)
     if (!values.name) {
         errors.name = '请输入姓名'
     } else if (values.name.length > 15) {
@@ -14,11 +13,11 @@ const validate = values => {
     }
     if (!values.mobile) {
         errors.mobile = '请输入手机号'
-    } else if (values.mobile.length > 15) {
-        errors.mobile = 'Must be 15 characters or less'
+    } else if (!/^[1][3758][0-9]{9}$/i.test(values.mobile)) {
+        errors.mobile = '请输入正确的手机号码'
     }
 
-    //设置默认值
+    //设置默认值-性别-省份-城市
     if (!values.sex) {
         values.sex=0
     }
@@ -32,15 +31,18 @@ const validate = values => {
         values.typeId = 0
     }
 
+    if (!values.company) {
+        errors.money = '请输入工作单位'
+    }
     if (!values.money) {
         errors.money = '请输入借款金额'
-    } else if (values.money.length > 15) {
-        errors.money = 'Must be 15 characters or less'
+    } else if (!Number(values.money)) {
+        errors.money = '请输入正确的金额'
     }
     if (!values.cycle) {
         errors.cycle = '请输入借款期限'
-    } else if (values.cycle.length > 15) {
-        errors.cycle = 'Must be 15 characters or less'
+    } else if (!Number(values.cycle)){
+        errors.cycle = '请输入正确的借款期限'
     }
     return errors
 }
@@ -76,8 +78,20 @@ class BorrowApplyPage extends Component{
     }
     componentWillMount() {
     }
-    check(data){
-        console.log(data)
+    submit(data){
+        borrowApply({
+            referrerName:data.name,
+            sex:data.sex,
+            phone:data.mobile,
+            province:data.province,
+            city:data.city,
+            company:data.company,
+            money:data.money,
+            cycle:data.cycle,
+            callback:(result)=>{
+
+            }
+        })
     }
     provinceChange(ev){
         this.setState({
@@ -99,7 +113,7 @@ class BorrowApplyPage extends Component{
         const {handleSubmit,invalid, reset, submitting} = this.props;
         return(
             <section className="level-2-wrap">
-                <form onSubmit={handleSubmit(this.check)}>
+                <form onSubmit={handleSubmit(this.submit)}>
                     <div className="borrow-apply-wrap">
                         <Field name="name" component={renderField} type="text" placeholder="请输入姓名" label="姓名"/>
                         <div className="borrow-apply-item">
@@ -161,6 +175,7 @@ class BorrowApplyPage extends Component{
                             </Field>
 
                         </div>
+                        <Field name="company" component={renderField} type="text" label="工作单位" />
                         <div className="borrow-apply-item">
                             <label >借款人类型</label>
                             <Field name="typeId" component="select">
