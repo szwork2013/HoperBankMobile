@@ -676,3 +676,42 @@
   border-color:#e3aa00;
   background:url("/static/img/invest_selected.png") bottom right #fff no-repeat;
 }
+
+
+/*实名认证*/
+.authentication-wrap{
+  width:90%;
+  margin-left:5%;
+  margin-top:20px;
+  height:100%;
+  .step-title{
+    border:1px solid #b4b4b4;
+    background-color:#b4b4b4;
+    color:#fff;
+    text-align:center;
+    padding:10px 0;
+    &.active{
+      border-color:#e3aa00;
+      color:#e3aa00;
+      background-color:#fff;
+    }
+  }
+  .step-content{
+    border:1px solid #b4b4b4;
+    margin:10px auto;
+    padding-bottom:10px;
+    >p{
+      width:95%;
+      margin:5px auto;
+    }
+    >input,select{
+      display: block;
+      line-height:30px;
+      border:none;
+      width:95%;
+      margin:5px auto;
+      padding:7px 0;
+      border-bottom:1px solid #e3aa00
+    }
+  }
+}

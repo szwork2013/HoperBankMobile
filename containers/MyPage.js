@@ -106,9 +106,9 @@ class MyPage extends Component {
                 {
                     account && !account.name && <section className={'m-item-wrap tip-section'}>
                         <div className="m-item">
-                            <a className="m-item-a"  href="bindbank.html">
+                            <Link className="m-item-a"  to="/my/bindbank">
                                 随时随地投资，请先<span style={{color:"#004fa3"}}>实名认证</span>
-                            </a>
+                            </Link>
                         </div>
                     </section>
                 }

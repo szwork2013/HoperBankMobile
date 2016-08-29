@@ -6,6 +6,7 @@ import BorrowNavPage from './containers/BorrowNavPage'
 import BorrowListPage from './containers/BorrowListPage'
 import BorrowApplyPage from './containers/BorrowApplyPage'
 import MyPage from './containers/MyPage'
+import BindBankPage from './containers/BindBankPage'
 import ChargePage from './containers/ChargePage'
 import WithDrawPage from './containers/WithDrawPage'
 import LoginPage from './containers/LoginPage'
@@ -61,6 +62,7 @@ export default (
             </Route>
         </Route>
         <Route path="/my" component={MyPage}>
+            <Route path="/my/bindbank" component={BindBankPage} />
             <Route path="/my/personal" component={PersonalPage} />
             <Route path="/my/dealrecord" component={DealRecordPage} />
             <Route path="/my/investmentrecord" component={MyInvestmentPage}>

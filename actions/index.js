@@ -839,34 +839,6 @@ export function fetchActivityList(callback){
     }
 }
 
-/* 借款产品列表 */
-/*
-export function fetchBorrowProductList(callback){
-    var url=API.activity.list;
-    return (dispatch, getState) => {
-        return $.ajax({
-            type: 'GET',
-            url:url,
-            data:{
-            },
-            timeout:15000,
-            dataType:"jsonp",
-            jsonpCallback:'fetchActivityListJsonp',
-            success: function(data){
-                if(data.r==1){
-                    dispatch({
-                        type:FETCH_ACTIVITY_LIST,
-                        response:data.list
-                    })
-                }
-                callback && callback(data);
-            },
-            error: function(xhr, type){
-                console.log(xhr)
-            }
-        });
-    }
-}*/
 
 /*取消投资，不用通知store*/
 export function cancelInvest(opt){
@@ -932,7 +904,7 @@ export function reBuyOperation(opt){
 
 /*申请借款表单发送，不用通知store*/
 export function borrowApply(opt){
-    var url=API.borrow.apply;
+    var url=API.borrow.cooperation;
     return (dispatch, getState) => {
         return $.ajax({
             type: 'GET',

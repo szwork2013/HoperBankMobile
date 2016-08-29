@@ -6,7 +6,6 @@ export default class TabNavigator extends Component {
         super(props);
     }
     componentWillMount(){
-
     }
     render() {
         const props = this.props;
@@ -20,7 +19,7 @@ export default class TabNavigator extends Component {
                     <i className="i2"></i>
                     <p>理财</p>
                 </Link>
-                <Link to={{pathname:'/borrow',state:{borrowProductList:props.rootState.product.borrowProductList}}} activeClassName="active">
+                <Link to='/borrow' activeClassName="active">
                     <i className="i3"></i>
                     <p>借款</p>
                 </Link>

@@ -1,8 +1,9 @@
 import React, { Component, PropTypes } from 'react'
-import {borrowApply} from '../actions'
 import {Field,reduxForm} from 'redux-form';
+import {browserHistory} from 'react-router';
 import {BaseButton,TextButton} from '../components/Button'
 import RootLoading from '../components/RootLoading'
+import Overlay from '../components/Overlay'
 import showCity from '../static/lib/city'
 const validate = values => {
     const errors = {}
@@ -69,17 +70,22 @@ class BorrowApplyPage extends Component{
         this.state={
             province:'北京',
             city:[],
-            selectedCity:'',
-            selectedSex:0
+            loading:false,
+            overlayShouldShow:false
         }
         this.provinceChange = this.provinceChange.bind(this);
         this.cityChange = this.cityChange.bind(this);
-        this.sexChange = this.sexChange.bind(this)
+        this.sexChange = this.sexChange.bind(this);
+        this.submit = this.submit.bind(this);
     }
     componentWillMount() {
     }
     submit(data){
-        borrowApply({
+        console.log(data)
+        this.setState({
+            loading:true
+        });
+        this.props.applyAction({
             referrerName:data.name,
             sex:data.sex,
             phone:data.mobile,
@@ -89,9 +95,19 @@ class BorrowApplyPage extends Component{
             money:data.money,
             cycle:data.cycle,
             callback:(result)=>{
+                this.setState({
+                    loading:false
+                })
+                if(result.r==1){
+                    setTimeout(()=>{
+                        alert('申请成功，我们将会在三个工作日内联系您。');
+                        browserHistory.goBack()
+                    },300)
 
+                }
             }
         })
+        return false;
     }
     provinceChange(ev){
         this.setState({
@@ -113,6 +129,14 @@ class BorrowApplyPage extends Component{
         const {handleSubmit,invalid, reset, submitting} = this.props;
         return(
             <section className="level-2-wrap">
+                <RootLoading display={this.state.loading} />
+                <Overlay display={this.state.overlayShouldShow}>
+                    <p style={{width:'90%',margin:'30% auto 0 auto',color:'#fff',position:'relative',zIndex:1000}}>“定制”是琥珀金服为满足因银行授信政策、额度、放款效率等情况限制而急需借款的个人和中小微企业所推出的借款项目；</p>
+                    <p style={{width:'90%',margin:'15px auto 0 auto',color:'#fff',position:'relative',zIndex:1000}}>
+                        *琥珀金服承诺您所提供的信息仅用于联系您本人所用，并严格保密。
+                    </p>
+                    <div className="close" onClick={()=>this.setState({overlayShouldShow:false})}></div>
+                </Overlay>
                 <form onSubmit={handleSubmit(this.submit)}>
                     <div className="borrow-apply-wrap">
                         <Field name="name" component={renderField} type="text" placeholder="请输入姓名" label="姓名"/>
@@ -186,6 +210,7 @@ class BorrowApplyPage extends Component{
                         <Field name="money" component={renderField} type="text" label="借款金额" unit="万元"/>
                         <Field name="cycle" component={renderField} type="text" label="借款期限" unit="个月"/>
                     </div>
+                    <p style={{width:'90%',margin:'0 auto 20px auto'}} onClick={()=>this.setState({overlayShouldShow:true})}>申请说明</p>
                     <button className={`base-button ${(invalid || submitting)?'disabled':''}`} type="submit" disabled={invalid || submitting} >提交申请</button>
                 </form>
 
@@ -193,9 +218,9 @@ class BorrowApplyPage extends Component{
         )
     }
 }
-/*BorrowApplyPage.contextTypes = {
+BorrowApplyPage.contextTypes = {
     router: React.PropTypes.object.isRequired
-};*/
+};
 BorrowApplyPage.propTypes = {
     handleSubmit: PropTypes.func.isRequired
 }

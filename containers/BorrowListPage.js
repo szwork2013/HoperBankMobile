@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react'
+import {Link} from 'react-router';
 export default class BorrowListPage extends Component {
     constructor(props) {
         super(props)
@@ -6,13 +7,13 @@ export default class BorrowListPage extends Component {
     componentWillMount() {
     }
     render() {
-        const {borrowProductList} = this.props.location.state;
+        const {list} = this.props;
         return(
             <section className="level-2-wrap">
                 {
-                    borrowProductList.map((item,index)=>{
+                    list && list.map((item,index)=>{
                         return (
-                            <div key={index} className="borrow-product-item">
+                            <Link to="/borrow/apply" key={index} className="borrow-product-item">
                                 <h2>{item.name}</h2>
                                 <div>
                                     <div className="part-1">
@@ -31,7 +32,7 @@ export default class BorrowListPage extends Component {
                                         <p>{item.rate}</p>
                                     </div>
                                 </div>
-                            </div>
+                            </Link>
                         )
                     })
                 }
