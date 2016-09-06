@@ -15,7 +15,6 @@ class MyPage extends Component {
         this.jumpTo = this.jumpTo.bind(this);
     }
     componentWillMount() {
-
         if(!this.props.account.userId){
             /*this.props.history.push('/login')*/
             this.context.router.push('/login')
@@ -28,7 +27,6 @@ class MyPage extends Component {
         })
     }
     componentDidMount(){
-
     }
 
     componentWillReceiveProps(nextProps) {
@@ -47,6 +45,7 @@ class MyPage extends Component {
     jumpToCharge(){
         if(!this.props.account.name){
             alert('请先实名认证')
+            this.jumpTo('/my/bindbank')
             return false;
         }
         this.jumpTo('/my/charge')
@@ -54,6 +53,7 @@ class MyPage extends Component {
     jumpToWithDraw(){
         if(!this.props.account.name){
             alert('请先实名认证')
+            this.jumpTo('/my/bindbank')
             return false;
         }
         this.jumpTo('/my/withdraw')
@@ -66,7 +66,15 @@ class MyPage extends Component {
                 <ReactCSSTransitionGroup component="div"
                                          transitionName="slide-right"
                                          transitionEnterTimeout={300} transitionLeaveTimeout={300}>
-                    {this.props.children}
+                    {
+                        this.props.children && React.cloneElement(this.props.children, {
+                            asyncCheckId:this.props.asyncCheckId,
+                            userId:this.props.account.userId,
+                            mobile:this.props.account.mobile,
+                            fetchCity:this.props.fetchCity
+                        })
+                    }
+
                 </ReactCSSTransitionGroup>
 
                 <section className="my-wrap">

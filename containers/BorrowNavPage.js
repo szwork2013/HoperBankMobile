@@ -17,8 +17,7 @@ export default class BorrowNavPage extends Component {
                                      transitionEnterTimeout={300} transitionLeaveTimeout={300}>
                 {
                     children && React.cloneElement(children, {
-                        list: borrowProductList,
-                        applyAction:borrowApplyAction
+                        asyncCheckId: this.props.asyncCheckId
                     })
                 }
             </ReactCSSTransitionGroup>

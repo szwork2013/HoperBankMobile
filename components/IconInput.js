@@ -15,8 +15,8 @@ export default class IconInput extends Component {
     return (
         <div className={"icon-input-wrap"} onClick={props.onClick}>
           {props.children}
-          <div className={props.hasBorder ? 'icon-input-con' : 'icon-input-con icon-input-no-border'}>
-            <i className={'icon '+props.icon}></i>
+          <div className={`${props.hasBorder ? 'icon-input-con' : 'icon-input-con icon-input-no-border'} ${props.contentClass}`} >
+            {props.icon && <i className={'icon '+props.icon}></i>}
             <input type={props.type} placeholder={props.placeholder} onChange={this.handleChange.bind(this,[props.rule,props.callback])} />
           </div>
         </div>
@@ -29,11 +29,13 @@ IconInput.propTypes = {
   hasBorder:PropTypes.bool,
   type:PropTypes.string,
   rule:PropTypes.string,
+  contentClass:PropTypes.string
 }
 IconInput.defaultProps = {
   placeholder: 'button',
   type:'text',
   icon:'',
+  contentClass:'',
   hasBorder:true,
   rule:'*'
 }

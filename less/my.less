@@ -690,7 +690,9 @@
     color:#fff;
     text-align:center;
     padding:10px 0;
+    display: none;
     &.active{
+      display: block;
       border-color:#e3aa00;
       color:#e3aa00;
       background-color:#fff;
@@ -700,6 +702,10 @@
     border:1px solid #b4b4b4;
     margin:10px auto;
     padding-bottom:10px;
+    display: none;
+    &.active{
+      display:block;
+    }
     >p{
       width:95%;
       margin:5px auto;
@@ -712,6 +718,21 @@
       margin:5px auto;
       padding:7px 0;
       border-bottom:1px solid #e3aa00
+    }
+    .authenticationInput{
+      width:95%;
+      margin:0 auto;
+      float: none;
+      border-color:#e3aa00
+    }
+    .bink-bank-address-wrap{
+      overflow: hidden;
+      width:95%;
+      margin:0 auto;
+      >select{
+        width:50%;
+        float: left;
+      }
     }
   }
 }

@@ -16,7 +16,9 @@ class App extends Component {
         <div style={{height:'100%'}}>
             {children && React.cloneElement(children, {
                 borrowProductList: this.props.state.product.borrowProductList,
-                borrowApplyAction:this.props.borrowApply
+                borrowApplyAction:this.props.borrowApply,
+                asyncCheckId:this.props.asyncCheckId,
+                fetchCity:this.props.fetchCity
             })}
             <TabNavigator rootState={this.props.state} >
 
