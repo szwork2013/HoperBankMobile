@@ -36,7 +36,13 @@ export default class BindBankPage extends Component {
 
     }
     fetchCity(province){
-
+        this.props.fetchCity(province,(result)=>{
+            if(result.r==1){
+                this.setState({
+                    cityData:result.list
+                })
+            }
+        })
     }
     doStep1(){
         const props = this.props;
@@ -104,6 +110,7 @@ export default class BindBankPage extends Component {
                         </select>
                         <div className="bink-bank-address-wrap">
                             <select onChange={this.provinceChange.bind(this)}>
+                                <option>-请选择省份-</option>
                                 {
                                     this.props.provinceData.map((item,index)=>{
                                         return(
@@ -113,10 +120,11 @@ export default class BindBankPage extends Component {
                                 }
                             </select>
                             <select>
+                                <option>-请选择城市-</option>
                                 {
                                     this.state.cityData.map((item,index)=>{
                                         return(
-                                            <option key={index} value={item}>{item}</option>
+                                            <option key={index} value={item.code}>{item.name}</option>
                                         )
                                     })
                                 }
