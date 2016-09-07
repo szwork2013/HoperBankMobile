@@ -12,7 +12,10 @@ export default class BindBankPage extends Component {
             firstStepPassed:false,
             firstStepText:'下一步',
             activeStep:1,
-            cityData:[]
+            cityData:[],
+            bankId:'',
+            province:'',
+            city:''
         }
         this.checkStep1 = this.checkStep1.bind(this);
     }
@@ -66,8 +69,19 @@ export default class BindBankPage extends Component {
             })
         }
     }
+    doStep2(){
+
+    }
     provinceChange(ev){
-        this.fetchCity(ev.target.value)
+        this.fetchCity(ev.target.value);
+        this.setState({
+            province:ev.target.value
+        })
+    }
+    cityChange(ev){
+        this.setState({
+            city:ev.target.value
+        })
     }
     render() {
         return (
@@ -119,7 +133,7 @@ export default class BindBankPage extends Component {
                                     })
                                 }
                             </select>
-                            <select>
+                            <select onChange={this.cityChange.bind(this)}>
                                 <option>-请选择城市-</option>
                                 {
                                     this.state.cityData.map((item,index)=>{
@@ -134,10 +148,10 @@ export default class BindBankPage extends Component {
                             placeholder="银行卡号"
                             rule="^\d{16,20}$"
                             contentClass='authenticationInput'
-                            callback={(b,val)=>{this.setState({name:val,namePassed:b});this.checkStep1()}}>
+                            callback={(b,val)=>{this.setState({bankId:val})}}>
                         </IconInput>
-                        <button className="base-button" style={{width:'95%',borderRadius:0,marginTop:'15px'}}>
-                            下一步
+                        <button className="base-button" style={{width:'95%',borderRadius:0,marginTop:'15px'}} onClick={this.doStep2.bind(this)}>
+                            实名认证
                         </button>
                     </div>
                 </section>
