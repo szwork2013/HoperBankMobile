@@ -71,7 +71,8 @@ class MyPage extends Component {
                             asyncCheckId:this.props.asyncCheckId,
                             userId:this.props.account.userId,
                             mobile:this.props.account.mobile,
-                            fetchCity:this.props.fetchCity
+                            fetchCity:this.props.fetchCity,
+                            authentication:this.props.authentication
                         })
                     }
 

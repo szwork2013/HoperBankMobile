@@ -1,4 +1,4 @@
-import 'isomorphic-fetch'
+import fetch from 'isomorphic-fetch'
 import API from '../api'
 export const FETCH_INDEX =  'FETCH_INDEX'
 export const FETCH_ACCOUNT =  'FETCH_ACCOUNT'
@@ -135,14 +135,12 @@ function setCookie(data){
 /*理财*/
 export function fetchLCList(callback){
     return (dispatch, getState) => {
-        $.ajax({
+       /* $.ajax({
             type: 'GET',
             url: API.product.list,
             data: {
             },
             timeout:15000,
-            dataType:"jsonp",
-            jsonpCallback:'fetchLCListJsonp',
             success: function(data){
                 if(data.r==1){
                     dispatch({
@@ -156,7 +154,18 @@ export function fetchLCList(callback){
             error: function(xhr, type){
                 console.log(xhr)
             }
-        });
+        });*/
+        fetch(API.product.list)
+            .then((response)=>response.json())
+            .then((data)=>{
+                if(data.r==1){
+                    dispatch({
+                        type:FETCH_LCLIST,
+                        response:data.list || null
+                    })
+                    callback && callback(data);
+                }
+            })
     }
 }
 export function setFetching(b){
@@ -978,5 +987,26 @@ export function fetchCity(province,cb){
                 console.log(xhr)
             }
         });
+    }
+}
+
+/*实名认证，不用通知store*/
+export function authentication(opt){
+    var url=API.authentication.certification2;
+    return (dispatch, getState) => {
+        return fetch(url,{
+            body:JSON.stringify({
+                userId:opt.userId,
+                name:opt.name,
+                pid:opt.pid,
+                parentBankId:opt.parentBankId,
+                cityId:opt.cityId,
+                capAcntNo:opt.capAcntNo
+            })
+        })
+            .then((response)=>response.json())
+            .then((data)=>{
+                opt.callback && opt.callback(data)
+            })
     }
 }

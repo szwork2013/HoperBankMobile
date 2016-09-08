@@ -14,6 +14,8 @@ export default class BindBankPage extends Component {
             activeStep:1,
             cityData:[],
             bankId:'',
+            bankNo:'',
+            bankNoPassed:false,
             province:'',
             city:''
         }
@@ -70,7 +72,27 @@ export default class BindBankPage extends Component {
         }
     }
     doStep2(){
-
+        const props = this.props;
+        if(!this.state.province){
+            alert('请选择省份');
+            return false;
+        }
+        if(!this.state.city){
+            alert('请选择城市');
+            return false;
+        }
+        if(!this.state.bankNoPassed){
+            alert('请输入正确的银行卡号');
+            return false;
+        }
+        this.props.authentication({
+            userId:props.userId,
+            name:this.state.name,
+            pid:this.state.idCard,
+            parentBankId:opt.parentBankId,
+            cityId:this.state.city,
+            capAcntNo:this.state.bankId
+        })
     }
     provinceChange(ev){
         this.fetchCity(ev.target.value);
@@ -81,6 +103,11 @@ export default class BindBankPage extends Component {
     cityChange(ev){
         this.setState({
             city:ev.target.value
+        })
+    }
+    bankChange(ev){
+        this.setState({
+            bankId:ev.target.value
         })
     }
     render() {
@@ -113,7 +140,7 @@ export default class BindBankPage extends Component {
                     <div className={`step-content ${this.state.activeStep==2?'active':''}`}>
                         <p>持卡人：{this.state.name}</p>
                         <p>{this.props.mobile}</p>
-                        <select>
+                        <select onChange={this.bankChange.bind(this)}>
                             {
                                 this.props.bankData.map((item,index)=>{
                                     return(
@@ -148,7 +175,7 @@ export default class BindBankPage extends Component {
                             placeholder="银行卡号"
                             rule="^\d{16,20}$"
                             contentClass='authenticationInput'
-                            callback={(b,val)=>{this.setState({bankId:val})}}>
+                            callback={(b,val)=>{this.setState({bankNo:val,bankNoPassed:b})}}>
                         </IconInput>
                         <button className="base-button" style={{width:'95%',borderRadius:0,marginTop:'15px'}} onClick={this.doStep2.bind(this)}>
                             实名认证
