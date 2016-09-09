@@ -131,18 +131,24 @@ class InvestRecordList extends Component {
     }
     renderItem(item,index){
         //item.reBuyStatus = 1;
+        const shortTitleStyle={
+            width:'50%'
+        }
         return(
             <div className="invest-record-item" key={index}>
                 <div className={`invest-type-icon-${item.productType}`}></div>
                     <div className="invest-record-info" >
                         <p className="p1">
-                            <span className="fl invest-record-title">{item.productName}
+                            <span className="fl invest-record-title" style={item.productType==0 ? shortTitleStyle : null}>{item.productName}
                                 {
                                     item.productType==0 && item.status==3 && item.reBuyStatus==2 && <span className="invest-record-title-tip">续投</span>
                                 }
                             </span>
                             {
                                 item.productType==0 && item.status==1 && <span className="fr operation" onClick={()=>{this.cancelInvest(item.pid,item.investId)}}>取消投资</span>
+                            }
+                            {
+                                item.productType==0 && (item.status==2 || item.status==3 || item.status==4) && <span style={{marginLeft:'10px'}} className="fr operation" onClick={()=>{this.viewCreditorList()}}>查看债权</span>
                             }
                             {
                                 item.productType==0 && item.status==3 && item.reBuyStatus==1 && <span className="fr operation" onClick={()=>{this.reBuyOperation(item.pid,item.investId,1)}}>续投</span>

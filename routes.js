@@ -30,6 +30,7 @@ import FinancialProductRecord from './containers/FinancialProductRecord'
 import FinancialReturnPlan from './containers/FinancialReturnPlan'
 import DealResultPage from './containers/DealResultPage'
 import ActivityCenterPage from './containers/ActivityCenter'
+import CreditorListPage from './containers/CreditorListPage'
 export default (
     <Route path="/" component={App}>
         <IndexRedirect to="/home" />
@@ -67,6 +68,9 @@ export default (
             <Route path="/my/dealrecord" component={DealRecordPage} />
             <Route path="/my/investmentrecord" component={MyInvestmentPage}>
                 <Route path="/my/investmentrecord/select" component={ChoseRebuyPage}>
+
+                </Route>
+                <Route path="/my/investmentrecord/creditorList" component={CreditorListPage}>
 
                 </Route>
             </Route>
