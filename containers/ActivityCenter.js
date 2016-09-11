@@ -8,18 +8,10 @@ class ActivityCenter extends Component {
     constructor(props) {
         super(props)
         this.state={
-            loaded:false
+            detailUrl:''
         }
     }
     componentWillMount() {
-        const props = this.props;
-        props.fetchActivityList((result)=>{
-            if(result.r==1){
-                this.setState({
-                    loaded:true
-                })
-            }
-        })
     }
     componentDidMount(){
 
@@ -33,21 +25,23 @@ class ActivityCenter extends Component {
                                          transitionName="slide-right"
                                          transitionEnterTimeout={300} transitionLeaveTimeout={300}>
                     {
-                        props.children
+                        props.children && React.cloneElement(props.children, {
+                            url:this.state.detailUrl
+                        })
                     }
                 </ReactCSSTransitionGroup>
                 {
                     props.activity.map((item,index)=>{
                         return(
                             <section className="activity-wrap" key={index}>
-                                <a className="activity-item" href={item.link}>
+                                <div className="activity-item" href={`/activity/detail/${item.link}`}>
                                     <h3><i></i>{item.title}</h3>
                                     <p>{item.startTime}---{item.endTime}</p>
                                     <div className={item.status==0?'gray':''}>
                                         <img src={item.image} />
                                     </div>
                                     <p>{item.describe}</p>
-                                </a>
+                                </div>
                             </section>
                         )
                     })

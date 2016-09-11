@@ -129,6 +129,15 @@ class InvestRecordList extends Component {
             })
         }
     }
+    viewCreditorList(){
+        this.context.router.push({
+            pathname:'/my/investmentrecord/select',
+            query:{
+                investId:investId,
+                operation:operation
+            }
+        })
+    }
     renderItem(item,index){
         //item.reBuyStatus = 1;
         const shortTitleStyle={
