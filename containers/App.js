@@ -18,7 +18,9 @@ class App extends Component {
                 borrowProductList: this.props.state.product.borrowProductList,
                 borrowApplyAction:this.props.borrowApply,
                 asyncCheckId:this.props.asyncCheckId,
-                fetchCity:this.props.fetchCity
+                fetchCity:this.props.fetchCity,
+                fetchCreditorlist:this.props.fetchCreditorlist,
+                creditorList:this.props.state.user.creditorList
             })}
             <TabNavigator rootState={this.props.state} >
 

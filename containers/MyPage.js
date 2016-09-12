@@ -72,7 +72,9 @@ class MyPage extends Component {
                             userId:this.props.account.userId,
                             mobile:this.props.account.mobile,
                             fetchCity:this.props.fetchCity,
-                            authentication:this.props.authentication
+                            authentication:this.props.authentication,
+                            fetchCreditorlist:this.props.fetchCreditorlist,
+                            creditorList:this.props.creditorList
                         })
                     }
 

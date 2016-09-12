@@ -27,6 +27,7 @@ export const FETCH_FINANCIAL_RETURN_PLAN = 'FETCH_FINANCIAL_RETURN_PLAN'
 export const CLEAR_FINANCIAL_RETURN_PLAN = 'CLEAR_FINANCIAL_RETURN_PLAN'
 export const FETCH_ACTIVITY_LIST = 'FETCH_ACTIVITY_LIST';
 export const SET_INVEST_RECORD_SHOULD_UPDATE = 'SET_INVEST_RECORD_SHOULD_UPDATE'
+export const FETCH_CREDITOR_LIST = 'FETCH_CREDITOR_LIST';
 export function loadIndex(){
     return (dispatch, getState) => {
         return $.ajax({
@@ -1006,6 +1007,32 @@ export function authentication(opt){
         })
             .then((response)=>response.json())
             .then((data)=>{
+                opt.callback && opt.callback(data)
+            })
+    }
+}
+
+/*查看债权列表*/
+export function fetchCreditorlist(opt){
+    //var url=API.user.creditorlist;
+    var url='/static/feed/creditorlist.json';
+    return (dispatch, getState) => {
+        return fetch(url,{
+           /* body:JSON.stringify({
+                userId:opt.userId,
+                investId:opt.investId,
+                type:opt.type
+            })*/
+        })
+            .then((response)=>response.json())
+            .then((data)=>{
+                dispatch({
+                    type:FETCH_CREDITOR_LIST,
+                    response:{
+                        type:opt.type,
+                        data:data.data
+                    }
+                })
                 opt.callback && opt.callback(data)
             })
     }

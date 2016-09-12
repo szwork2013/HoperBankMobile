@@ -309,6 +309,27 @@ function borrowProductList(state=borrowProductListData,action){
     return state;
 }
 
+//查看债权列表
+const creditorListInitData= {
+    type1:[],
+    type2:[]
+}
+function creditorList(state=creditorListInitData,action){
+    const {type} = action;
+    if(type==ActionTypes.FETCH_CREDITOR_LIST){
+        if(action.response.type==1){
+            return Object.assign({},state,{
+                type1:action.response.data
+            })
+        }else if (action.response.type==2){
+            return Object.assign({},state,{
+                type2:action.response.data
+            })
+        }
+    }
+    return state;
+}
+
 const rootReducer = combineReducers({
   routing,
   index,
@@ -334,6 +355,7 @@ const rootReducer = combineReducers({
         investRecord,
         investRecordShouldUpdate:setInvestRecordShouldUpdate,
         returnPlanRecord,
+        creditorList,
         gift:combineReducers({
             preview:myGift,
             list:myGiftList

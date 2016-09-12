@@ -1,85 +1,85 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
-import { fetchLCList } from '../actions'
 import {Link,browserHistory} from 'react-router'
-import ReactIScroll from 'react-iscroll'
-import iScroll from 'iscroll/build/iscroll-probe';
+import TabBar,{TabBarItem} from '../components/TabBar'
 import RootLoading from '../components/RootLoading'
 import config from './componentConfig'
-class CreditorListPage extends Component {
+export default class CreditorListPage extends Component {
     constructor(props) {
         super(props)
         this.state={
             loaded:false
         }
-        this.renderItem = this.renderItem.bind(this);
     }
-
     componentWillMount() {
-        this.props.fetchLCList(()=>{
-            this.setState({
-                loaded:true
-            })
-        })
+        const props = this.props;
     }
     componentDidMount(){
+    }
+    render() {
+        const props = this.props;
+        return(
+            <section className="level-2-wrap">
+                <TabBar>
+                    <TabBarItem name="首投">
+                        <CreditorItemPage userId={props.userId} creditorList={props.creditorList.type1} investId={props.location.query.investId} type={1} fetchCreditorlist={props.fetchCreditorlist} />
+                    </TabBarItem>
+                    <TabBarItem name="复投">
+                        <CreditorItemPage userId={props.userId} creditorList={props.creditorList.type2} investId={props.location.query.investId} type={2} fetchCreditorlist={props.fetchCreditorlist} />
+                    </TabBarItem>
+                </TabBar>
+
+            </section>
+        )
+    }
+}
+
+class CreditorItemPage extends Component {
+    constructor(props) {
+        super(props)
+    }
+    componentWillMount() {
+        const props = this.props;
+        if(props.creditorList.length===0){
+            props.fetchCreditorlist({
+                userId:props.userId,
+                investId:props.investId,
+                type:props.type,
+                callback:()=>{
+
+                }
+            })
+        }
 
     }
     render() {
-
         return(
-            <ReactIScroll iScroll={iScroll}
-                          options={this.props.options}
-                          onScrollStart={this.onScrollStart}>
-
-                <ul className="financial-ul">
-                    {
-                        this.state.loaded && this.renderItem()
-                    }
-                </ul>
-                <RootLoading display={!this.state.loaded}/>
-            </ReactIScroll>
-
+            <section className="creditor-list-wrap">
+                {
+                    this.props.creditorList.map((item,index)=>{
+                        return(
+                            <div className="creditor-list-item" key={index}>
+                                <h2>{item.serialNo}</h2>
+                                <p className="p1">
+                                    <span>借款项目</span>
+                                    <span>借款期限</span>
+                                    <span>出借金额</span>
+                                </p>
+                                <p className="p2">
+                                    <span>{item.borrowType}</span>
+                                    <span>{item.limit}</span>
+                                    <span className="red">{item.amt}</span>
+                                </p>
+                                <p className="p3">
+                                    <span className="fl">借款人-{item.name}</span>
+                                    <span className="fr">{item.idCard}</span>
+                                </p>
+                            </div>
+                        )
+                    })
+                }
+            </section>
         )
     }
-    renderItem(){
-        const data = this.props.product.type1
-        var arr = [];
-        data.map((item,index)=>{
-            arr.push(
-                <li key={index}>
-                    <h2>{item.name}</h2>
-                    <div>
-                        <div className="part-1">
-                            <p className="p1">{item.rate}<span style={{fontSize:'18px'}}>%</span></p>
-                            <p className="p2">预期年收益率</p>
-                        </div>
-                        <div className="part-2">
-                            <p className="p1">{item.limit}个月</p>
-                            <p className="p2">期限</p>
-                        </div>
-                        <div className="part-3">
-                            <Link to={`/financial/product/1/${item.productId}`} >立投</Link>
-                        </div>
-                    </div>
-                </li>
-            )
-        })
-        return arr
-    }
+
 }
-
-
-function mapStateToProps(state, ownProps) {
-    return {
-        product:state.product,
-        options: {
-            scrollbars: false,
-            click:config.isScrollClick
-        }
-    }
-}
-
-export default connect(mapStateToProps, {
-    fetchLCList
-})(CreditorListPage)

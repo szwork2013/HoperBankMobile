@@ -15,6 +15,7 @@ class InvestRecordList extends Component {
         this.renderItem = this.renderItem.bind(this);
         this.cancelInvest =this.cancelInvest.bind(this);
         this.initData = this.initData.bind(this);
+        this.viewCreditorList = this.viewCreditorList.bind(this)
     }
     componentWillMount() {
         this.initData();
@@ -129,12 +130,12 @@ class InvestRecordList extends Component {
             })
         }
     }
-    viewCreditorList(){
+    viewCreditorList(id){
+        this.props.setInvestId(id);
         this.context.router.push({
-            pathname:'/my/investmentrecord/select',
-            query:{
-                investId:investId,
-                operation:operation
+            pathname:`/my/investmentrecord/creditorList`,
+            query: {
+                investId: id
             }
         })
     }
@@ -157,7 +158,7 @@ class InvestRecordList extends Component {
                                 item.productType==0 && item.status==1 && <span className="fr operation" onClick={()=>{this.cancelInvest(item.pid,item.investId)}}>取消投资</span>
                             }
                             {
-                                item.productType==0 && (item.status==2 || item.status==3 || item.status==4) && <span style={{marginLeft:'10px'}} className="fr operation" onClick={()=>{this.viewCreditorList()}}>查看债权</span>
+                                item.productType==0 && (item.status==2 || item.status==3 || item.status==4) && <span style={{marginLeft:'10px'}} className="fr operation" onClick={()=>{this.viewCreditorList(item.investId)}}>查看债权</span>
                             }
                             {
                                 item.productType==0 && item.status==3 && item.reBuyStatus==1 && <span className="fr operation" onClick={()=>{this.reBuyOperation(item.pid,item.investId,1)}}>续投</span>

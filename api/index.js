@@ -90,6 +90,7 @@ var API = {
         dealrecord:domain+'user/trade/record',
         account:domain+'user/account/data',
         investmentrecord:domain+'user/investment/record',
+        creditorlist:domain+'user/investment/record/creditorlist',
         returnedPlan:domain+'user/returnedPlan/record'
     },
     withdraw:domain+'withdraw/commit',
