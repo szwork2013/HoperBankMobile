@@ -2,7 +2,7 @@
   "r":"1",
   "data":[
     {
-      "serialNo":"HPS115151321212123",
+      "contractNo":"HPS115151321212123",
       "amt":"34115.0",
       "name":"王小二",
       "idCard":"4552125151515151",
@@ -11,7 +11,7 @@
       "originAmt":"723010"
     },
     {
-      "serialNo":"HPS115151321212123",
+      "contractNo":"HPS115151321212123",
       "amt":"34115.0",
       "name":"王小二",
       "idCard":"4552125151515151",
@@ -20,7 +20,34 @@
       "originAmt":"723010"
     },
     {
-      "serialNo":"HPS115151321212123",
+      "contractNo":"HPS115151321212123",
+      "amt":"34115.0",
+      "name":"王小二",
+      "idCard":"4552125151515151",
+      "borrowType":"生意贷",
+      "limit":"24",
+      "originAmt":"723010"
+    },
+    {
+      "contractNo":"HPS115151321212123",
+      "amt":"34115.0",
+      "name":"王小二",
+      "idCard":"4552125151515151",
+      "borrowType":"生意贷",
+      "limit":"24",
+      "originAmt":"723010"
+    },
+    {
+      "contractNo":"HPS115151321212123",
+      "amt":"34115.0",
+      "name":"王小二",
+      "idCard":"4552125151515151",
+      "borrowType":"生意贷",
+      "limit":"24",
+      "originAmt":"723010"
+    },
+    {
+      "contractNo":"HPS115151321212123",
       "amt":"34115.0",
       "name":"王小二",
       "idCard":"4552125151515151",

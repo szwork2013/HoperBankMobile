@@ -31,7 +31,9 @@ import FinancialReturnPlan from './containers/FinancialReturnPlan'
 import DealResultPage from './containers/DealResultPage'
 import ActivityCenterPage from './containers/ActivityCenter'
 import CreditorListPage from './containers/CreditorListPage'
+import CreditorDetailPage from './containers/CreditorDetailPage'
 import ActivityDetailPage from './containers/ActivityDetail'
+import InvestConfirmPage from './containers/InvestConfirmPage'
 export default (
     <Route path="/" component={App}>
         <IndexRedirect to="/home" />
@@ -52,6 +54,7 @@ export default (
             cb(null,FinancialPage)
         }}>
             <Route path="/financial/product/:productType/:id" component={InvestMainPage}>
+                <Route path="/financial/product/:productType/:id/confirm" component={InvestConfirmPage} />
                 <Route path="/financial/product/:productType/:id/detail" component={ProductDetail} />
                 <Route path="/financial/product/:productType/:id/record" component={FinancialProductRecord} />
                 <Route path="/financial/product/:productType/:id/returnPlan" component={FinancialReturnPlan} />
@@ -74,8 +77,10 @@ export default (
                 <Route path="/my/investmentrecord/select" component={ChoseRebuyPage}>
 
                 </Route>
-                <Route path="/my/investmentrecord/creditorList" component={CreditorListPage}>
+                <Route path="/my/investmentrecord/creditorList:investId" component={CreditorListPage}>
+                    <Route path="/my/investmentrecord/creditorList:investId/detail" component={CreditorDetailPage}>
 
+                    </Route>
                 </Route>
             </Route>
             <Route path="/my/returnPlanRecordPage" component={ReturnPlanRecordPage} />

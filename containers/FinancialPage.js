@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
-import { loadUser, loadStarred } from '../actions'
+import {fetchConfirmPageCoupon} from '../actions'
 import TabBar,{TabBarItem} from '../components/TabBar'
 import FinancialList from './FinancialList'
 import FinancialServicesList from './FinancialServicesList'
@@ -30,18 +30,20 @@ class FinancialPage extends Component {
                                          transitionName="slide-right"
                                          transitionEnterTimeout={300} transitionLeaveTimeout={300}>
                     {
-                        this.props.children
+                        this.props.children && React.cloneElement(this.props.children, {
+                            fetchConfirmPageCoupon:this.props.fetchConfirmPageCoupon
+                        })
                     }
                 </ReactCSSTransitionGroup>
                 <TabBar>
-                    <TabBarItem name="理财服务">
+                    <TabBarItem name="理财服务" >
                         <FinancialList />
                     </TabBarItem>
                     <TabBarItem name="优选服务">
                         <FinancialServicesList type="9" />
                     </TabBarItem>
                     <TabBarItem name="债权转让" >
-                        <FinancialServicesList type="5" />
+                        <FinancialServicesList type="5"  />
                     </TabBarItem>
                 </TabBar>
             </div>
@@ -57,5 +59,5 @@ function mapStateToProps(state, ownProps) {
 }
 
 export default connect(mapStateToProps, {
-
+    fetchConfirmPageCoupon
 })(FinancialPage)

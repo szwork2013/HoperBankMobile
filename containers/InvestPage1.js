@@ -106,9 +106,12 @@ class InvestPage1 extends Component{
                 <ReactCSSTransitionGroup component="div"
                                          transitionName="slide-right"
                                          transitionEnterTimeout={300} transitionLeaveTimeout={300}>
-                    {
-                        this.props.children
-                    }
+
+                            {this.props.children  && React.cloneElement(this.props.children, {
+                                fetchConfirmPageCoupon:this.props.fetchConfirmPageCoupon,
+                                userId:this.props.account.userId
+                            })}
+
                 </ReactCSSTransitionGroup>
                 <RootLoading display={!this.state.loaded}/>
                 <section className="product-wrap">
@@ -253,7 +256,19 @@ class InvestPage1 extends Component{
             return false;
         }
         if(this.checkInput()){
-            this.setState({
+
+            //跳到二次确认页
+            //userId由prop带下去，其它参数由url带入
+            this.context.router.push({
+                pathname:`/financial/product/${props.params.productType}/${props.params.id}/confirm`,
+                query:{
+                    productId:props.params.id,
+                    type:1,
+                    money:this.state.amtMoney
+                }
+            })
+
+            /*this.setState({
                 loaded:false
             })
             props.payForProduct({
@@ -284,7 +299,7 @@ class InvestPage1 extends Component{
                     },300)
 
                 }
-            })
+            })*/
         }
     }
     checkInput(){

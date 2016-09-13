@@ -1014,16 +1014,9 @@ export function authentication(opt){
 
 /*查看债权列表*/
 export function fetchCreditorlist(opt){
-    //var url=API.user.creditorlist;
-    var url='/static/feed/creditorlist.json';
+    var url=API.user.creditorlist;
     return (dispatch, getState) => {
-        return fetch(url,{
-           /* body:JSON.stringify({
-                userId:opt.userId,
-                investId:opt.investId,
-                type:opt.type
-            })*/
-        })
+        return fetch(url+`?userId=${opt.userId}&investId=${opt.investId}&type=${opt.type}`)
             .then((response)=>response.json())
             .then((data)=>{
                 dispatch({
@@ -1033,6 +1026,19 @@ export function fetchCreditorlist(opt){
                         data:data.data
                     }
                 })
+                opt.callback && opt.callback(data)
+            })
+    }
+}
+
+/*投资确认页优惠券获取*/
+/*不用保存在store中*/
+export function fetchConfirmPageCoupon(opt){
+    var url=API.product.confirm;
+    return (dispatch, getState) => {
+        return fetch(url+`?userId=${opt.userId}&productId=${opt.productId}&type=${opt.type}&money=${opt.money}`)
+            .then((response)=>response.json())
+            .then((data)=>{
                 opt.callback && opt.callback(data)
             })
     }

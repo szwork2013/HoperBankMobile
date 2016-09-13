@@ -27,6 +27,13 @@ export class TextButton extends Component{
     constructor(props) {
         super(props)
     }
+    renderRightText(){
+        if(this.props.rightText){
+            return(
+                <span className="fr">{this.props.rightText}</span>
+            )
+        }
+    }
     render(){
         const props = this.props;
         return(
@@ -34,6 +41,7 @@ export class TextButton extends Component{
                 <div className={"base-text-button-info " + (!props.hasBorder && 'no-border')}>
                     <span>{props.text}</span>
                     {props.hasIcon && <i className="icon icon-arrow-right"></i>}
+                    {this.renderRightText.bind(this)()}
                 </div>
 
             </div>

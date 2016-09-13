@@ -45,9 +45,9 @@ export default class FinancialSelector extends Component {
         return(
             <ul className="financial-nav">
                 <li className={this.state.orderBy == 1 ? 'active ' : ''} onClick={()=>{this.changeOrder(1)}}>默认</li>
-                <li className={(this.isActive(6,7) ? 'active ' : ' ') + this.getDirection(6,7)} onClick={()=>{this.toggleOrder(6,7)}}>年利率<i></i></li>
-                <li className={(this.isActive(4,5) ? 'active ' : ' ') + this.getDirection(4,5)} onClick={()=>{this.toggleOrder(4,5)}}>期限<i></i></li>
-                <li className={(this.isActive(2,3) ? 'active ' : ' ') + this.getDirection(2,3)} onClick={()=>{this.toggleOrder(2,3)}}>进度<i></i></li>
+                <li className={(this.isActive(6,7) ? 'active ' : ' ') + this.getDirection(6,7)} onClick={()=>{this.toggleOrder(6,7)}}><span>年利率</span><i></i></li>
+                <li className={(this.isActive(4,5) ? 'active ' : ' ') + this.getDirection(4,5)} onClick={()=>{this.toggleOrder(4,5)}}><span>期限</span><i></i></li>
+                <li className={(this.isActive(2,3) ? 'active ' : ' ') + this.getDirection(2,3)} onClick={()=>{this.toggleOrder(2,3)}}><span>进度</span><i></i></li>
             </ul>
         )
     }

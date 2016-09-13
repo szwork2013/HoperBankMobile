@@ -40,6 +40,7 @@ var API = {
         buy:domain+'product/buy',
         cancel:domain+ 'product/cancel',
         reBuy:domain+'product/rebuy',
+        confirm:domain +'product/confirm',
         financial:{
             list:domain+'product/financial/list',
             detail:domain+'product/financial/detail',

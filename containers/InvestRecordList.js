@@ -133,10 +133,7 @@ class InvestRecordList extends Component {
     viewCreditorList(id){
         this.props.setInvestId(id);
         this.context.router.push({
-            pathname:`/my/investmentrecord/creditorList`,
-            query: {
-                investId: id
-            }
+            pathname:`/my/investmentrecord/creditorList${id}`
         })
     }
     renderItem(item,index){
