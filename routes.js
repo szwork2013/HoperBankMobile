@@ -34,6 +34,7 @@ import CreditorListPage from './containers/CreditorListPage'
 import CreditorDetailPage from './containers/CreditorDetailPage'
 import ActivityDetailPage from './containers/ActivityDetail'
 import InvestConfirmPage from './containers/InvestConfirmPage'
+import InvestConfirmSelectCouponPage from './containers/InvestConfirmSelectCouponPage.js'
 export default (
     <Route path="/" component={App}>
         <IndexRedirect to="/home" />
@@ -54,7 +55,11 @@ export default (
             cb(null,FinancialPage)
         }}>
             <Route path="/financial/product/:productType/:id" component={InvestMainPage}>
-                <Route path="/financial/product/:productType/:id/confirm" component={InvestConfirmPage} />
+                <Route path="/financial/product/:productType/:id/confirm" component={InvestConfirmPage}>
+                    <Route path="/financial/product/:productType/:id/confirm/coupon/:type" component={InvestConfirmSelectCouponPage}>
+
+                    </Route>
+                </Route>
                 <Route path="/financial/product/:productType/:id/detail" component={ProductDetail} />
                 <Route path="/financial/product/:productType/:id/record" component={FinancialProductRecord} />
                 <Route path="/financial/product/:productType/:id/returnPlan" component={FinancialReturnPlan} />

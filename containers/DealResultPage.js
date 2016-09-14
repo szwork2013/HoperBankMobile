@@ -3,7 +3,7 @@ import {BaseButton} from '../components/Button'
 import {fetchAccount} from '../actions'
 import { browserHistory } from 'react-router'
 import { connect } from 'react-redux'
-export default class DealResultPage extends Component {
+class DealResultPage extends Component {
     constructor(props) {
         super(props)
         this.renderPayResult = this.renderPayResult.bind(this);
@@ -46,7 +46,7 @@ export default class DealResultPage extends Component {
                 </div>
                 <div className="deal-result-bottom">
                     <BaseButton text="确定"
-                                 onClick={()=>{browserHistory.goBack()}} />
+                                 onClick={()=>{browserHistory.replace('/my/investmentrecord')}} />
                 </div>
             </section>
         )
