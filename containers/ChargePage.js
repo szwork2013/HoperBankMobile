@@ -40,7 +40,7 @@ class ChargePage extends Component{
                 <RootLoading display={this.state.overlayShouldShow}/>
                 <div className="input-item">
                     <span className="input-item-left">账户余额</span>
-                    <span className="input-item-right">元{props.account.balance}</span>
+                    <span className="input-item-right">{props.account.balance}元</span>
                 </div>
                 <div className="input-item white">
                     <span className="input-item-left">充值金额</span>

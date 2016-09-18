@@ -11,7 +11,9 @@ export default class ActivityDetail extends Component {
         }
     }
     componentWillMount() {
-
+        if(!this.props.url){
+            browserHistory.goBack();
+        }
     }
     componentDidMount(){
 
@@ -19,10 +21,9 @@ export default class ActivityDetail extends Component {
     render() {
         const props = this.props;
         return (
-            <section className="level-2-wrap">
-                123
-                <iframe>
-                    
+            <section className="level-2-wrap absolute">
+                <iframe ref="iframe1" src={this.props.url} style={{width:'100%'}}>
+
                 </iframe>
             </section>
         )

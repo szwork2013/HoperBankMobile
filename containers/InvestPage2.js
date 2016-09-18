@@ -16,7 +16,6 @@ class InvestPage2 extends Component{
             canSubmit:true,
             ableBuy:true
         }
-        console.log(props)
         this.amtMoneyChange = this.amtMoneyChange.bind(this);
     }
     componentWillMount() {
@@ -79,9 +78,11 @@ class InvestPage2 extends Component{
                 <ReactCSSTransitionGroup component="div"
                                          transitionName="slide-right"
                                          transitionEnterTimeout={300} transitionLeaveTimeout={300}>
-                    {
-                        this.props.children
-                    }
+                    {this.props.children  && React.cloneElement(this.props.children, {
+                        fetchConfirmPageCoupon:this.props.fetchConfirmPageCoupon,
+                        userId:this.props.account.userId,
+                        propPay:this.propPay.bind(this)
+                    })}
                 </ReactCSSTransitionGroup>
                 <RootLoading display={!this.state.loaded}/>
                 <div className="project-invest-wrap">
@@ -168,50 +169,64 @@ class InvestPage2 extends Component{
             return false;
         }
         if(this.checkInput()){
-            this.setState({
-                loaded:false
-            })
-            props.payForProduct({
-                type:props.params.productType,
-                userId:props.account.userId,
-                productId:props.params.id,
-                amt:this.state.amtMoney,
-                success:(result)=>{
-                    this.setState({
-                        loaded:true,
-                        overlayShouldShow:false
-                    })
+            //余额不足
+            if(props.account.balance < this.state.amtMoney){
+                let r = confirm("余额不足，请充值！");
+                if(r){
                     this.context.router.push({
-                        pathname:`/financial/product/${props.params.productType}/${props.params.id}/dealResult`,
-                        query:{
-                            amt:this.state.amtMoney,
-                            sy:this.calculate(this.state.amtMoney,obj.rate,obj.limit),
-                            product:obj.productName
-                        }
+                        pathname: '/my/charge',
+                        query: { amt:parseFloat(this.state.amtMoney)-parseFloat(props.account.balance) }
                     })
-                },
-                fail:(result)=>{
-                    this.setState({
-                        loaded:true
-                    })
-                    setTimeout(()=>{
-                        if(result.status==1006){
-                            let r = confirm("余额不足，请充值！");
-                            if(r){
-                                this.context.router.push({
-                                    pathname: '/my/charge',
-                                    query: { amt:parseFloat(this.state.amtMoney)-parseFloat(props.account.balance) }
-                                })
-                            }
-                        }else{
-                            alert(result.message)
+                }
+                return false;
+            }
 
-                        }
-                    },300)
+
+            //跳到二次确认页
+            //userId由prop带下去，其它参数由url带入
+            this.context.router.push({
+                pathname:`/financial/product/${props.params.productType}/${props.params.id}/confirm`,
+                query:{
+                    productId:props.params.id,
+                    type:props.params.productType,
+                    money:this.state.amtMoney,
+                    productName:obj.productName,
+                    rate:obj.rate,
+                    limit:obj.limit
 
                 }
             })
         }
+    }
+    propPay(obj){
+        const props = this.props;
+        props.payForProduct({
+            type:props.params.productType,
+            userId:props.account.userId,
+            productId:props.params.id,
+            amt:this.state.amtMoney,
+            success:(result)=>{
+                obj.success && obj.success(result)
+
+                this.setState({
+                    loaded:true,
+                    overlayShouldShow:false
+                })
+                this.context.router.replace({
+                    pathname:`/financial/product/${props.params.productType}/${props.params.id}/dealResult`,
+                    query:{
+                        amt:this.state.amtMoney,
+                        sy:this.calculate(this.state.amtMoney,obj.rate,obj.limit),
+                        product:obj.productName
+                    }
+                })
+            },
+            fail:(result)=>{
+                obj.fail && obj.fail(result)
+
+                alert(result.message)
+            }
+        })
     }
     checkInput(){
         const amtMoney = this.state.amtMoney;

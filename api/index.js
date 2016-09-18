@@ -77,6 +77,9 @@ var API = {
         certification1:domain + 'user/certification',
         certification2:domain + 'user/certification2'
     },
+    reset:{
+        password:domain+'reset/password'
+    },
     forget:{
         password:{
             step1:domain+'forget/password/step1',

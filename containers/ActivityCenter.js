@@ -8,10 +8,19 @@ class ActivityCenter extends Component {
     constructor(props) {
         super(props)
         this.state={
-            detailUrl:''
+            detailUrl:'',
+            loaded:false
         }
     }
     componentWillMount() {
+        const props = this.props;
+        props.fetchActivityList((result)=>{
+            if(result.r==1){
+                this.setState({
+                    loaded:true
+                })
+            }
+        })
     }
     componentDidMount(){
 
@@ -34,7 +43,14 @@ class ActivityCenter extends Component {
                     props.activity.map((item,index)=>{
                         return(
                             <section className="activity-wrap" key={index}>
-                                <div className="activity-item" href={`/activity/detail/${item.link}`}>
+                                <div className="activity-item"  onClick={()=>{
+                                    this.state.detailUrl=item.link
+                                    this.setState({
+                                        detailUrl:item.link
+                                    })
+                                    //this.context.router.push('/activity/detail/')
+                                    location.href=item.link
+                                }}>
                                     <h3><i></i>{item.title}</h3>
                                     <p>{item.startTime}---{item.endTime}</p>
                                     <div className={item.status==0?'gray':''}>
@@ -50,6 +66,9 @@ class ActivityCenter extends Component {
         )
     }
 }
+ActivityCenter.contextTypes = {
+    router: React.PropTypes.object.isRequired
+};
 function mapStateToProps(state, ownProps) {
     return {
         account:state.account,

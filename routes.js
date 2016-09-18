@@ -35,6 +35,8 @@ import CreditorDetailPage from './containers/CreditorDetailPage'
 import ActivityDetailPage from './containers/ActivityDetail'
 import InvestConfirmPage from './containers/InvestConfirmPage'
 import InvestConfirmSelectCouponPage from './containers/InvestConfirmSelectCouponPage.js'
+import ResetPassWordPage from './containers/ResetPassWordPage'
+import ForgotPassWordPage from './containers/ForgotPassWordPage'
 export default (
     <Route path="/" component={App}>
         <IndexRedirect to="/home" />
@@ -76,7 +78,9 @@ export default (
         </Route>
         <Route path="/my" component={MyPage}>
             <Route path="/my/bindbank" component={BindBankPage} />
-            <Route path="/my/personal" component={PersonalPage} />
+            <Route path="/my/personal" component={PersonalPage} >
+                <Route path="/my/personal/resetPassWord" component={ResetPassWordPage} />
+            </Route>
             <Route path="/my/dealrecord" component={DealRecordPage} />
             <Route path="/my/investmentrecord" component={MyInvestmentPage}>
                 <Route path="/my/investmentrecord/select" component={ChoseRebuyPage}>
@@ -108,6 +112,9 @@ export default (
 
         </Route>
         <Route path="/register" component={RegisterPage}>
+
+        </Route>
+        <Route path="/forgot" component={ForgotPassWordPage}>
 
         </Route>
 

@@ -571,7 +571,6 @@ export function payForProduct(opt){
         // no default
     }
     return (dispatch, getState) => {
-        console.log(url)
         return $.ajax({
             type: 'GET',
             url:url,
@@ -1037,6 +1036,19 @@ export function fetchConfirmPageCoupon(opt){
     var url=API.product.confirm;
     return (dispatch, getState) => {
         return fetch(url+`?userId=${opt.userId}&productId=${opt.productId}&type=${opt.type}&money=${opt.money}`)
+            .then((response)=>response.json())
+            .then((data)=>{
+                opt.callback && opt.callback(data)
+            })
+    }
+}
+
+/*重置密码*/
+/*不用保存在store中*/
+export function resetPassWord(opt){
+    var url=API.reset.password;
+    return (dispatch, getState) => {
+        return fetch(url+`?userId=${opt.userId}&newpasswd=${opt.newpasswd}&type=${opt.type}&oldpasswd=${opt.oldpasswd}`)
             .then((response)=>response.json())
             .then((data)=>{
                 opt.callback && opt.callback(data)

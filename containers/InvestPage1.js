@@ -291,7 +291,7 @@ class InvestPage1 extends Component{
     propPay(obj){
         const props = this.props;
         props.payForProduct({
-            type:1,
+            type:props.params.productType,
             userId:props.account.userId,
             productId:props.params.id,
             amt:this.state.amtMoney,

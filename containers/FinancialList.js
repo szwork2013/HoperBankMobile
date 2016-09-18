@@ -26,11 +26,13 @@ class FinancialList extends Component {
 
     }
     render() {
-
+        const iScrollHeight = config.windowHeight - config.navHeight - config.tabBarHeight
         return(
             <ReactIScroll iScroll={iScroll}
                           options={this.props.options}
-                          onScrollStart={this.onScrollStart}>
+                          onScrollStart={this.onScrollStart}
+                            style={{height:iScrollHeight,overflow:'hidden'}}
+                            >
 
                 <ul className="financial-ul">
                     {

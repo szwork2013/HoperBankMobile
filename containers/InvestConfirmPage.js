@@ -21,11 +21,23 @@ export default class InvestConfirmPage extends Component{
             browserHistory.goBack()
             return false;
         }
+        var type = 1;
+        switch (parseInt(props.location.query.type)){
+            case 1:
+                type=1;
+                break;
+            case 9:
+                type=2;
+                break;
+            case 5:
+                type=3;
+                break;
+        }
         props.fetchConfirmPageCoupon({
             userId:props.userId,
             productId:props.location.query.productId,
             money:props.location.query.money,
-            type:props.location.query.type,
+            type:type,
             callback:(result)=>{
                 console.log(result)
                 if(result.r==1){
@@ -44,6 +56,8 @@ export default class InvestConfirmPage extends Component{
     calculate(type,money,rate,time){
         if(type==1){
             return (parseFloat( money * rate / 100 / 12 * time) || 0).toFixed(2);
+        }else{
+            return (money * (rate / 100 / 12) * Math.pow(1 + (rate / 100 / 12), time) / (Math.pow(1 + (rate / 100 / 12), time) - 1) * time - money).toFixed(2);
         }
 
     }
@@ -78,7 +92,7 @@ export default class InvestConfirmPage extends Component{
 
                         <TextButton text="加息卡" onClick={()=>{
                             this.context.router.push(`/financial/product/${props.params.productType}/${props.params.id}/confirm/coupon/2`)
-                        }}  hasBorder={true}  rightText={this.state.coupon.type2.length>0?'':'无可用'} hasIcon={true} />
+                        }}  hasBorder={true}  rightText={this.state.coupon.type2 && this.state.coupon.type2.length>0?'':'无可用'} hasIcon={true} />
 
                         <TextButton text="抵用券" onClick={()=>{
                            this.context.router.push(`/financial/product/${props.params.productType}/${props.params.id}/confirm/coupon/3`)
@@ -113,9 +127,6 @@ export default class InvestConfirmPage extends Component{
                         }} />
                     </div>
                 </div>
-
-
-
             </section>
         )
     }
