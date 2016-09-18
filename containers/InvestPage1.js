@@ -296,6 +296,8 @@ class InvestPage1 extends Component{
             productId:props.params.id,
             amt:this.state.amtMoney,
             success:(result)=>{
+                obj.success && obj.success(result)
+
                 this.setState({
                     loaded:true,
                     overlayShouldShow:false
@@ -310,6 +312,8 @@ class InvestPage1 extends Component{
                 })
             },
             fail:(result)=>{
+                obj.fail && obj.fail(result)
+
                 alert(result.message)
             }
         })

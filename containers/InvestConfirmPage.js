@@ -11,7 +11,8 @@ export default class InvestConfirmPage extends Component{
                 type1:null,
                 type2:[],
                 type3:[]
-            }
+            },
+            loading:false
         }
     }
     componentWillMount() {
@@ -60,6 +61,7 @@ export default class InvestConfirmPage extends Component{
                     })}
 
                 </ReactCSSTransitionGroup>
+                <RootLoading display={this.state.loading} />
                 <div className="invest-confirm-wrap">
                     <div className="invest-confirm-information">
                         <p className="p1">{params.productName}</p>
@@ -89,7 +91,25 @@ export default class InvestConfirmPage extends Component{
                         <p style={{width:'90%',margin:'15px auto 0 auto'}}>预计收益<span className="money">{this.calculate(props.params.productType,params.money,params.rate,params.limit)}</span>元</p>
 
                         <BaseButton text="确认投资" className="invest-confirm-pay" onClick={()=>{
-                            props.propPay({productName:params.name,rate:params.rate,limit:params.limit})
+                            this.setState({
+                                loading:true
+                            })
+                            props.propPay({
+                                productName:params.name,
+                                rate:params.rate,
+                                limit:params.limit,
+                                success:()=>{
+                                    this.setState({
+                                        loading:false
+                                    })
+                                },
+                                fail:()=>{
+                                    this.setState({
+                                        loading:false
+                                    })
+                                }
+
+                            })
                         }} />
                     </div>
                 </div>
