@@ -22,40 +22,6 @@
     }
   }
 }
-.my-info-bottom{
-  background-color:#fff;
-  padding:15px;
-  overflow: hidden;
-  text-align: center;
-  >.part-1{
-    color:#333;
-    width:30%;
-    float: left;
-    text-align: left;
-  }
-  >.part-2{
-    width:70%;
-    float: right;
-    margin-top:5px;
-    >a{
-
-      padding:5px 30px;
-      float: right;
-      &.btn-1{
-        border:1px solid #d6d7dc;
-        border-radius:5px;
-        color:#004fa3;
-        margin-right:10px;
-      }
-      &.btn-2{
-        border-radius:5px;
-        color:#fff;
-        background-color:#e3aa00;
-
-      }
-    }
-  }
-}
 
 .my-info-top{
   background-color:@color7;
@@ -88,15 +54,20 @@
     width:70%;
     float: right;
     margin-top:5px;
-    >a{
-
+    >button{
+      background:none;
       padding:5px 30px;
       float: right;
+      font-size:14px;
       &.btn-1{
         border:1px solid @huise;
         border-radius:5px;
         color:@blue;
         margin-right:10px;
+        &.disabled{
+          background:@huise;
+          color:#fff;
+        }
       }
       &.btn-2{
         border-radius:5px;

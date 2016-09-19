@@ -84,6 +84,7 @@ class InvestPage1 extends Component{
     }
     render(){
         const options = {mouseWheel: false, scrollbars: false, scrollX: true,probeType: 2,momentum:false,startX:-750}
+        const account = this.props.account;
         var data = {
             rate:0,
             limit:0,
@@ -218,7 +219,7 @@ class InvestPage1 extends Component{
                         overlayShouldShow:false
                     })
                 }} />
-                <BaseButton className="fixed" text="立即购买" onClick={()=>{
+                <BaseButton className={`fixed ${account.userId && parseInt(account.isBorrower) && 'disabled'}`} disabled={parseInt(account.isBorrower)} text="立即购买" onClick={()=>{
                     this.setState({
                         overlayShouldShow:true
                     })

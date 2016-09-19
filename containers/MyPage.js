@@ -109,8 +109,8 @@ class MyPage extends Component {
                             <p className="p2">可用余额(元)</p>
                         </div>
                         <div className="part-2">
-                            <a onClick={this.jumpToCharge.bind(this)} className="btn-2" >充值</a>
-                            <a  onClick={this.jumpToWithDraw.bind(this)} className="btn-1">提现</a>
+                            <button onClick={this.jumpToCharge.bind(this)} className="btn-2" >充值</button>
+                            <button  onClick={this.jumpToWithDraw.bind(this)} disabled={parseInt(account.isBorrower)} className={`btn-1 ${parseInt(account.isBorrower)?'disabled':''}`}>提现</button>
                         </div>
                     </div>
                 </section>

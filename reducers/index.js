@@ -26,7 +26,8 @@ var accountState = {
     "fullMobile":cookie.get('fullMobile') || '',
     "principalMoney":cookie.get('principalMoney') || '',
     "totalIncome":cookie.get('totalIncome') || '',
-    "userId":cookie.get('userId') || ''
+    "userId":cookie.get('userId') || '',
+    "isBorrower":cookie.get('isBorrower') || ''
 };
 var emptyState = {
     "balance":"",
@@ -39,7 +40,8 @@ var emptyState = {
     "name":"",
     "principalMoney":"",
     "totalIncome":"",
-    "userId":""
+    "userId":"",
+    "isBorrower":""
 }
 
 function account(state=accountState,action){

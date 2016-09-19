@@ -128,7 +128,8 @@ function setCookie(data){
         "name":data.name,
         "principalMoney":data.principalMoney,
         "totalIncome":data.totalIncome,
-        "userId":data.userId
+        "userId":data.userId,
+        "isBorrower":data.isBorrower
     })
 }
 
@@ -1049,6 +1050,43 @@ export function resetPassWord(opt){
     var url=API.reset.password;
     return (dispatch, getState) => {
         return fetch(url+`?userId=${opt.userId}&newpasswd=${opt.newpasswd}&type=${opt.type}&oldpasswd=${opt.oldpasswd}`)
+            .then((response)=>response.json())
+            .then((data)=>{
+                opt.callback && opt.callback(data)
+            })
+    }
+}
+
+/*忘记密码第一步：发送短信验证码*/
+/*不用保存在store中*/
+export function forgotPassWordStep1(opt){
+    var url=API.forget.password.step1;
+    return (dispatch, getState) => {
+        return fetch(url+`?mobile=${opt.mobile}`)
+            .then((response)=>response.json())
+            .then((data)=>{
+                opt.callback && opt.callback(data)
+            })
+    }
+}
+/*忘记密码第二步：获取重置密码权限，发送手机号和手机验证码*/
+/*不用保存在store中*/
+export function forgotPassWordStep2(opt){
+    var url=API.forget.password.step2;
+    return (dispatch, getState) => {
+        return fetch(url+`?mobile=${opt.mobile}&smsCode=${opt.smsCode}`)
+            .then((response)=>response.json())
+            .then((data)=>{
+                opt.callback && opt.callback(data)
+            })
+    }
+}
+/*忘记密码第三步：重置密码，发送手机号，新密码，重置密码权限码*/
+/*不用保存在store中*/
+export function forgotPassWordStep3(opt){
+    var url=API.forget.password.step3;
+    return (dispatch, getState) => {
+        return fetch(url+`?mobile=${opt.mobile}&passwd=${opt.passwd}&resCode=${opt.resCode}`)
             .then((response)=>response.json())
             .then((data)=>{
                 opt.callback && opt.callback(data)

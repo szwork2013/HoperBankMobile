@@ -51,6 +51,11 @@ class InvestPage2 extends Component{
                         alert(msg);
                     },300)
                 }
+                if(parseInt(this.props.account.isBorrower)){
+                    this.setState({
+                        ableBuy:false
+                    })
+                }
             }
         })
     }
