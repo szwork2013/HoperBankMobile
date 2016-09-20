@@ -14,7 +14,6 @@ class HomePage extends Component {
         this.prev = this.prev.bind(this);
         this.next = this.next.bind(this);
         this.renderMain = this.renderMain.bind(this);
-        console.log(props)
     }
 
     componentWillMount() {

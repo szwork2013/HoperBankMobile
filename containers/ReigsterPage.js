@@ -258,6 +258,7 @@ class ReigsterPage extends Component {
                         rule="^([1][3758][0-9]{9}|hoperbank)$"
                         hasBorder={false}
                         type="text"
+                        defaultValue={this.props.params.referrerName || ''}
                         callback={(b,val)=>{this.setState({referrerName:val,referrerNamePassed:b})}}>
                     </IconInput>
                     <section className="tip-section-2">

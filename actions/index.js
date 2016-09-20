@@ -28,6 +28,10 @@ export const CLEAR_FINANCIAL_RETURN_PLAN = 'CLEAR_FINANCIAL_RETURN_PLAN'
 export const FETCH_ACTIVITY_LIST = 'FETCH_ACTIVITY_LIST';
 export const SET_INVEST_RECORD_SHOULD_UPDATE = 'SET_INVEST_RECORD_SHOULD_UPDATE'
 export const FETCH_CREDITOR_LIST = 'FETCH_CREDITOR_LIST';
+
+/*location storage*/
+
+
 export function loadIndex(){
     return (dispatch, getState) => {
         return $.ajax({
@@ -58,13 +62,10 @@ export function fetchAccount(id,callback){
             data: {
                 userId:id
             },
-            timeout:15000,
-            dataType:"jsonp",
-            jsonpCallback:'fetchAccountJsonp',
             success: function(data){
                 if(data.r==1){
                     data.account.fullMobile=cookie.get('fullMobile');
-                    setCookie(data.account)
+                    saveAccount(data.account)
                     dispatch({
                         type:FETCH_ACCOUNT,
                         response:data.account
@@ -94,7 +95,7 @@ export function doLogin(username,password,callback){
 
                 if(data.r==1){
                     data.account.fullMobile=username;
-                    setCookie(data.account);
+                    saveAccount(data.account);
                     dispatch({
                         type:DO_LOGIN,
                         response:data.account
@@ -110,14 +111,16 @@ export function doLogin(username,password,callback){
     }
 }
 export function doLogout(){
-    cookie.empty();
+    clearAccount();
     return {
         type:DO_LOGOUT,
         response:null
     }
 }
-function setCookie(data){
-    cookie.set({
+
+
+function saveAccount(data){
+    /*cookie.set({
         "balance":data.balance,
         "bankCard":data.bankCard,
         "freezeMoney":data.freezeMoney,
@@ -130,33 +133,33 @@ function setCookie(data){
         "totalIncome":data.totalIncome,
         "userId":data.userId,
         "isBorrower":data.isBorrower
-    })
+    })*/
+    for (let key in data){
+        localStorage[key]=data[key];
+    }
+}
+function clearAccount(){
+    var emptyData = {
+        "balance":"",
+        "bankCard":"",
+        "freezeMoney":"",
+        "idCard":"",
+        "invest":"",
+        "mobile":"",
+        "fullMobile":'',
+        "name":"",
+        "principalMoney":"",
+        "totalIncome":"",
+        "userId":"",
+        "isBorrower":""
+    }
+    saveAccount(emptyData);
 }
 
 
 /*理财*/
 export function fetchLCList(callback){
     return (dispatch, getState) => {
-       /* $.ajax({
-            type: 'GET',
-            url: API.product.list,
-            data: {
-            },
-            timeout:15000,
-            success: function(data){
-                if(data.r==1){
-                    dispatch({
-                        type:FETCH_LCLIST,
-                        response:data.list || null
-                    })
-                    callback && callback(data);
-                }
-
-            },
-            error: function(xhr, type){
-                console.log(xhr)
-            }
-        });*/
         fetch(API.product.list)
             .then((response)=>response.json())
             .then((data)=>{

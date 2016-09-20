@@ -111,7 +111,7 @@ export default (
         <Route path="/login" component={LoginPage}>
 
         </Route>
-        <Route path="/register" component={RegisterPage}>
+        <Route path="/register(/:referrerName)" component={RegisterPage}>
 
         </Route>
         <Route path="/forgot" component={ForgotPassWordPage}>

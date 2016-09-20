@@ -3,7 +3,7 @@ import IconButton from '../components/IconButton'
 import IconInput from '../components/IconInput'
 import {BaseButton} from '../components/Button'
 import RootLoading from '../components/RootLoading'
-import { browserHistory } from 'react-router'
+import { browserHistory,Link } from 'react-router'
 export default class ResetPassWordPage extends Component {
     constructor(props) {
         super(props)
@@ -96,7 +96,7 @@ export default class ResetPassWordPage extends Component {
                         callback={(b,val)=>{this.setState({reNewPassword:val,reNewPasswordPassed:b})}}>
                     </IconInput>
                     <section style={{width:'90%',textAlign:'right',margin:'10px auto',overflow:'hidden'}}>
-                        <a href="findoutPwd.html" className="fr" style={{color:'#004fa3'}}>忘记密码?</a>
+                        <Link to="/forgot" className="fr" style={{color:'#004fa3'}}>忘记密码?</Link>
                     </section>
                     <BaseButton text="确定" className="mt20" onClick={this.doReset}/>
                 </section>

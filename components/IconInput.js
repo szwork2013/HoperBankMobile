@@ -19,7 +19,7 @@ export default class IconInput extends Component {
                 {props.children}
                 <div className={`${props.hasBorder ? 'icon-input-con' : 'icon-input-con icon-input-no-border'} ${props.contentClass}`} >
                     {props.icon && <i className={'icon '+props.icon}></i>}
-                    <input type={this.state.type} placeholder={props.placeholder} onChange={this.handleChange.bind(this,[props.rule,props.callback])} />
+                    <input type={this.state.type} placeholder={props.placeholder} defaultValue={this.props.defaultValue} onChange={this.handleChange.bind(this,[props.rule,props.callback])} />
                     {
                         this.props.type =='password' && <div className={`eyes ${this.state.eyesStatus=='open' ? 'open' : ''}`} onClick={
                         ()=>{
@@ -47,7 +47,8 @@ IconInput.propTypes = {
     hasBorder:PropTypes.bool,
     type:PropTypes.string,
     rule:PropTypes.string,
-    contentClass:PropTypes.string
+    contentClass:PropTypes.string,
+    defaultValue:PropTypes.string
 }
 IconInput.defaultProps = {
     placeholder: 'button',
@@ -55,5 +56,6 @@ IconInput.defaultProps = {
     icon:'',
     contentClass:'',
     hasBorder:true,
-    rule:'*'
+    rule:'*',
+    defaultValue:''
 }

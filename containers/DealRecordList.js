@@ -75,7 +75,7 @@ class DealRecordList extends Component {
             <div className="my-deal-record-item" key={index}>
                 <div className="my-deal-record-info">
                     <p>
-                        {item.remarkTime}
+                        {new Date(item.remarkTime).toLocaleString()}
                     </p>
                     <p>
                         <span className="my-deal-record-money">{item.money}元</span>

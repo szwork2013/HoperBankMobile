@@ -69,6 +69,10 @@ class ChargePage extends Component{
         )
     }
     doCharge(){
+        if(this.state.amtMoney <100){
+            alert('100元起充');
+            return false;
+        }
         const props = this.props;
         if(this.checkInput()){
             props.charge({

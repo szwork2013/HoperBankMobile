@@ -16,18 +16,18 @@ function index(state=null,action){
 }
 
 var accountState = {
-    "balance":cookie.get('balance') || 0,
-    "bankCard":cookie.get('bankCard') || '',
-    "freezeMoney":cookie.get('freezeMoney') || '',
-    "idCard":cookie.get('idCard') || '',
-    "invest":cookie.get('invest') || '',
-    "mobile":cookie.get('mobile') || '',
-    "name":cookie.get('name') || '',
-    "fullMobile":cookie.get('fullMobile') || '',
-    "principalMoney":cookie.get('principalMoney') || '',
-    "totalIncome":cookie.get('totalIncome') || '',
-    "userId":cookie.get('userId') || '',
-    "isBorrower":cookie.get('isBorrower') || ''
+    "balance":localStorage.balance || '',
+    "bankCard":localStorage.bankCard || '',
+    "freezeMoney":localStorage.freezeMoney || '',
+    "idCard":localStorage.idCard || '',
+    "invest":localStorage.invest || '',
+    "mobile":localStorage.mobile || '',
+    "name":localStorage.name || '',
+    "fullMobile":localStorage.fullMobile || '',
+    "principalMoney":localStorage.principalMoney || '',
+    "totalIncome":localStorage.totalIncome || '',
+    "userId":localStorage.userId || '',
+    "isBorrower":localStorage.isBorrower || ''
 };
 var emptyState = {
     "balance":"",
