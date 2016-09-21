@@ -1,7 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import * as asyncActions from '../actions'
-import { browserHistory } from 'react-router'
 import TabNavigator from '../components/TabNavigator'
 
 class App extends Component {
@@ -12,7 +11,6 @@ class App extends Component {
     }
     componentWillMount(){
         //console.log(this.props.children.type)
-        console.log
         React.Children.map(this.props.children,child=>{
             console.log(child.type.displayName)
         })
