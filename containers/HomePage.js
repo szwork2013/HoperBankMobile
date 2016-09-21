@@ -36,7 +36,35 @@ class HomePage extends Component {
     }
 
     renderMain(){
-        const {banner,recommend} = this.props.index
+        const {recommend} = this.props.index;
+        const banner =[
+            {
+                img:'/static/img/banner7.jpg',
+                link:'http://m.hoperbank.com/activity20160915.html',
+                title:'activity20160915.html'
+            },
+            {
+                img:'/static/img/banner3.jpg',
+                link:'activity20160617.html',
+                title:''
+            },
+            {
+                img:'/static/img/banner1.jpg',
+                link:'#',
+                title:''
+            },
+            {
+                img:'/static/img/banner4.jpg',
+                link:'#',
+                title:''
+            },
+            {
+                img:'/static/img/banner5.jpg',
+                link:'#',
+                title:''
+            }
+
+        ]
         const swipeOptions = {
             continuous: true,
             callback:(index,elm)=>{
@@ -53,7 +81,7 @@ class HomePage extends Component {
                         banner.map((item,index)=>{
                             return(
                                 <div className="swiper-slide" key={index}>
-                                    <section className="banner"><a href="activity20160617.html"><img src={'http://oss-cn-shenzhen.aliyuncs.com/hopertest/'+item.link} /></a></section>
+                                    <section className="banner"><a href="activity20160617.html"><img src={item.img} /></a></section>
                                 </div>
                             )
                         })

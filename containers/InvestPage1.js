@@ -50,22 +50,22 @@ class InvestPage1 extends Component{
         })
         if(this.state.ableAdd){
 
-            console.log(Math.abs(ins.x)> (Math.abs(ins.maxScrollX)-100))
-            if(Math.abs(ins.x)> (Math.abs(ins.maxScrollX)-100)){
+            //console.log(Math.abs(ins.x)> (Math.abs(ins.maxScrollX)-100))
+            if(Math.abs(ins.x)> (Math.abs(ins.maxScrollX)-150)){
+                console.log('add')
+                this.state.ableAdd=false;
                 this.setState({
                     ableAdd:false
                 });
-                setTimeout(()=>{
-                    arr.push((arr.length)*1000)
-                    arr.push((arr.length)*1000)
-                    arr.push((arr.length)*1000)
-                    arr.push((arr.length)*1000)
-                    arr.push((arr.length)*1000)
-                    this.setState({
-                        data:arr,
-                        ableAdd:true
-                    })
-                },100)
+                for(let i = 0 ;i<30;i++){
+                    arr.push(arr.length*1000);
+                }
+
+                this.setState({
+                    data:arr,
+                    ableAdd:true
+                })
+                this.state.ableAdd=true;
             }
 
         }
@@ -83,7 +83,7 @@ class InvestPage1 extends Component{
         return (parseFloat( money * rate / 100 / 12 * time) || 0).toFixed(2);
     }
     render(){
-        const options = {mouseWheel: false, scrollbars: false, scrollX: true,probeType: 2,momentum:false,startX:-750}
+        const options = {mouseWheel: false, scrollbars: false, scrollX: true,probeType: 2,startX:-750}
         const account = this.props.account;
         var data = {
             rate:0,

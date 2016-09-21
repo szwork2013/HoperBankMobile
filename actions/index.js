@@ -52,6 +52,15 @@ export function loadIndex(){
                 alert('网络状况不佳')
             }
         });
+        /*return fetch(API.index)
+            .then((response)=>response.json())
+            .then((data)=>{
+                dispatch({
+                    type:FETCH_INDEX,
+                    response:data
+                })
+                opt.callback && opt.callback(data)
+            })*/
     }
 }
 export function fetchAccount(id,callback){
