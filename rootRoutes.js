@@ -4,6 +4,9 @@ export default {
     //onEnter: redirectHome,
     path: '/',
     component: App,
+    IndexRedirect:{
+        to:'/home'
+    },
     indexRoute: {
         getComponent: (nextState, cb) => {
             // Only load if we're logged in

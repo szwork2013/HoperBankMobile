@@ -3,8 +3,7 @@
   "version": "0.0.0",
   "description": "hoper-bank-mobile",
   "scripts": {
-    "start": "nodemon server.js",
-    "publish-win": "set NODE_ENV=prod&&webpack -p --progress --colors"
+    "start": "nodemon server.js"
   },
   "repository": {
     "type": "git",
@@ -48,6 +47,7 @@
     "concurrently": "^0.1.1",
     "css-loader": "^0.25.0",
     "express": "^4.13.3",
+    "html-webpack-plugin": "^2.22.0",
     "less-loader": "^2.2.3",
     "lodash.isequal": "^4.4.0",
     "progressbar.js": "^1.0.1",
