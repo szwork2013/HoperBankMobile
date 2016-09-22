@@ -1,31 +1,8 @@
 import React, { Component, PropTypes } from 'react'
 import { Provider } from 'react-redux'
-import routes from '../routes'
+import rootRoute from '../rootRoutes'
 import { Router } from 'react-router'
-import App from './App'
-function redirectHome(nextState, replace,cb){
-    replace('/home')
-    cb();
-}
-const rootRoute = {
-    //onEnter: redirectHome,
-    path: '/',
-    component: App,
-    indexRoute: {
-        getComponent: (nextState, cb) => {
-            // Only load if we're logged in
 
-                return require.ensure([], (require) => {
-                    cb(null, require('../routes/Home'))
-                })
-
-        }
-    },
-    childRoutes: [
-        require('../routes/Home'),
-        require('../routes/Borrow')
-    ]
-};
 
 export default class Root extends Component {
   render() {

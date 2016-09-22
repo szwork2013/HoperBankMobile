@@ -1,8 +1,8 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
-import { loadIndex } from '../../../actions'
+import { loadIndex } from 'actions'
 import ReactSwipe from 'react-swipe';
-import RootLoading from '../../../components/RootLoading'
+import RootLoading from 'RootLoading'
 import { browserHistory,Link } from 'react-router'
 var ReactCSSTransitionGroup = require('react-addons-css-transition-group');
 class HomePage extends Component {
@@ -45,7 +45,7 @@ class HomePage extends Component {
             },
             {
                 img:'/static/img/banner3.jpg',
-                link:'activity20160617.html',
+                link:'http://m.hoperbank.com/activity20160617.html',
                 title:''
             },
             {
@@ -81,7 +81,7 @@ class HomePage extends Component {
                         banner.map((item,index)=>{
                             return(
                                 <div className="swiper-slide" key={index}>
-                                    <section className="banner"><a href="activity20160617.html"><img src={item.img} /></a></section>
+                                    <section className="banner"><a href={item.link}><img src={item.img} /></a></section>
                                 </div>
                             )
                         })

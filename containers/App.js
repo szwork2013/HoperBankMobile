@@ -25,6 +25,11 @@ class App extends Component {
                     borrowProductList: this.props.state.product.borrowProductList
                 }
                 break;
+            case 'FinancialPage':
+                childrenPorps= {
+                    fetchConfirmPageCoupon:this.props.fetchConfirmPageCoupon,
+                }
+                break;
             default:
                 childrenPorps={
                     asyncCheckId:this.props.asyncCheckId,

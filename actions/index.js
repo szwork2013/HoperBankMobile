@@ -104,6 +104,7 @@ export function doLogin(username,password,callback){
 
                 if(data.r==1){
                     data.account.fullMobile=username;
+                    data.account.logged = true;
                     saveAccount(data.account);
                     dispatch({
                         type:DO_LOGIN,
@@ -160,7 +161,8 @@ function clearAccount(){
         "principalMoney":"",
         "totalIncome":"",
         "userId":"",
-        "isBorrower":""
+        "isBorrower":"",
+        "logged":false
     }
     saveAccount(emptyData);
 }
