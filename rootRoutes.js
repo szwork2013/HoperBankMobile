@@ -4,19 +4,7 @@ export default {
     //onEnter: redirectHome,
     path: '/',
     component: App,
-    IndexRedirect:{
-        to:'/home'
-    },
-    indexRoute: {
-        getComponent: (nextState, cb) => {
-            // Only load if we're logged in
-
-            return require.ensure([], (require) => {
-                cb(null, require('./routes/Home'))
-            })
-
-        }
-    },
+    indexRoute: { onEnter: (nextState, replace) => replace('/home') },
     childRoutes: [
         require('./routes/Home'),
         require('./routes/Financial'),

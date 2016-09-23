@@ -1,20 +1,29 @@
 module.exports = {
 
-  logged:function(){
+    logged:function(){
         return localStorage.logged
-  },
+    },
 
-  getToken: function () {
-    return localStorage.token
-  },
+    getToken: function () {
+        return localStorage.token
+    },
 
-  logout: function (cb) {
-    delete localStorage.logged
-    if (cb) cb()
-  },
+    login:function(localData,cb){
+        localStorage.logged = true;
+        for (let key in localData){
+            localStorage[key]=localData[key];
+        }
+        cb && cb()
+    },
 
-  loggedIn: function () {
-    return !!localStorage.token
-  },
+    logout: function (cb) {
+        localStorage.clear()
+        cb && cb()
+    },
+
+    getItem:(str)=>{
+        return localStorage[str];
+    }
+
 
 };

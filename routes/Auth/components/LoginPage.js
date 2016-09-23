@@ -47,9 +47,9 @@ class LoginPage extends Component {
                 },300)
             }else{
                 if(this.props.location.query.backUrl){
-                    this.context.router.push(this.props.location.query.backUrl)
+                    this.context.router.replace(this.props.location.query.backUrl)
                 }else{
-                    this.context.router.push('/my')
+                    this.context.router.replace('/my')
                 }
             }
         })

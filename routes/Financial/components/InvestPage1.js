@@ -250,7 +250,7 @@ class InvestPage1 extends Component{
         if(!props.account.userId){
             let r = confirm("请先登录");
             if(r){
-                this.context.router.push({
+                this.context.router.replace({
                     pathname: '/login',
                     query: { backUrl: location.pathname }
                 })

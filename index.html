@@ -9,6 +9,10 @@
     <script src="/static/lib/fastclick.min.js"></script>
     <script src="/static/lib/jquery-qrcode-0.14.0.min.js"></script>
     <style>
+        body{
+            max-height:736px;
+            max-width:414px
+        }
         .root-loading-enter { opacity: 0; transition: opacity .3s ease-in; }
         .root-loading-enter.root-loading-enter-active { opacity: 1; transition: opacity .3s ease-in; }
         .root-loading-leave { opacity: 1; transition: opacity .3s ease-in; }
@@ -119,5 +123,6 @@
         FastClick.attach(document.body);
     })
 </script>
-<script type="text/javascript" src="/static/scripts/bundle_577f6866753f60a54f57.js"></script></body>
+<script src="/static/scripts/bundle.js"></script>
+</body>
 </html>

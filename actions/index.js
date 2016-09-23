@@ -1,5 +1,6 @@
 import fetch from 'isomorphic-fetch'
 import API from '../api'
+import Auth from '../utils/auth'
 export const FETCH_INDEX =  'FETCH_INDEX'
 export const FETCH_ACCOUNT =  'FETCH_ACCOUNT'
 export const FETCH_LCLIST = 'FETCH_LCLIST'
@@ -29,40 +30,20 @@ export const FETCH_ACTIVITY_LIST = 'FETCH_ACTIVITY_LIST';
 export const SET_INVEST_RECORD_SHOULD_UPDATE = 'SET_INVEST_RECORD_SHOULD_UPDATE'
 export const FETCH_CREDITOR_LIST = 'FETCH_CREDITOR_LIST';
 
-/*location storage*/
-
 
 export function loadIndex(){
     return (dispatch, getState) => {
-        return $.ajax({
-            type: 'GET',
-            url: API.index,
-            data: {},
-            timeout:10000,
-            dataType:"jsonp",
-            jsonpCallback:'loadIndex',
-            success: function(data){
-                dispatch({
-                    type:FETCH_INDEX,
-                    response:data
-                })
-            },
-            error: function(xhr, type){
-                console.log(xhr)
-                alert('网络状况不佳')
-            }
-        });
-        /*return fetch(API.index)
+        return fetch(API.index)
             .then((response)=>response.json())
             .then((data)=>{
                 dispatch({
                     type:FETCH_INDEX,
                     response:data
                 })
-                opt.callback && opt.callback(data)
-            })*/
+            })
     }
 }
+
 export function fetchAccount(id,callback){
     return (dispatch, getState) => {
         return $.ajax({
@@ -73,11 +54,12 @@ export function fetchAccount(id,callback){
             },
             success: function(data){
                 if(data.r==1){
-                    data.account.fullMobile=cookie.get('fullMobile');
-                    saveAccount(data.account)
-                    dispatch({
-                        type:FETCH_ACCOUNT,
-                        response:data.account
+                    data.account.fullMobile= Auth.getItem('fullMobile');
+                    Auth.login(data.account,()=>{
+                        dispatch({
+                            type:FETCH_ACCOUNT,
+                            response:data.account
+                        })
                     })
                 }
                 callback && callback(data);
@@ -101,14 +83,13 @@ export function doLogin(username,password,callback){
             dataType:"jsonp",
             jsonpCallback:'jsonp',
             success: function(data){
-
                 if(data.r==1){
                     data.account.fullMobile=username;
-                    data.account.logged = true;
-                    saveAccount(data.account);
-                    dispatch({
-                        type:DO_LOGIN,
-                        response:data.account
+                    Auth.login(data.account,()=>{
+                        dispatch({
+                            type:DO_LOGIN,
+                            response:data.account
+                        })
                     })
                 }
                 callback && callback(data);
@@ -121,50 +102,11 @@ export function doLogin(username,password,callback){
     }
 }
 export function doLogout(){
-    clearAccount();
+    Auth.logout()
     return {
         type:DO_LOGOUT,
         response:null
     }
-}
-
-
-function saveAccount(data){
-    /*cookie.set({
-        "balance":data.balance,
-        "bankCard":data.bankCard,
-        "freezeMoney":data.freezeMoney,
-        "idCard":data.idCard,
-        "invest":data.invest,
-        "mobile":data.mobile,
-        'fullMobile':data.fullMobile || cookie.get('fullMobile'),
-        "name":data.name,
-        "principalMoney":data.principalMoney,
-        "totalIncome":data.totalIncome,
-        "userId":data.userId,
-        "isBorrower":data.isBorrower
-    })*/
-    for (let key in data){
-        localStorage[key]=data[key];
-    }
-}
-function clearAccount(){
-    var emptyData = {
-        "balance":"",
-        "bankCard":"",
-        "freezeMoney":"",
-        "idCard":"",
-        "invest":"",
-        "mobile":"",
-        "fullMobile":'',
-        "name":"",
-        "principalMoney":"",
-        "totalIncome":"",
-        "userId":"",
-        "isBorrower":"",
-        "logged":false
-    }
-    saveAccount(emptyData);
 }
 
 
@@ -213,17 +155,9 @@ export function fetchFWList(opt){
         //no default
     }
     return (dispatch, getState) => {
-        return $.ajax({
-            type: 'GET',
-            url:url,
-            data: {
-                curPage:opt.curPage || 1,
-                orderby:opt.orderBy || 1
-            },
-            timeout:15000,
-            dataType:"jsonp",
-            jsonpCallback:'fetchFWListJsonp',
-            success: function(data){
+        return fetch(`${url}?curPage=${opt.curPage || 1}&orderby=${opt.orderBy || 1}`)
+            .then((response)=>response.json())
+            .then((data)=>{
                 var oldArr = getState().product.type2;
                 if(data.r==1){
                     dispatch({
@@ -232,12 +166,9 @@ export function fetchFWList(opt){
                     })
                     opt.callback && opt.callback(data);
                 }
-
-            },
-            error: function(xhr, type){
-                console.log(xhr)
-            }
-        });
+            }).catch(function(error) {
+                console.log('fetchFWList request failed', error)
+            })
     }
 }
 
@@ -245,14 +176,12 @@ export function fetchFWList(opt){
 export function fetchTeam(userId,callback){
     return (dispatch, getState) => {
         return $.ajax({
-            type: 'GET',
+            type: 'POST',
             url:API.myteam.preview,
             data: {
                 userId: userId
             },
-            timeout:15000,
-            dataType:"jsonp",
-            jsonpCallback:'fetchTeamJsonp',
+            dataType:'json',
             success: function(data){
                 if(data.r==1){
                     dispatch({
@@ -272,16 +201,14 @@ export function fetchTeam(userId,callback){
 export function fetchTeamList(opt){
     return (dispatch, getState) => {
         return $.ajax({
-            type: 'GET',
+            type: 'POST',
             url:API.myteam.teamList,
             data:{
                 userId:opt.userId,
                 type:opt.type,
                 curPage:opt.curPage
             },
-            timeout:15000,
-            dataType:"jsonp",
-            jsonpCallback:'fetchTeamListJsonp',
+            dataType:"json",
             success: function(data){
                 if(data.r==1){
                     dispatch({
@@ -310,15 +237,13 @@ export function clearTeamList(){
 export function fetchRoyaltyList(userId,year,callback){
     return (dispatch, getState) => {
         return $.ajax({
-            type: 'GET',
+            type: 'POST',
             url:API.myteam.royaltyList,
             data:{
                 userId:userId,
                 year:year
             },
-            timeout:15000,
-            dataType:"jsonp",
-            jsonpCallback:'fetchRoyaltyListJsonp',
+            dataType:"json",
             success: function(data){
                 if(data.r==1){
                     dispatch({
@@ -350,16 +275,14 @@ export function clearDealRecord(){
 export function fetchDealRecord(opt){
     return (dispatch, getState) => {
         return $.ajax({
-            type: 'GET',
+            type: 'POST',
             url:API.user.dealrecord,
             data:{
                 userId:opt.userId,
                 type:opt.type,
                 curPage:opt.curPage
             },
-            timeout:15000,
-            dataType:"jsonp",
-            jsonpCallback:'fetchDealRecordJsonp',
+            dataType:"json",
             success: function(data){
                 if(data.r==1){
                     dispatch({
@@ -391,16 +314,14 @@ export function clearInvestRecord(){
 export function fetchInvestRecord(opt){
     return (dispatch, getState) => {
         return $.ajax({
-            type: 'GET',
+            type: 'POST',
             url:API.user.investmentrecord,
             data:{
                 userId:opt.userId,
                 status:opt.type,
                 curPage:opt.curPage
             },
-            timeout:15000,
-            dataType:"jsonp",
-            jsonpCallback:'fetchInvestRecordJsonp',
+            dataType:"json",
             success: function(data){
                 if(data.r==1){
                     dispatch({
@@ -432,16 +353,14 @@ export function clearReturnPlanRecord(){
 export function fetchReturnPlanRecord(opt){
     return (dispatch, getState) => {
         return $.ajax({
-            type: 'GET',
+            type: 'POST',
             url:API.user.returnedPlan,
             data:{
                 userId:opt.userId,
                 status:opt.type,
                 curPage:opt.curPage
             },
-            timeout:15000,
             dataType:"jsonp",
-            jsonpCallback:'fetchReturnPlanRecordJsonp',
             success: function(data){
                 if(data.r==1){
                     dispatch({

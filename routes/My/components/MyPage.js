@@ -15,11 +15,6 @@ class MyPage extends Component {
         this.jumpTo = this.jumpTo.bind(this);
     }
     componentWillMount() {
-        if(!this.props.account.userId){
-            /*this.props.history.push('/login')*/
-            this.context.router.push('/login')
-            return false;
-        }
         this.props.fetchAccount(this.props.account.userId,()=>{
             this.setState({
                 loaded:true

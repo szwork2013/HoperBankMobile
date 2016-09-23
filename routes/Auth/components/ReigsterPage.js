@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react'
-var ReactCSSTransitionGroup = require('react-addons-css-transition-group');
 import { connect } from 'react-redux'
 import { doLogin,registerFirstStep,registerSecondStep,registerThirdStep } from 'actions'
 import IconButton from 'components/IconButton'

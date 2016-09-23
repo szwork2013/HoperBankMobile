@@ -6,7 +6,6 @@ class BorrowNavPage extends Component {
         super(props)
     }
     componentWillMount() {
-        console.log(this.props)
     }
     static PropTypes = {
         borrowProductList: PropTypes.array.isRequired,

@@ -6,14 +6,9 @@ import TabNavigator from '../components/TabNavigator'
 class App extends Component {
     constructor(props) {
         super(props)
-        console.log(this.props)
         this.childrenFilter = this.childrenFilter.bind(this);
     }
     componentWillMount(){
-        //console.log(this.props.children.type)
-        React.Children.map(this.props.children,child=>{
-            console.log(child.type.displayName)
-        })
     }
     childrenFilter(componentName){
         var childrenPorps = {};
@@ -32,6 +27,10 @@ class App extends Component {
                 break;
             default:
                 childrenPorps={
+                    fetchCity:this.props.fetchCity,
+                    borrowApplyAction:this.props.borrowApply,
+                    fetchConfirmPageCoupon:this.props.fetchConfirmPageCoupon,
+                    borrowProductList: this.props.state.product.borrowProductList,
                     asyncCheckId:this.props.asyncCheckId,
                     fetchCreditorlist:this.props.fetchCreditorlist,
                     creditorList:this.props.state.user.creditorList

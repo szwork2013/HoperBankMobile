@@ -12,23 +12,10 @@ class TeamPage extends Component {
     }
   }
   componentWillMount() {
-
     const props = this.props;
-    if(!props.account.userId){
-      this.context.router.push({
-        pathname: '/login',
-        query: { backUrl: location.pathname }
-      })
-      return false;
-    }
-
-    /*url中有userId的话使用url的，没有的话使用store的userId，是为了给app端调用这页面用的*/
-    props.fetchTeam(props.routeParams.userId || props.account.userId,()=>{
+    props.fetchTeam( props.account.userId,()=>{
       this.setState({loaded:true})
     })
-  }
-  componentDidMount(){
-
   }
   render() {
     const team = this.props.team;

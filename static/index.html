@@ -9,6 +9,10 @@
     <script src="/static/lib/fastclick.min.js"></script>
     <script src="/static/lib/jquery-qrcode-0.14.0.min.js"></script>
     <style>
+        #root{
+            max-height:736px;
+            max-width:414px
+        }
         .root-loading-enter { opacity: 0; transition: opacity .3s ease-in; }
         .root-loading-enter.root-loading-enter-active { opacity: 1; transition: opacity .3s ease-in; }
         .root-loading-leave { opacity: 1; transition: opacity .3s ease-in; }
@@ -28,22 +32,6 @@
         .refresh-right-enter.refresh-right-enter-active {}
         .refresh-right-leave {}
         .refresh-right-leave.refresh-right-leave-active {}
-        .loader-wrap{
-            position: fixed;
-            left:0;
-            top:0;
-            width:100%;
-            height:100%;
-            z-index:9999;
-            background-color:#e3aa00
-        }
-        .loader{
-            width:70px;
-            height:60px;
-            align-items:center;
-            justify-content:center;
-            margin:50% auto 0 auto;
-        }
         .ball-clip-rotate-pulse {
             position:relative;
             -webkit-transform:translateY(-15px);
