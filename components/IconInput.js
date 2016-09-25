@@ -8,6 +8,24 @@ export default class IconInput extends Component {
             eyesStatus:'closed'
         }
     }
+    static propTypes = {
+        placeholder: PropTypes.string,
+        icon:PropTypes.string,
+        hasBorder:PropTypes.bool,
+        type:PropTypes.string,
+        rule:PropTypes.string,
+        contentClass:PropTypes.string,
+        defaultValue:PropTypes.string
+    }
+    static defaultProps = {
+        placeholder: 'button',
+        type:'text',
+        icon:'',
+        contentClass:'',
+        hasBorder:true,
+        rule:'*',
+        defaultValue:''
+    }
     handleChange(arr,e){
         var reg = new RegExp(arr[0],'g');
         arr[1] && arr[1](reg.test(e.target.value),e.target.value);
@@ -40,22 +58,4 @@ export default class IconInput extends Component {
             </div>
         )
     }
-}
-IconInput.propTypes = {
-    placeholder: PropTypes.string,
-    icon:PropTypes.string,
-    hasBorder:PropTypes.bool,
-    type:PropTypes.string,
-    rule:PropTypes.string,
-    contentClass:PropTypes.string,
-    defaultValue:PropTypes.string
-}
-IconInput.defaultProps = {
-    placeholder: 'button',
-    type:'text',
-    icon:'',
-    contentClass:'',
-    hasBorder:true,
-    rule:'*',
-    defaultValue:''
 }

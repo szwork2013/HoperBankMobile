@@ -1,14 +1,14 @@
 module.exports = {
 
-    logged:function(){
+    logged:()=>{
         return localStorage.logged
     },
 
-    getToken: function () {
+    getToken: ()=>{
         return localStorage.token
     },
 
-    login:function(localData,cb){
+    login:(localData,cb)=>{
         localStorage.logged = true;
         for (let key in localData){
             localStorage[key]=localData[key];
@@ -16,7 +16,7 @@ module.exports = {
         cb && cb()
     },
 
-    logout: function (cb) {
+    logout:(cb)=>{
         localStorage.clear()
         cb && cb()
     },
@@ -24,6 +24,4 @@ module.exports = {
     getItem:(str)=>{
         return localStorage[str];
     }
-
-
 };

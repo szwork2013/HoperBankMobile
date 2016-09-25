@@ -13,6 +13,22 @@ export default class ListView extends Component {
         this.onScrollEnd =  this.onScrollEnd.bind(this);
         this.onScroll =  this.onScroll.bind(this);
     }
+    static propTypes = {
+        dataSource:PropTypes.array,
+        renderRow:PropTypes.func,
+        wrapperClass:PropTypes.string
+    }
+    static defaultProps = {
+        dataSource:[],
+        renderRow:()=>{},
+        wrapperClass:'',
+        options: {
+            mouseWheel: false,
+            scrollbars: false,
+            probeType: 1,
+            click:iScrollClick(),
+        }
+    }
     onScrollStart() {
     }
     onScrollEnd(){
@@ -88,22 +104,6 @@ export default class ListView extends Component {
                 <RefreshView text={this.state.loaderText} display={this.state.scrollToBottom} />
             </div>
         )
-    }
-}
-ListView.propTypes = {
-    dataSource:PropTypes.array,
-    renderRow:PropTypes.func,
-    wrapperClass:PropTypes.string
-}
-ListView.defaultProps = {
-    dataSource:[],
-    renderRow:()=>{},
-    wrapperClass:'',
-    options: {
-        mouseWheel: false,
-        scrollbars: false,
-        probeType: 1,
-        click:iScrollClick(),
     }
 }
 function iScrollClick(){

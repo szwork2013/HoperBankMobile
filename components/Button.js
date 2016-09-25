@@ -3,6 +3,16 @@ export class BaseButton extends Component {
     constructor(props) {
         super(props)
     }
+    static propTypes = {
+        text: PropTypes.string,
+        onClick: PropTypes.func,
+        className:PropTypes.string,
+    }
+    static defaultProps = {
+        onClick: ()=>{},
+        text: 'button',
+        className:''
+    }
     render() {
         const props = this.props;
         return (
@@ -12,20 +22,25 @@ export class BaseButton extends Component {
         )
     }
 }
-BaseButton.propTypes = {
-    text: PropTypes.string,
-    onClick: PropTypes.func,
-    className:PropTypes.string,
-}
-BaseButton.defaultProps = {
-    onClick: ()=>{},
-    text: 'button',
-    className:''
-}
+
 
 export class TextButton extends Component{
     constructor(props) {
         super(props)
+    }
+    static propTypes = {
+        text: PropTypes.string,
+        onClick: PropTypes.func,
+        className:PropTypes.string,
+        hasBorder:PropTypes.bool,
+        hasIcon:PropTypes.bool
+    }
+    static defaultProps = {
+        onClick: ()=>{},
+        text: 'button',
+        hasBorder:true,
+        className:'',
+        hasIcon:true
     }
     renderRightText(){
         if(this.props.rightText){
@@ -47,18 +62,4 @@ export class TextButton extends Component{
             </div>
         )
     }
-}
-TextButton.propTypes = {
-    text: PropTypes.string,
-    onClick: PropTypes.func,
-    className:PropTypes.string,
-    hasBorder:PropTypes.bool,
-    hasIcon:PropTypes.bool
-}
-TextButton.defaultProps = {
-    onClick: ()=>{},
-    text: 'button',
-    hasBorder:true,
-    className:'',
-    hasIcon:true
 }

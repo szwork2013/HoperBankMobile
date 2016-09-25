@@ -1,14 +1,15 @@
 import React, { Component, PropTypes } from 'react'
-import { browserHistory,Link } from 'react-router'
-import { connect } from 'react-redux'
+import { Link } from 'react-router'
 export default class TabNavigator extends Component {
     constructor(props) {
         super(props);
     }
     componentWillMount(){
     }
+    static contextTypes = {
+        router: PropTypes.object.isRequired
+    }
     render() {
-        const props = this.props;
         return (
             <section className="main-foot-nav">
                 <Link to={{pathname:'/home'}} activeClassName="active" >
@@ -31,6 +32,3 @@ export default class TabNavigator extends Component {
         )
     }
 }
-TabNavigator.contextTypes = {
-    router: React.PropTypes.object.isRequired
-};

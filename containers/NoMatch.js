@@ -3,11 +3,6 @@ export default class NoMatch extends Component {
   constructor(props) {
     super(props)
   }
-  componentWillMount() {
-  }
-  componentDidMount(){
-
-  }
   render() {
     return (
         <section>

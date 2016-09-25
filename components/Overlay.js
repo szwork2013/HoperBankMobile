@@ -1,9 +1,16 @@
 import React, { Component, PropTypes } from 'react'
 var ReactCSSTransitionGroup = require('react-addons-css-transition-group');
-var Overlay = React.createClass({
-  componentWillMount(){
-
-  },
+export default class Overlay extends Component{
+    static propTypes = {
+        display: PropTypes.bool,
+        onClick: PropTypes.func,
+        className:PropTypes.string,
+    }
+    static defaultProps = {
+        display: true,
+        onClick:()=>{},
+        className:'',
+    }
     renderOverlay(){
         return(
             <div className={'overlay'} onClick={this.props.onClick}>
@@ -13,28 +20,14 @@ var Overlay = React.createClass({
                 }
             </div>
         )
-    },
-  render() {
-    return (
-        <ReactCSSTransitionGroup component="div"
-                                 transitionName="overlay-css"
-                                 transitionEnterTimeout={300} transitionLeaveTimeout={300}>
-            {this.props.display && this.renderOverlay()}
-        </ReactCSSTransitionGroup>
-
-
-
-    )
-  }
-})
-Overlay.propTypes = {
-    display: PropTypes.bool,
-    onClick: PropTypes.func,
-    className:PropTypes.string,
+    }
+    render() {
+        return (
+            <ReactCSSTransitionGroup component="div"
+                                     transitionName="overlay-css"
+                                     transitionEnterTimeout={300} transitionLeaveTimeout={300}>
+                {this.props.display && this.renderOverlay()}
+            </ReactCSSTransitionGroup>
+        )
+    }
 }
-Overlay.defaultProps = {
-    display: true,
-    onClick:()=>{},
-    className:'',
-}
-export default Overlay
