@@ -1,5 +1,7 @@
 import fetch from 'isomorphic-fetch'
 import API from '../api'
+import Auth from 'utils/auth'
+const USER_ID = Auth.getItem('userId');
 export * from  './productActions'
 export * from './authActions'
 export * from './teamsActions'
@@ -36,26 +38,11 @@ export function setFetching(b){
 /*取消投资，不用通知store*/
 export function cancelInvest(opt){
     var url=API.product.cancel;
-    return (dispatch, getState) => {
-        return $.ajax({
-            type: 'GET',
-            url:url,
-            data:{
-                userId:opt.userId,
-                productId:opt.productId,
-                investId:opt.investId
-            },
-            timeout:15000,
-            dataType:"jsonp",
-            jsonpCallback:'cancelInvestJsonp',
-            success: function(data){
-                opt.callback && opt.callback(data);
-            },
-            error: function(xhr, type){
-                console.log(xhr)
-            }
-        });
-    }
+    return fetch(`${url}?userId=${USER_ID}&productId=${opt.productId}&investId=${opt.investId}`)
+        .then((res)=>res.json())
+        .then((res)=>{
+            opt.callback && opt.callback(res);
+        })
 }
 
 
@@ -63,25 +50,11 @@ export function cancelInvest(opt){
 export function reBuyOperation(opt){
     var url=API.product.reBuy;
     return (dispatch, getState) => {
-        return $.ajax({
-            type: 'GET',
-            url:url,
-            data:{
-                userId:opt.userId,
-                productId:opt.productId,
-                investId:opt.investId,
-                operation:opt.operation
-            },
-            timeout:15000,
-            dataType:"jsonp",
-            jsonpCallback:'cancelInvestJsonp',
-            success: function(data){
-                opt.callback && opt.callback(data);
-            },
-            error: function(xhr, type){
-                console.log(xhr)
-            }
-        });
+        return fetch(`${url}?userId=${USER_ID}&productId=${opt.productId}&investId=${opt.investId}&operation=${opt.operation}`)
+            .then((res)=>res.json())
+            .then((res)=>{
+                opt.callback && opt.callback(res);
+            })
     }
 }
 

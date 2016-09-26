@@ -1,6 +1,7 @@
 import fetch from 'isomorphic-fetch'
 import API from '../api'
-import Auth from '../utils/auth'
+import Auth from 'utils/auth'
+const USER_ID = Auth.getItem('userId');
 
 
 export const FETCH_DEALRECORD = 'FETCH_DEALRECORD'
@@ -26,29 +27,17 @@ export function clearDealRecord(){
 /*获取*/
 export function fetchDealRecord(opt){
     return (dispatch, getState) => {
-        return $.ajax({
-            type: 'POST',
-            url:API.user.dealrecord,
-            data:{
-                userId:opt.userId,
-                type:opt.type,
-                curPage:opt.curPage
-            },
-            dataType:"json",
-            success: function(data){
-                if(data.r==1){
+        return fetch(API.user.dealrecord+`?userId=${USER_ID}&type=${opt.type}&curPage=${opt.curPage}`)
+            .then((res)=>res.json())
+            .then((res)=>{
+                if(res.r==1){
                     dispatch({
                         type:FETCH_DEALRECORD,
-                        response:getState().user.dealRecord.concat(data.list)
+                        response:getState().user.dealRecord.concat(res.list)
                     })
-                    opt.callback && opt.callback(data);
+                    opt.callback && opt.callback(res);
                 }
-
-            },
-            error: function(xhr, type){
-                console.log(xhr)
-            }
-        });
+            })
     }
 }
 
@@ -65,29 +54,17 @@ export function clearInvestRecord(){
 /*获取*/
 export function fetchInvestRecord(opt){
     return (dispatch, getState) => {
-        return $.ajax({
-            type: 'POST',
-            url:API.user.investmentrecord,
-            data:{
-                userId:opt.userId,
-                status:opt.type,
-                curPage:opt.curPage
-            },
-            dataType:"json",
-            success: function(data){
-                if(data.r==1){
+        return fetch(API.user.investmentrecord + `?userId=${USER_ID}&status=${opt.type}$curPage=${opt.curPage}`)
+            .then((res)=>res.json())
+            .then((res)=>{
+                if(res.r==1){
                     dispatch({
                         type:FETCH_INVESTRECORD,
-                        response:getState().user.investRecord.concat(data.list)
+                        response:getState().user.investRecord.concat(res.list)
                     })
-                    opt.callback && opt.callback(data);
+                    opt.callback && opt.callback(res);
                 }
-
-            },
-            error: function(xhr, type){
-                console.log(xhr)
-            }
-        });
+            })
     }
 }
 
@@ -104,29 +81,17 @@ export function clearReturnPlanRecord(){
 /*获取*/
 export function fetchReturnPlanRecord(opt){
     return (dispatch, getState) => {
-        return $.ajax({
-            type: 'POST',
-            url:API.user.returnedPlan,
-            data:{
-                userId:opt.userId,
-                status:opt.type,
-                curPage:opt.curPage
-            },
-            dataType:"jsonp",
-            success: function(data){
-                if(data.r==1){
+        return fetch(API.user.returnedPlan + `?userId=${USER_ID}&status=${opt.type}&curPage=${opt.curPage}`)
+            .then((res)=>res.json())
+            .then((res)=>{
+                if(res.r==1){
                     dispatch({
                         type:FETCH_RETURNPLANRECORD,
-                        response:getState().user.returnPlanRecord.concat(data.list)
+                        response:getState().user.returnPlanRecord.concat(res.list)
                     })
-                    opt.callback && opt.callback(data);
+                    opt.callback && opt.callback(res);
                 }
-
-            },
-            error: function(xhr, type){
-                console.log(xhr)
-            }
-        });
+            })
     }
 }
 
@@ -134,7 +99,7 @@ export function fetchReturnPlanRecord(opt){
 export function fetchCreditorlist(opt){
     var url=API.user.creditorlist;
     return (dispatch, getState) => {
-        return fetch(url+`?userId=${opt.userId}&investId=${opt.investId}&type=${opt.type}`)
+        return fetch(url+`?userId=${USER_ID}&investId=${opt.investId}&type=${opt.type}`)
             .then((response)=>response.json())
             .then((data)=>{
                 dispatch({
@@ -153,7 +118,7 @@ export function fetchCreditorlist(opt){
 export function authentication(opt){
     var url=API.authentication.certification2;
     return (dispatch, getState) => {
-        return fetch(`${url}?userId=${opt.userId}&name=${opt.name}&pid=${opt.pid}&parentBankId=${opt.parentBankId}&cityId=${opt.cityId}&capAcntNo=${opt.capAcntNo}`)
+        return fetch(`${url}?userId=${USER_ID}&name=${opt.name}&pid=${opt.pid}&parentBankId=${opt.parentBankId}&cityId=${opt.cityId}&capAcntNo=${opt.capAcntNo}`)
             .then((response)=>response.json())
             .then((data)=>{
                 opt.callback && opt.callback(data)
@@ -167,7 +132,7 @@ export function authentication(opt){
 export function fetchConfirmPageCoupon(opt){
     var url=API.product.confirm;
     return (dispatch, getState) => {
-        return fetch(url+`?userId=${opt.userId}&productId=${opt.productId}&type=${opt.type}&money=${opt.money}`)
+        return fetch(url+`?userId=${USER_ID}&productId=${opt.productId}&type=${opt.type}&money=${opt.money}`)
             .then((response)=>response.json())
             .then((data)=>{
                 opt.callback && opt.callback(data)
@@ -178,58 +143,34 @@ export function fetchConfirmPageCoupon(opt){
 /* 我的礼券-一级 */
 export function fetchGift(opt){
     return (dispatch, getState) => {
-        return $.ajax({
-            type: 'GET',
-            url:API.coupon.preview,
-            data:{
-                userId:opt.userId,
-            },
-            timeout:15000,
-            dataType:"jsonp",
-            jsonpCallback:'fetchGiftJsonp',
-            success: function(data){
-                if(data.r==1){
+        return fetch(API.coupon.preview + `?userId=${USER_ID}`)
+            .then((res)=>res.json())
+            .then((res)=>{
+                if(res.r==1){
                     dispatch({
                         type:FETCH_GIFT,
-                        response:data.list
+                        response:res.list
                     })
-                    opt.callback && opt.callback(data);
+                    opt.callback && opt.callback(res);
                 }
-            },
-            error: function(xhr, type){
-                console.log(xhr)
-            }
-        });
+            })
     }
 }
 
 /* 我的礼券-详情 */
 export function fetchGiftList(opt){
     return (dispatch, getState) => {
-        return $.ajax({
-            type: 'GET',
-            url:API.coupon.detail,
-            data:{
-                userId:opt.userId,
-                type:opt.type,
-                couponType:opt.couponType
-            },
-            timeout:15000,
-            dataType:"jsonp",
-            jsonpCallback:'fetchGiftListJsonp',
-            success: function(data){
-                if(data.r==1){
+        return fetch(API.coupon.detail + `?userId=${USER_ID}&type=${opt.type}&couponType=${opt.couponType}` )
+            .then((res)=>res.json())
+            .then((res)=>{
+                if(res.r==1){
                     dispatch({
                         type:FETCH_GIFT_LIST,
-                        response:data.list
+                        response:res.list
                     })
-                    opt.callback && opt.callback(data);
+                    opt.callback && opt.callback(res);
                 }
-            },
-            error: function(xhr, type){
-                console.log(xhr)
-            }
-        });
+            })
     }
 }
 

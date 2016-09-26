@@ -4,10 +4,11 @@ import Auth from '../utils/auth'
 export const FETCH_ACCOUNT =  'FETCH_ACCOUNT'
 export const DO_LOGIN =  'DO_LOGIN'
 export const DO_LOGOUT =  'DO_LOGOUT'
+const USER_ID = Auth.getItem('userId');
 
 export function fetchAccount(id,callback){
     return (dispatch, getState) => {
-        return fetch(API.user.account + `?userId=${id}`)
+        return fetch(API.user.account + `?userId=${USER_ID}`)
             .then((res)=>res.json())
             .then((data)=>{
                 if(data.r==1){
@@ -20,6 +21,8 @@ export function fetchAccount(id,callback){
                     })
                 }
                 callback && callback(data);
+            }).catch(function(error) {
+                console.log('fetchAccount request failed', error)
             })
     }
 }
@@ -28,7 +31,6 @@ export function doLogin(username,password,callback){
         return fetch(`${API.login}?mobile=${username}&passwd=${password}`)
             .then((res)=>res.json())
             .then((res)=>{
-
                 if(res.r==1){
                     res.account.fullMobile=username;
                     Auth.login(res.account,()=>{
@@ -39,7 +41,6 @@ export function doLogin(username,password,callback){
                     })
                 }
                 callback && callback(res);
-
             })
     }
 }
@@ -57,22 +58,11 @@ export function doLogout(){
 export function registerFirstStep(phoneNumber,callback){
     var url = API.regedit.step1
     return (dispatch, getState) => {
-        return $.ajax({
-            type: 'GET',
-            url:url,
-            data:{
-                mobile:phoneNumber
-            },
-            timeout:15000,
-            dataType:"jsonp",
-            jsonpCallback:'registerFirstStepJsonp',
-            success: function(data){
-                callback && callback(data);
-            },
-            error: function(xhr, type){
-                console.log(xhr)
-            }
-        });
+        return fetch(`${url}?mobile=${phoneNumber}`)
+            .then((res)=>res.json())
+            .then((res)=>{
+                callback && callback(res);
+            })
     }
 }
 /*注册-步骤二 -> 获取验证码 */
@@ -80,22 +70,11 @@ export function registerFirstStep(phoneNumber,callback){
 export function registerSecondStep(phoneNumber,callback){
     var url = API.regedit.step2
     return (dispatch, getState) => {
-        return $.ajax({
-            type: 'GET',
-            url:url,
-            data:{
-                mobile:phoneNumber
-            },
-            timeout:15000,
-            dataType:"jsonp",
-            jsonpCallback:'registerSecondStepJsonp',
-            success: function(data){
-                callback && callback(data);
-            },
-            error: function(xhr, type){
-                console.log(xhr)
-            }
-        });
+        return fetch(`${url}?mobile=${phoneNumber}`)
+            .then((res)=>res.json())
+            .then((res)=>{
+                callback && callback(res);
+            })
     }
 }
 /*注册-步骤三 -> 发送表单 */
@@ -103,25 +82,11 @@ export function registerSecondStep(phoneNumber,callback){
 export function registerThirdStep(opt){
     var url = API.regedit.step3
     return (dispatch, getState) => {
-        return $.ajax({
-            type: 'GET',
-            url:url,
-            data:{
-                mobile:opt.mobile,
-                passwd:opt.password,
-                code:opt.code,
-                referrerName:opt.referrerName
-            },
-            timeout:15000,
-            dataType:"jsonp",
-            jsonpCallback:'registerThirdStepJsonp',
-            success: function(data){
-                opt.callback && opt.callback(data);
-            },
-            error: function(xhr, type){
-                console.log(xhr)
-            }
-        });
+        return fetch(`${url}?mobile=${opt.mobile}&passwd=${opt.password}&code=${opt.code}&referrerName=${opt.referrerName}`)
+            .then((res)=>res.json())
+            .then((res)=>{
+                opt.callback && opt.callback(res);
+            })
     }
 }
 
@@ -130,7 +95,7 @@ export function registerThirdStep(opt){
 export function resetPassWord(opt){
     var url=API.reset.password;
     return (dispatch, getState) => {
-        return fetch(url+`?userId=${opt.userId}&newpasswd=${opt.newpasswd}&type=${opt.type}&oldpasswd=${opt.oldpasswd}`)
+        return fetch(url+`?userId=${USER_ID}&newpasswd=${opt.newpasswd}&type=${opt.type}&oldpasswd=${opt.oldpasswd}`)
             .then((response)=>response.json())
             .then((data)=>{
                 opt.callback && opt.callback(data)

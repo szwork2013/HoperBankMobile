@@ -1,34 +1,17 @@
 import fetch from 'isomorphic-fetch'
 import API from '../api'
-
+import Auth from 'utils/auth'
+const USER_ID = Auth.getItem('userId');
 
 /*申请借款表单发送，不用通知store*/
 export function borrowApply(opt){
     var url=API.borrow.cooperation;
     return (dispatch, getState) => {
-        return $.ajax({
-            type: 'GET',
-            url:url,
-            data:{
-                referrerName:opt.referrerName,
-                sex:opt.sex,
-                phone:opt.phone,
-                province:opt.province,
-                city:opt.city,
-                company:opt.company,
-                money:opt.money,
-                cycle:opt.cycle
-            },
-            timeout:15000,
-            dataType:"jsonp",
-            jsonpCallback:'borrowApplyJsonp',
-            success: function(data){
-                opt.callback && opt.callback(data);
-            },
-            error: function(xhr, type){
-                console.log(xhr)
-            }
-        });
+        return fetch(`${url}?referrerName=${opt.referrerName}&sex=${opt.sex}&phone=${opt.phone}&province=${opt.province}&city=${opt.city}&company=${opt.company}&money=${opt.money}&cycle=${opt.cycle}`)
+            .then((res)=>res.json())
+            .then((res)=>{
+                opt.callback && opt.callback(res);
+            })
     }
 }
 
@@ -37,24 +20,11 @@ export function borrowApply(opt){
 export function asyncCheckId(opt){
     var url=API.authentication.certification1;
     return (dispatch, getState) => {
-        return $.ajax({
-            type: 'GET',
-            url:url,
-            data:{
-                userId:opt.userId,
-                name:opt.name,
-                pid:opt.pid
-            },
-            timeout:15000,
-            dataType:"jsonp",
-            jsonpCallback:'asyncCheckIdJsonp',
-            success: function(data){
-                opt.callback && opt.callback(data);
-            },
-            error: function(xhr, type){
-                console.log(xhr)
-            }
-        });
+        return fetch(`${url}?userId=${USER_ID}&name=${opt.name}&pid=${opt.pid}`)
+            .then((res)=>res.json())
+            .then((res)=>{
+                opt.callback && opt.callback(res);
+            })
     }
 }
 
@@ -62,21 +32,10 @@ export function asyncCheckId(opt){
 export function fetchCity(province,cb){
     var url=API.authentication.city;
     return (dispatch, getState) => {
-        return $.ajax({
-            type: 'GET',
-            url:url,
-            data:{
-                provinceName:province
-            },
-            timeout:15000,
-            dataType:"jsonp",
-            jsonpCallback:'fetchCityJsonp',
-            success: function(data){
-                cb && cb(data);
-            },
-            error: function(xhr, type){
-                console.log(xhr)
-            }
-        });
+        return fetch(`${url}?provinceName=${province}`)
+            .then((res)=>res.json())
+            .then((res)=>{
+                cb && cb(res);
+            })
     }
 }

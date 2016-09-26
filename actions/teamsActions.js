@@ -1,5 +1,7 @@
 import fetch from 'isomorphic-fetch'
 import API from '../api'
+import Auth from 'utils/auth'
+const USER_ID = Auth.getItem('userId');
 export const FETCH_TEAM = 'FETCH_TEAM'
 export const FETCH_TEAMLIST = 'FETCH_TEAMLIST'
 export const CLEAR_TEAMLIST = 'CLEAR_TEAMLIST'
@@ -9,54 +11,32 @@ export const FETCH_ROYALTYLIST ='FETCH_ROYALTYLIST'
 /*获取团队数据*/
 export function fetchTeam(userId,callback){
     return (dispatch, getState) => {
-        return $.ajax({
-            type: 'POST',
-            url:API.myteam.preview,
-            data: {
-                userId: userId
-            },
-            dataType:'json',
-            success: function(data){
-                if(data.r==1){
+        return fetch(API.myteam.preview + `?userId=${USER_ID}`)
+            .then((res)=>res.json())
+            .then((res)=>{
+                if(res.r==1){
                     dispatch({
                         type:FETCH_TEAM,
-                        response:data.info
+                        response:res.info
                     })
-                    callback && callback(data);
+                    callback && callback(res);
                 }
-
-            },
-            error: function(xhr, type){
-                console.log(xhr)
-            }
-        });
+            })
     }
 }
 export function fetchTeamList(opt){
     return (dispatch, getState) => {
-        return $.ajax({
-            type: 'POST',
-            url:API.myteam.teamList,
-            data:{
-                userId:opt.userId,
-                type:opt.type,
-                curPage:opt.curPage
-            },
-            dataType:"json",
-            success: function(data){
-                if(data.r==1){
+        return fetch(API.myteam.teamList + `?userId=${USER_ID}&type=${opt.type}&curPage=${opt.curPage}`)
+            .then((res)=>res.json())
+            .then((res)=>{
+                if(res.r==1){
                     dispatch({
                         type:FETCH_TEAMLIST,
-                        response:getState().team.teamList.concat(data.info.list)
+                        response:getState().team.teamList.concat(res.info.list)
                     })
-                    opt.callback && opt.callback(data);
+                    opt.callback && opt.callback(res);
                 }
-
-            },
-            error: function(xhr, type){
-                console.log(xhr)
-            }
-        });
+            })
     }
 }
 export function clearTeamList(){
@@ -70,27 +50,16 @@ export function clearTeamList(){
 /* 提成列表获取 */
 export function fetchRoyaltyList(userId,year,callback){
     return (dispatch, getState) => {
-        return $.ajax({
-            type: 'POST',
-            url:API.myteam.royaltyList,
-            data:{
-                userId:userId,
-                year:year
-            },
-            dataType:"json",
-            success: function(data){
-                if(data.r==1){
+        return fetch(API.myteam.royaltyList + `?userId=${USER_ID}&year=${year}`)
+            .then((res)=>res.json())
+            .then((res)=>{
+                if(res.r==1){
                     dispatch({
                         type:FETCH_ROYALTYLIST,
-                        response:data.list
+                        response:res.list
                     })
-                    callback && callback(data);
+                    callback && callback(res);
                 }
-
-            },
-            error: function(xhr, type){
-                console.log(xhr)
-            }
-        });
+            })
     }
 }

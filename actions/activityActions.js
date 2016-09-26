@@ -16,6 +16,8 @@ export function fetchActivityList(callback){
                     })
                 }
                 callback && callback(response);
+            }).catch(function(error) {
+                console.log('fetchActivityList request failed', error)
             })
     }
 }

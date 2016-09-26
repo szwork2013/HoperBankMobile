@@ -1,6 +1,7 @@
 import fetch from 'isomorphic-fetch'
 import API from '../api'
-
+import Auth from 'utils/auth'
+const USER_ID = Auth.getItem('userId');
 export const FETCH_LCLIST = 'FETCH_LCLIST'
 export const FETCH_FWLIST = 'FETCH_FWLIST'
 export const CLEAR_PRODUCT =  'CLEAR_PRODUCT'
@@ -82,29 +83,17 @@ export function fetchFinancialInvestRecord(opt){
         // no default
     }
     return (dispatch, getState) => {
-        return $.ajax({
-            type: 'GET',
-            url:url,
-            data:{
-                curPage:opt.curPage,
-                projectId:opt.projectId
-            },
-            timeout:15000,
-            dataType:"jsonp",
-            jsonpCallback:'fetchFinancialInvestRecord',
-            success: function(data){
-                if(data.r==1){
+        return fetch(url + `?curPage=${opt.curPage}&projectId=${opt.projectId}`)
+            .then((res)=>res.json())
+            .then((res)=>{
+                if(res.r==1){
                     dispatch({
                         type:FETCH_FINANCIAL_INVEST_RECORD,
-                        response:getState().product.investRecord.concat(data.list)
+                        response:getState().product.investRecord.concat(res.list)
                     })
-                    opt.callback && opt.callback(data);
                 }
-            },
-            error: function(xhr, type){
-                console.log(xhr)
-            }
-        });
+                opt.callback && opt.callback(res);
+            })
     }
 }
 /* 产品详情投资记录删除 */
@@ -132,11 +121,12 @@ export function payForProduct(opt){
         // no default
     }
     return (dispatch, getState) => {
+        return fetch(url + `?userId=${USER_ID}`)
         return $.ajax({
             type: 'GET',
             url:url,
             data:{
-                userId:opt.userId,
+                userId:USER_ID,
                 productId:opt.productId,
                 amt:opt.amt
             },
