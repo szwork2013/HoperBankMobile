@@ -100,8 +100,8 @@ class WithDrawPage extends Component{
     }
     checkInput(){
         const amtMoney = this.state.amtMoney;
-        if(amtMoney < 2){
-            alert('2元起提现')
+        if(amtMoney <= 2){
+            alert('2元以上提现')
             return false;
         }else if(amtMoney>this.props.account.balance){
             alert('余额不足')

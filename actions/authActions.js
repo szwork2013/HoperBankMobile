@@ -8,7 +8,7 @@ export const DO_LOGOUT =  'DO_LOGOUT'
 export function fetchAccount(id,callback){
     return (dispatch, getState) => {
         return fetch(API.user.account + `?userId=${id}`)
-            .then((res)=>res.json)
+            .then((res)=>res.json())
             .then((data)=>{
                 if(data.r==1){
                     data.account.fullMobile= Auth.getItem('fullMobile');
@@ -26,18 +26,20 @@ export function fetchAccount(id,callback){
 export function doLogin(username,password,callback){
     return (dispatch, getState) => {
         return fetch(`${API.login}?mobile=${username}&passwd=${password}`)
-            .then((res)=>res.json)
-            .then((data)=>{
-                if(data.r==1){
-                    data.account.fullMobile=username;
-                    Auth.login(data.account,()=>{
+            .then((res)=>res.json())
+            .then((res)=>{
+
+                if(res.r==1){
+                    res.account.fullMobile=username;
+                    Auth.login(res.account,()=>{
                         dispatch({
                             type:DO_LOGIN,
-                            response:data.account
+                            response:res.account
                         })
                     })
                 }
-                callback && callback(data);
+                callback && callback(res);
+
             })
     }
 }

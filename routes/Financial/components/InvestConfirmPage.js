@@ -39,7 +39,6 @@ export default class InvestConfirmPage extends Component{
             money:props.location.query.money,
             type:type,
             callback:(result)=>{
-                console.log(result)
                 if(result.r==1){
                     this.setState({
                         coupon:{
@@ -109,7 +108,7 @@ export default class InvestConfirmPage extends Component{
                                 loading:true
                             })
                             props.propPay({
-                                productName:params.name,
+                                productName:params.productName,
                                 rate:params.rate,
                                 limit:params.limit,
                                 success:()=>{
@@ -122,7 +121,6 @@ export default class InvestConfirmPage extends Component{
                                         loading:false
                                     })
                                 }
-
                             })
                         }} />
                     </div>

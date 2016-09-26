@@ -1,6 +1,8 @@
 import React, { Component, PropTypes } from 'react'
 import {BaseButton,TextButton} from 'components/Button'
 import IconInput from 'components/IconInput'
+import RootLoading from 'components/RootLoading'
+import { browserHistory } from 'react-router'
 export default class BindBankPage extends Component {
     constructor(props) {
         super(props)
@@ -17,14 +19,10 @@ export default class BindBankPage extends Component {
             bankNo:'',
             bankNoPassed:false,
             province:'',
-            city:''
+            city:'',
+            loading:false
         }
         this.checkStep1 = this.checkStep1.bind(this);
-    }
-    componentWillMount() {
-    }
-    componentDidMount(){
-
     }
     checkStep1(){
         setTimeout(()=>{
@@ -85,13 +83,28 @@ export default class BindBankPage extends Component {
             alert('请输入正确的银行卡号');
             return false;
         }
+        this.setState({
+            loading:true
+        })
         this.props.authentication({
             userId:props.userId,
             name:this.state.name,
             pid:this.state.idCard,
-            parentBankId:opt.parentBankId,
+            parentBankId:this.state.bankId,
             cityId:this.state.city,
-            capAcntNo:this.state.bankId
+            capAcntNo:this.state.bankNo,
+            callback:(result)=>{
+                this.setState({
+                    loading:false
+                })
+                if(result.r==1){
+                    this.props.fetchAccount();
+                    alert('银行卡绑定成功');
+                    browserHistory.goBack()
+                }else{
+                    alert(result.msg);
+                }
+            }
         })
     }
     provinceChange(ev){
@@ -113,6 +126,7 @@ export default class BindBankPage extends Component {
     render() {
         return (
             <section className="level-2-wrap" style={{backgroundColor:'#fff'}}>
+                <RootLoading display={this.state.loading}/>
                 <section className="authentication-wrap">
                     <div className={`step-title ${this.state.activeStep==1?'active':''}`}>
                         实名认证
@@ -120,7 +134,7 @@ export default class BindBankPage extends Component {
                     <div className={`step-content ${this.state.activeStep==1?'active':''}`}>
                         <IconInput
                             placeholder="真实姓名"
-                            rule="^\w{1,}$"
+                            rule="^[\u4e00-\u9fa5]{2,}$"
                             contentClass='authenticationInput'
                             callback={(b,val)=>{this.setState({name:val,namePassed:b});this.checkStep1()}}>
                         </IconInput>

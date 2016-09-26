@@ -193,11 +193,11 @@ function calSY(opt){
     switch (opt.type){
         // 0 和1的时候都是等额本息，so 0直接穿透去1
         case 0:
-        case 1:
-            return parseFloat(opt.money * (opt.rate / 100 / 12) * Math.pow(1 + (opt.rate / 100 / 12), opt.productCycle) / (Math.pow(1 + (opt.rate / 100 / 12), opt.productCycle) - 1) * opt.productCycle - opt.money).toFixed(2)
-            break;
-        case 2:
             return parseFloat( opt.money * opt.rate / 100 / 12 * opt.productCycle).toFixed(2);
+            break;
+        case 1:
+        case 2:
+            return parseFloat(opt.money * (opt.rate / 100 / 12) * Math.pow(1 + (opt.rate / 100 / 12), opt.productCycle) / (Math.pow(1 + (opt.rate / 100 / 12), opt.productCycle) - 1) * opt.productCycle - opt.money).toFixed(2)
             break;
         // no default
     }

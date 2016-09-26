@@ -33,7 +33,7 @@ class DealResultPage extends Component {
                 <div className="deal-success-wrap">
                     <div className="deal-success-item">
                         <span className="fl">投资产品</span>
-                        <span className="fr">{props.location.query.product}</span>
+                        <span className="fr" style={{width:'70%',height:'22px',overflow:'hidden',whiteSpace:'nowrap',textOverflow:'ellipsis'}}>{props.location.query.product}</span>
                     </div>
                     <div className="deal-success-item">
                         <span className="fl">购买金额</span>

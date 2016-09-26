@@ -38,6 +38,7 @@ class LoginPage extends Component {
             loading:true
         })
         this.props.doLogin(this.state.username,hex_md5(this.state.password),(result)=>{
+            console.log(result.r)
             if(result.r!=1){
                 this.setState({
                     loading:false

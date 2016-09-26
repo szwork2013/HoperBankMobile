@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
-import { fetchAccount,doLogout } from 'actions'
+import { fetchAccount,doLogout,authentication } from 'actions'
 import IconButton from 'IconButton'
 import RootLoading from 'RootLoading'
 import { browserHistory,Link } from 'react-router'
@@ -69,7 +69,10 @@ class MyPage extends Component {
                             fetchCity:this.props.fetchCity,
                             authentication:this.props.authentication,
                             fetchCreditorlist:this.props.fetchCreditorlist,
-                            creditorList:this.props.creditorList
+                            creditorList:this.props.creditorList,
+                            fetchAccount:()=>{
+                                this.props.fetchAccount(this.props.account.userId)
+                            }
                         })
                     }
 
@@ -149,5 +152,6 @@ function mapStateToProps(state, ownProps) {
 
 module.exports = connect(mapStateToProps, {
     fetchAccount,
-    doLogout
+    doLogout,
+    authentication
 })(MyPage)

@@ -153,16 +153,7 @@ export function fetchCreditorlist(opt){
 export function authentication(opt){
     var url=API.authentication.certification2;
     return (dispatch, getState) => {
-        return fetch(url,{
-            body:JSON.stringify({
-                userId:opt.userId,
-                name:opt.name,
-                pid:opt.pid,
-                parentBankId:opt.parentBankId,
-                cityId:opt.cityId,
-                capAcntNo:opt.capAcntNo
-            })
-        })
+        return fetch(`${url}?userId=${opt.userId}&name=${opt.name}&pid=${opt.pid}&parentBankId=${opt.parentBankId}&cityId=${opt.cityId}&capAcntNo=${opt.capAcntNo}`)
             .then((response)=>response.json())
             .then((data)=>{
                 opt.callback && opt.callback(data)

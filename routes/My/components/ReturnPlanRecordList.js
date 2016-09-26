@@ -71,7 +71,7 @@ class ReturnPlanRecordList extends Component {
                         </p>
                         <p className="return-plan-p">
                             <span>{(parseFloat(item.planInterest) + parseFloat(item.planPrincipal)).toFixed(2) + '元'}</span>
-                            <span>{item.productCycle+'期'}</span>
+                            <span>{item.planCycle+'期'}</span>
                             <span>{item.planDate}</span>
                         </p>
                     </div>

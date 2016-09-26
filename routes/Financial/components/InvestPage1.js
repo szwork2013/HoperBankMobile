@@ -284,6 +284,14 @@ class InvestPage1 extends Component{
                     rate:obj.rate,
                     limit:obj.limit
 
+                },
+                state:{
+                    productId:props.params.id,
+                    type:1,
+                    money:this.state.amtMoney,
+                    productName:obj.productName,
+                    rate:obj.rate,
+                    limit:obj.limit
                 }
             })
 

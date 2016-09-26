@@ -4,6 +4,8 @@ import { fetchDealRecord,clearDealRecord } from 'actions'
 import RootLoading from 'components/RootLoading'
 import ListView from 'components/ListView'
 import config from 'componentConfig'
+
+
 class DealRecordList extends Component {
     constructor(props) {
         super(props)
@@ -60,22 +62,34 @@ class DealRecordList extends Component {
     }
     renderItem(item,index){
         var statusTxt='';
-        switch (item.status){
-            case 1:
-                statusTxt = '成功';
-                break;
-            case 5:
-                statusTxt ='撤销';
-                break;
-            default:
-                statusTxt = '失败';
-                break;
+        if(item.productName){
+            switch (parseInt(item.status)){
+                case 0:
+                    statusTxt = '失败';
+                    break;
+                case 5:
+                    statusTxt ='撤销';
+                    break;
+                default:
+                    statusTxt = '成功';
+                    break;
+            }
+        }else{
+            switch (parseInt(item.status)){
+                case 1:
+                    statusTxt = '成功';
+                    break;
+                default:
+                    statusTxt = '失败';
+                    break;
+            }
         }
+
         return(
             <div className="my-deal-record-item" key={index}>
                 <div className="my-deal-record-info">
                     <p>
-                        {new Date(item.remarkTime).toLocaleString()}
+                        {item.remarkTime}
                     </p>
                     <p>
                         <span className="my-deal-record-money">{item.money}元</span>
