@@ -9,7 +9,7 @@ export const FETCH_ROYALTYLIST ='FETCH_ROYALTYLIST'
 
 
 /*获取团队数据*/
-export function fetchTeam(userId,callback){
+export function fetchTeam(callback){
     return (dispatch, getState) => {
         return fetch(API.myteam.preview + `?userId=${USER_ID}`)
             .then((res)=>res.json())
@@ -48,7 +48,7 @@ export function clearTeamList(){
 }
 
 /* 提成列表获取 */
-export function fetchRoyaltyList(userId,year,callback){
+export function fetchRoyaltyList(year,callback){
     return (dispatch, getState) => {
         return fetch(API.myteam.royaltyList + `?userId=${USER_ID}&year=${year}`)
             .then((res)=>res.json())

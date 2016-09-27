@@ -13,6 +13,7 @@ export default {
         require('./routes/Activity'),
         require('./routes/Team'),
         ...require('./routes/Auth'),
+        require('./routes/Safe'),
         {
             path:'*',
             component:NoMatch

@@ -1,10 +1,7 @@
 import React, { Component, PropTypes } from 'react'
-import { connect } from 'react-redux'
-import { fetchTeamList,clearTeamList } from 'actions'
 import RootLoading from 'components/RootLoading'
 import ListView from 'components/ListView'
-
-class TeamList extends Component {
+export default class TeamList extends Component {
     constructor(props) {
         super(props)
         this.state={
@@ -18,7 +15,6 @@ class TeamList extends Component {
 
         props.clearTeamList();
         props.fetchTeamList({
-            userId:props.account.userId,
             curPage:1,
             type:props.type,
             callback:()=>{
@@ -34,7 +30,6 @@ class TeamList extends Component {
     fetchFunc(opt){
             this.props.fetchTeamList({
                 curPage:opt.curPage,
-                userId:this.props.account.userId,
                 type:this.props.type,
                 callback:opt.callback
             })
@@ -79,17 +74,3 @@ class TeamList extends Component {
             )
     }
 }
-
-
-function mapStateToProps(state, ownProps) {
-    return {
-        teamList:state.team.teamList,
-        isFetching:state.isFetching,
-        account:state.account
-    }
-}
-
-export default connect(mapStateToProps, {
-    fetchTeamList,
-    clearTeamList
-})(TeamList)

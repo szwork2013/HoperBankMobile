@@ -101,12 +101,12 @@ class HomePage extends Component {
                             </Link>
                         </li>
                         <li>
-                            <a>
+                            <Link to="/safe">
                                 <img src="/static/img/index-icon1.png" width="30" height="30" />
                                 <div>
                                     <p className="p1">安全保障</p>
                                 </div>
-                            </a>
+                            </Link>
                         </li>
                         <li>
                             <Link to={'/myteam'}>

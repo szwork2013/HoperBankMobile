@@ -121,35 +121,21 @@ export function payForProduct(opt){
         // no default
     }
     return (dispatch, getState) => {
-        return fetch(url + `?userId=${USER_ID}`)
-        return $.ajax({
-            type: 'GET',
-            url:url,
-            data:{
-                userId:USER_ID,
-                productId:opt.productId,
-                amt:opt.amt
-            },
-            timeout:15000,
-            dataType:"jsonp",
-            jsonpCallback:'payForProductJsonp',
-            success: function(data){
-                if(data.r==1){
+        return fetch(url + `?userId=${USER_ID}&productId=${opt.productId}&amt=${opt.amt}`)
+            .then((res)=>res.json())
+            .then((res)=>{
+                if(res.r==1){
                     opt.success && opt.success({
-                        status:data.r,
-                        message:data.msg
+                        status:res.r,
+                        message:res.msg
                     })
                 }else{
                     opt.fail && opt.fail({
-                        status:data.r,
-                        message:data.msg
+                        status:res.r,
+                        message:res.msg
                     })
                 }
-            },
-            error: function(xhr, type){
-                console.log(xhr)
-            }
-        });
+            })
     }
 
 }
@@ -170,28 +156,17 @@ export function fetchFinancialServices(opt){
 
     }
     return (dispatch, getState) => {
-        return $.ajax({
-            type: 'GET',
-            url:url,
-            data:{
-                projectId:opt.projectId
-            },
-            timeout:15000,
-            dataType:"jsonp",
-            jsonpCallback:'fetchFinancialServices',
-            success: function(data){
-                if(data.r==1){
+        return fetch(url + `?projectId=${opt.projectId}`)
+            .then((res)=>res.json())
+            .then((res)=>{
+                if(res.r==1){
                     dispatch({
                         type:FETCH_FINANCIAL_SERVICES,
-                        response:data.productInfo
+                        response:res.productInfo
                     })
-                    opt.callback && opt.callback(data);
+                    opt.callback && opt.callback(res);
                 }
-            },
-            error: function(xhr, type){
-                console.log(xhr)
-            }
-        });
+            })
     }
 }
 
@@ -211,29 +186,17 @@ export function fetchFinancialReturnPlan(opt){
 
     }
     return (dispatch, getState) => {
-        return $.ajax({
-            type: 'GET',
-            url:url,
-            data:{
-                curPage:opt.curPage,
-                projectId:opt.projectId
-            },
-            timeout:15000,
-            dataType:"jsonp",
-            jsonpCallback:'fetchFinancialReturnPlanJsonp',
-            success: function(data){
-                if(data.r==1){
+        return fetch(url + `?curPage=${opt.curPage}&projectId=${opt.projectId}`)
+            .then((res)=>res.json())
+            .then((res)=>{
+                if(res.r==1){
                     dispatch({
                         type:FETCH_FINANCIAL_RETURN_PLAN,
-                        response:getState().product.returnPlan.concat(data.list)
+                        response:getState().product.returnPlan.concat(res.list)
                     })
-                    opt.callback && opt.callback(data);
+                    opt.callback && opt.callback(res);
                 }
-            },
-            error: function(xhr, type){
-                console.log(xhr)
-            }
-        });
+            })
     }
 }
 /* 产品详情投资记录删除 */

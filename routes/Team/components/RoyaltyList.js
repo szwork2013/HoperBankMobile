@@ -1,10 +1,8 @@
 import React, { Component, PropTypes } from 'react'
-import { connect } from 'react-redux'
-import { fetchRoyaltyList } from 'actions'
 import RootLoading from 'components/RootLoading'
 import ListView from 'components/ListView'
 const yearArr = [2016,2017,2018];
-class RoyaltyList extends Component {
+export default class RoyaltyList extends Component {
     constructor(props) {
         super(props)
         this.state={
@@ -20,7 +18,7 @@ class RoyaltyList extends Component {
         this.setState({
             loaded:false
         })
-        props.fetchRoyaltyList(this.props.account.userId,year,(data)=>{
+        props.fetchRoyaltyList(year,(data)=>{
             this.setState({
                 loaded:true
             })
@@ -86,15 +84,3 @@ class RoyaltyList extends Component {
         )
     }
 }
-
-
-function mapStateToProps(state, ownProps) {
-    return {
-        royaltyList:state.team.royaltyList,
-        account:state.account
-    }
-}
-
-export default connect(mapStateToProps, {
-    fetchRoyaltyList
-})(RoyaltyList)
