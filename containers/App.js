@@ -8,8 +8,6 @@ class App extends Component {
         super(props)
         this.childrenFilter = this.childrenFilter.bind(this);
     }
-    componentWillMount(){
-    }
     childrenFilter(componentName){
         var childrenPorps = {};
         switch(componentName){

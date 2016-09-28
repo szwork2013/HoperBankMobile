@@ -150,7 +150,7 @@ class InvestPage1 extends Component{
                     //onRefresh={this.onRefresh}
                               onScroll={this.onScroll}
                     //onScrollStart={this.onScrollStart}
-                              style={{height:'150px',backgroundColor:'#fff',position:'relative'}}
+                              style={{height:'150px',backgroundColor:'#fff',position:'relative',overflow:'hidden'}}
                 >
                     <div className="product-scroll-wrap" style={{width:(this.state.data.length+3)*75}}>
                         <ul>

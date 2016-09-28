@@ -12,6 +12,25 @@
       height:100%;
     }
   }
+  .carousel-dots{
+    padding:5px 5px 5px 0;
+    background-color:#f6edd4;
+    overflow: hidden;
+    position: fixed;
+    bottom:15px;
+    border-radius:10px;
+    >.dot{
+      width:15px;
+      height:15px;
+      border-radius:50%;
+      background-color:#f1e1b3;
+      float: left;
+      margin-left:5px;
+      &.active{
+        background-color:#fff;
+      }
+    }
+  }
 }
 div[class^="safe-item"]{
   position: absolute;
@@ -45,25 +64,7 @@ div[class^="safe-item"]{
     border-radius:7px;
   }
 }
-.carousel-dots{
-  padding:5px 5px 5px 0;
-  background-color:#f6edd4;
-  overflow: hidden;
-  position: fixed;
-  bottom:15px;
-  border-radius:10px;
-  >.dot{
-    width:15px;
-    height:15px;
-    border-radius:50%;
-    background-color:#f1e1b3;
-    float: left;
-    margin-left:5px;
-    &.active{
-      background-color:#fff;
-    }
-  }
-}
+
 
 .tip-con{
   position: absolute;

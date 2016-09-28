@@ -7,8 +7,18 @@ module.exports = [
         component:LoginPage
     },
     {
-        path:'/register(/:referrerName)',
-        component:RegisterPage
+        path:'/register',
+        component:RegisterPage,
+        childRoutes:[
+            {
+                path: '/register/agreement',
+                getComponent(nextState, cb) {
+                    require.ensure([], (require) => {
+                        cb(null, require('./components/RegisterAgreementPage'))
+                    })
+                }
+            }
+        ]
     },
     {
         path:'/forgot',

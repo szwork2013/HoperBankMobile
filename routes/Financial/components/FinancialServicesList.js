@@ -108,8 +108,8 @@ class FinancialServicesList extends Component {
                         </div>
                         <div className="part-3">
                             <Circle
-                                progress={item.progress/100}
-                                text={item.progress+'%'}
+                                progress={(item.progress/100)>1? 1 : (item.progress/100)}
+                                text={(item.progress>100? 100:item.progress)+'%'}
                                 options={options}
                                 initialAnimate={true}
                                 containerStyle={containerStyle}

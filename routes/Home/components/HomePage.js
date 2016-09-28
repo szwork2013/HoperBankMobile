@@ -3,13 +3,15 @@ import { connect } from 'react-redux'
 import { loadIndex } from 'actions'
 import ReactSwipe from 'react-swipe';
 import RootLoading from 'RootLoading'
+import config from 'container/componentConfig'
 import { browserHistory,Link } from 'react-router'
 var ReactCSSTransitionGroup = require('react-addons-css-transition-group');
 class HomePage extends Component {
     constructor(props) {
         super(props)
         this.state={
-            selected:1
+            selected:1,
+            bannerSelected:0
         }
         this.prev = this.prev.bind(this);
         this.next = this.next.bind(this);
@@ -19,13 +21,6 @@ class HomePage extends Component {
     componentWillMount() {
         //loadData(this.props)
         !this.props.index && this.props.loadIndex()
-    }
-    componentDidMount(){
-
-    }
-
-    componentWillReceiveProps(nextProps) {
-
     }
     next() {
         this.refs.reactSwipe.next();
@@ -39,17 +34,12 @@ class HomePage extends Component {
         const {recommend} = this.props.index;
         const banner =[
             {
-                img:'/static/img/banner7.jpg',
-                link:'http://m.hoperbank.com/activity20160915.html',
-                title:'activity20160915.html'
-            },
-            {
                 img:'/static/img/banner3.jpg',
                 link:'http://m.hoperbank.com/activity20160617.html',
                 title:''
             },
             {
-                img:'/static/img/banner1.jpg',
+                img:'/static/img/banner5.jpg',
                 link:'#',
                 title:''
             },
@@ -57,13 +47,7 @@ class HomePage extends Component {
                 img:'/static/img/banner4.jpg',
                 link:'#',
                 title:''
-            },
-            {
-                img:'/static/img/banner5.jpg',
-                link:'#',
-                title:''
             }
-
         ]
         const swipeOptions = {
             continuous: true,
@@ -76,25 +60,45 @@ class HomePage extends Component {
         }
         return (
             <section style={{backgroundColor:'#fff'}}>
-                <ReactSwipe className="carousel" swipeOptions={{continuous: true,auto: 3000}}>
-                    {
-                        banner.map((item,index)=>{
-                            return(
-                                <div className="swiper-slide" key={index}>
-                                    <section className="banner"><a href={item.link}><img src={item.img} /></a></section>
-                                </div>
-                            )
-                        })
-                    }
-                    <div className="swiper-slide">
-                        <section className="banner"><a href="activity20160617.html"><img src="http://m.hoperbank.com/img/banner3.jpg" /></a></section>
+                <div className="carousel">
+                    <ReactSwipe
+                        swipeOptions={
+                                {
+                                    continuous: true,
+                                    auto: 3000,
+                                    callback:(index,elm)=>{
+                                        this.setState({
+                                            bannerSelected:index
+                                        })
+                                    }
+                                 }
+                            }
+                    >
+                        {
+                            banner.map((item,index)=>{
+                                return(
+                                    <div className="swiper-slide" key={index}>
+                                        <section className="banner"><a href={item.link}><img src={item.img} /></a></section>
+                                    </div>
+                                )
+                            })
+                        }
+                    </ReactSwipe>
+                    <div className="carousel-dots">
+                        {
+                            banner.map((item,index)=>{
+                                return(
+                                    <div className={`dot ${this.state.bannerSelected===index && 'active'}`} key={index}></div>
+                                )
+                            })
+                        }
                     </div>
-                </ReactSwipe>
+                </div>
                 <section className="index-nav-list">
                     <ul>
                         <li>
                             <Link to="/activity">
-                                <img src="/static/img/index-icon2.png" width="30" height="30" />
+                                <img src="/static/img/index-icon2.png" width="20" height="20" />
                                 <div>
                                     <p className="p1">活动中心</p>
                                 </div>
@@ -102,16 +106,16 @@ class HomePage extends Component {
                         </li>
                         <li>
                             <Link to="/safe">
-                                <img src="/static/img/index-icon1.png" width="30" height="30" />
+                                <img src="/static/img/index-icon1.png" width="20" height="20" />
                                 <div>
                                     <p className="p1">安全保障</p>
                                 </div>
                             </Link>
                         </li>
                         <li>
-                            <Link to={'/myteam'}>
+                            <Link to='/myteam'>
 
-                                <img src="/static/img/index-icon3.png" width="30" height="30" />
+                                <img src="/static/img/index-icon3.png" width="20" height="20" />
                                 <div>
                                     <p className="p1">团队</p>
                                 </div>
@@ -182,7 +186,6 @@ HomePage.contextTypes = {
 };
 function mapStateToProps(state, ownProps) {
     return {
-        account:state.account,
         index:state.index
     }
 }

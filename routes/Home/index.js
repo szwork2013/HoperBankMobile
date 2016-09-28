@@ -1,6 +1,6 @@
 module.exports = {
     onLeave:(nextState,replace)=>{
-        console.log(nextState)
+        //console.log(nextState)
     },
     path: '/home',
     getComponent(nextState, cb) {

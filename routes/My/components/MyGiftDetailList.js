@@ -23,7 +23,7 @@ class GiftList extends Component{
           {
             this.props.giftList.map((item,index)=>{
               return(
-                  <div className={`gift-list-item-2 type${item.type}`} key={index}>
+                  <div className={`gift-list-item-2 type${this.props.type}`} key={index}>
                     <div className="part-left">
                       <h3>{item.name}</h3>
                       <p>有效时间：{item.validTime}</p>

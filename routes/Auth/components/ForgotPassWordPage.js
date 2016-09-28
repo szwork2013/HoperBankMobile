@@ -164,7 +164,7 @@ class ForgotPassWordPage extends Component {
     }
     render() {
         return (
-            <section className="form-wrap" style={{marginTop:'30px'}}>
+            <section className="form-wrap" style={{paddingTop:'30px'}}>
                 <RootLoading display={this.state.loading} />
                 <section className={`register-step-first ${this.state.step.first ? '':'hide'}`} >
                     <IconInput

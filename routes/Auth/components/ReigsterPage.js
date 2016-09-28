@@ -6,6 +6,7 @@ import IconInput from 'components/IconInput'
 import {BaseButton} from 'components/Button'
 import RootLoading from 'components/RootLoading'
 import { Link } from 'react-router'
+var ReactCSSTransitionGroup = require('react-addons-css-transition-group');
 class ReigsterPage extends Component {
     constructor(props) {
         super(props)
@@ -207,6 +208,13 @@ class ReigsterPage extends Component {
     render() {
         return (
             <section className="form-wrap">
+                <ReactCSSTransitionGroup component="div"
+                                         transitionName="slide-right"
+                                         transitionEnterTimeout={300} transitionLeaveTimeout={300}>
+                    {
+                        this.props.children
+                    }
+                </ReactCSSTransitionGroup>
                 <RootLoading display={this.state.loading} />
                 <section className={`register-step-first ${this.state.step.first ? '':'hide'}`} >
                     <img src="/static/img/login_banner.jpg" width="100%" style={{marginBottom:'10px'}} />
@@ -218,7 +226,7 @@ class ReigsterPage extends Component {
                         callback={(b,val)=>{this.setState({username:val,userNamePassed:b})}}>
                     </IconInput>
                     <section className="tip-section-2">
-                        注册即同意<a>《琥珀金服服务协议》</a>
+                        注册即同意<Link to="/register/agreement">《琥珀金服服务协议》</Link>
                     </section>
                     <BaseButton text="下一步" onClick={this.doStepFirst} className={`mt20 ${this.state.userNamePassed? '':'disabled'}`} disabled={!this.state.userNamePassed} />
                     <section className="tip-section-2">
@@ -257,7 +265,7 @@ class ReigsterPage extends Component {
                         rule="^([1][3758][0-9]{9}|hoperbank)$"
                         hasBorder={false}
                         type="text"
-                        defaultValue={this.props.params.referrerName || ''}
+                        defaultValue={this.props.location.query.referrerName || ''}
                         callback={(b,val)=>{this.setState({referrerName:val,referrerNamePassed:b})}}>
                     </IconInput>
                     <section className="tip-section-2">

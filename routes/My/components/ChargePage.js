@@ -51,9 +51,6 @@ class ChargePage extends Component{
                 <BaseButton text="立即充值" className={this.state.canSubmit ? '' : 'disabled'} style={{marginTop:'20px'}}
                             disabled={!this.state.canSubmit}
                             onClick={()=>{
-                            this.setState({
-                                overlayShouldShow:true
-                            })
                             this.doCharge()
                             }} />
                 <form ref="form" action={props.chargeUrl}>
@@ -73,8 +70,12 @@ class ChargePage extends Component{
             alert('100元起充');
             return false;
         }
+
         const props = this.props;
         if(this.checkInput()){
+            this.setState({
+                overlayShouldShow:true
+            })
             props.charge({
                 amt:this.state.amtMoney,
                 callback:(result)=>{
