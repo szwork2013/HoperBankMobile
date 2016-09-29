@@ -5,6 +5,8 @@ import FinancialReturnPlan from './components/FinancialReturnPlan'
 import DealResultPage from './components/DealResultPage'
 import InvestConfirmPage from './components/InvestConfirmPage'
 import InvestConfirmSelectCouponPage from './components/InvestConfirmSelectCouponPage'
+import { connect } from 'react-redux'
+import {fetchConfirmPageCoupon} from 'actions'
 module.exports = {
     path: '/financial',
     getComponent(nextState, cb) {
@@ -19,7 +21,9 @@ module.exports = {
             childRoutes: [
                 {
                     path:"/financial/product/:productType/:id/confirm",
-                    component:InvestConfirmPage,
+                    component:connect(null,{
+                        fetchConfirmPageCoupon
+                    })(InvestConfirmPage),
                     childRoutes:[
                         {
                             path:'/financial/product/:productType/:id/confirm/coupon/:type',

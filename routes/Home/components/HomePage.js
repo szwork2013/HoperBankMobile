@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { loadIndex } from 'actions'
 import ReactSwipe from 'react-swipe';
 import RootLoading from 'RootLoading'
-import config from 'container/componentConfig'
+import config from 'containers/componentConfig'
 import { browserHistory,Link } from 'react-router'
 var ReactCSSTransitionGroup = require('react-addons-css-transition-group');
 class HomePage extends Component {
@@ -17,7 +17,9 @@ class HomePage extends Component {
         this.next = this.next.bind(this);
         this.renderMain = this.renderMain.bind(this);
     }
-
+    static contextTypes = {
+        router: React.PropTypes.object.isRequired
+    }
     componentWillMount() {
         //loadData(this.props)
         !this.props.index && this.props.loadIndex()
@@ -181,9 +183,6 @@ class HomePage extends Component {
         )
     }
 }
-HomePage.contextTypes = {
-    router: React.PropTypes.object.isRequired
-};
 function mapStateToProps(state, ownProps) {
     return {
         index:state.index

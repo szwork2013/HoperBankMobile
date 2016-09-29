@@ -90,7 +90,14 @@ class ReigsterPage extends Component {
         console.log(`both:${this.state.bothPasswordPassed}`)
         console.log(`yCodePassed:${this.state.yCodePassed}`)
         console.log(`referrerNamePassed:${this.state.referrerNamePassed}`)
-
+        if(this.props.location.query.referrerName){
+            this.state.referrerNamePassed=true;
+            this.state.referrerName=this.props.location.query.referrerName;
+            this.setState({
+                referrerNamePassed:true,
+                referrerName:this.props.location.query.referrerName
+            })
+        }
         this.setErrorTip([
             {
                 condition:this.state.userNamePassed,
@@ -226,7 +233,7 @@ class ReigsterPage extends Component {
                         callback={(b,val)=>{this.setState({username:val,userNamePassed:b})}}>
                     </IconInput>
                     <section className="tip-section-2">
-                        注册即同意<Link to="/register/agreement">《琥珀金服服务协议》</Link>
+                        注册即同意<Link to="/register/agreement" style={{color:'#ee5447'}}>《琥珀金服服务协议》</Link>
                     </section>
                     <BaseButton text="下一步" onClick={this.doStepFirst} className={`mt20 ${this.state.userNamePassed? '':'disabled'}`} disabled={!this.state.userNamePassed} />
                     <section className="tip-section-2">

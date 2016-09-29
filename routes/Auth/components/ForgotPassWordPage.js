@@ -35,12 +35,6 @@ class ForgotPassWordPage extends Component {
         this.doStepThird = this.doStepThird.bind(this);
         this.handleGetCode = this.handleGetCode.bind(this);
     }
-    componentWillMount() {
-        //已登陆过就直接跳到我的
-    }
-    componentDidMount(){
-
-    }
     sendYcode(mobile,callback){
         this.props.forgotPassWordStep1({
             mobile:mobile,

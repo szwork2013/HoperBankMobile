@@ -51,7 +51,7 @@ module.exports = {
             'react-progressbar':path.join(__dirname, '/', 'static/lib/react-progressbar'),
             'componentConfig':path.join(__dirname, '/', 'containers/componentConfig'),
             'utils':path.join(__dirname, '/', 'utils'),
-            'container':path.join(__dirname, '/', 'containers')
+            'containers':path.join(__dirname, '/', 'containers')
 
         }
     },

@@ -2,9 +2,6 @@ import fetch from 'isomorphic-fetch'
 import API from '../api'
 import Auth from 'utils/auth'
 
-function getId(){
-    return Auth.getItem('userId');
-}
 
 export const FETCH_DEALRECORD = 'FETCH_DEALRECORD'
 export const CLEAR_DEALRECORD = 'CLEAR_DEALRECORD'
@@ -29,7 +26,7 @@ export function clearDealRecord(){
 /*获取*/
 export function fetchDealRecord(opt){
     return (dispatch, getState) => {
-        return fetch(API.user.dealrecord+`?userId=${getId()}&type=${opt.type}&curPage=${opt.curPage}`)
+        return fetch(API.user.dealrecord+`?userId=${Auth.getUserId()}&type=${opt.type}&curPage=${opt.curPage}`)
             .then((res)=>res.json())
             .then((res)=>{
                 if(res.r==1){
@@ -56,7 +53,7 @@ export function clearInvestRecord(){
 /*获取*/
 export function fetchInvestRecord(opt){
     return (dispatch, getState) => {
-        return fetch(API.user.investmentrecord + `?userId=${getId()}&status=${opt.type}$curPage=${opt.curPage}`)
+        return fetch(API.user.investmentrecord + `?userId=${Auth.getUserId()}&status=${opt.type}$curPage=${opt.curPage}`)
             .then((res)=>res.json())
             .then((res)=>{
                 if(res.r==1){
@@ -83,7 +80,7 @@ export function clearReturnPlanRecord(){
 /*获取*/
 export function fetchReturnPlanRecord(opt){
     return (dispatch, getState) => {
-        return fetch(API.user.returnedPlan + `?userId=${getId()}&status=${opt.type}&curPage=${opt.curPage}`)
+        return fetch(API.user.returnedPlan + `?userId=${Auth.getUserId()}&status=${opt.type}&curPage=${opt.curPage}`)
             .then((res)=>res.json())
             .then((res)=>{
                 if(res.r==1){
@@ -101,7 +98,7 @@ export function fetchReturnPlanRecord(opt){
 export function fetchCreditorlist(opt){
     var url=API.user.creditorlist;
     return (dispatch, getState) => {
-        return fetch(url+`?userId=${getId()}&investId=${opt.investId}&type=${opt.type}`)
+        return fetch(url+`?userId=${Auth.getUserId()}&investId=${opt.investId}&type=${opt.type}`)
             .then((response)=>response.json())
             .then((data)=>{
                 dispatch({
@@ -120,7 +117,7 @@ export function fetchCreditorlist(opt){
 export function authentication(opt){
     var url=API.authentication.certification2;
     return (dispatch, getState) => {
-        return fetch(`${url}?userId=${getId()}&name=${opt.name}&pid=${opt.pid}&parentBankId=${opt.parentBankId}&cityId=${opt.cityId}&capAcntNo=${opt.capAcntNo}`)
+        return fetch(`${url}?userId=${Auth.getUserId()}&name=${opt.name}&pid=${opt.pid}&parentBankId=${opt.parentBankId}&cityId=${opt.cityId}&capAcntNo=${opt.capAcntNo}`)
             .then((response)=>response.json())
             .then((data)=>{
                 opt.callback && opt.callback(data)
@@ -134,7 +131,7 @@ export function authentication(opt){
 export function fetchConfirmPageCoupon(opt){
     var url=API.product.confirm;
     return (dispatch, getState) => {
-        return fetch(url+`?userId=${getId()}&productId=${opt.productId}&type=${opt.type}&money=${opt.money}`)
+        return fetch(url+`?userId=${Auth.getUserId()}&productId=${opt.productId}&type=${opt.type}&money=${opt.money}`)
             .then((response)=>response.json())
             .then((data)=>{
                 opt.callback && opt.callback(data)
@@ -145,7 +142,7 @@ export function fetchConfirmPageCoupon(opt){
 /* 我的礼券-一级 */
 export function fetchGift(opt){
     return (dispatch, getState) => {
-        return fetch(API.coupon.preview + `?userId=${getId()}`)
+        return fetch(API.coupon.preview + `?userId=${Auth.getUserId()}`)
             .then((res)=>res.json())
             .then((res)=>{
                 if(res.r==1){
@@ -162,7 +159,7 @@ export function fetchGift(opt){
 /* 我的礼券-详情 */
 export function fetchGiftList(opt){
     return (dispatch, getState) => {
-        return fetch(API.coupon.detail + `?userId=${getId()}&type=${opt.type}&couponType=${opt.couponType}` )
+        return fetch(API.coupon.detail + `?userId=${Auth.getUserId()}&type=${opt.type}&couponType=${opt.couponType}` )
             .then((res)=>res.json())
             .then((res)=>{
                 if(res.r==1){

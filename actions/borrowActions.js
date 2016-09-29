@@ -1,7 +1,6 @@
 import fetch from 'isomorphic-fetch'
 import API from '../api'
 import Auth from 'utils/auth'
-const USER_ID = Auth.getItem('userId');
 
 /*申请借款表单发送，不用通知store*/
 export function borrowApply(opt){
@@ -20,7 +19,7 @@ export function borrowApply(opt){
 export function asyncCheckId(opt){
     var url=API.authentication.certification1;
     return (dispatch, getState) => {
-        return fetch(`${url}?userId=${USER_ID}&name=${opt.name}&pid=${opt.pid}`)
+        return fetch(`${url}?userId=${Auth.getUserId()}&name=${opt.name}&pid=${opt.pid}`)
             .then((res)=>res.json())
             .then((res)=>{
                 opt.callback && opt.callback(res);

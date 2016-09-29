@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react'
-import config from '../containers/componentConfig'
+import config from 'containers/componentConfig'
 export default class TabBar extends Component {
 
     constructor(props) {

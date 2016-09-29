@@ -10,7 +10,7 @@ class DealResultPage extends Component {
     }
     componentWillMount() {
         //交易成功后重新获取个人信息刷新账户余额
-        this.props.fetchAccount(this.props.userId)
+        this.props.fetchAccount()
     }
     componentDidMount(){
 

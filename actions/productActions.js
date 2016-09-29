@@ -1,7 +1,6 @@
 import fetch from 'isomorphic-fetch'
 import API from '../api'
 import Auth from 'utils/auth'
-const USER_ID = Auth.getItem('userId');
 export const FETCH_LCLIST = 'FETCH_LCLIST'
 export const FETCH_FWLIST = 'FETCH_FWLIST'
 export const CLEAR_PRODUCT =  'CLEAR_PRODUCT'
@@ -121,7 +120,7 @@ export function payForProduct(opt){
         // no default
     }
     return (dispatch, getState) => {
-        return fetch(url + `?userId=${USER_ID}&productId=${opt.productId}&amt=${opt.amt}`)
+        return fetch(url + `?userId=${Auth.getUserId()}&productId=${opt.productId}&amt=${opt.amt}`)
             .then((res)=>res.json())
             .then((res)=>{
                 if(res.r==1){

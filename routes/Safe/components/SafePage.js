@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import Auth from 'utils/auth'
 import ReactSwipe from 'react-swipe';
-import config from 'container/componentConfig'
+import config from 'containers/componentConfig'
 import Overlay from 'components/Overlay'
 class SafePage extends Component {
     constructor(props) {

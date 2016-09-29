@@ -18,12 +18,8 @@ class LoginPage extends Component {
         }
         this.login = this.login.bind(this);
     }
-    componentWillMount() {
-        //已登陆过就直接跳到我的
-        this.props.account.userId && this.context.router.push('/my')
-    }
-    componentDidMount(){
-
+    static contextTypes = {
+        router: React.PropTypes.object.isRequired
     }
     login(){
         if(!this.state.userNamePassed){
@@ -84,9 +80,6 @@ class LoginPage extends Component {
         )
     }
 }
-LoginPage.contextTypes = {
-    router: React.PropTypes.object.isRequired
-};
 
 function mapStateToProps(state, ownProps) {
     return {

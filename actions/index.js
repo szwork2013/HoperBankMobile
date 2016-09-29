@@ -1,7 +1,6 @@
 import fetch from 'isomorphic-fetch'
 import API from '../api'
 import Auth from 'utils/auth'
-const USER_ID = Auth.getItem('userId');
 export * from  './productActions'
 export * from './authActions'
 export * from './teamsActions'
@@ -38,7 +37,7 @@ export function setFetching(b){
 /*取消投资，不用通知store*/
 export function cancelInvest(opt){
     var url=API.product.cancel;
-    return fetch(`${url}?userId=${USER_ID}&productId=${opt.productId}&investId=${opt.investId}`)
+    return fetch(`${url}?userId=${Auth.getUserId()}&productId=${opt.productId}&investId=${opt.investId}`)
         .then((res)=>res.json())
         .then((res)=>{
             opt.callback && opt.callback(res);
@@ -50,7 +49,7 @@ export function cancelInvest(opt){
 export function reBuyOperation(opt){
     var url=API.product.reBuy;
     return (dispatch, getState) => {
-        return fetch(`${url}?userId=${USER_ID}&productId=${opt.productId}&investId=${opt.investId}&operation=${opt.operation}`)
+        return fetch(`${url}?userId=${Auth.getUserId()}&productId=${opt.productId}&investId=${opt.investId}&operation=${opt.operation}`)
             .then((res)=>res.json())
             .then((res)=>{
                 opt.callback && opt.callback(res);

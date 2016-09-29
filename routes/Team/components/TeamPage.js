@@ -1,8 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 var ReactCSSTransitionGroup = require('react-addons-css-transition-group');
-import { connect } from 'react-redux'
 import { browserHistory,Link } from 'react-router'
-import { fetchTeam,fetchTeamList,clearTeamList,fetchRoyaltyList } from 'actions'
 import RootLoading from 'components/RootLoading'
 class TeamPage extends Component {
     constructor(props) {
@@ -10,6 +8,18 @@ class TeamPage extends Component {
         this.state={
             loaded:false
         }
+    }
+    static propTypes = {
+        fetchTeam:PropTypes.func.isRequired,
+        fetchTeamList:PropTypes.func.isRequired,
+        clearTeamList:PropTypes.func.isRequired,
+        fetchRoyaltyList:PropTypes.func.isRequired,
+        royaltyList:PropTypes.array.isRequired,
+        teamList:PropTypes.array.isRequired,
+        team:PropTypes.object.isRequired
+    }
+    static contextTypes = {
+        router: React.PropTypes.object.isRequired
     }
     componentWillMount() {
         const props = this.props;
@@ -69,21 +79,5 @@ class TeamPage extends Component {
         )
     }
 }
-TeamPage.contextTypes = {
-    router: React.PropTypes.object.isRequired
-};
-function mapStateToProps(state, ownProps) {
-    return {
-        team:state.team.preview,
-        account:state.account,
-        teamList:state.team.teamList,
-        royaltyList:state.team.royaltyList
-    }
-}
 
-module.exports =  connect(mapStateToProps, {
-    fetchTeam,
-    fetchTeamList,
-    clearTeamList,
-    fetchRoyaltyList
-})(TeamPage)
+module.exports =  TeamPage

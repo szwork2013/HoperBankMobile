@@ -23,5 +23,6 @@ module.exports = {
 
     getItem:(str)=>{
         return localStorage[str];
-    }
+    },
+    getUserId:()=>localStorage.userId
 };

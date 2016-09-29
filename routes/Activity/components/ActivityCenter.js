@@ -12,6 +12,13 @@ class ActivityCenter extends Component {
             loaded:false
         }
     }
+    static propTypes = {
+        activity:PropTypes.array.isRequired,
+        fetchActivityList:PropTypes.func.isRequired
+    }
+    static contextTypes = {
+        router: React.PropTypes.object.isRequired
+    }
     componentWillMount() {
         const props = this.props;
         props.fetchActivityList((result)=>{
@@ -21,9 +28,6 @@ class ActivityCenter extends Component {
                 })
             }
         })
-    }
-    componentDidMount(){
-
     }
     render() {
         const props = this.props;
@@ -48,7 +52,6 @@ class ActivityCenter extends Component {
                                     this.setState({
                                         detailUrl:item.link
                                     })
-                                    //this.context.router.push('/activity/detail/')
                                     location.href=item.link
                                 }}>
                                     <h3><i></i>{item.title}</h3>
@@ -66,16 +69,5 @@ class ActivityCenter extends Component {
         )
     }
 }
-ActivityCenter.contextTypes = {
-    router: React.PropTypes.object.isRequired
-};
-function mapStateToProps(state, ownProps) {
-    return {
-        account:state.account,
-        activity:state.activity
-    }
-}
 
-module.exports =  connect(mapStateToProps, {
-    fetchActivityList
-})(ActivityCenter)
+module.exports = ActivityCenter

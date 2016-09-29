@@ -13,13 +13,11 @@ import ResetPassWordPage from './components/ResetPassWordPage'
 import ChoseRebuyPage from './components/ChoseRebuyPage'
 import CreditorListPage from './components/CreditorListPage'
 import CreditorDetailPage from './components/CreditorDetailPage'
-function checkLogin(nextState, replace){
-    if(!Auth.logged()){
-        replace('/login')
-    }
-}
+
 module.exports = {
-    onEnter:checkLogin,
+    onEnter:(nextState, replace)=>{
+        !Auth.logged() && replace('/login')
+    },
     path: '/my',
     getComponent(nextState, cb) {
         require.ensure([], (require) => {

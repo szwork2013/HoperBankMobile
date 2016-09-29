@@ -6,7 +6,7 @@ export default class NoMatch extends Component {
   render() {
     return (
         <section>
-          这是404啊
+          啊咧，找不到这个页面啊
         </section>
     )
   }

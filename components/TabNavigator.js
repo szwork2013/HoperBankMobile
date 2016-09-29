@@ -4,8 +4,6 @@ export default class TabNavigator extends Component {
     constructor(props) {
         super(props);
     }
-    componentWillMount(){
-    }
     static contextTypes = {
         router: PropTypes.object.isRequired
     }

@@ -4,6 +4,7 @@ import ReactIScroll from 'react-iscroll'
 class RegisterAgreementPage extends Component {
     constructor(props) {
         super(props)
+        console.log(props)
     }
     render() {
         return (

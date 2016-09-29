@@ -14,9 +14,7 @@ class FinancialPage extends Component {
                                          transitionName="slide-right"
                                          transitionEnterTimeout={300} transitionLeaveTimeout={300}>
                     {
-                        this.props.children && React.cloneElement(this.props.children, {
-                            fetchConfirmPageCoupon:this.props.fetchConfirmPageCoupon
-                        })
+                        this.props.children
                     }
                 </ReactCSSTransitionGroup>
                 <TabBar>

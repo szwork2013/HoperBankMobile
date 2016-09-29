@@ -1,7 +1,6 @@
 import fetch from 'isomorphic-fetch'
 import API from '../api'
 import Auth from 'utils/auth'
-const USER_ID = Auth.getItem('userId');
 export const FETCH_TEAM = 'FETCH_TEAM'
 export const FETCH_TEAMLIST = 'FETCH_TEAMLIST'
 export const CLEAR_TEAMLIST = 'CLEAR_TEAMLIST'
@@ -11,7 +10,7 @@ export const FETCH_ROYALTYLIST ='FETCH_ROYALTYLIST'
 /*获取团队数据*/
 export function fetchTeam(callback){
     return (dispatch, getState) => {
-        return fetch(API.myteam.preview + `?userId=${USER_ID}`)
+        return fetch(API.myteam.preview + `?userId=${Auth.getUserId()}`)
             .then((res)=>res.json())
             .then((res)=>{
                 if(res.r==1){
@@ -26,7 +25,7 @@ export function fetchTeam(callback){
 }
 export function fetchTeamList(opt){
     return (dispatch, getState) => {
-        return fetch(API.myteam.teamList + `?userId=${USER_ID}&type=${opt.type}&curPage=${opt.curPage}`)
+        return fetch(API.myteam.teamList + `?userId=${Auth.getUserId()}&type=${opt.type}&curPage=${opt.curPage}`)
             .then((res)=>res.json())
             .then((res)=>{
                 if(res.r==1){
@@ -50,7 +49,7 @@ export function clearTeamList(){
 /* 提成列表获取 */
 export function fetchRoyaltyList(year,callback){
     return (dispatch, getState) => {
-        return fetch(API.myteam.royaltyList + `?userId=${USER_ID}&year=${year}`)
+        return fetch(API.myteam.royaltyList + `?userId=${Auth.getUserId()}&year=${year}`)
             .then((res)=>res.json())
             .then((res)=>{
                 if(res.r==1){

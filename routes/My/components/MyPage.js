@@ -15,7 +15,7 @@ class MyPage extends Component {
         this.jumpTo = this.jumpTo.bind(this);
     }
     componentWillMount() {
-        this.props.fetchAccount(this.props.account.userId,()=>{
+        this.props.fetchAccount(()=>{
             this.setState({
                 loaded:true
             })

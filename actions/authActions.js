@@ -4,13 +4,10 @@ import Auth from 'utils/auth'
 export const FETCH_ACCOUNT =  'FETCH_ACCOUNT'
 export const DO_LOGIN =  'DO_LOGIN'
 export const DO_LOGOUT =  'DO_LOGOUT'
-function getId(){
-    return Auth.getItem('userId');
-}
 
-export function fetchAccount(id,callback){
+export function fetchAccount(callback){
     return (dispatch, getState) => {
-        return fetch(API.user.account + `?userId=${getId()}`)
+        return fetch(API.user.account + `?userId=${Auth.getUserId()}`)
             .then((res)=>res.json())
             .then((data)=>{
                 if(data.r==1){
@@ -97,7 +94,7 @@ export function registerThirdStep(opt){
 export function resetPassWord(opt){
     var url=API.reset.password;
     return (dispatch, getState) => {
-        return fetch(url+`?userId=${getId()}&newpasswd=${opt.newpasswd}&type=${opt.type}&oldpasswd=${opt.oldpasswd}`)
+        return fetch(url+`?userId=${Auth.getUserId()}&newpasswd=${opt.newpasswd}&type=${opt.type}&oldpasswd=${opt.oldpasswd}`)
             .then((response)=>response.json())
             .then((data)=>{
                 opt.callback && opt.callback(data)
