@@ -7,6 +7,7 @@ import {BaseButton} from 'components/Button'
 import RootLoading from 'components/RootLoading'
 import { Link } from 'react-router'
 var ReactCSSTransitionGroup = require('react-addons-css-transition-group');
+var timer = null;
 class ReigsterPage extends Component {
     constructor(props) {
         super(props)
@@ -130,13 +131,18 @@ class ReigsterPage extends Component {
             })
             if(this.state.referrerName.toLowerCase()=='hoperbank'){
                 //填的不是手机号的时候
+                clearInterval(timer)
                 this.doRegister();
             }else{
                 //推荐人填写的是手机号的时候
                 this.props.registerFirstStep(this.state.referrerName,(result)=>{
                     if(result.r==1002){
+                        clearInterval(timer)
                         this.doRegister();
                     }else{
+                        this.setState({
+                            loading:false
+                        })
                         alert('没有该推荐人')
                     }
                 })
@@ -189,7 +195,7 @@ class ReigsterPage extends Component {
         this.setState({
             yCodeSendAble:false
         })
-        var timer = null;
+
         var time = 120;
         this.refs.yCode.value='正在发送';
         this.sendYcode(this.state.username,(result)=>{

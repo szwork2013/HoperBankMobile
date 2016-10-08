@@ -1,13 +1,10 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
-class FinancialProductDetail extends Component {
+import ReactIScroll from 'react-iscroll'
+import iScroll from 'iscroll/build/iscroll-probe';
+export default class FinancialProductDetail extends Component {
     constructor(props) {
         super(props)
-    }
-    componentWillMount() {
-    }
-    componentDidMount(){
-
     }
     renderContent(type){
         const data = this.props.productInfo;
@@ -63,7 +60,9 @@ class FinancialProductDetail extends Component {
     render() {
         return (
             <section className="level-2-wrap">
-                {this.renderContent.bind(this)(parseInt(this.props.params.productType))}
+                <ReactIScroll iScroll={iScroll}>
+                    {this.renderContent.bind(this)(parseInt(this.props.params.productType))}
+                </ReactIScroll>
             </section>
         )
     }
@@ -158,14 +157,4 @@ const InvestInfoPage = (props)=>{
             </div>
         </div>
     )
-
-
 }
-function mapStateToProps(state, ownProps) {
-    return {
-        productInfo:state.product.productDetail
-    }
-}
-
-export default connect(mapStateToProps, {
-})(FinancialProductDetail)

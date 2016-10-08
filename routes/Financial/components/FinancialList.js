@@ -22,9 +22,6 @@ class FinancialList extends Component {
             })
         })
     }
-    componentDidMount(){
-
-    }
     render() {
         const iScrollHeight = config.windowHeight - config.navHeight - config.tabBarHeight
         return(

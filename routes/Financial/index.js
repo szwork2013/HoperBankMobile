@@ -33,7 +33,9 @@ module.exports = {
                 },
                 {
                     path:"/financial/product/:productType/:id/detail",
-                    component:FinancialProductDetail
+                    component:connect((state,ownProps)=>({
+                        productInfo:state.product.productDetail
+                    }),{})(FinancialProductDetail)
                 },
                 {
                     path:"/financial/product/:productType/:id/record",

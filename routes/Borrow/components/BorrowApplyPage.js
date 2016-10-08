@@ -97,13 +97,12 @@ class BorrowApplyPage extends Component{
             callback:(result)=>{
                 this.setState({
                     loading:false
-                })
+                });
                 if(result.r==1){
                     setTimeout(()=>{
                         alert('申请成功，我们将会在三个工作日内联系您。');
                         browserHistory.goBack()
                     },300)
-
                 }
             }
         })
@@ -160,7 +159,8 @@ class BorrowApplyPage extends Component{
                                     })
                                 }
                             </Field>
-                            <Field name="province" props={{onChange:this.provinceChange}}  component="select" >
+
+                            <select onChange={this.provinceChange}>
                                 <option value="北京">北京</option>
                                 <option value="上海">上海</option>
                                 <option value="广东">广东</option>
@@ -196,7 +196,7 @@ class BorrowApplyPage extends Component{
                                 <option value="澳门">澳门特别行政区</option>
                                 <option value="台湾">台湾</option>
                                 <option value="海外">海外</option>
-                            </Field>
+                            </select>
 
                         </div>
                         <Field name="company" component={renderField} type="text" label="工作单位" />
