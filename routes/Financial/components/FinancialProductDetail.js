@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react'
-import { connect } from 'react-redux'
 import ReactIScroll from 'react-iscroll'
 import iScroll from 'iscroll/build/iscroll-probe';
 export default class FinancialProductDetail extends Component {
@@ -9,7 +8,7 @@ export default class FinancialProductDetail extends Component {
     renderContent(type){
         const data = this.props.productInfo;
         //理财服务项目详情 0
-        switch (type){
+        switch (parseInt(type)){
             case 1:
                 return(
                     <div className="product-s1-detail">
@@ -54,6 +53,8 @@ export default class FinancialProductDetail extends Component {
             case 9:
                 return <InvestInfoPage data={data} />
                 break;
+            default:
+                return <div></div>
         }
 
     }
@@ -61,7 +62,7 @@ export default class FinancialProductDetail extends Component {
         return (
             <section className="level-2-wrap">
                 <ReactIScroll iScroll={iScroll}>
-                    {this.renderContent.bind(this)(parseInt(this.props.params.productType))}
+                    {this.renderContent.bind(this)(this.props.params.productType)}
                 </ReactIScroll>
             </section>
         )
@@ -70,7 +71,7 @@ export default class FinancialProductDetail extends Component {
 const InvestInfoPage = (props)=>{
     var productType= '';
     const data = props.data;
-    switch (data.xdProductType){
+    switch (parseInt(data.xdProductType)){
         case 1:
             productType = '消费薪金贷'
             break;

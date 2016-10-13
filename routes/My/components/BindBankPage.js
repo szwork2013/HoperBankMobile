@@ -64,7 +64,13 @@ export default class BindBankPage extends Component {
                         this.setState({
                             activeStep:2
                         })
+                    }else{
+                        alert(result.msg)
                     }
+                    this.setState({
+                        firstStepPassed:true,
+                        firstStepText:'下一步'
+                    })
                 }
             })
         }

@@ -1,4 +1,6 @@
 import Auth from 'utils/auth'
+import {fetchCity} from 'actions'
+import { connect } from 'react-redux'
 import PersonalPage from './components/PersonalPage'
 import BindBankPage from './components/BindBankPage'
 import DealRecordPage from './components/DealRecordPage'
@@ -27,7 +29,9 @@ module.exports = {
     childRoutes:[
         {
             path:'/my/bindbank',
-            component:BindBankPage
+            component:connect(()=>({}),{
+                fetchCity
+            })(BindBankPage)
         },
         {
             path:'/my/personal',

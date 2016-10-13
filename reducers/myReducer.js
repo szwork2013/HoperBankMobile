@@ -81,13 +81,13 @@ function creditorList(state=creditorListInitData,action){
     const {type} = action;
     if(type==ActionTypes.FETCH_CREDITOR_LIST){
         if(action.response.type==1){
-            return Object.assign({},state,{
+            return {
                 type1:action.response.data
-            })
+            }
         }else if (action.response.type==2){
-            return Object.assign({},state,{
+            return {
                 type2:action.response.data
-            })
+            }
         }
     }
     return state;

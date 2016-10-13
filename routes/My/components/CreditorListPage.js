@@ -50,7 +50,7 @@ class CreditorItemPage extends Component {
     }
     componentWillMount() {
         const props = this.props;
-        if(props.creditorList.length===0){
+
             props.fetchCreditorlist({
                 userId:props.userId,
                 investId:props.investId,
@@ -59,7 +59,7 @@ class CreditorItemPage extends Component {
 
                 }
             })
-        }
+
 
     }
     renderItem(item,index){
