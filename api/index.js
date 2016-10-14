@@ -7,7 +7,7 @@ var domain,
 * 2为公测
 * 3为后端测试
 * */
-const ENV = 1;
+const ENV = 2;
 switch (ENV){
     case 1:
         domain='http://api.hoperbank.com/hpmobile/v1/';

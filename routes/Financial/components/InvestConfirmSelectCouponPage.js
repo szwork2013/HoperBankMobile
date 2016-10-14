@@ -1,13 +1,17 @@
 import React, { Component, PropTypes } from 'react'
 import RootLoading from 'components/RootLoading'
 import {BaseButton,TextButton} from 'components/Button'
+import { browserHistory } from 'react-router'
 export default class InvestConfirmSelectCouponPage extends Component{
     constructor(props) {
         super(props)
+        this.renderType2 = this.renderType2.bind(this)
+        this.state={
+            selected:props.couponSelected || null
+        }
     }
     componentWillMount() {
         const props = this.props;
-
     }
     componentWillReceiveProps(nextProps){
     }
@@ -20,7 +24,7 @@ export default class InvestConfirmSelectCouponPage extends Component{
         )
     }
     renderType1(data){
-        if(data){
+        if(data && data.length!==0){
             return(
                 <div className={`gift-list-item-2 type1`}>
                     <div className="part-left">
@@ -38,7 +42,30 @@ export default class InvestConfirmSelectCouponPage extends Component{
 
     }
     renderType2(data){
-        if(data.length === 0){
+        if(data && data.length!==0){
+            let arr =[];
+            data.map((item,index)=>{
+                arr.push(
+                    <div className="select-coupon-item" key={index} onClick={()=>{ this.setState({selected:item.couponId});this.props.selectCoupon(item.couponId,item.money);browserHistory.goBack()}}>
+                        <div className="select-coupon-selector">
+                            <div className={`${this.state.selected==item.couponId? 'selected':''}`}></div>
+                        </div>
+                        <div className={`coupon-type-2`}>
+                            <div className="part-1">
+                                <p>有效时间：{item.validTime}</p>
+                                <p>适用范围：{item.scope}</p>
+                                <p>使用条件：{item.condition}</p>
+                            </div>
+                            <div className="part-2">
+                                <p className="p1">{item.money}</p>
+                                <p className="p2">加息券</p>
+                            </div>
+                        </div>
+                    </div>
+                )
+            })
+            return arr;
+        }else{
             return this.renderNull()
         }
     }

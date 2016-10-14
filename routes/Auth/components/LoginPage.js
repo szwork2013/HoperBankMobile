@@ -6,7 +6,7 @@ import IconInput from 'components/IconInput'
 import {Link} from 'react-router'
 import {BaseButton} from 'components/Button'
 import RootLoading from 'components/RootLoading'
-class LoginPage extends Component {
+export default class LoginPage extends Component {
     constructor(props) {
         super(props)
         this.state={
@@ -21,6 +21,9 @@ class LoginPage extends Component {
     static contextTypes = {
         router: React.PropTypes.object.isRequired
     }
+    static propTypes = {
+        doLogin: PropTypes.func
+    }
     login(){
         if(!this.state.userNamePassed){
             alert('请输入十一位手机号码');
@@ -34,7 +37,6 @@ class LoginPage extends Component {
             loading:true
         })
         this.props.doLogin(this.state.username,hex_md5(this.state.password),(result)=>{
-            console.log(result.r)
             if(result.r!=1){
                 this.setState({
                     loading:false
@@ -43,8 +45,14 @@ class LoginPage extends Component {
                     alert(result.msg)
                 },300)
             }else{
+                //has backUrl ?  ---> backUrl
+                //asset file ? ---> use location
                 if(this.props.location.query.backUrl){
-                    this.context.router.replace(this.props.location.query.backUrl)
+                    if(this.props.location.query.asset){
+                        location.href=this.props.location.query.backUrl;
+                    }else{
+                        this.context.router.replace(this.props.location.query.backUrl)
+                    }
                 }else{
                     this.context.router.replace('/my')
                 }
@@ -80,13 +88,3 @@ class LoginPage extends Component {
         )
     }
 }
-
-function mapStateToProps(state, ownProps) {
-    return {
-        account:state.account
-    }
-}
-
-export default connect(mapStateToProps, {
-    doLogin
-})(LoginPage)

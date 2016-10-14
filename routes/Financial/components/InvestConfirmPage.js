@@ -12,8 +12,11 @@ export default class InvestConfirmPage extends Component{
                 type2:[],
                 type3:[]
             },
+            couponId:'',
+            couponTxt:null,
             loading:false
         }
+        this.selectCoupon = this.selectCoupon.bind(this);
     }
     componentWillMount() {
         const props = this.props;
@@ -60,6 +63,22 @@ export default class InvestConfirmPage extends Component{
         }
 
     }
+    selectCoupon(id,txt){
+        this.setState({
+            couponId:id,
+            couponTxt:txt
+        })
+    }
+    showCouponType2(){
+        if(this.state.couponTxt){
+
+            return this.state.couponTxt;
+        }
+        if(this.state.coupon.type2 && this.state.coupon.type2.length){
+            return this.state.coupon.type2.length + '张可用';
+        }
+        return '无可用'
+    }
     render(){
         const props = this.props;
         const params = props.location.query;
@@ -70,7 +89,9 @@ export default class InvestConfirmPage extends Component{
                                          transitionEnterTimeout={300} transitionLeaveTimeout={300}>
 
                     {this.props.children  && React.cloneElement(this.props.children, {
-                        coupon:this.state.coupon
+                        coupon:this.state.coupon,
+                        selectCoupon:this.selectCoupon,
+                        couponSelected:this.state.couponId || null
                     })}
 
                 </ReactCSSTransitionGroup>
@@ -91,7 +112,7 @@ export default class InvestConfirmPage extends Component{
 
                         <TextButton text="加息卡" onClick={()=>{
                             this.context.router.push(`/financial/product/${props.params.productType}/${props.params.id}/confirm/coupon/2`)
-                        }}  hasBorder={true}  rightText={this.state.coupon.type2 && this.state.coupon.type2.length>0?'':'无可用'} hasIcon={true} />
+                        }}  hasBorder={true}  rightText={this.showCouponType2.bind(this)()} hasIcon={true} />
 
                         <TextButton text="抵用券" onClick={()=>{
                            this.context.router.push(`/financial/product/${props.params.productType}/${props.params.id}/confirm/coupon/3`)
@@ -101,7 +122,9 @@ export default class InvestConfirmPage extends Component{
 
                         }}  hasBorder={false} hasIcon={false} rightText={`${params.money}元`} style={{marginTop:'20px'}} />
 
-                        <p style={{width:'90%',margin:'15px auto 0 auto'}}>预计收益<span className="money">{this.calculate(props.params.productType,params.money,params.rate,params.limit)}</span>元</p>
+                        <p style={{width:'90%',margin:'15px auto 0 auto'}}>预计收益<span className="money">{this.calculate(props.params.productType,params.money,params.rate,params.limit)}</span>
+                            元{this.state.couponTxt && `,<span class="money">加息新增${this.calculate(props.params.productType,params.money,parseFloat(this.state.couponTxt.replace('%','')),params.limit)}<span>元`}
+                        </p>
 
                         <BaseButton text="确认投资" className="invest-confirm-pay" onClick={()=>{
                             this.setState({
@@ -111,6 +134,7 @@ export default class InvestConfirmPage extends Component{
                                 productName:params.productName,
                                 rate:params.rate,
                                 limit:params.limit,
+                                couponId:this.state.couponId,
                                 success:()=>{
                                     this.setState({
                                         loading:false

@@ -663,3 +663,58 @@
 .money{
   color:#ff4343;
 }
+
+.select-coupon-item{
+  margin-top:15px;
+  padding:0 10px;
+  overflow: hidden;
+  >.select-coupon-selector{
+    float: left;
+    width:20%;
+    height:100%;
+    >div{
+      width:30px;
+      height:30px;
+      margin:50% auto;
+      border:1px solid #d7d8dd;
+      border-radius:50%;
+      &.selected{
+        background:#ff4343;
+      }
+    }
+  }
+}
+.coupon-type-2{
+  width:80%;
+  height:110px;
+  float: right;
+
+  >.part-1{
+    color:#fff;
+    width:66.7%;
+    height:100%;
+    float: right;
+    font-size:12px;
+    background:url("/static/img/coupon_type2_bg_2.png") no-repeat;
+    background-size:100%;
+    text-indent:5px;
+    >p{
+      margin-top:10px;
+    }
+  }
+  >.part-2{
+    float: left;
+    height:100%;
+    width:33.3%;
+    background:url("/static/img/coupon_type2_bg_1.png") no-repeat;
+    background-size:100%;
+    text-align: center;
+    >p.p1{
+      font-size:22px;
+      margin-top:30%;
+    }
+    >p.p2{
+      font-size:14px;
+    }
+  }
+}

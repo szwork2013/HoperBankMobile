@@ -210,6 +210,7 @@ class InvestPage2 extends Component{
             userId:props.account.userId,
             productId:props.params.id,
             amt:this.state.amtMoney,
+            couponId:obj.couponId,
             success:(result)=>{
                 obj.success && obj.success(result)
 
