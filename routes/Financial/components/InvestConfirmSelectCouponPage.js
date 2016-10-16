@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react'
-import RootLoading from 'components/RootLoading'
 import {BaseButton,TextButton} from 'components/Button'
 import { browserHistory } from 'react-router'
 export default class InvestConfirmSelectCouponPage extends Component{
@@ -10,10 +9,8 @@ export default class InvestConfirmSelectCouponPage extends Component{
             selected:props.couponSelected || null
         }
     }
-    componentWillMount() {
-        const props = this.props;
-    }
-    componentWillReceiveProps(nextProps){
+    componentWillMount(){
+        
     }
     renderNull(){
         return(
@@ -52,13 +49,19 @@ export default class InvestConfirmSelectCouponPage extends Component{
                         </div>
                         <div className={`coupon-type-2`}>
                             <div className="part-1">
-                                <p>有效时间：{item.validTime}</p>
-                                <p>适用范围：{item.scope}</p>
-                                <p>使用条件：{item.condition}</p>
+                                <img src="/static/img/coupon_type2_bg_2.png"/>
+                                <div>
+                                    <p>有效时间：{item.validTime}</p>
+                                    <p>适用范围：{item.scope}</p>
+                                    <p>使用条件：{item.condition}</p>
+                                </div>
                             </div>
                             <div className="part-2">
-                                <p className="p1">{item.money}</p>
-                                <p className="p2">加息券</p>
+                                <img src="/static/img/coupon_type2_bg_1.png"/>
+                                <div>
+                                    <p className="p1">{item.money}</p>
+                                    <p className="p2">加息券</p>
+                                </div>
                             </div>
                         </div>
                     </div>

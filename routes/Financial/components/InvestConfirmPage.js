@@ -14,18 +14,27 @@ export default class InvestConfirmPage extends Component{
             },
             couponId:'',
             couponTxt:null,
-            loading:false
+            loading:false,
+            queryState:props.location.state
         }
         this.selectCoupon = this.selectCoupon.bind(this);
     }
+    static contextTypes = {
+        router: React.PropTypes.object.isRequired
+    }
+    static propTypes = {
+        fetchConfirmPageCoupon:PropTypes.func.isRequired
+    }
     componentWillMount() {
         const props = this.props;
-        if(!props.location.query.productId){
-            browserHistory.goBack()
+        //const queryState = this.state.queryState;
+        const queryState = props.location.query;
+        if(!props.location.query.productName){
+            this.context.router.replace(`/financial/product/${props.params.productType}/${props.params.id}`)
             return false;
         }
         var type = 1;
-        switch (parseInt(props.location.query.type)){
+        switch (parseInt(queryState.type)){
             case 1:
                 type=1;
                 break;
@@ -37,9 +46,8 @@ export default class InvestConfirmPage extends Component{
                 break;
         }
         props.fetchConfirmPageCoupon({
-            userId:props.userId,
-            productId:props.location.query.productId,
-            money:props.location.query.money,
+            productId:queryState.productId,
+            money:queryState.money,
             type:type,
             callback:(result)=>{
                 if(result.r==1){
@@ -54,6 +62,10 @@ export default class InvestConfirmPage extends Component{
         })
     }
     componentWillReceiveProps(nextProps){
+        /*if(!this.state.queryState){
+            this.context.router.replace(`/financial/product/${nextProps.params.productType}/${nextProps.params.id}`)
+        }*/
+        //console.log(nextProps)
     }
     calculate(type,money,rate,time){
         if(type==1){
@@ -71,7 +83,6 @@ export default class InvestConfirmPage extends Component{
     }
     showCouponType2(){
         if(this.state.couponTxt){
-
             return this.state.couponTxt;
         }
         if(this.state.coupon.type2 && this.state.coupon.type2.length){
@@ -81,6 +92,7 @@ export default class InvestConfirmPage extends Component{
     }
     render(){
         const props = this.props;
+        //const params = this.state.queryState;
         const params = props.location.query;
         return(
             <section className="level-2-wrap" style={{zIndex:9999}}>
@@ -123,21 +135,30 @@ export default class InvestConfirmPage extends Component{
                         }}  hasBorder={false} hasIcon={false} rightText={`${params.money}元`} style={{marginTop:'20px'}} />
 
                         <p style={{width:'90%',margin:'15px auto 0 auto'}}>预计收益<span className="money">{this.calculate(props.params.productType,params.money,params.rate,params.limit)}</span>
-                            元{this.state.couponTxt && `,<span class="money">加息新增${this.calculate(props.params.productType,params.money,parseFloat(this.state.couponTxt.replace('%','')),params.limit)}<span>元`}
+                            元{this.state.couponTxt && <span>,加息新增<span className="money">{this.calculate(props.params.productType,params.money,parseFloat(this.state.couponTxt.replace('%','')),params.limit)}</span>元</span>}
                         </p>
 
                         <BaseButton text="确认投资" className="invest-confirm-pay" onClick={()=>{
                             this.setState({
                                 loading:true
                             })
-                            props.propPay({
-                                productName:params.productName,
-                                rate:params.rate,
-                                limit:params.limit,
+                            props.payForProduct({
+                                productId:props.params.id,
+                                amt:params.money,
                                 couponId:this.state.couponId,
+                                type:props.params.productType,
                                 success:()=>{
                                     this.setState({
                                         loading:false
+                                    })
+                                    this.context.router.replace({
+                                        pathname:`/financial/product/${props.params.productType}/${props.params.id}/dealResult`,
+                                        state:{
+                                            amt:params.money,
+                                            sy:this.calculate(props.params.productType,params.money,params.rate,params.limit),
+                                            product:params.productName,
+                                            couponSy:this.state.couponTxt ? this.calculate(props.params.productType,params.money,parseFloat(this.state.couponTxt.replace('%','')),params.limit) : ''
+                                        }
                                     })
                                 },
                                 fail:()=>{
@@ -146,6 +167,7 @@ export default class InvestConfirmPage extends Component{
                                     })
                                 }
                             })
+
                         }} />
                     </div>
                 </div>
@@ -153,6 +175,3 @@ export default class InvestConfirmPage extends Component{
         )
     }
 }
-InvestConfirmPage.contextTypes = {
-    router: React.PropTypes.object.isRequired
-};

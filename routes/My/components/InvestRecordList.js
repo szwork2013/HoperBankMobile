@@ -72,14 +72,12 @@ class InvestRecordList extends Component {
     }
     cancelInvest(productId,investId){
         const props = this.props;
-        //console.log(productId,investId)
         const r = confirm('要撤销该投资吗');
         if(r){
             this.setState({
                 loaded:false
             })
             props.cancelInvest({
-                userId:props.account.userId,
                 productId:productId,
                 investId:investId,
                 callback:(result)=>{

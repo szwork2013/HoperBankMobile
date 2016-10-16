@@ -13,3 +13,5 @@ render(
   <Root store={store} history={history} />,
   document.getElementById('root')
 )
+var func = () => ({  foo: 1  });
+console.log(func())

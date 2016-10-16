@@ -1,16 +1,10 @@
 import React, { Component, PropTypes } from 'react'
-import ListView from 'components/ListView'
 import { connect } from 'react-redux'
 import TabBar,{TabBarItem} from 'components/TabBar'
 import DealRecordList from './DealRecordList'
 class DealRecordPage extends Component {
   constructor(props) {
     super(props)
-  }
-  componentWillMount() {
-  }
-  componentDidMount(){
-
   }
   render() {
     const props = this.props;

@@ -126,18 +126,7 @@ export function authentication(opt){
 }
 
 
-/*投资确认页优惠券获取*/
-/*不用保存在store中*/
-export function fetchConfirmPageCoupon(opt){
-    var url=API.product.confirm;
-    return (dispatch, getState) => {
-        return fetch(url+`?userId=${Auth.getUserId()}&productId=${opt.productId}&type=${opt.type}&money=${opt.money}`)
-            .then((response)=>response.json())
-            .then((data)=>{
-                opt.callback && opt.callback(data)
-            })
-    }
-}
+
 
 /* 我的礼券-一级 */
 export function fetchGift(opt){

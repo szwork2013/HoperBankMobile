@@ -63,6 +63,8 @@ export function fetchFWList(opt){
     }
 }
 
+
+
 /* 产品详情投资记录获取 */
 export function fetchFinancialInvestRecord(opt){
     var url='';
@@ -120,7 +122,7 @@ export function payForProduct(opt){
         // no default
     }
     return (dispatch, getState) => {
-        return fetch(url + `?userId=${Auth.getUserId()}&productId=${opt.productId}&amt=${opt.amt}`)
+        return fetch(url + `?userId=${Auth.getUserId()}&productId=${opt.productId}&amt=${opt.amt}&couponId=${opt.couponId}`)
             .then((res)=>res.json())
             .then((res)=>{
                 if(res.r==1){
@@ -136,7 +138,6 @@ export function payForProduct(opt){
                 }
             })
     }
-
 }
 
 /* 优选服务 投资页面资料获取 */
@@ -204,5 +205,18 @@ export function clearFinancialReturnPlan(){
         dispatch({
             type:CLEAR_FINANCIAL_RETURN_PLAN
         })
+    }
+}
+
+/*投资确认页优惠券获取*/
+/*不用保存在store中*/
+export function fetchConfirmPageCoupon(opt){
+    var url=API.product.confirm;
+    return (dispatch, getState) => {
+        return fetch(url+`?userId=${Auth.getUserId()}&productId=${opt.productId}&type=${opt.type}&money=${opt.money}`)
+            .then((response)=>response.json())
+            .then((data)=>{
+                opt.callback && opt.callback(data)
+            })
     }
 }

@@ -107,13 +107,7 @@ class InvestPage1 extends Component{
                 <ReactCSSTransitionGroup component="div"
                                          transitionName="slide-right"
                                          transitionEnterTimeout={300} transitionLeaveTimeout={300}>
-
-                            {this.props.children  && React.cloneElement(this.props.children, {
-                                fetchConfirmPageCoupon:this.props.fetchConfirmPageCoupon,
-                                userId:this.props.account.userId,
-                                propPay:this.propPay.bind(this)
-                            })}
-
+                            {this.props.children}
                 </ReactCSSTransitionGroup>
                 <RootLoading display={!this.state.loaded}/>
                 <section className="product-wrap">
@@ -258,9 +252,8 @@ class InvestPage1 extends Component{
             return false;
         }
         if(this.checkInput()){
-
             //余额不足
-            if(props.account.balance < this.state.amtMoney){
+            if(parseFloat(props.account.balance) < parseFloat(this.state.amtMoney)){
                 let r = confirm("余额不足，请充值！");
                 if(r){
                     this.context.router.push({
@@ -271,21 +264,23 @@ class InvestPage1 extends Component{
                 return false;
             }
 
+            this.setState({
+                overlayShouldShow:false
+            })
 
             //跳到二次确认页
             //userId由prop带下去，其它参数由url带入
             this.context.router.push({
                 pathname:`/financial/product/${props.params.productType}/${props.params.id}/confirm`,
-                query:{
+                state:{
                     productId:props.params.id,
                     type:1,
                     money:this.state.amtMoney,
                     productName:obj.productName,
                     rate:obj.rate,
                     limit:obj.limit
-
                 },
-                state:{
+                query:{
                     productId:props.params.id,
                     type:1,
                     money:this.state.amtMoney,
@@ -296,36 +291,6 @@ class InvestPage1 extends Component{
             })
 
         }
-    }
-    propPay(obj){
-        const props = this.props;
-        props.payForProduct({
-            type:props.params.productType,
-            userId:props.account.userId,
-            productId:props.params.id,
-            amt:this.state.amtMoney,
-            success:(result)=>{
-                obj.success && obj.success(result)
-
-                this.setState({
-                    loaded:true,
-                    overlayShouldShow:false
-                })
-                this.context.router.replace({
-                    pathname:`/financial/product/${props.params.productType}/${props.params.id}/dealResult`,
-                    query:{
-                        amt:this.state.amtMoney,
-                        sy:this.calculate(this.state.amtMoney,obj.rate,obj.limit),
-                        product:obj.productName
-                    }
-                })
-            },
-            fail:(result)=>{
-                obj.fail && obj.fail(result)
-
-                alert(result.message)
-            }
-        })
     }
     checkInput(){
         const amtMoney = this.state.amtMoney;

@@ -1,19 +1,20 @@
 import React, { Component, PropTypes } from 'react'
 import {BaseButton} from 'components/Button'
-import {fetchAccount} from 'actions'
 import { browserHistory } from 'react-router'
-import { connect } from 'react-redux'
-class DealResultPage extends Component {
+export default class DealResultPage extends Component {
     constructor(props) {
         super(props)
         this.renderPayResult = this.renderPayResult.bind(this);
     }
+    static contextTypes = {
+        router: PropTypes.object.isRequired
+    }
+    static propTypes = {
+        fetchAccount:PropTypes.func.isRequired
+    }
     componentWillMount() {
         //交易成功后重新获取个人信息刷新账户余额
         this.props.fetchAccount()
-    }
-    componentDidMount(){
-
     }
     render() {
         return (
@@ -24,6 +25,7 @@ class DealResultPage extends Component {
     }
     renderPayResult(){
         const props = this.props;
+        const queryParams = props.location.state;
         return(
             <section className="deal-result-container">
                 <div className="deal-result-top">
@@ -33,15 +35,15 @@ class DealResultPage extends Component {
                 <div className="deal-success-wrap">
                     <div className="deal-success-item">
                         <span className="fl">投资产品</span>
-                        <span className="fr" style={{width:'70%',height:'22px',overflow:'hidden',whiteSpace:'nowrap',textOverflow:'ellipsis'}}>{props.location.query.product}</span>
+                        <span className="fr" style={{width:'70%',height:'22px',overflow:'hidden',whiteSpace:'nowrap',textOverflow:'ellipsis',textAlign:'right'}}>{queryParams.product}</span>
                     </div>
                     <div className="deal-success-item">
                         <span className="fl">购买金额</span>
-                        <span className="fr">{props.location.query.amt + '元'}</span>
+                        <span className="fr">{queryParams.amt + '元'}</span>
                     </div>
                     <div className="deal-success-item">
                         <span className="fl">预计收益</span>
-                        <span className="fr">{props.location.query.sy + '元'}</span>
+                        <span className="fr">{queryParams.sy + '元'}{queryParams.couponSy && '+' + queryParams.couponSy + '元'}</span>
                     </div>
                 </div>
                 <div className="deal-result-bottom">
@@ -51,21 +53,4 @@ class DealResultPage extends Component {
             </section>
         )
     }
-    renderChargeResult(){
-
-    }
-    renderWithDrawResult(){
-
-    }
 }
-DealResultPage.contextTypes = {
-    router: React.PropTypes.object.isRequired
-};
-function mapStateToProps(state, ownProps) {
-    return {
-        userId:state.account.userId
-    }
-}
-export default connect(mapStateToProps,{
-    fetchAccount
-})(DealResultPage)

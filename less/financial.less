@@ -695,26 +695,53 @@
     height:100%;
     float: right;
     font-size:12px;
-    background:url("/static/img/coupon_type2_bg_2.png") no-repeat;
-    background-size:100%;
-    text-indent:5px;
-    >p{
-      margin-top:10px;
+    position: relative;
+    >img{
+      width:100%;
+      height:100%;
     }
+    >div {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      left: 0;
+      top: 0;
+      >p{
+        margin-top:10px;
+        text-indent:5px;
+      }
+    }
+
   }
   >.part-2{
     float: left;
     height:100%;
     width:33.3%;
-    background:url("/static/img/coupon_type2_bg_1.png") no-repeat;
     background-size:100%;
     text-align: center;
-    >p.p1{
-      font-size:22px;
-      margin-top:30%;
+    position: relative;
+    >img{
+      width:100%;
+      height:100%;
     }
-    >p.p2{
-      font-size:14px;
+    >div{
+      position: absolute;
+      width:100%;
+      height:100%;
+      left:0;
+      top:0;
+
+      >p{
+        text-align: center;
+        &.p1{
+          font-size:22px;
+          margin-top:30%;
+        }
+        &.p2{
+          font-size:14px;
+        }
+      }
     }
+
   }
 }

@@ -37,11 +37,13 @@ export function setFetching(b){
 /*取消投资，不用通知store*/
 export function cancelInvest(opt){
     var url=API.product.cancel;
-    return fetch(`${url}?userId=${Auth.getUserId()}&productId=${opt.productId}&investId=${opt.investId}`)
-        .then((res)=>res.json())
-        .then((res)=>{
-            opt.callback && opt.callback(res);
-        })
+    return (dispatch, getState)=>{
+        return fetch(`${url}?userId=${Auth.getUserId()}&productId=${opt.productId}&investId=${opt.investId}`)
+            .then((res)=>res.json())
+            .then((res)=>{
+                opt.callback && opt.callback(res);
+            })
+    }
 }
 
 

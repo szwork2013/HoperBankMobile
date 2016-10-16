@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react'
-import ReactIScroll from 'react-iscroll'
 import { connect } from 'react-redux'
 import {fetchFinancialServices,payForProduct} from 'actions'
 import RootLoading from 'components/RootLoading'
@@ -175,7 +174,7 @@ class InvestPage2 extends Component{
         }
         if(this.checkInput()){
             //余额不足
-            if(props.account.balance < this.state.amtMoney){
+            if(parseFloat(props.account.balance) < parseFloat(this.state.amtMoney)){
                 let r = confirm("余额不足，请充值！");
                 if(r){
                     this.context.router.push({
@@ -186,7 +185,9 @@ class InvestPage2 extends Component{
                 return false;
             }
 
-
+            this.setState({
+                overlayShouldShow:false
+            })
             //跳到二次确认页
             //userId由prop带下去，其它参数由url带入
             this.context.router.push({
