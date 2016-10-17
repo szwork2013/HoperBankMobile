@@ -53,7 +53,7 @@ export function clearInvestRecord(){
 /*获取*/
 export function fetchInvestRecord(opt){
     return (dispatch, getState) => {
-        return fetch(API.user.investmentrecord + `?userId=${Auth.getUserId()}&status=${opt.type}$curPage=${opt.curPage}`)
+        return fetch(API.user.investmentrecord + `?userId=${Auth.getUserId()}&status=${opt.type}&curPage=${opt.curPage}`)
             .then((res)=>res.json())
             .then((res)=>{
                 if(res.r==1){

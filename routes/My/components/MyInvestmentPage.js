@@ -12,12 +12,6 @@ class MyInvestmentPage extends Component {
         }
         this.setInvestId = this.setInvestId.bind(this);
     }
-    componentWillMount() {
-        console.log(this.props)
-    }
-    componentDidMount(){
-
-    }
     setInvestId(id){
         this.setState({
             investId:id

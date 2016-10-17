@@ -139,6 +139,7 @@ class InvestRecordList extends Component {
         const shortTitleStyle={
             width:'50%'
         }
+
         return(
             <div className="invest-record-item" key={index}>
                 <div className={`invest-type-icon-${item.productType}`}></div>
@@ -165,7 +166,7 @@ class InvestRecordList extends Component {
                         <div className="item-record-detail">
                             <div className="part-1">
                                 <p>预计年化收益</p>
-                                <p>{item.productRate+'%'}</p>
+                                <p>{item.productRate+'%'}{item.addRate? <span className="invest-record-money"> + {item.addRate}%</span> : ''}</p>
                             </div>
                             <div className="part-2">
                                 <p>投资金额</p>
@@ -173,7 +174,35 @@ class InvestRecordList extends Component {
                             </div>
                             <div className="part-3">
                                 <p>预期收益</p>
-                                <p className="invest-record-money">{calSY({money:item.actualMoney,rate:item.productRate,productCycle:item.productCycle,type:item.productType})}</p>
+                                <p className="invest-record-money">
+                                    {
+                                        /* 计算利息时分开原利息与加息卡计算，最后再相加 */
+                                        item.addRate ?
+                                        parseFloat(calSY(
+                                            {
+                                                money:item.actualMoney,
+                                                rate:item.productRate,
+                                                productCycle:item.productCycle,
+                                                type:item.productType
+                                            }
+                                        )) + parseFloat(calSY(
+                                            {
+                                                money:item.actualMoney,
+                                                rate:item.addRate || 0,
+                                                productCycle:item.productCycle,
+                                                type:item.productType
+                                            }
+                                        )) : parseFloat(calSY(
+                                            {
+                                                money:item.actualMoney,
+                                                rate:item.productRate,
+                                                productCycle:item.productCycle,
+                                                type:item.productType
+                                            }
+                                        ))
+
+                                    }
+                                </p>
                             </div>
                         </div>
                         <p className="p2">

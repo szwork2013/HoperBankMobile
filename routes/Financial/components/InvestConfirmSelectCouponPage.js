@@ -49,7 +49,7 @@ export default class InvestConfirmSelectCouponPage extends Component{
                         </div>
                         <div className={`coupon-type-2`}>
                             <div className="part-1">
-                                <img src="/static/img/coupon_type2_bg_2.png"/>
+                                <img src="/static/img/coupon_type1_bg_2.png"/>
                                 <div>
                                     <p>有效时间：{item.validTime}</p>
                                     <p>适用范围：{item.scope}</p>
@@ -57,7 +57,7 @@ export default class InvestConfirmSelectCouponPage extends Component{
                                 </div>
                             </div>
                             <div className="part-2">
-                                <img src="/static/img/coupon_type2_bg_1.png"/>
+                                <img src="/static/img/coupon_type1_bg_1.png"/>
                                 <div>
                                     <p className="p1">{item.money}</p>
                                     <p className="p2">加息券</p>

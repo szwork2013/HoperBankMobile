@@ -26,6 +26,7 @@ class FinancialList extends Component {
         const iScrollHeight = config.windowHeight - config.navHeight - config.tabBarHeight
         return(
             <ReactIScroll iScroll={iScroll}
+                          options={this.props.options}
                             style={{height:iScrollHeight,overflow:'hidden'}}
                             >
 

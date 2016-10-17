@@ -37,9 +37,9 @@ class GiftList extends Component{
 
         if(couponType==1){
             return (
-                <div className={`gift-item coupon-type-2`} key={index}>
+                <div className={`gift-item coupon-type-2 type${type}`} key={index}>
                     <div className="part-1">
-                        <img src="/static/img/coupon_type2_bg_2.png"/>
+                        <img src={`/static/img/coupon_type${type==3? 3 : 1}_bg_2.png`}/>
                         <div>
                             <p>有效时间：{item.validTime}</p>
                             <p>适用范围：{item.scope}</p>
@@ -47,7 +47,7 @@ class GiftList extends Component{
                         </div>
                     </div>
                     <div className="part-2">
-                        <img src="/static/img/coupon_type2_bg_1.png"/>
+                        <img src={`/static/img/coupon_type${type}_bg_1.png`}/>
                         <div>
                             <p className="p1">{item.money}</p>
                             <p className="p2">加息券</p>

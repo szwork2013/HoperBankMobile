@@ -126,7 +126,7 @@ export default class InvestConfirmPage extends Component{
                             this.context.router.push(`/financial/product/${props.params.productType}/${props.params.id}/confirm/coupon/2`)
                         }}  hasBorder={true}  rightText={this.showCouponType2.bind(this)()} hasIcon={true} />
 
-                        <TextButton text="抵用券" onClick={()=>{
+                        <TextButton text="投资抵扣" onClick={()=>{
                            this.context.router.push(`/financial/product/${props.params.productType}/${props.params.id}/confirm/coupon/3`)
                         }}  hasBorder={false}  rightText="无可用" hasIcon={true} />
 
