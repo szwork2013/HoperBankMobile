@@ -13,17 +13,7 @@ module.exports = {
           }
     },
     path: '/myteam',
-    component:connect((state,ownProps)=>({
-        team:state.team.preview,
-        teamList:state.team.teamList,
-        royaltyList:state.team.royaltyList
-    }),{
-        fetchTeam,
-        fetchTeamList,
-        clearTeamList,
-        fetchRoyaltyList
-    })(require('./components/TeamPage')),
-    /*getComponent(nextState, cb) {
+    getComponent(nextState, cb) {
         require.ensure([], (require) => {
             cb(null,connect((state,ownProps)=>({
                 team:state.team.preview,
@@ -36,7 +26,7 @@ module.exports = {
                 fetchRoyaltyList
             })(require('./components/TeamPage')))
         })
-    },*/
+    },
     childRoutes:[
         {
             path:'/myteam/teamlist',

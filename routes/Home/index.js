@@ -3,10 +3,9 @@ module.exports = {
         //console.log(nextState)
     },
     path: '/home',
-    component:require('./components/HomePage')
-    /*getComponent(nextState, cb) {
+    getComponent(nextState, cb) {
         require.ensure([], (require) => {
             cb(null, require('./components/HomePage'))
         })
-    }*/
+    }
 }

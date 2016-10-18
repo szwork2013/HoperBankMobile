@@ -5,13 +5,14 @@ var webpack = require('webpack')
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 module.exports = {
     devtool: 'cheap-source-map',
-    entry: {
-        app:'./index'
-    },
+    entry: [
+        'webpack-hot-middleware/client',
+        './index'
+    ],
     output: {
         path: __dirname+'/static/scripts/',
         filename: 'bundle.js',
-        chunkFilename: '[id].chunk.js',
+        chunkFilename: '[id].chunk_[hash].js',
         publicPath: '/static/scripts/'
     },
     plugins: [
@@ -26,7 +27,8 @@ module.exports = {
         //new webpack.optimize.CommonsChunkPlugin('shared.js')
         new webpack.DefinePlugin({
             'process.env.NODE_ENV': JSON.stringify('development')
-        })
+        }),
+        new webpack.HotModuleReplacementPlugin()
     ],
     module: {
         loaders: [

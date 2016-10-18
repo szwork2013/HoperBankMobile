@@ -10,7 +10,7 @@ module.exports = {
     output: {
         path: __dirname+'/static/scripts/',
         filename: 'bundle_[hash].js',
-        chunkFilename: '[id].chunk.js',
+        chunkFilename: '[id].chunk_[hash].js',
         publicPath: '/static/scripts/'
     },
     plugins: [

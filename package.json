@@ -3,7 +3,9 @@
   "version": "0.0.0",
   "description": "hoper-bank-mobile",
   "scripts": {
-    "start": "nodemon server.js"
+    "start": "nodemon server.js",
+    "publish-mac": "export NODE_ENV=prod&&webpack -p --progress --colors",
+    "publish-win": "set NODE_ENV=prod&&webpack -p --progress --colors"
   },
   "repository": {
     "type": "git",
