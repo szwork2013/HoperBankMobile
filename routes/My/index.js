@@ -21,11 +21,13 @@ module.exports = {
         !Auth.logged() && replace('/login')
     },
     path: '/my',
-    getComponent(nextState, cb) {
-        require.ensure([], (require) => {
-            cb(null, require('./components/MyPage'))
-        })
-    },
+    component: require('./components/MyPage'),
+    /*
+    * getComponent(nextState, cb) {
+     require.ensure([], (require) => {
+     cb(null, require('./components/MyPage'))
+     })
+     },*/
     childRoutes:[
         {
             path:'/my/bindbank',

@@ -9,11 +9,12 @@ import { connect } from 'react-redux'
 import {fetchConfirmPageCoupon,payForProduct,fetchAccount} from 'actions'
 module.exports = {
     path: '/financial',
-    getComponent(nextState, cb) {
-        require.ensure([], (require) => {
-            cb(null, require('./components/FinancialPage'))
-        })
-    },
+    component:require('./components/FinancialPage'),
+    /*getComponent(nextState, cb) {
+     require.ensure([], (require) => {
+     cb(null, require('./components/FinancialPage'))
+     })
+     },*/
     childRoutes: [
         {
             path:'/financial/product/:productType/:id',
