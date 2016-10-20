@@ -63,7 +63,7 @@ export default class LoginPage extends Component {
         return (
             <section className="form-wrap">
                 <RootLoading display={this.state.loading} />
-                <img src="/static/img/login_banner.jpg" width="100%" style={{marginBottom:'10px'}} />
+                <img src="http://oss.hoperbank.com/static/login.png" width="100%" style={{marginBottom:'10px'}} />
                 <IconInput
                     placeholder="请输入手机号"
                     icon="icon-phone"

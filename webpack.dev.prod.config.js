@@ -1,4 +1,4 @@
-console.log('dev')
+console.log('use webpack.dev.prod.config')
 var fs = require('fs')
 var path = require('path')
 var webpack = require('webpack')
@@ -16,17 +16,11 @@ module.exports = {
         publicPath: '/static/scripts/'
     },
     plugins: [
-        //new webpack.optimize.DedupePlugin(),
+        new webpack.optimize.DedupePlugin(),
         new webpack.optimize.OccurenceOrderPlugin(),
-        new HtmlWebpackPlugin({
-            title: '琥珀金服',
-            template: './static/index.html',
-            filename: '../../index.html',
-            favicon: ''
-        }),
         //new webpack.optimize.CommonsChunkPlugin('shared.js')
         new webpack.DefinePlugin({
-            'process.env.NODE_ENV': JSON.stringify('development')
+            'process.env.NODE_ENV': JSON.stringify('prod')
         }),
         new webpack.HotModuleReplacementPlugin()
     ],

@@ -230,7 +230,7 @@ class ReigsterPage extends Component {
                 </ReactCSSTransitionGroup>
                 <RootLoading display={this.state.loading} />
                 <section className={`register-step-first ${this.state.step.first ? '':'hide'}`} >
-                    <img src="/static/img/login_banner.jpg" width="100%" style={{marginBottom:'10px'}} />
+                    <img src="http://oss.hoperbank.com/static/reg.png" width="100%" style={{marginBottom:'10px'}} />
                     <IconInput
                         placeholder="请输入手机号"
                         icon="icon-tel"
