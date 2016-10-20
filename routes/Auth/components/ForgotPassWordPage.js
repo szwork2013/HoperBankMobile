@@ -213,7 +213,6 @@ ForgotPassWordPage.contextTypes = {
 
 function mapStateToProps(state, ownProps) {
     return {
-        account:state.account
     }
 }
 

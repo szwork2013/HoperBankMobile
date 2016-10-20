@@ -2,7 +2,6 @@ console.log('use webpack.dev.test.config')
 var fs = require('fs')
 var path = require('path')
 var webpack = require('webpack')
-var HtmlWebpackPlugin = require('html-webpack-plugin');
 module.exports = {
     devtool: 'cheap-source-map',
     entry: [
@@ -36,9 +35,6 @@ module.exports = {
                 test: /\.less$/,
                 loader: "style!css!less"
             }
-        ],
-        postLoaders: [
-            { loader: "transform?brfs" }
         ]
     },
     resolve: {

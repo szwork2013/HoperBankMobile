@@ -20,7 +20,7 @@ module.exports = {
         new webpack.optimize.OccurenceOrderPlugin(),
         //new webpack.optimize.CommonsChunkPlugin('shared.js')
         new webpack.DefinePlugin({
-            'process.env.NODE_ENV': JSON.stringify('prod')
+            'process.env.NODE_ENV': JSON.stringify('production')
         }),
         new webpack.HotModuleReplacementPlugin()
     ],

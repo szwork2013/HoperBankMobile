@@ -1,15 +1,11 @@
 import { connect } from 'react-redux'
 import {fetchActivityList} from 'actions'
-
+import ActivityPage from './components/ActivityCenter'
 module.exports = {
     path: '/activity',
-    getComponent(nextState, cb) {
-        require.ensure([], (require) => {
-            cb(null, connect((state,ownProps)=>({
-                activity:state.activity
-            }),{
-                fetchActivityList
-            })(require('./components/ActivityCenter')))
-        })
-    }
+    component:connect((state,ownProps)=>({
+        activity:state.activity
+    }),{
+        fetchActivityList
+    })(ActivityPage)
 }

@@ -15,7 +15,7 @@ module.exports = {
         publicPath: '/static/scripts/'
     },
     plugins: [
-        new CleanPlugin('./static/scripts'),
+        new CleanPlugin(['./static/scripts','./static/index.html']),
         new webpack.optimize.UglifyJsPlugin({
             compress: {
                 warnings: false
@@ -31,7 +31,7 @@ module.exports = {
         }),
         //new webpack.optimize.CommonsChunkPlugin('shared.js')
         new webpack.DefinePlugin({
-            'process.env.NODE_ENV': JSON.stringify('prod')
+            'process.env.NODE_ENV': JSON.stringify('production')
         })
     ],
     module: {

@@ -118,5 +118,4 @@ class RegisterAgreementPage extends Component {
         )
     }
 }
-
-module.exports = RegisterAgreementPage
+module.exports = RegisterAgreementPage;

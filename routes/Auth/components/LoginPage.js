@@ -1,6 +1,4 @@
 import React, { Component, PropTypes } from 'react'
-import { connect } from 'react-redux'
-import { doLogin } from 'actions'
 import IconButton from 'components/IconButton'
 import IconInput from 'components/IconInput'
 import {Link} from 'react-router'
@@ -63,7 +61,9 @@ export default class LoginPage extends Component {
         return (
             <section className="form-wrap">
                 <RootLoading display={this.state.loading} />
-                <img src="http://oss.hoperbank.com/static/login.png" width="100%" style={{marginBottom:'10px'}} />
+                <div className="auth-banner">
+                    <img src="http://oss.hoperbank.com/static/login.png" width="100%" />
+                </div>
                 <IconInput
                     placeholder="请输入手机号"
                     icon="icon-phone"
