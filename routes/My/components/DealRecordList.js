@@ -86,7 +86,7 @@ class DealRecordList extends Component {
         }
 
         return(
-            <div className="my-deal-record-item" key={index}>
+            <div className={`my-deal-record-item animated fadeInLeft`} key={index} style={{animationDuration:0.5+(index%10 / 5)+'s'}}>
                 <div className="my-deal-record-info">
                     <p>
                         {item.remarkTime}

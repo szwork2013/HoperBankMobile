@@ -95,7 +95,9 @@ class FinancialServicesList extends Component {
         };
         var Circle = ProgressBar.Circle;
         return(
-                <Link to={`/financial/product/${this.props.type}/${item.projectId}`} key={index} className='financial-li'>
+                <Link to={`/financial/product/${this.props.type}/${item.projectId}`}
+                      className={`financial-li animated fadeInLeft`} style={{animationDuration:0.5+(index%10 / 5)+'s'}}
+                      key={index}>
                     <h2>{item.title}</h2>
                     <div>
                         <div className="part-1">

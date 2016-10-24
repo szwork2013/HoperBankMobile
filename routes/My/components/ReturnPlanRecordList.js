@@ -61,7 +61,7 @@ class ReturnPlanRecordList extends Component {
     }
     renderItem(item,index){
         return(
-            <div className="return-plan-record-item" key={index}>
+            <div className={`return-plan-record-item  animated fadeInLeft`} key={index} style={{animationDuration:0.5+(index%10 / 5)+'s'}}>
                     <div className="return-plan-record-info">
                         <h2 className="return-plan-h2">{item.productName}</h2>
                         <p className="return-plan-p">

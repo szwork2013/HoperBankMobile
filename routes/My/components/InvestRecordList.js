@@ -141,7 +141,7 @@ class InvestRecordList extends Component {
         }
 
         return(
-            <div className="invest-record-item" key={index}>
+            <div className={`invest-record-item animated fadeInLeft`} key={index} style={{animationDuration:0.5+(index%10 / 5)+'s'}}>
                 <div className={`invest-type-icon-${item.productType}`}></div>
                     <div className="invest-record-info" >
                         <p className="p1">

@@ -27,7 +27,7 @@ class InvitationPage extends Component {
             </div>
             <div className="part-2">
               <p className="p1">扫一扫下面我的推荐码</p>
-              <div className="code" ref='code'>
+              <div className="code animated zoomIn" style={{animationDelay:'300ms',animationDuration:0.2}} ref='code'>
               </div>
               <p className="p2">
                 我的链接:<input type="text" defaultValue={`http://www.hoperbank.com/reg/html?inviteMobile=${this.props.account.fullMobile}`} />

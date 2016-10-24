@@ -23,7 +23,7 @@ class GiftList extends Component{
     renderItem(couponType,type,item,index){
         if(couponType==3){
             return (
-                <div className={`gift-list-item-2 type${type}`} key={index}>
+                <div className={`gift-list-item-2 type${type} animated flipInX`} key={index} style={{animationDuration:0.5+(index%10 / 5)+'s'}}>
                     <div className="part-left">
                         <h3>{item.name}</h3>
                         <p>有效时间：{item.validTime}</p>
@@ -37,7 +37,7 @@ class GiftList extends Component{
 
         if(couponType==1){
             return (
-                <div className={`gift-item coupon-type-2 type${type}`} key={index}>
+                <div className={`gift-item coupon-type-2 type${type}  animated flipInX`} key={index} style={{animationDuration:0.5+(index%10 / 5)+'s'}}>
                     <div className="part-1">
                         <img src={`/static/img/coupon_type${type==3? 3 : 1}_bg_2.png`}/>
                         <div>

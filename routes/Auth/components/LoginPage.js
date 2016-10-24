@@ -61,7 +61,7 @@ export default class LoginPage extends Component {
         return (
             <section className="form-wrap">
                 <RootLoading display={this.state.loading} />
-                <div className="auth-banner">
+                <div className={`auth-banner animated fadeIn`}>
                     <img src="http://oss.hoperbank.com/static/login.png" width="100%" />
                 </div>
                 <IconInput

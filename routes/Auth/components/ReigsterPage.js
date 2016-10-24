@@ -230,7 +230,7 @@ class ReigsterPage extends Component {
                 </ReactCSSTransitionGroup>
                 <RootLoading display={this.state.loading} />
                 <section className={`register-step-first ${this.state.step.first ? '':'hide'}`} >
-                    <div className="auth-banner">
+                    <div className={`auth-banner animated fadeIn`}>
                         <img src="http://oss.hoperbank.com/static/reg.png" width="100%" />
                     </div>
                     <IconInput

@@ -28,17 +28,17 @@ class BorrowNavPage extends Component {
                         })
                     }
                 </ReactCSSTransitionGroup>
-                <div className="borrow-banner">
+                <div className={`borrow-banner animated fadeIn`}>
                     <img src="/static/img/loan_1080_546.jpg" width="100%" />
                 </div>
-                <Link className="borrow-nav-item" to="/borrow/list" >
+                <Link className="borrow-nav-item animated bounceInLeft" to="/borrow/list" >
                     <div className="borrow-nav-icon"></div>
                     <div className="borrow-nav-info">
                         <h2>快速申请</h2>
                         <p>优先接受深圳地区的借款申请，提交申请后我们将在2个工作日内和您取得联系。</p>
                     </div>
                 </Link>
-                <Link className="borrow-nav-item" to='/borrow/apply'>
+                <Link className="borrow-nav-item  animated bounceInRight" to='/borrow/apply'>
                     <div className="borrow-nav-icon icon2"></div>
                     <div className="borrow-nav-info">
                         <h2>合作项目</h2>

@@ -132,7 +132,7 @@ class HomePage extends Component {
                                 recommend.map((item,index)=>{
                                     return(
                                         <section className="index-ll-content" key={index}>
-                                            <div className="index-ll-bg">
+                                            <div className={`index-ll-bg ${index===1? 'animated flipInY' : ''}`}>
                                                 <h2 className="tit">{item.name}</h2>
                                                 <p className="p1"><span className="rate">{item.rate}</span><span>%</span></p>
                                                 <p className="p2">预期年化收益率</p>
@@ -159,7 +159,16 @@ class HomePage extends Component {
                         {
                             recommend.map((item,index)=>{
                                 return(
-                                    <li key={index} style={{width:Math.floor(100/recommend.length) +'%'}} className={this.state.selected == index ? 'active':''}><i></i>{item.limit}个月</li>
+                                    <li key={index}
+                                        style={
+                                            {
+                                                width:Math.floor(100/recommend.length) +'%',
+                                                animationDuration:1+(index/5)  +'s'
+                                            }
+                                        }
+                                        className={`animated fadeIn ${this.state.selected == index ? 'active':''}`}>
+                                        <i></i>{item.limit}个月
+                                    </li>
                                 )
                             })
                         }

@@ -45,7 +45,7 @@ class FinancialList extends Component {
         var arr = [];
         data.map((item,index)=>{
             arr.push(
-                <li key={index}>
+                <li key={index} className={`animated fadeInLeft`} style={{animationDuration:0.5+(index/5)+'s'}}>
                     <h2>{item.name}</h2>
                     <div>
                         <div className="part-1">
