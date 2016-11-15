@@ -83,7 +83,7 @@ class InvestPage1 extends Component{
         return (parseFloat( money * rate / 100 / 12 * time) || 0).toFixed(2);
     }
     render(){
-        const options = {mouseWheel: false, scrollbars: false, scrollX: true,probeType: 2,startX:-750}
+        const options = {mouseWheel: false, scrollbars: false, scrollX: true,probeType: 2,startX:-750,momentum:true}
         const account = this.props.account;
         var data = {
             rate:0,

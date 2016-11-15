@@ -10,17 +10,19 @@ class FinancialList extends Component {
     constructor(props) {
         super(props)
         this.state={
-            loaded:false
+            loaded:!(props.product.type1.length === 0)
         }
         this.renderItem = this.renderItem.bind(this);
     }
 
     componentWillMount() {
-        this.props.fetchLCList(()=>{
-            this.setState({
-                loaded:true
+        if(this.props.product.type1.length ===0){
+            this.props.fetchLCList(()=>{
+                this.setState({
+                    loaded:true
+                })
             })
-        })
+        }
     }
     render() {
         const iScrollHeight = config.windowHeight - config.navHeight - config.tabBarHeight

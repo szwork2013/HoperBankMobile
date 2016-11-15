@@ -81,7 +81,7 @@ class MyPage extends Component {
                 <section className="my-wrap">
                     <div className="my-info-top">
                         <div className="my-avatar-wrap">
-                            <h2 id="sumMoney">{account ? account.totalIncome : <icon className="loading"></icon>}</h2>
+                            <h2 id="sumMoney" className={`${this.state.loaded && 'animated tada'}`}>{account ? account.totalIncome : <icon className="loading"></icon>}</h2>
                             <p>累计总收益(元)</p>
                             <div className="my-account-wrap">
                                 <div>

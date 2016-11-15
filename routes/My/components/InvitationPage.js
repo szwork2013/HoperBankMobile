@@ -10,7 +10,7 @@ class InvitationPage extends Component {
         "render":'image',
         "size": 150,
         "color": "#3a3",
-        "text": `http://www.hoperbank.com/reg/html?inviteMobile=${this.props.account.fullMobile}`,
+        "text": `https://www.hoperbank.com/reg/html?inviteMobile=${this.props.account.fullMobile}`,
         "background":'#fff'
       });
     },300)
@@ -30,7 +30,7 @@ class InvitationPage extends Component {
               <div className="code animated zoomIn" style={{animationDelay:'300ms',animationDuration:0.2}} ref='code'>
               </div>
               <p className="p2">
-                我的链接:<input type="text" defaultValue={`http://www.hoperbank.com/reg/html?inviteMobile=${this.props.account.fullMobile}`} />
+                我的链接:<input type="text" defaultValue={`https://www.hoperbank.com/reg/html?inviteMobile=${this.props.account.fullMobile}`} />
               </p>
               <p className="p3">
                 长按上方链接 -> 全选 -> 复制将注册链接发给好友。

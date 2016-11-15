@@ -71,7 +71,8 @@ export default class FinancialProductDetail extends Component {
 const InvestInfoPage = (props)=>{
     var productType= '';
     const data = props.data;
-    switch (parseInt(data.xdProductType)){
+    const xdProductType = parseInt(data.xdProductType);
+    switch (xdProductType){
         case 1:
             productType = '消费薪金贷'
             break;
@@ -96,7 +97,86 @@ const InvestInfoPage = (props)=>{
         case 8:
             productType = '车主贷'
             break;
+        case 9:
+            productType = '企业订单贷'
+            break;
     }
+
+    if(xdProductType===9){
+        return(
+            <div className="product-s1-detail">
+                <div className="product-text-item no-bg">
+                    <span className="s1">借款信息</span>
+                </div>
+                <div className="product-text-item">
+                    <span className="s1">借款类型</span>
+                    <span className="s2 text-right">{productType}</span>
+                </div>
+                <div className="product-text-item">
+                    <span className="s1">借款期限</span>
+                    <span className="s2 text-right">{data.productCycle}个月</span>
+                </div>
+                <div className="product-text-item">
+                    <span className="s1">借款用途</span>
+                    <span className="s2 text-right">{data.loanApplication}</span>
+                </div>
+                <div className="product-text-item no-bg">
+                    <span className="s1">企业信息</span>
+                </div>
+                <div className="product-text-item">
+                    <span className="s1">企业名字</span>
+                    <span className="s2 text-right">{data.companyName || ''}</span>
+                </div>
+                <div className="product-text-item">
+                    <span className="s1">企业地址</span>
+                    <span className="s2 text-right">{data.companyAddress || ''}</span>
+                </div>
+                <div className="product-text-item no-bg">
+                    <span className="s1">企业法人/负责人信息</span>
+                </div>
+                <div className="product-text-item">
+                    <span className="s1">法人/负责人名字</span>
+                    <span className="s2 text-right">{data.realName || ''}</span>
+                </div>
+                <div className="product-text-item">
+                    <span className="s1">职位级别</span>
+                    <span className="s2 text-right">{data.position}</span>
+                </div>
+                <div className="product-text-item">
+                    <span className="s1">任职部门</span>
+                    <span className="s2 text-right">{data.dept}</span>
+                </div>
+                <div className="product-text-item no-bg">
+                    <span className="s1">其它审核信息</span>
+                </div>
+                <div className="product-text-item">
+                    <span className="s1">企业收入证明</span>
+                    <span className="s2 text-right">已验证</span>
+                </div>
+                <div className="product-text-item">
+                    <span className="s1">企业经营地证明</span>
+                    <span className="s2 text-right">已验证</span>
+                </div>
+                <div className="product-text-item">
+                    <span className="s1">信用报告</span>
+                    <span className="s2 text-right">已验证</span>
+                </div>
+                <div className="product-text-item">
+                    <span className="s1">购销合同</span>
+                    <span className="s2 text-right">已验证</span>
+                </div>
+                <div className="product-text-item">
+                    <span className="s1">身份证信息</span>
+                    <span className="s2 text-right">已验证</span>
+                </div>
+                <div className="product-text-item">
+                    <span className="s1">营业执照</span>
+                    <span className="s2 text-right">已验证</span>
+                </div>
+            </div>
+        )
+    }
+
     return(
         <div className="product-s1-detail">
             <div className="product-text-item no-bg">
@@ -108,7 +188,7 @@ const InvestInfoPage = (props)=>{
             </div>
             <div className="product-text-item">
                 <span className="s1">借款期限</span>
-                <span className="s2 text-right">{data.productCycle}</span>
+                <span className="s2 text-right">{data.productCycle}个月</span>
             </div>
             <div className="product-text-item">
                 <span className="s1">借款用途</span>

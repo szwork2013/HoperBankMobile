@@ -2,7 +2,6 @@ import React, { Component, PropTypes } from 'react'
 import ListView from 'components/ListView'
 import { connect } from 'react-redux'
 import RootLoading from 'components/RootLoading'
-import DealRecordList from './DealRecordList'
 import config from 'componentConfig'
 import {fetchFinancialInvestRecord,clearFinancialInvestRecord} from 'actions'
 class FinancialProductRecord extends Component {
@@ -39,7 +38,7 @@ class FinancialProductRecord extends Component {
     }
     renderItem(item,index){
         return(
-            <div key={index} className="my-team-list-item">
+            <div key={index} className={`my-team-list-item my-deal-record-item animated fadeInLeft`}  style={{animationDuration:0.2+(index%10 / 7)+'s'}}>
                 <p>
                     <span>{item.user}</span>
                     <span>{item.money}</span>

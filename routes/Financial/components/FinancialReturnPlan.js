@@ -2,7 +2,6 @@ import React, { Component, PropTypes } from 'react'
 import ListView from 'components/ListView'
 import { connect } from 'react-redux'
 import RootLoading from 'components/RootLoading'
-import DealRecordList from './DealRecordList'
 import config from 'componentConfig'
 import {fetchFinancialReturnPlan,clearFinancialReturnPlan} from 'actions'
 class FinancialReturnPlan extends Component {

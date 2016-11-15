@@ -16,8 +16,8 @@ switch (ENV){
         break;
     case 2:
         domain='http://120.25.97.109:5080/hpmobile/v1/';
-        fuiouCharge='http://www-1.fuiou.com:9057/jzh/app/500002.action';
-        fuiouWithDraw='http://www-1.fuiou.com:9057/jzh/app/500003.action';
+        fuiouCharge='https://jzh-test.fuiou.com/jzh/app/500002.action';
+        fuiouWithDraw='https://jzh-test.fuiou.com/jzh/app/500003.action';
         break;
     case 3:
         domain = 'http://192.168.1.46:8080/hpmobile/v1/';
