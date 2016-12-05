@@ -56,6 +56,10 @@ class ReigsterPage extends Component {
     }
     doStepFirst(){
         const props = this.props;
+        if(!this.refs.agree.checked){
+            alert('请阅读并同意注册相关条款')
+            return false;
+        }
         if(this.state.userNamePassed){
             //手机号码格式通过
             this.setState({
@@ -241,7 +245,10 @@ class ReigsterPage extends Component {
                         callback={(b,val)=>{this.setState({username:val,userNamePassed:b})}}>
                     </IconInput>
                     <section className="tip-section-2">
-                        注册即同意<Link to="/register/agreement" style={{color:'#ee5447'}}>《琥珀金服服务协议》</Link>
+                        <label>
+                            <input type="checkbox" ref="agree"  style={{marginRight:'5px'}} defaultChecked="checked" />
+                            同意<Link to="/register/agreement" style={{color:'#ee5447'}}>《琥珀金服服务协议》</Link>及测试<Link to="/risktest" style={{color:'#ee5447'}}>《风险评测》</Link>
+                        </label>
                     </section>
                     <BaseButton text="下一步" onClick={this.doStepFirst} className={`mt20 ${this.state.userNamePassed? '':'disabled'}`} disabled={!this.state.userNamePassed} />
                     <section className="tip-section-2">

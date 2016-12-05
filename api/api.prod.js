@@ -106,7 +106,7 @@ var API = {
     coupon:{
         preview:domain + 'user/coupon',
         detail:domain + 'user/coupon/detail'
-    }
-
+    },
+    question:domain+'question/surveyInterface'
 }
 export default API;

@@ -21,12 +21,6 @@ class MyPage extends Component {
             })
         })
     }
-    componentDidMount(){
-    }
-
-    componentWillReceiveProps(nextProps) {
-
-    }
     logout(){
         var r = confirm("确定要退出吗？")
         if(r){
@@ -129,14 +123,13 @@ class MyPage extends Component {
                     <IconButton text="个人资料" icon="icon-personal" onClick={()=>{this.jumpTo('/my/personal')}} />
                     <IconButton text="我的推荐码" icon="icon-dimension-code" onClick={()=>{this.jumpTo('/my/invitation')}}  />
                     <IconButton text="我的礼券" icon="icon-gift" onClick={()=>{this.jumpTo('/my/myGift')}} />
+                    <IconButton text="风险评测" icon="icon-record" onClick={()=>{this.jumpTo('/risktest')}} />
                     <IconButton text="客服热线" icon="icon-user3" hasBorder={false} href="tel:4008-758-338" hasArrow={false} arrowText="4008-758-338"/>
                 </section>
                 <section className="my-exit-wrap">
                     <input className="my-exit-btn" type="button" id="exit" onClick={this.logout} value="安全退出"/>
                 </section>
-
             </section>
-
         )
     }
 }

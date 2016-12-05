@@ -60,6 +60,15 @@ export function reBuyOperation(opt){
 }
 
 
-
-
+/*问卷调查，不用通知store*/
+export function asyncRisk(opt){
+    var url=API.question;
+    return (dispatch, getState) => {
+        return fetch(`${url}?userId=${Auth.getUserId() || ''}&answer=${opt.answer}`)
+            .then((res)=>res.json())
+            .then((res)=>{
+                opt.callback && opt.callback(res);
+            })
+    }
+}
 

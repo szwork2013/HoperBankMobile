@@ -100,9 +100,12 @@ const InvestInfoPage = (props)=>{
         case 9:
             productType = '企业订单贷'
             break;
+        case 10:
+            productType = '险商借'
+            break;
     }
 
-    if(xdProductType===9){
+    if(xdProductType===9 || xdProductType===10){
         return(
             <div className="product-s1-detail">
                 <div className="product-text-item no-bg">
