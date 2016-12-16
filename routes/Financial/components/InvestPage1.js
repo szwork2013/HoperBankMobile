@@ -96,6 +96,7 @@ class InvestPage1 extends Component{
                 return data = item;
             }
         });
+
         const show={
             transform:`translate(0,-${$(this.refs.shoppingWindow).outerHeight()}px)`
         }
@@ -128,7 +129,7 @@ class InvestPage1 extends Component{
                         </div>
                         <div>
                             <p className="p1">起投金额(元)</p>
-                            <p className="p2">100</p>
+                            <p className="p2">{data.lowestBuy}</p>
                             <div className="line-2"></div>
                         </div>
                         <div>
@@ -233,7 +234,7 @@ class InvestPage1 extends Component{
                     </div>
                     <BaseButton text="确认" className={this.state.canSubmit ? '' : 'disabled'}
                                 disabled={!this.state.canSubmit}
-                                style={{width:'100%',marginTop:'10px'}} onClick={this.doPay.bind(this,{productName:data.name,rate:data.rate,limit:data.limit})} />
+                                style={{width:'100%',marginTop:'10px'}} onClick={this.doPay.bind(this,{productName:data.name,rate:data.rate,limit:data.limit,lowestBuy:data.lowestBuy})} />
 
                 </div>
             </section>
@@ -241,6 +242,7 @@ class InvestPage1 extends Component{
     }
     doPay(obj){
         const props = this.props;
+
         if(!props.account.userId){
             let r = confirm("请先登录");
             if(r){
@@ -251,7 +253,7 @@ class InvestPage1 extends Component{
             }
             return false;
         }
-        if(this.checkInput()){
+        if(this.checkInput(obj.lowestBuy)){
             //余额不足
             if(parseFloat(props.account.balance) < parseFloat(this.state.amtMoney)){
                 let r = confirm("余额不足，请充值！");
@@ -292,10 +294,11 @@ class InvestPage1 extends Component{
 
         }
     }
-    checkInput(){
+    checkInput(lowestBuy){
         const amtMoney = this.state.amtMoney;
-        if(amtMoney < 100){
-            alert('100元起投')
+        if(amtMoney < lowestBuy){
+            alert(`${lowestBuy}元起投`)
+
             return false;
         }
         return true;

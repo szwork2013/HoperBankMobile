@@ -89,6 +89,12 @@ export default class BindBankPage extends Component {
             alert('请输入正确的银行卡号');
             return false;
         }
+        if(this.state.bankId==''){
+            this.state.bankId = this.props.bankData[0].value;
+            this.setState({
+                bankId:this.props.bankData[0].value
+            })
+        }
         this.setState({
             loading:true
         })

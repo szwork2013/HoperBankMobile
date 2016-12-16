@@ -154,7 +154,7 @@ class InvestPage2 extends Component{
                     </div>
                     <BaseButton text="确认" className={this.state.canSubmit ? '' : 'disabled'}
                                 disabled={!this.state.canSubmit}
-                                style={{width:'100%',marginTop:'10px'}} onClick={this.doPay.bind(this,{productName:product.productName,rate:product.productRate,limit:product.productCycle})} />
+                                style={{width:'100%',marginTop:'10px'}} onClick={this.doPay.bind(this,{productName:product.productName,rate:product.productRate,lowestBuy:product.atleastMoney,limit:product.productCycle})} />
 
                 </div>
             </section>
@@ -172,7 +172,7 @@ class InvestPage2 extends Component{
             }
             return false;
         }
-        if(this.checkInput()){
+        if(this.checkInput(obj.lowestBuy)){
             //余额不足
             if(parseFloat(props.account.balance) < parseFloat(this.state.amtMoney)){
                 let r = confirm("余额不足，请充值！");
@@ -235,10 +235,11 @@ class InvestPage2 extends Component{
             }
         })
     }
-    checkInput(){
+    checkInput(lowestBuy){
         const amtMoney = this.state.amtMoney;
-        if(amtMoney < 100){
-            alert('100元起投')
+        if(amtMoney < lowestBuy){
+            alert(`${lowestBuy}元起投`);
+
             return false;
         }
         return true;

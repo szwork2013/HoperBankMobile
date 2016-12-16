@@ -36,12 +36,27 @@ class HomePage extends Component {
         const {recommend} = this.props.index;
         const banner =[
             {
-                img:'/static/img/banner5.jpg',
+                img:'/static/img/banner1.jpg',
+                link:'',
+                title:''
+            },
+            {
+                img:'/static/img/banner2.jpg',
+                link:'',
+                title:''
+            },
+            {
+                img:'/static/img/banner3.jpg',
                 link:'',
                 title:''
             },
             {
                 img:'/static/img/banner4.jpg',
+                link:'',
+                title:''
+            },
+            {
+                img:'/static/img/banner5.jpg',
                 link:'',
                 title:''
             }
