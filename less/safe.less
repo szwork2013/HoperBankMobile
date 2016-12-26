@@ -14,20 +14,20 @@
   }
   .carousel-dots{
     padding:5px 5px 5px 0;
-    background-color:#f6edd4;
     overflow: hidden;
     position: fixed;
     bottom:15px;
     border-radius:10px;
     >.dot{
-      width:15px;
-      height:15px;
+      width:10px;
+      height:10px;
       border-radius:50%;
-      background-color:#f1e1b3;
+      background-color:#fff;
       float: left;
-      margin-left:5px;
+      margin-left:8px;
+      opacity:0.5;
       &.active{
-        background-color:#fff;
+        opacity:1;
       }
     }
   }
@@ -40,6 +40,7 @@ div[class^="safe-item"]{
   height:100%;
   >img{
     width:100%;
+    height:100%;
   }
   >p{
     position: absolute;
@@ -48,93 +49,5 @@ div[class^="safe-item"]{
     font-size:16px;
     text-align:center;
     color:#e3aa00;
-  }
-}
-.safe-item-4{
-  >.safe-item-button{
-    position: absolute;
-    width:100px;
-    height:auto;
-    padding:10px 0;
-    background-color:#e3aa00;
-    color:#fff;
-    top:auto;
-    bottom:60px;
-    text-align:center;
-    border-radius:7px;
-  }
-}
-
-
-.tip-con{
-  position: absolute;
-  width:100%;
-  height:100%;
-  overflow-y: scroll;
-  left:0;
-  top:0;
-  z-index:990;
-  color:#fff;
-  p.safe-direction{
-    width:90%;
-    margin:15px auto 0 auto;
-  }
-  .close{
-    position: relative;
-    top:auto;
-    bottom:auto;
-    margin:20px 0;
-    background-image:url("/static/img/safe/close.png")
-  }
-  >p{
-    width:90%;
-    margin:10px auto;
-    font-size:14px;
-    line-height:24px;
-  }
-  .tip-con-1{
-    width:90%;
-    margin:10px auto 0 auto;
-    overflow: hidden;
-    border-bottom:1px solid #9d9d9d;
-    padding-bottom:10px;
-    >.part-left{
-      float: left;
-      width:20%;
-      p{
-        text-align: center;
-        font-size:14px;
-        margin-top:5px;
-
-      }
-      .safe-icon{
-        width:70px;
-        height:70px;
-        background:url("/static/img/safe/icon.png") no-repeat;
-        background-size:100%;
-        &.i2{
-          background-position:0 -70px;
-        }
-        &.i3{
-          background-position:0 -140px;
-        }
-        &.i4{
-          background-position:0 -210px;
-        }
-        &.i5{
-          background-position:0 -280px;
-        }
-        &.i6{
-          background-position:0 -350px;
-        }
-      }
-    }
-    >.part-right{
-      float: left;
-      font-size:14px;
-      padding-top:5px;
-      width:70%;
-      margin-left:5%;
-    }
   }
 }

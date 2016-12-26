@@ -30,8 +30,8 @@ export default class IconButton extends Component {
                     <i className={'icon '+props.icon}></i>
                     <span className="icon-button-text">{props.text}</span>
                     <div className="icon-arrow-wrap">
-                        {props.hasArrow && <i className="icon icon-arrow-right"></i>}
                         {props.arrowText!='' && <span className="arrow-text">{props.arrowText}</span>}
+                        {props.hasArrow && <i className="icon icon-arrow-right"></i>}
                     </div>
                 </a>
             </div>

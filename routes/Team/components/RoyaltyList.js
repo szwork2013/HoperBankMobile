@@ -16,7 +16,8 @@ export default class RoyaltyList extends Component {
     updateList(year){
         const props = this.props;
         this.setState({
-            loaded:false
+            loaded:false,
+            year:year
         })
         props.fetchRoyaltyList(year,(data)=>{
             this.setState({

@@ -85,9 +85,9 @@ class FinancialServicesList extends Component {
     }
     renderItem(item,index){
         var options = {
-            strokeWidth: 6,
-            color: '#e3be4f',
-            trailColor: '#D1D3D7',
+            strokeWidth: 3,
+            color: '#e60000',
+            trailColor: '#ededed',
         };
         var containerStyle = {
             width: '70px',
@@ -101,17 +101,16 @@ class FinancialServicesList extends Component {
                     <h2>{item.title}</h2>
                     <div>
                         <div className="part-1">
-                            <p className="p1">{item.rate}<span style={{fontSize:'18px'}}>%</span></p>
-                            <p className="p2">预期年收益率</p>
+                            <p className="p3">{item.rate}<span>%</span></p>
                         </div>
                         <div className="part-2">
-                            <p className="p1">{item.limit}个月</p>
-                            <p className="p2">期限</p>
+                            <p className="p3"><span>期限：</span>{item.limit}个月</p>
+                            <p className="p3"><span>项目金额：</span>{item.money}元</p>
                         </div>
                         <div className="part-3">
                             <Circle
                                 progress={(item.progress/100)>1? 1 : (item.progress/100)}
-                                text={(item.progress>100? 100:item.progress)+'%'}
+                                text={(item.progress>100? 100:item.progress)+'<span>%</span>'}
                                 options={options}
                                 initialAnimate={true}
                                 containerStyle={containerStyle}

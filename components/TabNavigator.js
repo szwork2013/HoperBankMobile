@@ -16,7 +16,7 @@ export default class TabNavigator extends Component {
                 </Link>
                 <Link to="/financial" activeClassName="active">
                     <i className="i2"></i>
-                    <p>理财</p>
+                    <p>出借</p>
                 </Link>
                 <Link to='/borrow' activeClassName="active">
                     <i className="i3"></i>

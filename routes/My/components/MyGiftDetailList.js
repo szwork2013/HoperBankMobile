@@ -23,36 +23,42 @@ class GiftList extends Component{
     renderItem(couponType,type,item,index){
         if(couponType==3){
             return (
-                <div className={`gift-list-item-2 type${type} animated flipInX`} key={index} style={{animationDuration:0.5+(index%10 / 5)+'s'}}>
+                <div className={`gift-list-item type${type} animated flipInX`} key={index} style={{animationDuration:0.5+(index%10 / 5)+'s'}}>
                     <div className="part-left">
-                        <h3>{item.name}</h3>
-                        <p>有效时间：{item.validTime}</p>
-                        <p>适用范围：{item.scope}</p>
-                        <p>使用条件：{item.condition}</p>
+                        <p>{parseInt(item.money)}<span>元</span></p>
+                        <img src={type==3? `/static/img/coupon/red_packets_n_l.png` :`/static/img/coupon/red_packets_n_r.png`} />
                     </div>
-                    <div className="abs">{parseInt(item.money)}</div>
+                    <div className="part-right">
+                        <div className="info">
+                            <h3>{item.name}</h3>
+                            <p>{item.scope}</p>
+                            <p className="red">{item.condition}</p>
+                            <p>有效期{item.validTime}</p>
+                        </div>
+                        <img src="/static/img/coupon/coupon_r.png" />
+                    </div>
+                    <div className="abs">已使用</div>
                 </div>
             )
         }
 
         if(couponType==1){
             return (
-                <div className={`gift-item coupon-type-2 type${type}  animated flipInX`} key={index} style={{animationDuration:0.5+(index%10 / 5)+'s'}}>
-                    <div className="part-1">
-                        <img src={`/static/img/coupon_type${type==3? 3 : 1}_bg_2.png`}/>
-                        <div>
-                            <p>有效时间：{item.validTime}</p>
-                            <p>适用范围：{item.scope}</p>
-                            <p>使用条件：{item.condition}</p>
-                        </div>
+                <div className={`gift-list-item type${type} animated flipInX`} key={index} style={{animationDuration:0.5+(index%10 / 5)+'s'}}>
+                    <div className="part-left">
+                        <p>{parseInt(item.money)}<span>%</span></p>
+                        <img src={type==3? `/static/img/coupon/coupon_l_out.png` :`/static/img/coupon/coupon_l.png`} />
                     </div>
-                    <div className="part-2">
-                        <img src={`/static/img/coupon_type${type}_bg_1.png`}/>
-                        <div>
-                            <p className="p1">{item.money}</p>
-                            <p className="p2">加息券</p>
+                    <div className="part-right">
+                        <div className="info">
+                            <h3>{item.name}</h3>
+                            <p>{item.scope}</p>
+                            <p className="red">{item.condition}</p>
+                            <p>有效期{item.validTime}</p>
                         </div>
+                        <img src="/static/img/coupon/coupon_r.png" />
                     </div>
+                    <div className="abs">已使用</div>
                 </div>
             )
         }

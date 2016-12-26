@@ -46,30 +46,22 @@ class TeamPage extends Component {
                     }
                 </ReactCSSTransitionGroup>
                 <section className="my-team-wrap">
-                    <div className="my-team-item">
-                        <span className="s1">本期收入</span>
-                        <span className="s2" id="income">{team.income}元</span>
-                    </div>
-                    <div className="my-team-item">
-                        <span className="s1">上期收入</span>
-                        <span className="s2" id="prevIncome">{team.prevIncome}元</span>
-                    </div>
-                    <div className="my-team-item">
-                        <span className="s1">累计收入</span>
-                        <span className="s2" id="sumIncome">{team.sumIncome}元</span>
+                    <div className="my-team-summary">
+                        <div>{team.sumIncome}<span>元</span></div>
+                        <p>累计收益</p>
                     </div>
                 </section>
 
                 <section className="my-team-wrap">
                     <div className="my-team-item">
                         <Link className="m-item-a" to={`/myteam/teamlist`}>
-                            <span className="s1">团队清单</span>
+                            <span className="s1">推荐明细</span>
                             <span className="s2"><i className="icon icon-arrow-right"></i></span>
                         </Link>
                     </div>
                     <div className="my-team-item">
                         <Link className="m-item-a" to={`/myteam/royaltylist`}>
-                            <span className="s1">提成清单</span>
+                            <span className="s1">邀请佣金</span>
                             <span className="s2"><i className="icon icon-arrow-right"></i></span>
                         </Link>
                     </div>

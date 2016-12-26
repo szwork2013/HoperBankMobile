@@ -7,6 +7,7 @@ import DealRecordPage from './components/DealRecordPage'
 import MyInvestmentPage from './components/MyInvestmentPage'
 import ReturnedPlanRecordPage from './components/ReturnedPlanRecordPage'
 import InvitationPage from './components/InvitationPage'
+import QaqPage from './components/QaqPage'
 import MyGiftPage from './components/MyGiftPage'
 import MyGiftDetailPage from './components/MyGiftDetailPage'
 import ChargePage from './components/ChargePage'
@@ -46,6 +47,10 @@ module.exports = {
         {
             path:'/my/dealrecord',
             component:DealRecordPage
+        },
+        {
+            path:'/my/qaq',
+            component:QaqPage
         },
         {
             path:'/my/investmentrecord',

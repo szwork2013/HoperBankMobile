@@ -45,7 +45,7 @@ export class TextButton extends Component{
     renderRightText(){
         if(this.props.rightText){
             return(
-                <span className="fr">{this.props.rightText}</span>
+                <span className={`fr ${this.props.rightTextClass || ''}`}>{this.props.rightText}</span>
             )
         }
     }

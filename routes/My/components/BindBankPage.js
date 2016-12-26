@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import {BaseButton,TextButton} from 'components/Button'
-import IconInput from 'components/IconInput'
+import TextInput from 'components/TextInput'
 import RootLoading from 'components/RootLoading'
 import { browserHistory } from 'react-router'
 export default class BindBankPage extends Component {
@@ -17,6 +17,7 @@ export default class BindBankPage extends Component {
             cityData:[],
             bankId:'',
             bankNo:'',
+            reBankNo:'',
             bankNoPassed:false,
             province:'',
             city:'',
@@ -95,6 +96,14 @@ export default class BindBankPage extends Component {
                 bankId:this.props.bankData[0].value
             })
         }
+        if(this.state.reBankNo){
+            alert('请再次输入银行卡号');
+            return false;
+        }
+        if(this.state.bankNo != this.state.reBankNo){
+            alert('两次银行卡号输入不一致');
+            return false;
+        }
         this.setState({
             loading:true
         })
@@ -140,43 +149,60 @@ export default class BindBankPage extends Component {
             <section className="level-2-wrap" style={{backgroundColor:'#fff'}}>
                 <RootLoading display={this.state.loading}/>
                 <section className="authentication-wrap">
-                    <div className={`step-title ${this.state.activeStep==1?'active':''}`}>
-                        实名认证
-                    </div>
                     <div className={`step-content ${this.state.activeStep==1?'active':''}`}>
-                        <IconInput
+                        <TextInput
                             placeholder="真实姓名"
+                            text="真实姓名"
                             rule="^[\u4e00-\u9fa5]{2,}$"
                             contentClass='authenticationInput'
                             callback={(b,val)=>{this.setState({name:val,namePassed:b});this.checkStep1()}}>
-                        </IconInput>
-                        <IconInput
+                        </TextInput>
+                        <TextInput
                             placeholder="身份证"
+                            text="身份证号"
                             rule="^[1-9]{1}[0-9]{14}$|^[1-9]{1}[0-9]{16}([0-9]|[xX])$"
                             contentClass='authenticationInput'
                             callback={(b,val)=>{this.setState({idCard:val,idCardPassed:b});this.checkStep1()}}>
-                        </IconInput>
-                        <button className={`base-button ${this.state.firstStepPassed ? '' :'disabled'}`} disabled={!this.state.firstStepPassed} onClick={this.doStep1.bind(this)} style={{width:'95%',borderRadius:0,marginTop:'15px'}}>
+                        </TextInput>
+                        <button className={`base-button ${this.state.firstStepPassed ? '' :'disabled'}`} disabled={!this.state.firstStepPassed} onClick={this.doStep1.bind(this)} style={{marginTop:'35px'}}>
                             {this.state.firstStepText}
                         </button>
                     </div>
-                    <div className={`step-title ${this.state.activeStep==2?'active':''}`}>
-                        绑定银行卡
-                    </div>
                     <div className={`step-content ${this.state.activeStep==2?'active':''}`}>
-                        <p>持卡人：{this.state.name}</p>
-                        <p>{this.props.mobile}</p>
+                        <TextInput
+                            placeholder="请输入您的借记卡卡号"
+                            text="银行卡号"
+                            rule="^\d{16,20}$"
+                            contentClass='authenticationInput'
+                            callback={(b,val)=>{this.setState({bankNo:val,bankNoPassed:b})}}>
+                        </TextInput>
+                        <TextInput
+                            placeholder="请再次输入您的借记卡卡号"
+                            text="确认卡号"
+                            rule="^\d{16,20}$"
+                            contentClass='authenticationInput'
+                            callback={(b,val)=>{this.setState({reBankNo:val})}}>
+                        </TextInput>
+                        <TextInput type="select"
+                                   text="开户银行"
+                                   select={
                         <select onChange={this.bankChange.bind(this)}>
-                            {
-                                this.props.bankData.map((item,index)=>{
-                                    return(
-                                        <option key={index} value={item.value}>{item.name}</option>
-                                    )
-                                })
-                            }
-                        </select>
-                        <div className="bink-bank-address-wrap">
-                            <select onChange={this.provinceChange.bind(this)}>
+                                {
+                                    this.props.bankData.map((item,index)=>{
+                                        return(
+                                            <option key={index} value={item.value}>{item.name}</option>
+                                        )
+                                    })
+                                }
+                            </select>
+                        }>
+
+                        </TextInput>
+
+                        <TextInput type="select"
+                                   text="开户省份"
+                                   select={
+                        <select onChange={this.provinceChange.bind(this)}>
                                 <option>-请选择省份-</option>
                                 {
                                     this.props.provinceData.map((item,index)=>{
@@ -186,7 +212,13 @@ export default class BindBankPage extends Component {
                                     })
                                 }
                             </select>
-                            <select onChange={this.cityChange.bind(this)}>
+                        }>
+
+                        </TextInput>
+                        <TextInput type="select"
+                                   text="开户城市"
+                                   select={
+                        <select onChange={this.cityChange.bind(this)}>
                                 <option>-请选择城市-</option>
                                 {
                                     this.state.cityData.map((item,index)=>{
@@ -196,14 +228,10 @@ export default class BindBankPage extends Component {
                                     })
                                 }
                             </select>
-                        </div>
-                        <IconInput
-                            placeholder="银行卡号"
-                            rule="^\d{16,20}$"
-                            contentClass='authenticationInput'
-                            callback={(b,val)=>{this.setState({bankNo:val,bankNoPassed:b})}}>
-                        </IconInput>
-                        <button className="base-button" style={{width:'95%',borderRadius:0,marginTop:'15px'}} onClick={this.doStep2.bind(this)}>
+                        }>
+
+                        </TextInput>
+                        <button className="base-button" style={{marginTop:'35px'}} onClick={this.doStep2.bind(this)}>
                             实名认证
                         </button>
                     </div>

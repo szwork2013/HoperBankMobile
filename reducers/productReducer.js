@@ -63,57 +63,43 @@ function financialReturnPlan(state=[],action){
 //借款产品列表
 const borrowProductListData=[
     {
-        name:'保单贷',
-        amt:'1-50万元',
+        name:'保单借',
+        amt:'1-20万元',
         expires:'12-36个月',
         rate:'2.38%',
         type:1
     },
     {
-        name:'车主贷',
-        amt:'1-30万元',
+        name:'车主借',
+        amt:'1-20万元',
         expires:'12-36个月',
-        rate:'2.58%',
+        rate:'2.38%',
         type:2
     },
     {
-        name:'悦楼工薪贷',
+        name:'悦楼借',
         amt:'1-15万元',
         expires:'12-36个月',
         rate:'2.58%-2.78%',
         type:7
     },
     {
-        name:'悦楼生意贷',
-        amt:'1-15万元',
-        expires:'12-36个月',
-        rate:'2.58%-2.78%',
-        type:8
-    },
-    {
-        name:'消费精英贷',
-        amt:'1-50万元',
+        name:'消费借',
+        amt:'1-20万元',
         expires:'12-36个月',
         rate:'1.98%-2.58%',
+        type:3
+    },
+    {
+        name:'生意借',
+        amt:'1-20万元',
+        expires:'12-36个月',
+        rate:'2.78%',
         type:4
     },
     {
-        name:'消费薪金贷',
-        amt:'1-50万元',
-        expires:'12-36个月',
-        rate:'1.98%-2.58%',
-        type:1
-    },
-    {
-        name:'生意贷',
-        amt:'1-50万元',
-        expires:'12-36个月',
-        rate:'2.78%',
-        type:6
-    },
-    {
-        name:'社保贷',
-        amt:'1-50万元',
+        name:'社保借',
+        amt:'1-20万元',
         expires:'12-36个月',
         rate:'2.58%',
         type:5

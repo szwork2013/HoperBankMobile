@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { forgotPassWordStep3,forgotPassWordStep2,forgotPassWordStep1 } from 'actions'
 import IconButton from 'components/IconButton'
-import IconInput from 'components/IconInput'
+import TextInput from 'components/TextInput'
 import {BaseButton} from 'components/Button'
 import RootLoading from 'components/RootLoading'
 import { Link,browserHistory } from 'react-router'
@@ -158,45 +158,43 @@ class ForgotPassWordPage extends Component {
     }
     render() {
         return (
-            <section className="form-wrap" style={{paddingTop:'30px'}}>
+            <section className="form-wrap register-wrap">
                 <RootLoading display={this.state.loading} />
                 <section className={`register-step-first ${this.state.step.first ? '':'hide'}`} >
-                    <IconInput
+                    <TextInput
                         placeholder="请输入手机号"
-                        icon="icon-tel"
+                        text="手机号码"
                         rule="^[1][3758][0-9]{9}$"
                         callback={(b,val)=>{this.setState({username:val,userNamePassed:b})}}>
-                        <button ref="yCode" className={`input-btn get-code ${this.state.yCodeSendAble?'':'disabled'}`} disabled={!this.state.yCodeSendAble}  onClick={this.handleGetCode} >获取验证码</button>
-                    </IconInput>
-                    <IconInput
+                    </TextInput>
+                    <TextInput
                         placeholder="请输入验证码"
-                        icon="icon-ycode"
+                        text="验证码"
                         rule="^[0-9]{6}$"
-                        hasBorder={false}
                         callback={(b,val)=>{this.setState({yCode:val,yCodePassed:b})}}>
-                    </IconInput>
+                        <button ref="yCode" className={`input-btn get-code ${this.state.yCodeSendAble?'':'disabled'}`} disabled={!this.state.yCodeSendAble}  onClick={this.handleGetCode} >获取验证码</button>
+                    </TextInput>
                     <BaseButton text="下一步" onClick={this.doStepFirst} className={`mt20 ${ (this.state.userNamePassed && this.state.yCodePassed)? '':'disabled'}`} disabled={!(this.state.userNamePassed && this.state.yCodePassed)} />
                 </section>
                 <section className={`register-step-second ${this.state.step.second ? '':'hide'}`}>
-                    <IconInput
+                    <TextInput
                         placeholder="请输入新密码"
+                        text="新密码"
                         rule="^\w{6,16}$"
-                        contentClass='no-icon'
                         type="password"
                         callback={(b,val)=>{this.setState({newPassword:val,newPasswordPassed:b})}}>
-                    </IconInput>
-                    <IconInput
+                    </TextInput>
+                    <TextInput
                         placeholder="请再次输入新密码"
+                        text="确认密码"
                         rule="^\w{6,16}$"
-                        hasBorder={false}
-                        contentClass='no-icon'
                         type="password"
                         callback={(b,val)=>{this.setState({reNewPassword:val,reNewPasswordPassed:b})}}>
-                    </IconInput>
+                    </TextInput>
                     <BaseButton text="下一步" onClick={this.doStepSecond} className="mt20" />
                 </section>
                 <section className={`register-step-third ${this.state.step.third ? '':'hide'}`} >
-                    <img src="/static/img/ok.png" width="80" />
+                    <img src="/static/img/login_ok_picture.png" width="80" />
                     <section className="tip-section-2">
                         您的登录密码已修改成功
                     </section>

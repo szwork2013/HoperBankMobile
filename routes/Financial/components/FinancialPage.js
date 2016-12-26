@@ -24,9 +24,6 @@ class FinancialPage extends Component {
                     <TabBarItem name="优选服务">
                         <FinancialServicesList type="9" />
                     </TabBarItem>
-                    <TabBarItem name="债权转让" >
-                        <FinancialServicesList type="5"  />
-                    </TabBarItem>
                 </TabBar>
             </div>
         )

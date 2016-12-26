@@ -45,12 +45,10 @@ class ActivityCenter extends Component {
                                     })
                                     location.href=item.link
                                 }}>
-                                    <h3><i></i>{item.title}</h3>
-                                    <p>{item.startTime}---{item.endTime}</p>
                                     <div className={item.status==0?'gray':''}>
                                         <img src={item.image} />
                                     </div>
-                                    <p>{item.describe}</p>
+                                    <h3>{item.title}<span>{item.startTime}~{item.endTime}</span></h3>
                                 </div>
                             </section>
                         )

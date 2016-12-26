@@ -68,7 +68,7 @@ export default class TeamList extends Component {
                         <span>{item.regTime}</span>
                         <span>{item.realName || '未实名'}</span>
                         <span>{item.tel}</span>
-                        <span>{item.status == 0? '未交易':'已交易'}</span>
+                        <span><em className={`status ${item.status==0? '':'active'}`}>{item.status == 0? '未交易':'已交易'}</em></span>
                     </p>
                 </div>
             )

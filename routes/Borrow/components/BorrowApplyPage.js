@@ -127,7 +127,7 @@ class BorrowApplyPage extends Component{
     render(){
         const {handleSubmit,invalid, reset, submitting} = this.props;
         return(
-            <section className="level-2-wrap">
+            <section className="level-2-wrap" style={{backgroundColor:'#fff'}}>
                 <RootLoading display={this.state.loading} />
                 <Overlay display={this.state.overlayShouldShow}>
                     <p style={{width:'90%',margin:'30% auto 0 auto',color:'#fff',position:'relative',zIndex:1000}}>“定制”是琥珀金服为满足因银行授信政策、额度、放款效率等情况限制而急需借款的个人和中小微企业所推出的借款项目；</p>
@@ -146,7 +146,7 @@ class BorrowApplyPage extends Component{
                                 <option value="1">女士</option>
                             </Field>
                         </div>
-                        <Field name="mobile" component={renderField} type="text" label="联系电话"/>
+                        <Field name="mobile" component={renderField} type="text" label="联系电话"  />
                         <div className="borrow-apply-item">
                             <label >所在城市</label>
                             <Field name="city" component="select">
@@ -209,9 +209,11 @@ class BorrowApplyPage extends Component{
                         </div>
                         <Field name="money" component={renderField} type="text" label="借款金额" unit="万元"/>
                         <Field name="cycle" component={renderField} type="text" label="借款期限" unit="个月"/>
+
+                        <p style={{margin:'20px auto 20px auto'}} onClick={()=>this.setState({overlayShouldShow:true})}>申请说明</p>
+                        <button className={`base-button ${(invalid || submitting)?'disabled':''}`} style={{width:'100%'}} type="submit" disabled={invalid || submitting} >提交申请</button>
                     </div>
-                    <p style={{width:'90%',margin:'0 auto 20px auto'}} onClick={()=>this.setState({overlayShouldShow:true})}>申请说明</p>
-                    <button className={`base-button ${(invalid || submitting)?'disabled':''}`} type="submit" disabled={invalid || submitting} >提交申请</button>
+
                 </form>
 
             </section>

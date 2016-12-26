@@ -53,6 +53,9 @@ class ChargePage extends Component{
                             onClick={()=>{
                             this.doCharge()
                             }} />
+                <div className="tip-section-2">
+                    温馨提示：充值金额必须大于或等于100元。
+                </div>
                 <form ref="form" action={props.chargeUrl}>
                     <input type="hidden" name="amt" />
                     <input type="hidden" name="mchnt_cd" />

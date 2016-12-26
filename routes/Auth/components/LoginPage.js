@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import IconButton from 'components/IconButton'
-import IconInput from 'components/IconInput'
+import TextInput from 'components/TextInput'
 import {Link} from 'react-router'
 import {BaseButton} from 'components/Button'
 import RootLoading from 'components/RootLoading'
@@ -59,30 +59,33 @@ export default class LoginPage extends Component {
     }
     render() {
         return (
-            <section className="form-wrap">
+            <section className="form-wrap login-wrap">
                 <RootLoading display={this.state.loading} />
                 <div className={`auth-banner animated fadeIn`}>
-                    <img src="http://oss.hoperbank.com/static/login.png" width="100%" />
+                    <img src="/static/img/logo.png" width="50%" />
                 </div>
-                <IconInput
-                    placeholder="请输入手机号"
-                    icon="icon-phone"
-                    rule="^[1][3758][0-9]{9}$"
-                    callback={(b,val)=>{this.setState({username:val,userNamePassed:b})}}>
-                </IconInput>
-                <IconInput
-                    placeholder="请输入密码"
-                    icon="icon-pwd"
-                    rule="^\w{6,16}$"
-                    hasBorder={false}
-                    type="password"
-                    callback={(b,val)=>{this.setState({password:val,passWordPassed:b})}}>
-                </IconInput>
-                <section style={{width:'90%',textAlign:'right',margin:'10px auto',overflow:'hidden'}}>
-                    <Link to="/forgot" className="fr" style={{color:'#004fa3'}}>忘记密码?</Link>
+                <section style={{width:'90%',margin:'0 auto'}}>
+                    <TextInput
+                        placeholder="请输入手机号码"
+                        text="手机号码"
+                        rule="^[1][3758][0-9]{9}$"
+                        callback={(b,val)=>{this.setState({username:val,userNamePassed:b})}}>
+                    </TextInput>
+                    <TextInput
+                        placeholder="请输入登录密码"
+                        text="登录密码"
+                        rule="^\w{6,16}$"
+                        hasBorder={false}
+                        type="password"
+                        callback={(b,val)=>{this.setState({password:val,passWordPassed:b})}}>
+                    </TextInput>
+                    <section style={{width:'90%',textAlign:'right',margin:'10px auto',overflow:'hidden'}}>
+                        <Link to="/forgot" className="fr" style={{color:'#666'}}>忘记密码?</Link>
+                    </section>
+                    <BaseButton text="登 录" className="mt20" onClick={this.login}/>
+                    <BaseButton text="注 册" className="mt20 register" onClick={()=>{this.context.router.push('/register')}} />
                 </section>
-                <BaseButton text="登 录" className="mt20" onClick={this.login}/>
-                <BaseButton text="注 册" className="mt20 register" onClick={()=>{this.context.router.push('/register')}} />
+
             </section>
 
         )

@@ -1,9 +1,9 @@
-.icon-input-wrap{
+.icon-input-wrap,.text-input-wrap{
   width:100%;
   overflow: hidden;
   position: relative;
   background-color:#fff;
-  >.icon-input-con{
+  >.icon-input-con,.text-input-con{
     display: block;
     width:85%;
     float:right;
@@ -16,7 +16,7 @@
       float: none;
       margin:0 auto;
     }
-    &.icon-input-no-border{
+    &.icon-input-no-border,.text-input-no-border{
       border:none;
     }
     >input{
@@ -35,6 +35,34 @@
     }
   }
 }
+
+.text-input-wrap{
+  >.text-input-con{
+    width:90%;
+    float: none;
+    margin:0 auto;
+    position: relative;
+    padding:10px 0 6px 0;
+    >span{
+      position: absolute;
+      font-size:14px;
+      color:#666;
+
+
+    }
+    >input,select{
+      padding-left:100px;
+      text-align: left;
+      box-sizing: border-box;
+      border:none;
+      height:30px;
+      &.no-text{
+        padding-left:5px;
+      }
+    }
+  }
+}
+
 .eyes{
   position: absolute;
   right:10px;

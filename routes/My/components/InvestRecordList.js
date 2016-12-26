@@ -178,7 +178,7 @@ class InvestRecordList extends Component {
                                     {
                                         /* 计算利息时分开原利息与加息卡计算，最后再相加 */
                                         item.addRate ?
-                                        parseFloat(calSY(
+                                            (parseFloat(calSY(
                                             {
                                                 money:item.actualMoney,
                                                 rate:item.productRate,
@@ -192,14 +192,14 @@ class InvestRecordList extends Component {
                                                 productCycle:item.productCycle,
                                                 type:item.productType
                                             }
-                                        )) : parseFloat(calSY(
+                                        ))).toFixed(2) : parseFloat(calSY(
                                             {
                                                 money:item.actualMoney,
                                                 rate:item.productRate,
                                                 productCycle:item.productCycle,
                                                 type:item.productType
                                             }
-                                        ))
+                                        )).toFixed(2)
 
                                     }
                                 </p>

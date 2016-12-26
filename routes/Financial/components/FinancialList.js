@@ -55,7 +55,7 @@ class FinancialList extends Component {
                             <p className="p2">预期年收益率</p>
                         </div>
                         <div className="part-2">
-                            <p className="p1">{item.limit}个月</p>
+                            <p className="p1"><span>{item.limit}</span>个月</p>
                             <p className="p2">期限</p>
                         </div>
                         <div className="part-3">

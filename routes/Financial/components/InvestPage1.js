@@ -22,6 +22,8 @@ class InvestPage1 extends Component{
         }
         this.onScroll = this.onScroll.bind(this);
         this.amtMoneyChange = this.amtMoneyChange.bind(this);
+        this.add = this.add.bind(this);
+        this.minus = this.minus.bind(this);
     }
     componentWillMount() {
         //这里的判断是为了从列表页面点进来的，列表点进来的时候如果产品列表不为空则隐藏遮罩层
@@ -82,6 +84,23 @@ class InvestPage1 extends Component{
     calculate(money,rate,time){
         return (parseFloat( money * rate / 100 / 12 * time) || 0).toFixed(2);
     }
+    add(){
+        const reg = /^[0-9]+([.]{1}[0-9]+){0,1}$/g
+        this.setState({
+            amtMoney:parseFloat(this.state.amtMoney) + 100,
+            canSubmit:reg.test(this.state.amtMoney + 100 + '')
+        })
+    }
+    minus(){
+        const reg = /^[0-9]+([.]{1}[0-9]+){0,1}$/g
+        if(this.state.amtMoney<100){
+            return false;
+        }
+        this.setState({
+            amtMoney:parseFloat(this.state.amtMoney) - 100,
+            canSubmit:reg.test(this.state.amtMoney + 100 + '')
+        })
+    }
     render(){
         const options = {mouseWheel: false, scrollbars: false, scrollX: true,probeType: 2,startX:-750,momentum:true}
         const account = this.props.account;
@@ -113,8 +132,9 @@ class InvestPage1 extends Component{
                 <RootLoading display={!this.state.loaded}/>
                 <section className="product-wrap">
                     <div className="ll">
+                        <h2>{data.name}</h2>
                         <p className="p1">
-                            <span className="s1" id="rate">{data.rate}</span>
+                            <span className="s1">{data.rate}</span>
                             <span className="s2">%</span>
                         </p>
                         <p className="p2">
@@ -122,19 +142,18 @@ class InvestPage1 extends Component{
                         </p>
                     </div>
                     <div className="account-wrap">
-                        <div>
+                        <div className="limit-wrap">
+                            <p className="p2"><span>{data.limit}</span>个月</p>
                             <p className="p1">投资期限</p>
-                            <p className="p2"><span id="date">{data.limit}</span>期</p>
-                            <div className="line-2"></div>
                         </div>
                         <div>
-                            <p className="p1">起投金额(元)</p>
                             <p className="p2">{data.lowestBuy}</p>
+                            <p className="p1">起投金额(元)</p>
                             <div className="line-2"></div>
                         </div>
                         <div>
-                            <p className="p1">账户余额(元)</p>
                             <p className="p2" id="balance">{this.props.account.balance}</p>
+                            <p className="p1">账户余额(元)</p>
                         </div>
                     </div>
                 </section>
@@ -181,26 +200,6 @@ class InvestPage1 extends Component{
                         <p className="money" id="profit2">{this.calculate(this.state.amtMoney,2.75,data.limit)}</p>
                     </div>
                 </section>
-                <section className="index-date-line" style={{backgroundColor:'#fff'}}>
-                    <ul>
-                        <li style={{width:'25%'}}>
-                            <i></i>
-                            <p>确认金额</p>
-                        </li>
-                        <li style={{width:'25%'}}>
-                            <i></i>
-                            <p>系统匹配</p>
-                        </li>
-                        <li style={{width:'25%'}}>
-                            <i></i>
-                            <p>产生收益</p>
-                        </li>
-                        <li style={{width:'25%'}}>
-                            <i></i>
-                            <p>到期赎回</p>
-                        </li>
-                    </ul>
-                </section>
                 <section className="product-button-wrap">
                     <TextButton text="产品详情" onClick={()=>{
                         this.context.router.push(`/financial/product/1/${this.props.params.id}/detail`)
@@ -208,6 +207,10 @@ class InvestPage1 extends Component{
                     <TextButton text="投标记录" onClick={()=>{
                         this.context.router.push(`/financial/product/1/${this.props.params.id}/record`)
                     }}  hasBorder={false} />
+                    <div className="edun-tip">
+                        <i></i>
+                        <span>E盾计划全面保障</span>
+                    </div>
                 </section>
                 <Overlay display={this.state.overlayShouldShow} onClick={()=>{
                     this.setState({
@@ -220,19 +223,17 @@ class InvestPage1 extends Component{
                     })
                 }} />
                 <div className={"shopping-window "} style={this.state.overlayShouldShow ? show : hide } ref="shoppingWindow">
-                    <h3>投资项目:<span>{data.name}</span></h3>
                     <div className="input-wrap">
-                        <span className="input-wrap-text-1">投资金额</span>
-                        <span className="input-wrap-2">
-                            <input type="text" value={this.state.amtMoney} onChange={this.amtMoneyChange}/>元</span>
+                        <span className="control minus" onClick={this.minus}></span>
+                        <input type="text" value={this.state.amtMoney} onChange={this.amtMoneyChange}/>
+                        <span className="control add" onClick={this.add}></span>
                     </div>
                     <div className="input-wrap">
-                        <span className="input-wrap-text-1">预期收益</span>
+                        <span className="input-wrap-text-1">预计收益：</span>
                         <span className="input-wrap-2">
                             {this.calculate(this.state.amtMoney,data.rate,data.limit)}元</span>
-
                     </div>
-                    <BaseButton text="确认" className={this.state.canSubmit ? '' : 'disabled'}
+                    <BaseButton text="立即购买" className={this.state.canSubmit ? '' : 'disabled'}
                                 disabled={!this.state.canSubmit}
                                 style={{width:'100%',marginTop:'10px'}} onClick={this.doPay.bind(this,{productName:data.name,rate:data.rate,limit:data.limit,lowestBuy:data.lowestBuy})} />
 

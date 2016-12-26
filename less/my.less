@@ -7,25 +7,8 @@
 }
 
 .my-info-top{
-  background-color:#e3be4f;
-  padding:40px 0 0 0;
-  >.my-avatar-wrap{
-    padding:15px 0 0 0;
-    text-align: center;
-    color:#fff;
-    >h2{
-      font-size:28px;
-    }
-    >p{
-      margin-top:10px;
-      padding-bottom:15px;
-    }
-  }
-}
-
-.my-info-top{
-  background-color:@color7;
-  padding:40px 0 0 0;
+  background: linear-gradient(to right bottom, #e50000 , #ff6600);
+  padding:20px 0 0 0;
   >.my-avatar-wrap{
     padding:15px 0 0 0;
     text-align: center;
@@ -44,59 +27,62 @@
   padding:15px;
   overflow: hidden;
   text-align: center;
-  >.part-1{
-    color:#333;
-    width:30%;
-    float: left;
-    text-align: left;
-  }
-  >.part-2{
-    width:70%;
-    float: right;
-    margin-top:5px;
-    >button{
-      background:none;
-      padding:5px 30px;
-      float: right;
-      font-size:14px;
-      &.btn-1{
-        border:1px solid @huise;
-        border-radius:5px;
-        color:@blue;
-        margin-right:10px;
-        &.disabled{
-          background:@huise;
-          color:#fff;
-        }
-      }
-      &.btn-2{
-        border-radius:5px;
+  box-sizing: border-box;
+  border-bottom:1px solid #e6e6e6;
+  button{
+    background:none;
+    padding:7px 40px;
+    margin:0 auto;
+    font-size:14px;
+    &.btn-1{
+      background-color:#ff6600;
+      border-radius:5px;
+      color:#fff;
+      margin-right:10px;
+      &.disabled{
+        background:@huise;
         color:#fff;
-        background-color:#e3aa00;
-
       }
     }
+    &.btn-2{
+      border-radius:5px;
+      color:#fff;
+      background-color:#e60000;
+    }
+  }
+  >div{
+    width:50%;
+    float: left;
   }
 }
 
 .my-account-wrap{
   overflow: hidden;
-  background-color:#d4af3f;
+  background-color:#fff;
   margin-top:20px;
+  border-bottom:1px solid #f0f0f0;
   >div{
-    width:33.3%;
+    width:50%;
     float:left;
     padding:10px 0;
     position: relative;
-    >.p2{
+
+    >p.p1{
+      color:#666;
       font-size:14px;
+    }
+    >.p2{
+      font-size:16px;
+      color:#333;
+      margin-top:5px;
     }
     >.line-2{
       position: absolute;
-      height:30px;
-      border-right:1px solid #fff;
+      height:45px;
+      border-right:1px solid #f0f0f0;
       right:0;
       top:15px;
+
     }
   }
 }
@@ -120,41 +106,66 @@
 }
 
 .my-btn-wrap{
-  margin:30px 0;
+  margin:20px 0;
   background-color:#fff;
-
+  border-top:1px solid #e6e6e6;
+  border-bottom:1px solid #e6e6e6;
 }
 .my-exit-wrap{
   text-align: center;
   >.my-exit-btn{
     width:90%;
-    background:none;
+    background:#e60000;
     border-radius:5px;
-    border:1px solid #e3aa00;
-    color:#e3aa00;
+    color:#fff;
     text-align: center;
     margin:0 auto;
     line-height:40px;
     font-size:18px;
   }
 }
-
-
 .my-team-wrap{
-  width:90%;
-  margin:15px auto;
-  border:1px solid #d6d7dc;
-  padding-left:15px;
+  width:100%;
   background:#fff;
+  font-size:14px;
+
+  >.my-team-summary{
+    width:100%;
+    height:200px;
+    background: linear-gradient(to right bottom, #e50000 , #ff6600);
+    >div{
+      text-align: center;
+      padding-top:50px;
+      font-size:42px;
+      color:#fff;
+      >span{
+        font-size:16px;
+        margin-left:5px;
+      }
+    }
+    >p{
+      margin-top:10px;
+      color:#fff;
+      font-size:16px;
+      text-align: center;
+    }
+  }
   >.my-team-item{
     display: block;
-    padding:10px 5px 10px 0;
-    border-bottom:1px solid #d6d7dc;
-    margin-bottom:-1px;
+    margin-top:-1px;
     overflow: hidden;
+    &:first-child{
+      >.m-item-a{
+        border:none;
+      }
+    }
     >.m-item-a{
       display: block;
       overflow: hidden;
+      width:90%;
+      margin:0 auto;
+      padding:10px 0 10px 0;
+      border-top:1px solid #d6d7dc;
     }
     span{
       display:block;
@@ -178,6 +189,17 @@
     width:25%;
     text-align: center;
     font-size:14px;
+  }
+  .status{
+    display: inline-block;
+    padding:3px 10px;
+    background-color:#ccc;
+    border-radius:10px;
+    font-style: normal;
+    color:#fff;
+    &.active{
+      background-color:#1fe2ff;
+    }
   }
   &.col-3{
     span{
@@ -203,7 +225,7 @@
   width:100%;
   height:50px;
   .select-value{
-    background-color:#fff2cc;
+    background: linear-gradient(to right bottom, #e50000 , #ff6600);
     display: block;
     position: absolute;
     width:100%;
@@ -212,6 +234,8 @@
     text-align: center;
     left:0;
     top:0;
+    color:#fff;
+    
     z-index:1;
     >span{
       position: relative;
@@ -271,7 +295,7 @@
     height:40px;
     line-height: 40px;
     text-align: center;
-    background-color:#e3be4f;
+    background-color:#e50000;
     color:#fff;
     border-radius:50%;
     margin-right:5px;
@@ -314,6 +338,7 @@
     }
   }
 }
+
 
 /*investmentRecord*/
 .invest-record-wrap{
@@ -392,14 +417,14 @@
       margin-left:15px;
       >.invest-record-title-tip{
         padding:2px 5px;
-        color:#4995e5;
-        border:1px solid #4995e5;
+        color:#fff;
+        background-color:#ff6600;
         font-size:12px;
         margin-left:10px;
       }
     }
     .operation{
-      color:#e3aa00
+      color:#e60000
     }
     .invest-record-money{
       color:#ff4343
@@ -416,24 +441,36 @@
 
 /*我的回款*/
 .return-plan-record-item{
+    border:none;
+    margin-top:10px;
+  border-top:1px solid #e6e6e6;
+  border-bottom:1px solid #e6e6e6;
   >.return-plan-record-info{
     padding:10px;
     .return-plan-h2{
-      font-size:18px;
+      font-size:16px;
       font-weight:normal;
+      color:#333;
+      padding-bottom:10px;
+      border-bottom:1px solid #e6e6e6;
+      overflow: hidden;
+      width:100%;
+      height:30px;
+      white-space:nowrap;
+      box-sizing: border-box;
+      text-overflow:ellipsis;
+
     }
     p{
       overflow: hidden;
       font-size:14px;
       margin-top:10px;
+      color:#666;
       span{
         display: block;
-        width:33%;
+        width:25%;
         float:left;
-        text-align: center;
-        &:first-child{
-          text-align: left;
-        }
+        text-align: left;
       }
     }
   }
@@ -447,22 +484,16 @@
   padding-bottom:20px;
   margin:20px auto 0 auto;
   .part-1{
-    background-color:#e3aa00;
-    color:#fff;
+    background-color:#e60000;
     padding:20px;
-    font-size:18px;
-    p.p1{
-      word-spacing:8px; letter-spacing:13px;
-    }
-    p.p2{
-      word-spacing:8px; letter-spacing:13px;
-    }
+    text-align: center;
+
   }
   .part-2{
     text-align: center;
     padding:20px 0;
     p.p1{
-      color:#e3aa00
+      color:#333
     }
     p.p2{
       font-size:14px;
@@ -481,141 +512,96 @@
     }
     input{
       text-overflow: ellipsis;
-      color:#e3aa00;
+      color:#e60000;
     }
   }
 }
 
 
 /*我的礼券*/
-.gift-list-item{
-  display: block;
+.icon-button-wrap > .icon-button-con > .icon-arrow-wrap > span{
+  color:#e60000;
+}
+.gift-list-item {
   width:90%;
-  border:none;
-  border-radius:5px;
-  background-color:#fff;
-  margin:20px auto;
+  margin:10px auto 0 auto;
   height:100px;
-  >div{
+  font-size:12px;
+  position: relative;
+  >.part-left{
     float: left;
-    &.part-left{
-      width:30%;
-      background-color:#ff7676;
-      position: relative;
-      border-top-left-radius: 5px;
-      border-bottom-left-radius: 5px;
-      height:100px;
-      >.abs{
-        background:url("/static/img/gift_bg1.png") center 10px no-repeat ;
-        background-size:50%;
-        position: absolute;
-        left:0;
-        top:0;
-        width:100%;
-        height:100%;
-        &.ab2{
-          background:none;
-          width:80px;
-          height:80px;
-          line-height:80px;
-          border:5px solid #fff;
-          font-size:50px;
-          border-radius:50%;
-          color:#fff;
-          opacity:0.2;
-          text-align: center;
-          left:-15px;
-          top:-15px;
-        }
+    width:30%;
+    height:100%;
+    position: relative;
+    color:#fff;
+    >p{
+      position: absolute;
+      width:100%;
+      line-height:100px;
+      text-align: center;
+      font-size:36px;
+      left:0;
+      top:0;
+      >span{
+        font-size:14px;
+      }
+    }
+    >img{
+      width:100%;
+      height: 100%;
+    }
+  }
+  >.part-right{
+    width:70%;
+    float: left;
+    height:100%;
+    position: relative;
+    >.info{
+      position: absolute;
+      left:0;
+      top:0;
+      >h3{
+        font-weight:normal;
+        color:#333;
+        margin:8px 0 0 15px;
       }
       >p{
-        position: absolute;
-        width:100%;
-        text-align: center;
-        color:#fff;
-        bottom:10px;
-        left:0;
+        margin:5px 0 0 15px;
+        color:#666;
+        &.red{
+          color:#e60000;
+        }
       }
     }
-    &.part-right{
-      width:70%;
-      padding-top:10px;
-      position: relative;
-
-      .abs{
-        width:15px;
-        height:15px;
-        position: absolute;
-        top:40px;
-        right:-7px;
-        border-radius:50%;
-        background-color:#efeff4;
-      }
-      p{
-        margin-top:10px;
-        overflow: hidden;
-      }
-      span{
-        display: block;
-        float: left;
-        width:33%;
-        text-align: center;
-      }
+    >img{
+      height: 100%;
+      width:100%;
     }
   }
-}
-.gift-list-item-2{
-  width:90%;
-  height:100px;
-  max-width: 337.5px;
-  background:url("/static/img/gift_bg2.png") center no-repeat;
-  background-size:100%;
-  margin:20px auto;
-  position: relative;
-  >.abs{
-    width:60px;
-    text-align: center;
-    position: absolute;
-    right:25px;
-    top:30px;
-    font-size:30px;
-    color:#333;
+  .abs{
+    display: none;
   }
-  >.part-left{
-    color:#fff;
-    padding-left:25px;
-    font-size:12px;
-    h3{
-      font-size:18px;
-      padding-top:7px;
-    }
-    p{
-      margin-top:2px;
-    }
-  }
-  &.type2{
-    background:url("/static/img/gift_bg3.png") center no-repeat;
-    background-size:100%;
-    >.abs{
-      opacity:0.5
+  &.type2,&.type3{
+    .abs{
+      display: block;
+      position: absolute;
+      padding:0 10px;
+      line-height:15px;
+      font-size:12px;
+      height:15px;
+      background-color:#e60000;
+      color:#fff;
+      text-align: center;
+      bottom:0;
+      right:0;
+      border-top-left-radius: 15px;
     }
   }
   &.type3{
-    background:url("/static/img/gift_bg4.png") center no-repeat;
-    background-size:100%;
-    >.part-left{
-      color:#999;
-    }
-    >.abs{
-      color:#fff;
+    .abs{
+      background-color:#ccc;
     }
   }
-}
-.gift-item.coupon-type-2{
-  width:90%;
-  margin:10px auto;
-  float: none;
-  overflow: hidden;
 }
 
 /*w我的投资*/
@@ -677,7 +663,6 @@
     }
   }
   .step-content{
-    border:1px solid #b4b4b4;
     margin:10px auto;
     padding-bottom:10px;
     display: none;
@@ -688,20 +673,12 @@
       width:95%;
       margin:5px auto;
     }
-    >input,select{
-      display: block;
-      height:30px;
-      border:none;
-      width:95%;
-      margin:5px auto;
-      padding:7px 0;
-      border-bottom:1px solid #e3aa00;
+    >select{
+
     }
     .authenticationInput{
-      width:95%;
       margin:0 auto;
       float: none;
-      border-color:#e3aa00
     }
     .bink-bank-address-wrap{
       overflow: hidden;
@@ -719,12 +696,11 @@
 /*查看债权*/
 .creditor-list-wrap{
   .creditor-list-item{
-    width:95%;
+    width:100%;
     margin:10px auto;
     background-color:#fff;
-    border:1px solid #dcdcdc;
     overflow: hidden;
-    padding:5px;
+    padding:5px 10px;
     box-sizing: border-box;
     font-size:14px;
     >h2{
@@ -780,5 +756,22 @@
     &.p1{
       text-align:center;
     }
+  }
+}
+
+
+/*个人资料*/
+.personal-top{
+  width:100%;
+  height:200px;
+  background:linear-gradient(to right bottom, #e50000, #ff6600);
+  text-align: center;
+  >img{
+    margin-top:50px;
+  }
+  >.level{
+    font-size:14px;
+    color:#fff;
+    margin-top:7px;
   }
 }

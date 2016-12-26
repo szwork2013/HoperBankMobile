@@ -16,6 +16,8 @@ class InvestPage2 extends Component{
             ableBuy:true
         }
         this.amtMoneyChange = this.amtMoneyChange.bind(this);
+        this.add = this.add.bind(this);
+        this.minus = this.minus.bind(this);
     }
     componentWillMount() {
         const props = this.props;
@@ -68,6 +70,23 @@ class InvestPage2 extends Component{
     calculate(money,rate,productCycle){
         return (money * (rate / 100 / 12) * Math.pow(1 + (rate / 100 / 12), productCycle) / (Math.pow(1 + (rate / 100 / 12), productCycle) - 1) * productCycle - money).toFixed(2);
     }
+    add(){
+        const reg = /^[0-9]+([.]{1}[0-9]+){0,1}$/g
+        this.setState({
+            amtMoney:parseFloat(this.state.amtMoney) + 100,
+            canSubmit:reg.test(this.state.amtMoney + 100 + '')
+        })
+    }
+    minus(){
+        const reg = /^[0-9]+([.]{1}[0-9]+){0,1}$/g
+        if(this.state.amtMoney<100){
+            return false;
+        }
+        this.setState({
+            amtMoney:parseFloat(this.state.amtMoney) - 100,
+            canSubmit:reg.test(this.state.amtMoney + 100 + '')
+        })
+    }
     render(){
         const show={
             transform:`translate(0,-${$(this.refs.shoppingWindow).outerHeight()}px)`
@@ -90,37 +109,44 @@ class InvestPage2 extends Component{
                 </ReactCSSTransitionGroup>
                 <RootLoading display={!this.state.loaded}/>
                 <div className="project-invest-wrap">
+                    <h2>{product.productName}</h2>
                     <div className="project-invest-info">
                         <div className="part-left">
-                            <p className="p1">年化利率</p>
                             <p className="p2">{product.productRate}<span className="f14">%</span></p>
+                            <p className="p1">年化利率</p>
                         </div>
                         <div className="part-right">
-                            <p className="p1"><span>期限<i>{product.productCycle}</i>个月</span></p>
+                            <p className="p1">{product.productCycle}个月</p>
+                            <p className="p2">期限</p>
+                        </div>
+                    </div>
+
+                    <div className="project-money-info">
+                        <div className="d1">
+                            项目金额:{product.financingAmount}元
+                        </div>
+                        <div className="d2">
+                            剩余可投:{product.leftCopies}元
+                        </div>
+                    </div>
+                    <div className="project-money-info">
+                        <div className="d1">
+                            还款方式:等额本息
+                        </div>
+                        <div className="d2">
+                            账户余额:{props.account.balance}元
                         </div>
                     </div>
                     <div className="project-invest-progress">
                         <div className="project-invest-progress-max">
                             <div className="project-invest-progress-current" style={{width:Math.floor(product.progress)+'%'}}>
-                                <span>{ (product.progress ? Math.floor(product.progress) : 0) +'%'}</span>
+
                             </div>
+                            <span>{ (product.progress ? Math.floor(product.progress) : 0) +'%'}</span>
                         </div>
-                    </div>
-                    <div className="project-money-info">
-                        <div className="d1">
-                            项目总额{product.financingAmount}元
-                        </div>
-                        <div className="d2">
-                            剩余可投{product.leftCopies}元
-                        </div>
-                    </div>
-                    <div className="project-money-info-2">
-                        <p>投资区间:<span className="s1">{product.atleastMoney}</span><span className="s2">元起投</span></p>
-                        <p>还款方式:<span className="s2" >等额本息</span></p>
                     </div>
                 </div>
-                <TextButton text={`账户余额:${props.account.balance}`} hasBorder={false} hasIcon={false} style={{marginTop:'20px',borderTop:'1px solid #dcdcdc',borderBottom:'1px solid #dcdcdc'}} />
-                <TextButton text="项目详情" style={{marginTop:'20px',borderTop:'1px solid #dcdcdc'}} onClick={()=>{
+                <TextButton text="项目详情" style={{borderTop:'1px solid #dcdcdc'}} onClick={()=>{
                         this.context.router.push(`/financial/product/${props.params.productType}/${props.params.id}/detail`)
                     }} />
                 <TextButton text="投标记录" onClick={()=>{
@@ -129,6 +155,10 @@ class InvestPage2 extends Component{
                 <TextButton text="还款计划" hasBorder={false} style={{borderBottom:'1px solid #dcdcdc'}} onClick={()=>{
                         this.context.router.push(`/financial/product/${props.params.productType}/${props.params.id}/returnPlan`)
                     }} />
+                <div className="edun-tip">
+                    <i></i>
+                    <span>E盾计划全面保障</span>
+                </div>
                 <Overlay display={this.state.overlayShouldShow} onClick={()=>{
                     this.setState({
                         overlayShouldShow:false
@@ -140,11 +170,10 @@ class InvestPage2 extends Component{
                     })
                 }} />
                 <div className={"shopping-window "} style={this.state.overlayShouldShow ? show : hide } ref="shoppingWindow">
-                    <h3>投资项目:<span>{props.productName}</span></h3>
                     <div className="input-wrap">
-                        <span className="input-wrap-text-1">投资金额</span>
-                        <span className="input-wrap-2">
-                            <input type="text" value={this.state.amtMoney} onChange={this.amtMoneyChange}/>元</span>
+                        <span className="control minus" onClick={this.minus}></span>
+                        <input type="text" value={this.state.amtMoney} onChange={this.amtMoneyChange}/>
+                        <span className="control add" onClick={this.add}></span>
                     </div>
                     <div className="input-wrap">
                         <span className="input-wrap-text-1">预期收益</span>

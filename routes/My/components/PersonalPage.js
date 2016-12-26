@@ -8,11 +8,6 @@ class PersonalPage extends Component {
     constructor(props) {
         super(props)
     }
-    componentWillMount() {
-    }
-    componentDidMount(){
-
-    }
     render() {
         const account = this.props.account;
         const props = this.props;
@@ -29,7 +24,11 @@ class PersonalPage extends Component {
                         })
                     }
                 </ReactCSSTransitionGroup>
-                <div className="text-line-item-wrap" style={{marginTop:'30px'}}>
+                <div className="personal-top">
+                    <img src="/static/img/personal_center_avatar.png" width="70" />
+                    <div className="level">普通会员</div>
+                </div>
+                <div className="text-line-item-wrap" style={{borderTop:'none'}}>
                     <TextLineItem leftText="手机号码" rightText={account.mobile} />
                     <TextLineItem leftText="实名认证" rightText={account.name ? account.name +'('+account.idCard +')' :'未实名'} />
                     <TextLineItem hasBorder={false} leftText="绑定银行卡" rightText={account.bankCard || '未绑定'} />

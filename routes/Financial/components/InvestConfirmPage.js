@@ -116,7 +116,14 @@ export default class InvestConfirmPage extends Component{
                     </div>
                     <div className="invest-confirm-content">
                         <TextButton text="投资金额" onClick={()=>{
-                        }}  hasBorder={true} hasIcon={false} rightText={`${params.money}元`} />
+                        }}  hasBorder={true} hasIcon={false}
+                                    rightTextClass="money"
+                                    rightText={`${params.money}元`} />
+
+                        <TextButton text="预计收益" onClick={()=>{
+                        }}  hasBorder={true} hasIcon={false}
+                                    rightTextClass="money"
+                                    rightText={`${this.calculate(props.params.productType,params.money,params.rate,params.limit)}元${this.state.couponTxt ? ',加息新增'+this.calculate(props.params.productType,params.money,parseFloat(this.state.couponTxt.replace('%','')),params.limit)+'元':'' }`} />
 
                         <TextButton text="红包返现" onClick={()=>{
                             this.context.router.push(`/financial/product/${props.params.productType}/${props.params.id}/confirm/coupon/1`)
@@ -132,11 +139,9 @@ export default class InvestConfirmPage extends Component{
 
                         <TextButton text="应投金额" onClick={()=>{
 
-                        }}  hasBorder={false} hasIcon={false} rightText={`${params.money}元`} style={{marginTop:'20px'}} />
-
-                        <p style={{width:'90%',margin:'15px auto 0 auto'}}>预计收益<span className="money">{this.calculate(props.params.productType,params.money,params.rate,params.limit)}</span>
-                            元{this.state.couponTxt && <span>,加息新增<span className="money">{this.calculate(props.params.productType,params.money,parseFloat(this.state.couponTxt.replace('%','')),params.limit)}</span>元</span>}
-                        </p>
+                        }}  hasBorder={false} hasIcon={false} rightText={`${params.money}元`}
+                                    rightTextClass="money"
+                                    style={{marginTop:'20px'}} />
 
                         <BaseButton text="确认投资" className="invest-confirm-pay" onClick={()=>{
                             this.setState({

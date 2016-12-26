@@ -2,16 +2,20 @@
 @blue:#004fa3;
 @huise:#d6d7dc;
 @color7:#e3be4f;
+@red:#e60000;
 .financial-ul{
   padding-bottom:20px;
-  /*invest-wrap*/
     li,.financial-li{
-      width:90%;
+      width:100%;
       display: block;
       padding:10px;
       margin:10px auto 0 auto;
       background-color:#fff;
       position: relative;
+      box-sizing: border-box;
+      border-top:1px solid #e6e6e6;
+      border-bottom:1px solid #e6e6e6;
+
       >span{
         position: absolute;
         right:10px;
@@ -93,40 +97,66 @@
         overflow: hidden;
         >div{
           text-align: center;
-          width:33.3%;
           float: left;
           color:#646464;
           padding:10px 0;
           &.part-1{
+            width:30%;
             .p1{
-              color:#ff4343;
+              color:@red;
               font-size:36px;
               height:40px;
+              line-height:40px;
             }
             .p2{
               margin-top:10px;
+            }
+            .p3{
+              color:@red;
+              font-size:40px;
+              text-align: center;
+              margin-top:10px;
+              >span{
+                font-size:16px;
+              }
             }
           }
           &.part-2{
+            width:40%;
             .p1{
-              font-size:18px;
               line-height:40px;
               height:40px;
+              font-size:16px;
+              >span{
+                font-size:36px;
+              }
             }
             .p2{
               margin-top:10px;
             }
+            .p3{
+              text-align: left;
+              font-size:14px;
+              margin-top:10px;
+              color:#666;
+
+
+              >span{
+                color:#999;
+              }
+            }
           }
           &.part-3{
+            width:30%;
             a{
               display: block;
-              width:60px;
-              height:60px;
-              line-height:60px;
+              width:80px;
+              height:30px;
+              line-height:30px;
               color:#fff;
-              margin:10px  auto 0 auto;
-              background-color:@color7;
-              border-radius:50%;
+              margin:20px  auto 0 auto;
+              border-radius:5px;
+              background-color:@red;
             }
             .back-on{
               width:80px;
@@ -213,19 +243,24 @@
   position: relative;
 }
 .financial-nav{
-  width:90%;
+  width:100%;
   overflow: hidden;
   margin:10px auto 0 auto;
   padding:10px;
   background-color:#fff;
   >li{
     float: left;
-    width:25%;
+    width:24%;
     height:25px;
     line-height:25px;
     overflow: hidden;
+    border-left:1px solid #e6e6e6;
+    text-align: center;
+    &:first-child{
+      border-left:none;
+    }
     &.active{
-      color:#e3be4f;
+      color:@red;
       &.up i{
         background-position:0 -25px;
       }
@@ -235,6 +270,7 @@
     }
     >span{
       float: left;
+      margin-left:15px;
     }
     i{
       display: inline-block;
@@ -242,7 +278,7 @@
       height:25px;
       background:url("/static/img/arrow-icon.png") no-repeat;
       background-size:100%;
-      margin-left:10px;
+      margin-left:5px;
 
     }
   }
@@ -250,46 +286,72 @@
 .progressbar{
   float: right;
   margin-right:10px;
+  .progressbar-text{
+    font-size:20px;
+    >span{
+      font-size:14px;
+    }
+  }
 }
 
 .product-wrap{
-  background-color:#fff;
+  background: linear-gradient(to right bottom, #e50000 , #ff6600);
+  overflow: hidden;
+  padding-bottom:15px;
   .ll{
-    padding:30px 0;
-    text-align: center;
-    >.p1{
+    padding:30px 0 30px 30px;
+    text-align: left;
+    color:#fff;
+    >h2{
+      color:#fff;
+      text-align: center;
+      font-weight:normal;
+      margin-left:-30px;
+      margin-top:-15px;
 
+    }
+    >.p1{
       >.s1{
-        font-size:48px;
-        color:#ff4343
-      }
-      >.s2{
-        color:#ff4343
+        font-size:72px;
       }
     }
   }
   .account-wrap{
     padding:10px 0;
-    background-color:#efeff4;
-    overflow: hidden;
+    position: relative;
+    border-top:1px solid #f3774d;
+    width:90%;
+    margin:0 auto;
+    >div.limit-wrap{
+      position: absolute;
+      right:20px;
+      top:-60px;
+      text-align: right;
+      >.p1,>.p2{
+        font-size:14px;
+      }
+
+
+
+    }
     >div{
-      width:33.3%;
+      width:50%;
       position: relative;
       text-align: center;
       float: left;
+      color:#fff;
       >.line-2{
-        height:30px;
-        border-right:1px solid  #e1e1e1;
+        height:40px;
+        border-right:1px solid  #f3774d;
         position: absolute;
         right:0;
         top:5px;
       }
       >.p1{
         font-size:14px;
-        color:#909090;
       }
       >.p2{
-        color:#646464;
+        font-size:24px;
       }
     }
   }
@@ -325,7 +387,7 @@
     }
     >.money{
       font-size: 12px;
-      color:#e3aa00;
+      color:#ff6600;
     }
   }
 }
@@ -365,7 +427,7 @@
   text-align: center;
   input{
     font-size:20px;
-    color:#e3aa00;
+    color:#ff6600;
     width:150px;
     font-weight: bold;
     text-align: center;
@@ -384,16 +446,38 @@
     width:1px;
     height:63px;
     margin-left:-1px;
-    border-left:1px solid #e3aa00;
+    border-left:1px solid #ff6600;
   }
 }
 .level-2-wrap{
   .index-date-line{
     height:45px;
   }
+  .edun-tip{
+    width:160px;
+    overflow: hidden;
+    padding:10px 0;
+    margin:0 auto;
+    >i{
+      display: block;
+      width:30px;
+      height:30px;
+      background:url("/static/img/icon_edun.png") no-repeat;
+      background-size:100%;
+      float: left;
+    }
+    >span{
+      float: left;
+      display: block;
+      height:30px;
+      line-height:30px;
+      color:#ccc;
+    }
+  }
 }
 .product-button-wrap{
   margin:20px 0 100px 0;
+
 }
 .product-s1-detail{
   font-size:14px;
@@ -441,16 +525,22 @@
   background-color:#fff;
   left:0;
   transition: all .3s;
-  padding:20px 15px;
   box-sizing: border-box;
+  padding-top:15px;
   z-index:991;
   h3{
     text-align: center;
     margin-bottom:10px;
   }
+  .base-button{
+    width:100%;
+    border-radius:0;
+  }
   .input-wrap{
-    border-top:1px solid #dcdcdc;
     overflow: hidden;
+    position: relative;
+    width:80%;
+    margin:0 auto;
     padding:10px 0;
     >span{
       display: block;
@@ -459,10 +549,41 @@
       float: left;
     }
     .input-wrap-2{
-      float: right;
-      input{
-        text-align:right;
-        font-size:14px;
+      color:#e60000;
+
+    }
+    input{
+      position: absolute;
+      left:0;
+      top:10px;
+      height:38px;
+      line-height:38px;
+      width:100%;
+      text-align:center;
+      font-size:14px;
+      z-index:1;
+      border-top:1px solid #e6e6e6;
+      border-bottom:1px solid #e6e6e6;
+
+    }
+    >.control{
+      display: block;
+      width:40px;
+      height:40px;
+      position: relative;
+      z-index:2;
+      &.minus{
+        background:url("/static/img/minus.png") no-repeat;
+        background-size:100%;
+        float: left;
+      }
+      &.add{
+        background:url("/static/img/add.png") no-repeat;
+        background-size:100%;
+        float: right;
+
+
+
       }
     }
   }
@@ -470,8 +591,16 @@
 
 /*优选服务*/
 .project-invest-wrap{
-  padding:30px 0 10px 0;
+  padding:0 0 10px 0;
   background-color:#fff;
+  >h2{
+    font-weight:normal;
+    width:90%;
+    margin:0 auto;
+    padding:10px 0;
+    font-size:18px;
+    border-bottom:1px solid #f0f0f0;
+  }
   >.sq{
     position: absolute;
     width:100%;
@@ -484,7 +613,7 @@
   }
   .project-invest-info{
     overflow: hidden;
-
+    padding:20px 0;
     >div{
       box-sizing: border-box;
       float:left;
@@ -496,8 +625,8 @@
           font-size:14px;
         }
         >.p2{
-          color:#ff4343;
-          font-size:36px;
+          color:#e60000;
+          font-size:52px;
           >span.f14{
             font-size:14px;
           }
@@ -505,23 +634,16 @@
       }
       &.part-right{
         padding-right:20px;
+        padding-top:40px;
+        text-align: center;
         >.p1{
-          text-align: right;
-          >span{
-            font-size:12px;
-            padding:2px 15px;
-            color:@color6;
-            border:1px solid @color6;
-            border-radius:3px;
-          }
+          color:#666
         }
         >.p2{
-          text-align: right;
+          color:#999;
           font-size:14px;
-          margin-top:10px;
-          >span{
-            color:@color6;
-          }
+          margin-top:5px;
+
         }
       }
     }
@@ -529,11 +651,11 @@
   .project-invest-progress{
     box-sizing: border-box;
     padding:0 20px;
-    margin-top:10px;
+    margin:20px 0;
     >.project-invest-progress-max{
-      width:100%;
-      height:10px;
-      background-color:#f0f0f0;
+      width:80%;
+      height:7px;
+      border:1px solid #e60000;
       border-radius:5px;
       position: relative;
       >.project-invest-progress-current{
@@ -543,32 +665,32 @@
         left:0;
         top:0;
         border-radius:5px;
-        background-color:@color6;
+        background-color:#e60000;
         transition: all .5s;
-        >span{
-          display: block;
-          position: absolute;
-          right:-10px;
-          top:-2px;
-          height:15px;
-          width:25px;
-          border:1px solid @color6;
-          border-radius:10px;
-          font-size:10px;
-          background-color:#fff;
-          color:@color6;
-        }
+      }
+      >span{
+        display: block;
+        position: absolute;
+        right:-40px;
+        top:-5px;
+        height:15px;
+        width:25px;
+        font-size:12px;
+        color:#ee442a;
+
+
       }
     }
   }
   .project-money-info{
-    padding:20px;
-    border-bottom:1px solid #d6d7dc;
+    padding:5px 20px;
     overflow: hidden;
     >div{
       float: left;
       width:50%;
-      font-size:12px;
+      font-size:14px;
+
+
       color:#646464;
       &.d1{
         >span{
@@ -576,7 +698,7 @@
         }
       }
       &.d2{
-        text-align: right;
+        text-align: left;
         >span{
           color:#ff4343;
         }
@@ -630,7 +752,7 @@
 /*投资确认页*/
 .invest-confirm-wrap{
   .invest-confirm-information{
-    background-color:#fff2cc;
+    background-color:#fff;
     padding:20px;
     p{
       padding:5px;
@@ -647,14 +769,23 @@
         overflow: hidden;
         text-overflow: ellipsis;
         margin-bottom:10px;
+        border-bottom:1px solid #e6e6e6;
       }
       &.p2{
         color:#666;
+        text-align: center;
+      }
+      &.p3{
+        text-align: center;
       }
     }
   }
   .invest-confirm-content{
     margin:15px 0;
+    .money{
+      color:#e60000!important;
+
+    }
   }
   .invest-confirm-pay{
     margin-top:30px;

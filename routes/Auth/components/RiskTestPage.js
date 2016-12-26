@@ -15,6 +15,9 @@ export default class RiskTestPage extends Component {
     static propTypes = {
         asyncRisk: PropTypes.func
     }
+    componentWillMount(){
+        $(window).scrollTop(0)
+    }
     render(){
         return(
         <div>

@@ -16,7 +16,6 @@ export default class BorrowListPage extends Component {
                             list && list.map((item,index)=>{
                                 return (
                                     <Link to="/borrow/apply" key={index} className="borrow-product-item">
-                                        <h2>{item.name}</h2>
                                         <div>
                                             <div className="part-1">
                                                 <img src={`/static/img/borrow-icon-${item.type}.png`} />
@@ -34,6 +33,7 @@ export default class BorrowListPage extends Component {
                                                 <p>{item.rate}</p>
                                             </div>
                                         </div>
+                                        <h2>{item.name}</h2>
                                     </Link>
                                 )
                             })

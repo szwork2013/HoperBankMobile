@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import IconButton from 'components/IconButton'
-import IconInput from 'components/IconInput'
+import TextInput from 'components/TextInput'
 import {BaseButton} from 'components/Button'
 import RootLoading from 'components/RootLoading'
 import { browserHistory,Link } from 'react-router'
@@ -20,9 +20,6 @@ export default class ResetPassWordPage extends Component {
     }
     componentWillMount() {
         !this.props.userId && browserHistory.replace('/login')
-    }
-    componentDidMount(){
-
     }
     doReset(){
         const props = this.props;
@@ -71,32 +68,31 @@ export default class ResetPassWordPage extends Component {
     render() {
         return (
             <section className="level-2-wrap">
-                <section className="form-wrap" style={{marginTop:'30px'}}>
+                <section className="form-wrap register-wrap" >
                     <RootLoading display={this.state.loading} />
-                    <IconInput
+                    <TextInput
                         placeholder="请输入原密码"
+                        text="原密码"
                         rule="^\w{6,16}$"
-                        contentClass='no-icon'
                         type="password"
                         callback={(b,val)=>{this.setState({prevPassword:val,prevPasswordPassed:b})}}>
-                    </IconInput>
-                    <IconInput
+                    </TextInput>
+                    <TextInput
                         placeholder="请输入新密码"
+                        text="新密码"
                         rule="^\w{6,16}$"
-                        contentClass='no-icon'
                         type="password"
                         callback={(b,val)=>{this.setState({newPassword:val,newPasswordPassed:b})}}>
-                    </IconInput>
-                    <IconInput
+                    </TextInput>
+                    <TextInput
                         placeholder="请再次输入新密码"
+                        text="确认密码"
                         rule="^\w{6,16}$"
-                        hasBorder={false}
-                        contentClass='no-icon'
                         type="password"
                         callback={(b,val)=>{this.setState({reNewPassword:val,reNewPasswordPassed:b})}}>
-                    </IconInput>
+                    </TextInput>
                     <section style={{width:'90%',textAlign:'right',margin:'10px auto',overflow:'hidden'}}>
-                        <Link to="/forgot" className="fr" style={{color:'#004fa3'}}>忘记密码?</Link>
+                        <Link to="/forgot" className="fr" >忘记密码?</Link>
                     </section>
                     <BaseButton text="确定" className="mt20" onClick={this.doReset}/>
                 </section>

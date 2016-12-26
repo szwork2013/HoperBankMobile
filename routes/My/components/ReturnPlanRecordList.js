@@ -66,12 +66,12 @@ class ReturnPlanRecordList extends Component {
                         <h2 className="return-plan-h2">{item.productName}</h2>
                         <p className="return-plan-p">
                             <span>应收金额</span>
+                            <span className="money">{(parseFloat(item.planInterest) + parseFloat(item.planPrincipal)).toFixed(2) + '元'}</span>
                             <span>回款期数</span>
-                            <span>{this.props.type==2? '实际回款时间' : '预计回款时间'}</span>
+                            <span>{item.planCycle+'期'}</span>
                         </p>
                         <p className="return-plan-p">
-                            <span>{(parseFloat(item.planInterest) + parseFloat(item.planPrincipal)).toFixed(2) + '元'}</span>
-                            <span>{item.planCycle+'期'}</span>
+                            <span>{this.props.type==2? '实际回款时间' : '预计回款时间'}</span>
                             <span>{item.planDate}</span>
                         </p>
                     </div>

@@ -13,8 +13,6 @@ class HomePage extends Component {
             selected:1,
             bannerSelected:0
         }
-        this.prev = this.prev.bind(this);
-        this.next = this.next.bind(this);
         this.renderMain = this.renderMain.bind(this);
     }
     static contextTypes = {
@@ -24,14 +22,6 @@ class HomePage extends Component {
         //loadData(this.props)
         !this.props.index && this.props.loadIndex()
     }
-    next() {
-        this.refs.reactSwipe.next();
-    }
-
-    prev() {
-        this.refs.reactSwipe.prev();
-    }
-
     renderMain(){
         const {recommend} = this.props.index;
         const banner =[
@@ -67,7 +57,7 @@ class HomePage extends Component {
             }
         ]
         const swipeOptions = {
-            continuous: true,
+            continuous: false,
             callback:(index,elm)=>{
                 this.setState({
                     selected:index
@@ -147,52 +137,46 @@ class HomePage extends Component {
                                 recommend.map((item,index)=>{
                                     return(
                                         <section className="index-ll-content" key={index}>
-                                            <div className={`index-ll-bg ${index===1? 'animated flipInY' : ''}`}>
+                                            <div className={`index-swipe-item ${this.state.selected ==index?'active':''}`}>
                                                 <h2 className="tit">{item.name}</h2>
-                                                <p className="p1"><span className="rate">{item.rate}</span><span>%</span></p>
-                                                <p className="p2">预期年化收益率</p>
-                                                <p className="p3">{item.lowestBuy+'元起投'}</p>
+                                                <div className="wave-item" id={`wave-${index}`}>
+                                                    <img src="/static/img/wave.gif" />
+                                                    <p className="p1">{item.rate}<span>%</span></p>
+                                                    <p className="p2">年化收益率</p>
+                                                </div>
+                                                <div className="item-con-3">
+                                                    <span className="s1">起投金额<span>{item.lowestBuy}元</span></span>
+                                                    <span className="s2">期限<span>24个月</span></span>
+                                                </div>
+                                                <Link to={`/financial/product/1/${item.productId}`} style={{display:'block'}} className="index-ll-info">
+                                                    <div className="button">立即抢购</div>
+                                                </Link>
                                             </div>
-                                            <Link to={`/financial/product/1/${item.productId}`} style={{display:'block'}} className="index-ll-info">
-                                                <div className="d1">立即抢购</div>
-                                            </Link>
                                         </section>
                                     )
                                 })
                             }
                         </ReactSwipe>
-                        <div className="swiper-button-prev" onClick={this.prev}>
-                            <i className="icon icon-arrow-left-4"></i>
-                        </div>
-                        <div className="swiper-button-next" onClick={this.next}>
-                            <i className="icon icon-arrow-right-4"></i>
-                        </div>
                     </div>
-                </section>
-                <section className="index-date-line">
-                    <ul>
-                        {
-                            recommend.map((item,index)=>{
-                                return(
-                                    <li key={index}
-                                        style={
-                                            {
-                                                width:Math.floor(100/recommend.length) +'%',
-                                                animationDuration:1+(index/5)  +'s'
-                                            }
-                                        }
-                                        className={`animated fadeIn ${this.state.selected == index ? 'active':''}`}>
-                                        <i></i>{item.limit}个月
-                                    </li>
-                                )
-                            })
-                        }
-                    </ul>
                 </section>
             </section>
         )
     }
+    componentDidMount(){
 
+    }
+    initWave(){
+        $('.wave-item').each(function(){
+            wave($(this).attr('id'),0.5).start()
+        })
+    }
+    componentWillReceiveProps(nextProps){
+       /* var _this = this;
+        setTimeout(function(){
+
+            _this.initWave()
+        },400)*/
+    }
     render() {
         return (
             <section className="home-page">
