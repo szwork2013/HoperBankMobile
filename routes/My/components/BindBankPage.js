@@ -96,7 +96,7 @@ export default class BindBankPage extends Component {
                 bankId:this.props.bankData[0].value
             })
         }
-        if(this.state.reBankNo){
+        if(this.state.reBankNo==''){
             alert('请再次输入银行卡号');
             return false;
         }

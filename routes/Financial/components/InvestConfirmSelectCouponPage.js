@@ -23,14 +23,20 @@ export default class InvestConfirmSelectCouponPage extends Component{
     renderType1(data){
         if(data && data.length!==0){
             return(
-                <div className={`gift-list-item-2 type1`}>
+                <div className={`gift-list-item type1 animated flipInX`} >
                     <div className="part-left">
-                        <h3>{data.name}</h3>
-                        <p>有效时间：{data.validTime}</p>
-                        <p>适用范围：{data.scope}</p>
-                        <p>使用条件：{data.condition}</p>
+                        <p>{parseInt(data.money)}<span>元</span></p>
+                        <img src={`/static/img/coupon/red_packets_n_r.png`} />
                     </div>
-                    <div className="abs">{parseInt(data.money)}</div>
+                    <div className="part-right">
+                        <div className="info">
+                            <h3>{data.name}</h3>
+                            <p>{data.scope}</p>
+                            <p className="red">{data.condition}</p>
+                            <p>有效期{data.validTime}</p>
+                        </div>
+                        <img src="/static/img/coupon/coupon_r.png" />
+                    </div>
                 </div>
             )
         }else{
@@ -47,22 +53,21 @@ export default class InvestConfirmSelectCouponPage extends Component{
                         <div className="select-coupon-selector">
                             <div className={`${this.state.selected==item.couponId? 'selected':''}`}></div>
                         </div>
-                        <div className={`coupon-type-2`}>
-                            <div className="part-1">
-                                <img src="/static/img/coupon_type1_bg_2.png"/>
-                                <div>
-                                    <p>有效时间：{item.validTime}</p>
-                                    <p>适用范围：{item.scope}</p>
-                                    <p>使用条件：{item.condition}</p>
-                                </div>
+                        <div className={`gift-list-item type1 animated flipInX`} key={index} style={{animationDuration:0.5+(index%10 / 5)+'s'}}>
+                            <div className="part-left">
+                                <p>{parseInt(item.money)}<span>%</span></p>
+                                <img src={`/static/img/coupon/coupon_l.png`} />
                             </div>
-                            <div className="part-2">
-                                <img src="/static/img/coupon_type1_bg_1.png"/>
-                                <div>
-                                    <p className="p1">{item.money}</p>
-                                    <p className="p2">加息券</p>
+                            <div className="part-right">
+                                <div className="info">
+                                    <h3>{item.name}</h3>
+                                    <p>{item.scope}</p>
+                                    <p className="red">{item.condition}</p>
+                                    <p>有效期{item.validTime}</p>
                                 </div>
+                                <img src="/static/img/coupon/coupon_r.png" />
                             </div>
+                            <div className="abs">已使用</div>
                         </div>
                     </div>
                 )
@@ -78,6 +83,7 @@ export default class InvestConfirmSelectCouponPage extends Component{
             <section className="level-2-wrap">
                 {props.params.type==1 && this.renderType1(this.props.coupon.type1)}
                 {props.params.type==2 && this.renderType2(this.props.coupon.type2)}
+                {props.params.type==3 && this.renderNull()}
             </section>
         )
     }

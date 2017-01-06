@@ -5,10 +5,10 @@ function dealRecord(state=[],action){
     const { type } = action;
     switch (type){
         case ActionTypes.FETCH_DEALRECORD:
-            return action.response
+            return action.response;
             break;
         case ActionTypes.CLEAR_DEALRECORD:
-            return []
+            return [];
             break;
     }
     return state;

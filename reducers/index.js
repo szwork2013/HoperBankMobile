@@ -34,6 +34,26 @@ function fuiouURI(state=API.fuiouURI){
     return state;
 }
 
+/*临时记录*/
+function tempRecord(state=[],action){
+    const { type } = action;
+    if (type === ActionTypes.FETCH_TEMP_RECORD) {
+        if (action.response) {
+            return action.response
+        }
+    }else if(type === ActionTypes.CLEAR_TEMP_RECORD) {
+        return [];
+    }
+    return state
+}
+function tempRecordDetail(state=null,action){
+    const { type } = action;
+    if (type === ActionTypes.FETCH_TEMP_RECORD_DETAIL) {
+        return action.response;
+    }
+    return state;
+}
+
 const rootReducer = combineReducers({
     routing,
     index,
@@ -43,6 +63,10 @@ const rootReducer = combineReducers({
     product,
     isFetching,
     team,
+    tempRecord:combineReducers({
+        list:tempRecord,
+        detail:tempRecordDetail
+    }),
     user:myReducer,
     form:formReducer
 })

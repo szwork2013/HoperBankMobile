@@ -23,12 +23,13 @@ export default class QaqList extends Component {
     }
     render(){
         return(
-            <div className="" >
+            <div className="qaq-wrap" >
                 {this.state.data.map((item,index)=>{
                     return(
                         <div className="qaq-item" ref={`item${index}`} key={index} onClick={this.clickHandle.bind(this,index)}>
                             <div className="qaq-question">{index+1}.{item.question}</div>
-                            <div className="qaq-answer">{item.answer}</div>
+                            <div className="qaq-answer" dangerouslySetInnerHTML={{__html: item.answer}}></div>
+                            <i className="icon icon-arrow-right"></i>
                         </div>
                     )
                 })}

@@ -17,7 +17,9 @@ module.exports = {
     childRoutes: [
         {
             path:'/financial/product/:productType/:id',
-            component:InvestMainPage,
+            component:connect(null,{
+                fetchAccount
+            })(InvestMainPage),
             childRoutes: [
                 {
                     path:"/financial/product/:productType/:id/confirm",

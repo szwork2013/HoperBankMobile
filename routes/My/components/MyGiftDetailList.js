@@ -37,7 +37,7 @@ class GiftList extends Component{
                         </div>
                         <img src="/static/img/coupon/coupon_r.png" />
                     </div>
-                    <div className="abs">已使用</div>
+                    <div className="abs">{type==3? '已过期':'已使用'}</div>
                 </div>
             )
         }
@@ -58,7 +58,7 @@ class GiftList extends Component{
                         </div>
                         <img src="/static/img/coupon/coupon_r.png" />
                     </div>
-                    <div className="abs">已使用</div>
+                    <div className="abs">{type==3? '已过期':'已使用'}</div>
                 </div>
             )
         }

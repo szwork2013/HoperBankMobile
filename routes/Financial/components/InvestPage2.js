@@ -59,6 +59,8 @@ class InvestPage2 extends Component{
                 }
             }
         })
+
+        props.account.userId && this.props.fetchAccount();
     }
     amtMoneyChange(ins){
         const reg = /^[0-9]+([.]{1}[0-9]+){0,1}$/g

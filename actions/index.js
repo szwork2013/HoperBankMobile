@@ -8,7 +8,7 @@ export * from './accountActions'
 export * from './myActions'
 export * from './activityActions'
 export * from './borrowActions'
-
+export * from './discoverActions'
 export const FETCH_INDEX =  'FETCH_INDEX'
 export const SET_FETCHING = 'SET_FETCHING'
 

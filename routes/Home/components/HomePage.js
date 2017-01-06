@@ -146,7 +146,7 @@ class HomePage extends Component {
                                                 </div>
                                                 <div className="item-con-3">
                                                     <span className="s1">起投金额<span>{item.lowestBuy}元</span></span>
-                                                    <span className="s2">期限<span>24个月</span></span>
+                                                    <span className="s2">期限<span>{item.limit}个月</span></span>
                                                 </div>
                                                 <Link to={`/financial/product/1/${item.productId}`} style={{display:'block'}} className="index-ll-info">
                                                     <div className="button">立即抢购</div>

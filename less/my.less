@@ -18,7 +18,22 @@
     }
     >p{
       margin-top:10px;
+
       padding-bottom:15px;
+    }
+    >p.dir{
+      padding-bottom:0;
+      margin-top:25px;
+      font-size:14px;
+      overflow: hidden;
+      >span:nth-child(1){
+        float: left;
+        padding-left:20px;
+      }
+      >span:nth-child(2){
+        float: right;
+        padding-right:20px;
+      }
     }
   }
 }
@@ -325,16 +340,35 @@
       line-height:30px;
     }
     .my-deal-record-money{
-      color:#ff4343;
-      float: left;
+      color:#666;
+      float: right;
     }
     .my-deal-record-status{
+      display: block;
+      float: left;
+      color:#fff;
+      height:20px;
+      line-height:20px;
+      background-color:#1fe2ff;
+      padding:0 5px;
+      border-radius:10px;
+      margin:5px 0 0 10px;
+      &.fail{
+        background-color:#ccc;
+      }
+    }
+    .my-deal-record-order-date{
       float: right;
-
+      color:#999;
+      font-size:12px;
+    }
+    .my-deal-record-type{
+      float: left;
     }
     .my-deal-record-order-id{
       display: inline-block;
-
+      color:#999;
+      font-size:12px;
     }
   }
 }

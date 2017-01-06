@@ -41,8 +41,8 @@ class BorrowNavPage extends Component {
                 <Link className="borrow-nav-item  animated bounceInRight" to='/borrow/apply'>
                     <div className="borrow-nav-icon icon2"></div>
                     <div className="borrow-nav-info">
-                        <h2>合作项目</h2>
-                        <p>优先接受深圳地区的借款申请，提交申请后我们将在2个工作日内和您取得联系。</p>
+                        <h2>定制项目</h2>
+                        <p>诚邀各银行、金融机构共同合作，为借款人拓宽融资渠道，互惠多赢。</p>
                     </div>
                 </Link>
             </section>

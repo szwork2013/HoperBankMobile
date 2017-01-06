@@ -34,6 +34,7 @@ class InvestPage1 extends Component{
                 loaded:true
             })
         }
+        props.account.userId && this.props.fetchAccount();
     }
     componentWillReceiveProps(nextProps){
         //直接刷新当前页面的时候，由于不是列表页点进来的，那么store里会没有product信息
@@ -62,7 +63,6 @@ class InvestPage1 extends Component{
                 for(let i = 0 ;i<30;i++){
                     arr.push(arr.length*1000);
                 }
-
                 this.setState({
                     data:arr,
                     ableAdd:true
@@ -157,10 +157,9 @@ class InvestPage1 extends Component{
                         </div>
                     </div>
                 </section>
-
                 <ReactIScroll iScroll={iScroll}
                               options={options}
-                    // onScrollEnd={this.onScrollEnd}
+                              //onScrollEnd={this.onScrollEnd}
                     //onRefresh={this.onRefresh}
                               onScroll={this.onScroll}
                     //onScrollStart={this.onScrollStart}
@@ -202,7 +201,13 @@ class InvestPage1 extends Component{
                 </section>
                 <section className="product-button-wrap">
                     <TextButton text="产品详情" onClick={()=>{
-                        this.context.router.push(`/financial/product/1/${this.props.params.id}/detail`)
+                        this.context.router.push({
+                            pathname:`/financial/product/1/${this.props.params.id}/detail`,
+                            query:{
+                                lowestBuy:data.lowestBuy,
+                                name:data.name
+                            }
+                        })
                     }} />
                     <TextButton text="投标记录" onClick={()=>{
                         this.context.router.push(`/financial/product/1/${this.props.params.id}/record`)

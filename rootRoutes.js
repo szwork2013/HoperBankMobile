@@ -12,6 +12,7 @@ export default {
         require('./routes/My'),
         require('./routes/Activity'),
         require('./routes/Team'),
+        require('./routes/Discover'),
         ...require('./routes/Auth'),
         require('./routes/Safe'),
         {

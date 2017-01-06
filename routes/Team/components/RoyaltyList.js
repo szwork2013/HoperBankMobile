@@ -32,7 +32,7 @@ export default class RoyaltyList extends Component {
                 <div className="select-wrap">
                     <span className="select-value">
                         <span>
-                            <span>{this.state.year}</span><i></i>
+                            <span>时间:{this.state.year}</span><i></i>
                         </span>
                     </span>
                     <select onChange={(e)=>{

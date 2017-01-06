@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import {Link} from 'react-router';
 import iScroll from 'iscroll/build/iscroll-probe';
 import ReactIScroll from 'react-iscroll'
+var ReactCSSTransitionGroup = require('react-addons-css-transition-group');
 export default class BorrowListPage extends Component {
     constructor(props) {
         super(props)
@@ -10,12 +11,19 @@ export default class BorrowListPage extends Component {
         const {list} = this.props;
         return(
             <section className="level-2-wrap">
+                <ReactCSSTransitionGroup component="div"
+                                         transitionName="slide-right"
+                                         transitionEnterTimeout={300} transitionLeaveTimeout={300}>
+                    {
+                        this.props.children
+                    }
+                </ReactCSSTransitionGroup>
                 <ReactIScroll iScroll={iScroll}>
                     <div style={{paddingBottom:'80px'}}>
                         {
                             list && list.map((item,index)=>{
                                 return (
-                                    <Link to="/borrow/apply" key={index} className="borrow-product-item">
+                                    <Link to="/discover/borrow/apply" key={index} className="borrow-product-item">
                                         <div>
                                             <div className="part-1">
                                                 <img src={`/static/img/borrow-icon-${item.type}.png`} />

@@ -75,9 +75,16 @@ class MyPage extends Component {
                 <section className="my-wrap">
                     <div className="my-info-top">
                         <div className="my-avatar-wrap">
-                            <p>可用余额 (元)</p>
-                            <h2 className={`${this.state.loaded && 'animated tada'}`}>{account ? parseFloat(account.balance).toFixed(2) : <icon className="loading"></icon>}</h2>
-                            <p>累计总收益：{account ? account.totalIncome : <icon className="loading"></icon>}</p>
+                            <p>账户总额(元)</p>
+                            <h2 className={`${this.state.loaded && 'animated tada'}`}>
+                                {
+                                    (parseFloat(account.balance)+parseFloat(account.principalMoney)+parseFloat(account.invest)).toFixed(2)
+                                }
+                            </h2>
+                            <p className="dir">
+                                <span>可用余额：{parseFloat(account.balance).toFixed(2)}元</span>
+                                <span>已收收益：{account.totalIncome}元</span>
+                            </p>
                             <div className="my-account-wrap">
                                 <div>
                                     <p className="p1">待收本金(元)</p>

@@ -22,7 +22,7 @@ export default class FinancialProductDetail extends Component {
                         </div>
                         <div className="product-text-item">
                             <span className="s1">加入下限:</span>
-                            <span className="s2">100元起</span>
+                            <span className="s2">{this.props.location.query.lowestBuy}元起</span>
                         </div>
                         <div className="product-text-item">
                             <span className="s1">加入上限:</span>
@@ -30,11 +30,7 @@ export default class FinancialProductDetail extends Component {
                         </div>
                         <div className="product-text-item">
                             <span className="s1">赎回方式:</span>
-                            <span className="s2">理财计划结束即可自动退出</span>
-                        </div>
-                        <div className="product-text-item">
-                            <span className="s1">收益处理:</span>
-                            <span className="s2">理财计划结束(包括回款完成、债权结束)返还账户</span>
+                            <span className="s2">{this.props.location.query.name =='月息宝' ? '按月付息,到期还本' : '到期还本付息'}</span>
                         </div>
                         <div className="product-text-item" style={{marginTop:'20px'}}>
                             <span className="s1">理财计划:</span>

@@ -33,6 +33,14 @@ var API = {
         withdraw:fuiouWithDraw
     },
     index:domain+'index',
+    media:{
+        list:domain+"discover/newslist",
+        detail:domain+'discover/newslist/detail'
+    },
+    knowledge:{
+        list:domain+"discover/knowledgelist",
+        detail:domain+'discover/knowledgelist/detail'
+    },
     product:{
         list:domain+'product/list',
         detail:domain+'productDetail.json',

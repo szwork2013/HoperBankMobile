@@ -190,7 +190,15 @@ class ReigsterPage extends Component {
     }
     doStepThird(){
         this.props.doLogin(this.state.username,hex_md5(this.state.password),()=>{
-            this.context.router.push('/my')
+            if(this.props.location.query.backUrl){
+                if(this.props.location.query.asset){
+                    location.href=this.props.location.query.backUrl;
+                }else{
+                    this.context.router.replace(this.props.location.query.backUrl)
+                }
+            }else{
+                this.context.router.push('/my')
+            }
         })
     }
     handleGetCode(){
@@ -247,9 +255,6 @@ class ReigsterPage extends Component {
                     </section>
                 </section>
                 <section className={`register-step-second ${this.state.step.second ? '':'hide'}`}>
-                    <section className="tip-section-2">
-                        已向{this.state.username}手机发送验证码,请查收短信
-                    </section>
                     <TextInput
                         placeholder="请输入验证码"
                         text="输入验证码"
@@ -286,10 +291,10 @@ class ReigsterPage extends Component {
                     <section className="tip-section-2">
                         <label>
                             <input type="checkbox" ref="agree"  style={{marginRight:'5px'}} defaultChecked="checked" />
-                            同意<Link to="/register/agreement" style={{color:'#ee5447'}}>《琥珀金服服务协议》</Link>及<Link to="/risktest" style={{color:'#ee5447'}}>《风险评测》</Link>
+                            我已阅读并同意<Link to="/register/agreement" style={{color:'#ee5447'}}>《琥珀金服服务协议》</Link>及<Link to="/risktest" style={{color:'#ee5447'}}>《风险评测》</Link>
                         </label>
                     </section>
-                    <BaseButton text="注册" onClick={this.doStepSecond} className="mt20" />
+                    <BaseButton text="完成" onClick={this.doStepSecond} className="mt20" />
                 </section>
                 <section className={`register-step-third ${this.state.step.third ? '':'hide'}`} >
                     <img src="/static/img/login_ok_picture.png" width="80" />

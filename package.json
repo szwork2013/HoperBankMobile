@@ -8,7 +8,8 @@
     "publish-win": "set NODE_ENV=prod&&webpack -p --progress --colors",
     "dev-test": "set NODE_ENV=dev&&nodemon server.dev.js",
     "dev-prod": "set NODE_ENV=prod&&nodemon server.dev.js",
-    "bundle": "set NODE_ENV=prod&&webpack -p --progress --colors"
+    "bundle-prod": "set NODE_ENV=prod&&webpack --config webpack.bundle.prod.config.js -p --progress --colors",
+    "bundle-test": "set NODE_ENV=prod&&webpack --config webpack.bundle.test.config.js -p --progress --colors"
   },
   "repository": {
     "type": "git",
@@ -28,10 +29,11 @@
     "isomorphic-fetch": "^2.1.1",
     "lodash": "^4.0.0",
     "normalizr": "^2.0.0",
+    "react": "^15.4.1",
     "react-addons-css-transition-group": "^15.2.0",
     "react-addons-pure-render-mixin": "^15.2.0",
     "react-dom": "^15.3.1",
-    "react-iscroll": "^1.1.0",
+    "react-iscroll": "^1.1.1",
     "react-mixin": "^3.0.5",
     "react-redux": "^4.2.1",
     "react-router": "^2.7.0",
