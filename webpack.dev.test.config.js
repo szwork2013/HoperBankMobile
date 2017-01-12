@@ -34,6 +34,11 @@ module.exports = {
             {
                 test: /\.less$/,
                 loader: "style!css!less"
+            },
+            //下面这个是设置当图片大于150kb时转化成Base64格式的loader
+            {
+                test: /\.(png|jpg)$/,
+                loader: 'url?limit=15000'
             }
         ]
     },

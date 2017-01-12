@@ -4,6 +4,7 @@
   display:flex;
   position: relative;
   z-index:2;
+  font-size:14px;
   .selector-overlay{
     position: fixed;
     left:0;
@@ -34,6 +35,31 @@
       box-sizing: border-box;
       border-right:1px solid #e6e6e6;
       margin-top:7px;
+      >span{
+        display: inline-block;
+        margin-right:6px;
+      }
+      >i{
+        display: inline-block;
+        line-height:13px;
+        width:13px;
+        height:13px;
+        font-size:0;
+        background:url("/static/img/arrow_up.png");
+        background-size:100%;
+        transition: all .3s;
+        -webkit-transform:rotate(180deg); /* Safari 和 Chrome */
+        transform:rotate(180deg);
+      }
+      &.active{
+        color:#ff3000;
+        >i{
+          background:url("/static/img/arrow_down.png");
+          background-size:100%;
+          -webkit-transform:rotate(0deg); /* Safari 和 Chrome */
+          transform:rotate(0deg);
+        }
+      }
     }
     &:last-child{
       >.selector-title-item-txt{
@@ -48,11 +74,24 @@
     left:0;
     top:44px;
     border-top:1px solid #e6e6e6;
+    color:#666;
     z-index:2;
     >.selector-group-item{
       padding:10px;
       box-sizing: border-box;
       border-bottom:1px solid #e6e6e6;
+      position: relative;
+      .selected-sign{
+        width:25px;
+        height:25px;
+        position: absolute;
+        right:15px;
+        top:7px;
+        >img{
+          width:100%;
+          height:100%;
+        }
+      }
     }
     &.show{
       display: block;

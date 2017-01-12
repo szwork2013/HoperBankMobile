@@ -1,7 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { fetchTempRecordDetail } from 'actions'
-import RootLoading from 'components/RootLoading'
 import config from 'componentConfig'
 import iScroll from 'iscroll/build/iscroll-probe';
 import ReactIScroll from 'react-iscroll'
@@ -9,44 +8,35 @@ import ReactIScroll from 'react-iscroll'
 class TempRecordDetail extends Component {
     constructor(props) {
         super(props)
-        this.state={
-            loaded:false
-        }
     }
     componentWillMount() {
-
+        $('.main-foot-nav').hide();
         this.props.fetchTempRecordDetail({
             type:this.props.params.type,
             id:this.props.params.id,
             callback:(res)=>{
-                res.r==1 && this.setState({
-                    loaded:true
-                })
                 //设置title
-                $('title').html(this.props.dealRecordDetail.title)
+                $('title').html(this.props.location.query.title)
             }
         })
     }
     componentWillUnmount(){
         //重新设置title
+        $('.main-foot-nav').show();
         $('title').html("琥珀金服");
     }
     render(){
         const dealRecordDetail = this.props.dealRecordDetail;
         return(
-
             <div className="level-2-wrap absolute" >
-                <ReactIScroll iScroll={iScroll}>
                     <div className="temp-record-detail-wrap">
-                        <h3>{dealRecordDetail && dealRecordDetail.title}</h3>
+                        <h3>{this.props.location.query.title}</h3>
                         <p>
-                            <span>{dealRecordDetail && dealRecordDetail.date}</span>
+                            <span>{this.props.location.query.date}</span>
                         </p>
-                        <div dangerouslySetInnerHTML={{__html:dealRecordDetail && dealRecordDetail.content}}>
+                        <div dangerouslySetInnerHTML={{__html:dealRecordDetail}}>
                         </div>
                     </div>
-                </ReactIScroll>
-                <RootLoading display={!this.state.loaded}/>
             </div>
         )
     }

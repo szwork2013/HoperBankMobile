@@ -56,11 +56,15 @@ export function fetchTempRecordDetail(opt){
             url=API.knowledge.detail
         }
 
-        /*return $.ajax({
+        return $.ajax({
             url:url+`?id=${opt.id}`,
 
             success:(res)=>{
-                console.log(JSON.parse(res))
+                dispatch({
+                    type:FETCH_TEMP_RECORD_DETAIL,
+                    response:res
+                })
+                opt.callback && opt.callback(res);
                 if(res.r==1){
                     dispatch({
                         type:FETCH_TEMP_RECORD_DETAIL,
@@ -69,12 +73,13 @@ export function fetchTempRecordDetail(opt){
                     opt.callback && opt.callback(res);
                 }
             }
-        })*/
+        })
 
-        return fetch(url+`?id=${opt.id}`,{
+        /*return fetch(url+`?id=${opt.id}`,{
             method: "POST"
         })
             .then((res)=>{
+                console.log(res.text())
                 return res.json()
             })
             .then((res)=>{
@@ -89,6 +94,6 @@ export function fetchTempRecordDetail(opt){
             .catch(err => {
                 console.log(err)
                 //handle your server defined error?
-            })
+            })*/
     }
 }

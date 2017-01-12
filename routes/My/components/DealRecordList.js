@@ -13,14 +13,15 @@ class DealRecordList extends Component {
             loaded:false
         }
         this.fetchFunc = this.fetchFunc.bind(this);
+        this.reLoad = this.reLoad.bind(this)
     }
-    componentWillMount() {
-        //先清除产品2数据
-        const props = this.props;
+    reLoad(prop){
+        const props = prop || this.props;
         props.clearDealRecord();
         props.fetchDealRecord({
             curPage:1,
             type:props.type,
+            time:props.time,
             callback:()=>{
                 this.setState({
                     loaded:true
@@ -28,13 +29,20 @@ class DealRecordList extends Component {
             }
         })
     }
+    componentWillMount() {
+        //先清除产品2数据
+        this.reLoad()
+    }
     componentWillReceiveProps(nextProps) {
-
+        if(this.props.type != nextProps.type || this.props.time != nextProps.time){
+            this.reLoad(nextProps)
+        }
     }
     fetchFunc(opt){
             this.props.fetchDealRecord({
                 curPage:opt.curPage,
                 type:this.props.type,
+                time:this.props.time,
                 callback:opt.callback
             })
     }

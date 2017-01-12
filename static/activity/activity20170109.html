@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="format-detection" content="telephone=no" />
+    <title>飞镖</title>
+    <meta name="keywords" content="琥珀金服活动,双十二活动,双旦活动" />
+    <meta name="description"
+          content="喜迎双旦，琥珀金服隆重推出“双旦嘉年华 年终回家送机票”等多重惊喜回馈平台新老用户，琥珀金服十二月双旦活动具体参与方式和活动细则请查看官网。" />
+    <meta name="viewport" content="width=device-width,minimum-scale=1,maximum-scale=1,user-scalable=no">
+    <style>
+        *{
+            margin:0;
+            padding:0;
+            moz-user-select: -moz-none;
+            -moz-user-select: none;
+            -o-user-select:none;
+            -khtml-user-select:none;
+            -webkit-user-select:none;
+            -ms-user-select:none;
+            user-select:none;
+        }
+        .wrap{
+            width:100%;
+            max-width: 414px;
+            background:url("img/Activity/20170109/bg.png");
+            margin:0 auto;
+            min-height:500px;
+            position: relative;
+
+        }
+        .main{
+            padding:20px 0;
+            position: relative;
+            z-index:2;
+            text-align: center;
+        }
+        .main>img{
+            width:100%;
+        }
+        .gradual{
+            position: absolute;
+            width:100%;
+            height:100%;
+            left:0;
+            top:0;
+            z-index:1;
+            background: -webkit-linear-gradient(to bottom,rgba(255,0,0,0),rgba(212,70,34,0.8));
+            background: linear-gradient(to bottom,rgba(255,0,0,0),rgba(212,70,34,0.8));
+        }
+        .floor-1{
+            width:60%;
+            margin:0 auto;
+            position: relative;
+        }
+        .floor-1 .img{
+            position: absolute;
+            left:0;
+            top:0;
+            animation: spin 6s linear infinite;
+            z-index:1;
+        }
+        .floor-1 .btn{
+            position: relative;
+            z-index:2;
+            text-align: center;
+        }
+        @keyframes spin {
+            0% {
+                transform:rotate(0deg);
+            }
+            100% {
+                transform:rotate(-360deg);
+            }
+        }
+        .title-item{
+            width:150px;
+            margin:20px auto;
+            background:url("img/Activity/20170109/title_bg.png") no-repeat;
+            background-size:100%;
+            font-size:18px;
+            color:#fff;
+            text-align: center;
+            height:87px;
+            line-height:70px;
+            text-indent:-20px;
+        }
+        .rule{
+            width:90%;
+            position: relative;
+            margin:0 auto;
+            box-sizing: border-box;
+        }
+        .rule .bg{
+            position: absolute;
+            width:100%;
+            height:100%;
+            background-color:#970000;
+            border:10px solid #ffde00;
+            opacity:.32;
+            border-radius:30px;
+            box-sizing: border-box;
+        }
+        .rule .info{
+            position: relative;
+            z-index:1;
+            color:#fff;
+            text-align: left;
+            padding:20px 20px 20px 55px;
+            box-sizing: border-box;
+            font-size:14px;
+        }
+        .rule .info p{
+            position: relative;
+            line-height:22px;
+            margin-bottom:5px;
+        }
+        .rule .info span{
+            display: block;
+            width:20px;
+            height:20px;
+            background: -webkit-linear-gradient(#ffc000,#ff7200); /* Safari 5.1 - 6.0 */
+            background: -o-linear-gradient(#ffc000,#ff7200); /* Opera 11.1 - 12.0 */
+            background: -moz-linear-gradient(#ffc000,#ff7200); /* Firefox 3.6 - 15 */
+            background: linear-gradient(#ffc000,#ff7200); /* 标准的语法 */
+            text-align: center;
+            line-height:20px;
+            border-radius:50%;
+            position: absolute;
+            left:-30px;
+            top:2px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="wrap">
+    <div class="gradual"></div>
+    <div class="main">
+        <img src="img/Activity/20170109/top.png" />
+        <img src="img/Activity/20170109/1.png" style="width:90%;" />
+        <div class="floor-1">
+            <div class="img">
+                <img src="img/Activity/20170109/3.png"  style="width:100%;"/>
+            </div>
+            <div class="btn" id="start">
+                <img src="img/Activity/20170109/2.png"  style="width:80%;margin-top:10%;"/>
+            </div>
+        </div>
+        <div class="title-item" style="margin-top:50px;">
+            活动奖品
+        </div>
+        <div class="floor floor-2">
+            <img src="img/Activity/20170109/prize.png"  style="width:100%;"/>
+        </div>
+        <div class="title-item" style="margin-top:50px;">
+            活动规则
+        </div>
+        <div class="rule">
+            <div class="bg"></div>
+            <div class="info">
+                <p><span>1</span>活动期间每天有5次拆礼盒机会，成功邀请好友可增加1次拆礼盒机会，10秒内成功投掷≥30个飞镖即可获得1次拆礼盒机会；</p>
+                <p><span>2</span>在活动期间邀请新用户注册即算邀请成功，邀请获得的拆礼盒机会需当天使用，若当天未使用则视为自动放弃；</p>
+                <p><span>3</span>实物奖励将在活动结束后的15个工作日内统一发放，礼券奖励将自动发放至你的个人账户，请前往“我的账户-我的礼券”内进行查看；</p>
+                <p><span>4</span>本次活动最终解释权归琥珀金服所有。</p>
+            </div>
+        </div>
+    </div>
+
+</div>
+</body>
+<script src="../lib/jquery.min.js"></script>
+<script src="js/m.js"></script>
+<script>
+    $(function(){
+        $('#start').on('click',function(){
+            if(M.getUserId()){
+                location.href='activity20170109Game.html?'+'referrerName='+ M.getMobile()
+            }else{
+                location.href='activity20170109Game.html'
+            }
+        })
+    })
+</script>
+</html>

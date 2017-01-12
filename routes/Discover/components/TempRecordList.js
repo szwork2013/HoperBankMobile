@@ -63,13 +63,16 @@ class TempRecordList extends Component {
     }
     renderItem(item,index){
         return(
-            <Link to={`${this.props.location.pathname}/${item.id}`} className="news-item" key={index} >
+            <Link to={{pathname:`${this.props.location.pathname}/${item.id}`,query:{title:item.title,date:item.date}}} className="news-item" key={index} >
                 <div className="part-left">
                     <h3>{item.title}</h3>
                     <p>{item.date}</p>
                 </div>
                 <div className="part-right">
-                    <img src={(item.typeId && item.typeId!=8) ? `/static/img/discover/media/${item.typeId}.jpg` : `/static/img/discover/default.jpg`} />
+                    {
+                        this.props.params.type == 1 ? <img src={(item.typeId && item.typeId!=8) ? `/static/img/discover/media/${item.typeId}.jpg` : `/static/img/discover/default.jpg`} />:
+                            <img src={`/static/img/discover/knowledge/${index%46}.jpg`} />
+                    }
                 </div>
             </Link>
             )

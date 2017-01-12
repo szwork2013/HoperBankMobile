@@ -4,8 +4,6 @@
   "description": "hoper-bank-mobile",
   "scripts": {
     "start": "nodemon server.js",
-    "publish-mac": "export NODE_ENV=prod&&webpack -p --progress --colors",
-    "publish-win": "set NODE_ENV=prod&&webpack -p --progress --colors",
     "dev-test": "set NODE_ENV=dev&&nodemon server.dev.js",
     "dev-prod": "set NODE_ENV=prod&&nodemon server.dev.js",
     "bundle-prod": "set NODE_ENV=prod&&webpack --config webpack.bundle.prod.config.js -p --progress --colors",
@@ -69,6 +67,7 @@
     "remote-redux-devtools": "^0.4.8",
     "swipe-js-iso": "^2.0.3",
     "transform-loader": "^0.2.3",
+    "url-loader": "^0.5.7",
     "webpack": "^1.9.11",
     "webpack-dev-middleware": "^1.2.0",
     "webpack-hot-middleware": "^2.9.1"

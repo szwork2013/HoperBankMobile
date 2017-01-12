@@ -26,7 +26,7 @@ export function clearDealRecord(){
 /*获取*/
 export function fetchDealRecord(opt){
     return (dispatch, getState) => {
-        return fetch(API.user.dealrecord+`?userId=${Auth.getUserId()}&type=${opt.type}&curPage=${opt.curPage}`)
+        return fetch(API.user.dealrecord+`?userId=${Auth.getUserId()}&type=${opt.type}&time=${opt.time}&curPage=${opt.curPage}`)
             .then((res)=>res.json())
             .then((res)=>{
                 if(res.r==1){
