@@ -57,7 +57,7 @@ var M = {
     androidJump:function(str){
         var JSInterface = window.JSInterface || false;
         if(!JSInterface){
-            console.log('android func load fail');
+            alert.log('android func load fail');
         }else{
             JSInterface.jumpToType(str)
         }

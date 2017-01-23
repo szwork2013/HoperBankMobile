@@ -46,7 +46,7 @@ class GiftList extends Component{
             return (
                 <div className={`gift-list-item type${type} animated flipInX`} key={index} style={{animationDuration:0.5+(index%10 / 5)+'s'}}>
                     <div className="part-left">
-                        <p>{parseInt(item.money)}<span>%</span></p>
+                        <p>{item.money}<span>%</span></p>
                         <img src={type==3? `/static/img/coupon/coupon_l_out.png` :`/static/img/coupon/coupon_l.png`} />
                     </div>
                     <div className="part-right">

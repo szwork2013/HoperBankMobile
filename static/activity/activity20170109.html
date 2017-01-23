@@ -3,10 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="format-detection" content="telephone=no" />
-    <title>飞镖</title>
-    <meta name="keywords" content="琥珀金服活动,双十二活动,双旦活动" />
-    <meta name="description"
-          content="喜迎双旦，琥珀金服隆重推出“双旦嘉年华 年终回家送机票”等多重惊喜回馈平台新老用户，琥珀金服十二月双旦活动具体参与方式和活动细则请查看官网。" />
+    <title>春节大发“镖”,抢红包神器助你威</title>
+    <meta name="keywords" content="春节大发“镖”,抢红包神器助你威" />
+    <meta name="description" content="春节大发“镖”,抢红包神器助你威" />
     <meta name="viewport" content="width=device-width,minimum-scale=1,maximum-scale=1,user-scalable=no">
     <style>
         *{
@@ -174,11 +173,12 @@
 <script>
     $(function(){
         $('#start').on('click',function(){
-            if(M.getUserId()){
-                location.href='activity20170109Game.html?'+'referrerName='+ M.getMobile()
+            /*if(M.getUserId() || M.getQueryString('userId')){
+                location.href='activity20170109Game.html?'+location.href.split('?')[1]
             }else{
                 location.href='activity20170109Game.html'
-            }
+            }*/
+            location.href='activity20170109Game.html?'+location.href.split('?')[1]
         })
     })
 </script>

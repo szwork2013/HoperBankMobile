@@ -4,10 +4,9 @@
     <meta charset="UTF-8">
     <meta name="format-detection" content="telephone=no" />
     <meta name="apple-mobile-web-app-capable" content="yes"/>
-    <title>飞镖游戏</title>
-    <meta name="keywords" content="琥珀金服活动,双十二活动,双旦活动" />
-    <meta name="description"
-          content="喜迎双旦，琥珀金服隆重推出“双旦嘉年华 年终回家送机票”等多重惊喜回馈平台新老用户，琥珀金服十二月双旦活动具体参与方式和活动细则请查看官网。" />
+    <title>春节大发“镖”,抢红包神器助你威</title>
+    <meta name="keywords" content="春节大发“镖”,抢红包神器助你威" />
+    <meta name="description" content="春节大发“镖”,抢红包神器助你威" />
     <meta name="viewport" content="width=device-width,minimum-scale=1,maximum-scale=1,user-scalable=no">
     <style>
         *{
@@ -21,7 +20,6 @@
             -ms-user-select:none;
             user-select:none;
         }
-
         html,body{
             height:100%;
             font-family:Helvetica;
@@ -33,7 +31,6 @@
             margin:0 auto;
             height:100%;
             position: relative;
-
         }
         .main{
             padding:20px 0;
@@ -66,7 +63,9 @@
         }
         .start-button{
             width:150px;
+            height:47px;
             margin:10px auto 0 auto;
+            z-index:3;
         }
         .start-button>img,.take-prize>img{
             width:100%;
@@ -304,7 +303,7 @@
             -webkit-animation: balloon2 5s ease-in-out infinite;
         }
         .i7{
-           right:0;
+            right:0;
             top:90px;
             -webkit-animation: balloon4 5s ease-in-out infinite;
         }
@@ -600,12 +599,13 @@
 
 
         var userId = M.getUserId() || M.getUrlId();
-        //var domain = 'http://api.hoperbank.com/hpmobile/v1/';
-        var domain = 'feed/';
+        var domain = 'http://api.hoperbank.com/hpmobile/v1/activity/';
+        //var domain='http://120.25.97.109:5080/hpmobile/v1/activity/';
         //var timesUrl = domain+'activity/newyear/times'
-        var timesUrl = domain+'20170110Times.json';
-        var prizeUrl = domain+'20170110Prize.json';
+        var timesUrl = domain+'newyear/times';
+        var prizeUrl = domain+'newyear/take';
         var gameStarted = false;
+        var canTake = true;
 
         function logged(){
             return userId;
@@ -642,7 +642,7 @@
             $('.start-button').on('click',function(){
                 if(logged()){
                     asyncGetTimes(function(times){
-                        if(times==0){
+                        if(times<=0){
                             showResultBox({
                                 title:"",
                                 content:"<div style='margin-top:70px;line-height:30px;'>您的免费拆礼盒次数已用完，<br/>分享给好友一起参与，可额外<br/>获得1次免费拆礼盒机会！<div class='arrowDown'></div></div>",
@@ -685,7 +685,7 @@
 
         function play(){
             asyncGetTimes(function(times){
-                if(times==0){
+                if(times<=0){
                     showResultBox({
                         title:"",
                         content:"<div style='margin-top:70px;line-height:30px;'>您的免费拆礼盒次数已用完，<br/>分享给好友一起参与，可额外<br/>获得1次免费拆礼盒机会！<div class='arrowDown'></div></div>",
@@ -837,6 +837,10 @@
         initTakePrize();
         function initTakePrize(){
             $(document.body).delegate('.take-prize','click',function(){
+                if(!canTake){
+                    return false;
+                }
+                canTake = false;
                     asyncTakePrize(function(prize){
                         if(prize ==9){
                             prize = "1_" + Math.ceil(Math.random()*4)
@@ -854,6 +858,7 @@
                                 showShareTip();
                             }
                         })
+                        canTake = true;
                     })
             })
         }

@@ -1,31 +1,7 @@
-var domain,
-    fuiouCharge='',
-    fuiouWithDraw = '';
-/*
-* @EVN
-* 1为生产
-* 2为公测
-* 3为后端测试
-* */
-const ENV = 1;
-switch (ENV){
-    case 1:
-        domain='http://api.hoperbank.com/hpmobile/v1/';
-        fuiouCharge = 'https://jzh.fuiou.com/app/500002.action';
-        fuiouWithDraw='https://jzh.fuiou.com/app/500003.action';
-        break;
-    case 2:
-        domain='http://120.25.97.109:5080/hpmobile/v1/';
-        fuiouCharge='http://www-1.fuiou.com:9057/jzh/app/500002.action';
-        fuiouWithDraw='http://www-1.fuiou.com:9057/jzh/app/500003.action';
-        break;
-    case 3:
-        domain = 'http://192.168.1.46:8080/hpmobile/v1/';
-        fuiouCharge='http://www-1.fuiou.com:9057/jzh/app/500002.action';
-        fuiouWithDraw='http://www-1.fuiou.com:9057/jzh/app/500003.action';
-        break;
-    //no default
-}
+var domain='http://api.hoperbank.com/hpmobile/v1/',
+    fuiouCharge = 'https://jzh.fuiou.com/app/500002.action',
+    fuiouWithDraw='https://jzh.fuiou.com/app/500003.action';
+
 var API = {
     ossBannerDomain:'http://oss-cn-shenzhen.aliyuncs.com/hopertest/',
     fuiouURI:{

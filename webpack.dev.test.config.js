@@ -6,7 +6,7 @@ module.exports = {
     devtool: 'cheap-source-map',
     entry: [
         'webpack-hot-middleware/client',
-        './index'
+        './index',
     ],
     output: {
         path: __dirname+'/static/scripts/',
@@ -18,6 +18,7 @@ module.exports = {
         new webpack.optimize.DedupePlugin(),
         new webpack.optimize.OccurenceOrderPlugin(),
         //new webpack.optimize.CommonsChunkPlugin('shared.js')
+        new webpack.BannerPlugin('This file is created by SLEBEE'),
         new webpack.DefinePlugin({
             'process.env.NODE_ENV': JSON.stringify('dev')
         }),
@@ -58,5 +59,18 @@ module.exports = {
     context: __dirname,
     node: {
         __dirname: true
+    },
+    devServer: {
+        historyApiFallback:true,
+        hot:true,
+        inline:true,
+        progress:true,
+        //其实很简单的，只要配置这个参数就可以了
+        proxy: {
+            '/api/*': {
+                target: 'http://localhost:5000',
+                secure: false
+            }
+        }
     }
 }

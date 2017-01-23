@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "hoper-bank-mobile",
   "scripts": {
-    "start": "nodemon server.js",
+    "start": "webpack-dev-server --inline --hot",
     "dev-test": "set NODE_ENV=dev&&nodemon server.dev.js",
     "dev-prod": "set NODE_ENV=prod&&nodemon server.dev.js",
     "bundle-prod": "set NODE_ENV=prod&&webpack --config webpack.bundle.prod.config.js -p --progress --colors",
@@ -54,6 +54,7 @@
     "css-loader": "^0.25.0",
     "express": "^4.13.3",
     "html-webpack-plugin": "^2.22.0",
+    "http-proxy-middleware": "^0.17.3",
     "less-loader": "^2.2.3",
     "lodash.isequal": "^4.4.0",
     "progressbar.js": "^1.0.1",
@@ -68,8 +69,9 @@
     "swipe-js-iso": "^2.0.3",
     "transform-loader": "^0.2.3",
     "url-loader": "^0.5.7",
-    "webpack": "^1.9.11",
+    "webpack": "^1.14.0",
     "webpack-dev-middleware": "^1.2.0",
+    "webpack-dev-server": "^1.16.2",
     "webpack-hot-middleware": "^2.9.1"
   }
 }
