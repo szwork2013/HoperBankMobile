@@ -151,17 +151,6 @@ class BorrowApplyPage extends Component{
                             <Field name="mobile" component={renderField} type="text" label="联系电话"  />
                             <div className="borrow-apply-item">
                                 <label >所在城市</label>
-                                <Field name="city" component="select">
-                                    {this.state.city.length===0 && <option value='北京'>北京</option>}
-                                    {
-                                        this.state.city.map((item,index)=>{
-                                            return(
-                                                <option value={item} key={index}>{item}</option>
-                                            )
-                                        })
-                                    }
-                                </Field>
-
                                 <select onChange={this.provinceChange}>
                                     <option value="北京">北京</option>
                                     <option value="上海">上海</option>
@@ -199,7 +188,16 @@ class BorrowApplyPage extends Component{
                                     <option value="台湾">台湾</option>
                                     <option value="海外">海外</option>
                                 </select>
-
+                                <Field name="city" component="select">
+                                    {this.state.city.length===0 && <option value='北京'>北京</option>}
+                                    {
+                                        this.state.city.map((item,index)=>{
+                                            return(
+                                                <option value={item} key={index}>{item}</option>
+                                            )
+                                        })
+                                    }
+                                </Field>
                             </div>
                             <Field name="company" component={renderField} type="text" label="工作单位" />
                             <div className="borrow-apply-item">

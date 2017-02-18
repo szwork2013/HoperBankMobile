@@ -33,7 +33,6 @@
             position: relative;
         }
         .main{
-            padding:20px 0;
             position: relative;
             z-index:2;
             height:100%;
@@ -241,6 +240,7 @@
             bottom:240px;
             opacity:1;
             transition:All 1.4s ease-in-out;
+            -webkit-transition:All 1.4s ease-in-out;
         }
         .biu-target.start{
             transform:translate(0,-500px);
@@ -271,9 +271,11 @@
             top:0;
             opacity:1;
             transition:All 1.4s ease-in-out;
+            -webkit-transition:All 1.4s ease-in-out;
         }
         .gift.start{
             transform:translate(0,500px);
+            -webkit-transform:translate(0,500px);
             opacity:0
         }
         .i1{
@@ -502,6 +504,12 @@
             #biu{
                 bottom:130px;
             }
+            .rule .info{
+                font-size:12px;
+            }
+            .rule, .pop-box{
+                height:320px;
+            }
         }
     </style>
 </head>
@@ -510,7 +518,7 @@
 <div class="wrap">
     <div class="gradual"></div>
     <div class="main" id="stage_1">
-        <img src="img/Activity/20170109/top2.png"  />
+        <img src="img/Activity/20170109/top2.png" style="margin-top:10px"  />
         <img src="img/Activity/20170109/bottom.png" class="bottom" />
         <div class="start-button">
             <img src="img/Activity/20170109/button_start.png"  />

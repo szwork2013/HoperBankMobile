@@ -65,41 +65,9 @@ export default class FinancialProductDetail extends Component {
     }
 }
 const InvestInfoPage = (props)=>{
-    var productType= '';
+
     const data = props.data;
     const xdProductType = parseInt(data.xdProductType);
-    switch (xdProductType){
-        case 1:
-            productType = '消费薪金贷'
-            break;
-        case 2:
-            productType = '消费精英贷'
-            break;
-        case 3:
-            productType = '悦楼薪金贷'
-            break;
-        case 4:
-            productType = '悦楼生意贷'
-            break;
-        case 5:
-            productType = '生意贷'
-            break;
-        case 6:
-            productType = '社保贷'
-            break;
-        case 7:
-            productType = '保单贷'
-            break;
-        case 8:
-            productType = '车主贷'
-            break;
-        case 9:
-            productType = '企业订单贷'
-            break;
-        case 10:
-            productType = '险商借'
-            break;
-    }
 
     if(xdProductType===9 || xdProductType===10){
         return(
@@ -109,7 +77,7 @@ const InvestInfoPage = (props)=>{
                 </div>
                 <div className="product-text-item">
                     <span className="s1">借款类型</span>
-                    <span className="s2 text-right">{productType}</span>
+                    <span className="s2 text-right">{data.xdProductName||''}</span>
                 </div>
                 <div className="product-text-item">
                     <span className="s1">借款期限</span>
@@ -183,7 +151,7 @@ const InvestInfoPage = (props)=>{
             </div>
             <div className="product-text-item">
                 <span className="s1">借款类型</span>
-                <span className="s2 text-right">{productType}</span>
+                <span className="s2 text-right">{data.xdProductName}</span>
             </div>
             <div className="product-text-item">
                 <span className="s1">借款期限</span>
