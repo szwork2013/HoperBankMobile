@@ -37,6 +37,7 @@ class ReigsterPage extends Component {
         this.doStepThird = this.doStepThird.bind(this);
         this.handleGetCode = this.handleGetCode.bind(this);
         this.testPassword = this.testPassword.bind(this);
+        this.getVoiceCodeHandle=this.getVoiceCodeHandle.bind(this);
     }
     componentWillMount() {
         //已登陆过就直接跳到我的
@@ -50,8 +51,8 @@ class ReigsterPage extends Component {
             bothPasswordPassed:this.state.rePassword == this.state.password
         })
     }
-    sendYcode(mobile,callback){
-        this.props.registerSecondStep(mobile,(result)=>{
+    sendYcode(mobile,type,callback){
+        this.props.registerSecondStep(mobile,type,(result)=>{
             callback && callback(result);
         })
     }
@@ -208,10 +209,9 @@ class ReigsterPage extends Component {
         this.setState({
             yCodeSendAble:false
         })
-
         var time = 120;
         this.refs.yCode.value='正在发送';
-        this.sendYcode(this.state.username,(result)=>{
+        this.sendYcode(this.state.username,1,(result)=>{
             if(result.r==1){
                 timer=setInterval(()=>{
                     this.refs.yCode.value=`${time--}秒`;
@@ -229,6 +229,11 @@ class ReigsterPage extends Component {
                     yCodeSendAble:true
                 })
             }
+        })
+    }
+    getVoiceCodeHandle(){
+        this.sendYcode(this.state.username,2,(result)=>{
+            alert(result.msg)
         })
     }
     render() {
@@ -295,7 +300,9 @@ class ReigsterPage extends Component {
                         </label>
                     </section>
                     <BaseButton text="完成" onClick={this.doStepSecond} className="mt20" />
-                </section>
+
+                    <p className="voice-p">收不到验证码?试试<span onClick={this.getVoiceCodeHandle}>语音验证</span></p>
+               </section>
                 <section className={`register-step-third ${this.state.step.third ? '':'hide'}`} >
                     <img src="/static/img/login_ok_picture.png" width="80" />
                     <section className="tip-section-2">

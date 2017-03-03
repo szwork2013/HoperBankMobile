@@ -66,10 +66,10 @@ export function registerFirstStep(phoneNumber,callback){
 }
 /*注册-步骤二 -> 获取验证码 */
 /*不需要存入store*/
-export function registerSecondStep(phoneNumber,callback){
+export function registerSecondStep(phoneNumber,type,callback){
     var url = API.regedit.step2
     return (dispatch, getState) => {
-        return fetch(`${url}?mobile=${phoneNumber}`)
+        return fetch(`${url}?mobile=${phoneNumber}&type=${type}`)
             .then((res)=>res.json())
             .then((res)=>{
                 callback && callback(res);
